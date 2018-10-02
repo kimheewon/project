@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ##################################################
+     # ■ 샘플 Mapper ■ ymkang ■ 2018. 09. 03.
+     ################################################### -->
+<mapper namespace="sample">
+    <insert id="insertSample">
+        <![CDATA[
+            -- sample.insertSample: 샘플 등록
+            INSERT INTO TAdminMgmt (AdminId, AdminPwd, AdminName, HAdminNo)
+                            VALUES ('Payletter3', 'qwer', '페이레터', 1)
+
+        ]]>
+    </insert>
+    <select id="selectSample" resultType="sample">
+        <![CDATA[
+            -- sample.selectSample: 샘플 조회
+            SELECT TAM.AdminId AS strAdminId
+            FROM   TAdminMgmt TAM
+            WHERE  1 = 1
+        ]]>
+    </select>
+</mapper>

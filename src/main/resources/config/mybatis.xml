@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <typeAliases>
+        <!-- Common Alias START -->
+        <typeAlias alias="hashMap" type="java.util.HashMap" />
+        <typeAlias alias="linkedHashMap" type="java.util.LinkedHashMap" />
+        <typeAlias alias="map"     type="java.util.Map" />
+        <typeAlias alias="list"    type="java.util.List" />
+        <!-- Common Alias END   -->
+        
+        <package name="com.interntraining.admin.sample.domain"/>
+    </typeAliases>
+
+</configuration>
