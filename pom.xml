@@ -60,9 +60,9 @@
 
 		<!-- JDBC -->
 		<dependency>
-		    <groupId>org.mariadb.jdbc</groupId>
-		    <artifactId>mariadb-java-client</artifactId>
-		    </dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+        </dependency>
 
         <!--  Hikrali Connection Pool -->
         <dependency>
