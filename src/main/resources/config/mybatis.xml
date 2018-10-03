@@ -10,7 +10,8 @@
         <typeAlias alias="list"    type="java.util.List" />
         <!-- Common Alias END   -->
         
-        <package name="com.interntraining.admin.sample.domain"/>
+       
+        <package name="com.interntraining.admin.user.domain"/>
     </typeAliases>
 
 </configuration>
