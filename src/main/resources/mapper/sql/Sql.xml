@@ -64,6 +64,7 @@
 		update	 BOARD
 		set		 BoardTitle = #{title}
 				,BoardCnt	= #{cnt}
+				,BoardDate	= GETDATE()
 		where	 BoardNo 	= #{bno} 
 	</select>
 </mapper>
