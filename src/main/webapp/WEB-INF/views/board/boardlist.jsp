@@ -40,7 +40,7 @@
 	
     <div class="container_t">
     
-  		<h3 style="color:#212529;">게시판</h3>
+  		<h3 style="color:#2c3e50;">게시판</h3>
     	<span style="float:right; margin-right:6%; font-weight:bold">
   			<a href='boardlist'>목록</a>
 		</span>

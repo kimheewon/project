@@ -54,7 +54,7 @@
 	</header>
 	
 	<div class="container_t">
-		<h3 style="color:#212529;">게시글 작성</h3>
+		<h3 style="color:#2c3e50;">게시글 작성</h3>
 		<br>
 		<span style="float:right; margin-right:2%; font-weight:bold"><a href='boardlist'>목록</a></span>
 		<br><br>

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.interntraining.admin.user.dao.UserDAO;
 import com.interntraining.admin.user.domain.Board;
+import com.interntraining.admin.user.domain.Comment;
 import com.interntraining.admin.user.domain.User;
 
 
@@ -76,5 +77,10 @@ public class UserServiceImpl implements UserService {
 	public void updateboard(Board board) throws Exception{
 		userDAO.updateboard(board);
 	}
-		
+	
+	//댓글 뿌려주기
+	@Override
+	public List<Comment> selectcmmtlist(int bno) throws Exception{
+		return userDAO.selectcmmtlist(bno); 
+	}
 }

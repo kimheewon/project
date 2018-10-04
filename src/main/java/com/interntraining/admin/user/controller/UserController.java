@@ -20,6 +20,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 
 import com.interntraining.admin.user.domain.Board;
+import com.interntraining.admin.user.domain.Comment;
 import com.interntraining.admin.user.service.UserService;
 
 
@@ -118,13 +119,15 @@ public class UserController {
         return mav;
     }
 	
-	//게시글 읽기
+	//게시글 읽기 + 댓글 뿌려주기
 	@RequestMapping("boardread")
 	public ModelAndView boardread(int bno) throws Exception{
 		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
 		
 		Board boardread = userService.readboard(bno);
+		List<Comment> cmmtlist = userService.selectcmmtlist(bno);
 		mv.addObject("board", boardread);
+		mv.addObject("commentlist", cmmtlist);
 		mv.setViewName("/board/boardread");
 		return mv;
 	}

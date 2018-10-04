@@ -7,7 +7,7 @@
 <mapper namespace="sql">
     
 	<insert id="insertMember" >
-		insert into MEMBER values(
+		insert into TMember values(
 			#{id}, #{password}, #{name}, #{phone}, #{email}, #{gender}, #{birth}
 			)
 
@@ -17,14 +17,14 @@
 	<select id="selectOne"  resultType="User">
 		select UserId AS id
 		      ,UserPw AS password 	
-		from MEMBER where UserId = #{id} 
+		from TMember where UserId = #{id} 
 	</select>
 	
 	<!--  -->
 	<select id="selectlist"  resultType="User">
 		select UserId AS id
 		      ,UserPw AS password 		      
-		from   MEMBER
+		from   TMember
 	</select>
 	
 	<!-- 게시판 목록에 뿌려주기 -->
@@ -35,13 +35,13 @@
 				,BoardCnt	AS cnt
 				,BoardDate  AS date
 				,BoardHit   AS hit
-		from   	 BOARD
+		from   	 TBoard
 		ORDER BY BoardNo DESC
 	</select>
 	
 	<!-- 게시글 저장 -->
 	<insert id="insertboard" >
-		insert into BOARD(UserId,BoardTitle,BoardCnt) values(
+		insert into TBoard(UserId,BoardTitle,BoardCnt) values(
 			#{uid}, #{title}, #{cnt}
 			)
 
@@ -55,16 +55,28 @@
 				,BoardCnt	AS cnt
 				,BoardDate  AS date
 				,BoardHit   AS hit
-		from   	 BOARD
+		from   	 TBoard
 		where	 BoardNo = #{bno} 
 	</select>
 	
 	<!-- 수정한 게시글 Update -->
 	<select id="boardupdate">
-		update	 BOARD
+		update	 TBoard
 		set		 BoardTitle = #{title}
 				,BoardCnt	= #{cnt}
 				,BoardDate	= GETDATE()
 		where	 BoardNo 	= #{bno} 
+	</select>
+	
+	<!-- 댓글 뿌리기 -->
+	<select id="selectcmmtlist"  resultType="Comment">
+		select	 CmmtNo		AS cno
+				,BoardNo	AS bno
+				,UserId		AS uid
+				,CmmtCnt 	AS ccnt
+				,CmmtDate	AS cdate		
+		from   	 TComment
+		where	 BoardNo = #{bno}
+		ORDER BY CmmtNo	DESC
 	</select>
 </mapper>

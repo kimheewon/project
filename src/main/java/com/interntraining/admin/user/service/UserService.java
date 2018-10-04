@@ -3,6 +3,7 @@ package com.interntraining.admin.user.service;
 import java.util.List;
 
 import com.interntraining.admin.user.domain.Board;
+import com.interntraining.admin.user.domain.Comment;
 import com.interntraining.admin.user.domain.User;
 
 public interface UserService {
@@ -24,6 +25,9 @@ public interface UserService {
 
 	//수정한 게시글 저장
 	public void updateboard(Board board) throws Exception;
+	
+	//댓글 불러오기
+	public List<Comment> selectcmmtlist(int bno) throws Exception;
 
 	
 }

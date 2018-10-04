@@ -28,18 +28,17 @@
 
  		.container_b {	    
 			margin: 0 85% 15%;     /* 가로로 중앙에 배치 */
-			width: 20%;
-
-			
+			width: 20%;		
 	    }
+
 	    .button{
 			background-color : #18bc9c;
 			border : thick solid #18bc9c;
 		 	border-radius : 5px 5px 5px 5px;
 			padding : 1px; margin:1%;
 	   		color:white;
+			margin-left:50%;
 		}
-		
 
   </style>
 <jsp:include page="../login/navigation.jsp" flush="true"/>
@@ -54,7 +53,7 @@
 	</header>
 	
 	<div class="container_t">
-		<h3 style="color:#212529;">게시글 작성</h3>
+		<h3 style="color:#2c3e50;">게시글 작성</h3>
 		<br>
 		<span style="float:right; margin-right:2%; font-weight:bold"><a href='boardlist' >목록</a></span>
 		<br><br>
@@ -72,7 +71,7 @@
 		<div class="container_b">
 			<button class="button" type="submit">저장하기</button>
 			<button class="button" type="reset">다시작성</button>			
-			</div>
+		</div>
 		</form>
 	</div>
 	<jsp:include page="../bottom.jsp" flush="true"/>
