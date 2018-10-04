@@ -3,77 +3,77 @@ package com.interntraining.admin.user.domain;
 import java.util.Date;
 
 public class User {
-	private int no;
-	private String id;
-	private String password;
-	private String name;
-	private String phone;
-	private String email;
-	private int gender;	
-	private int birth;
-	private Date date;
-	private String grade;
+	private int intUserNo;
+	private String StrUserid;
+	private String StrUserPw;
+	private String StrUserName;
+	private String StrUserPhone;
+	private String StrUserEmail;
+	private int intUserSex;	
+	private int intUserBirth;
+	private Date DateUserDate;
+	private String StrUserGrade;
 
-	public int getNo() {
-		return no;
+	public int getIntUserNo() {
+		return intUserNo;
 	}
-	public void setNo(int no) {
-		this.no = no;
+	public void setIntUserNo(int intUserNo) {
+		this.intUserNo = intUserNo;
 	}
+	public String getStrUserid() {
+		return StrUserid;
+	}
+	public void setStrUserid(String strUserid) {
+		StrUserid = strUserid;
+	}
+	public String getStrUserPw() {
+		return StrUserPw;
+	}
+	public void setStrUserPw(String strUserPw) {
+		StrUserPw = strUserPw;
+	}
+	public String getStrUserName() {
+		return StrUserName;
+	}
+	public void setStrUserName(String strUserName) {
+		StrUserName = strUserName;
+	}
+	public String getStrUserPhone() {
+		return StrUserPhone;
+	}
+	public void setStrUserPhone(String strUserPhone) {
+		StrUserPhone = strUserPhone;
+	}
+	public String getStrUserEmail() {
+		return StrUserEmail;
+	}
+	public void setStrUserEmail(String strUserEmail) {
+		StrUserEmail = strUserEmail;
+	}
+	public int getIntUserSex() {
+		return intUserSex;
+	}
+	public void setIntUserSex(int intUserSex) {
+		this.intUserSex = intUserSex;
+	}
+	public int getIntUserBirth() {
+		return intUserBirth;
+	}
+	public void setIntUserBirth(int intUserBirth) {
+		this.intUserBirth = intUserBirth;
+	}
+	public Date getDateUserDate() {
+		return DateUserDate;
+	}
+	public void setDateUserDate(Date dateUserDate) {
+		DateUserDate = dateUserDate;
+	}
+	public String getStrUserGrade() {
+		return StrUserGrade;
+	}
+	public void setStrUserGrade(String strUserGrade) {
+		StrUserGrade = strUserGrade;
+	}
+
 	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	public int getGender() {
-		return gender;
-	}
-	public void setGender(int gender) {
-		this.gender = gender;
-	}
-	public int getBirth() {
-		return birth;
-	}
-	public void setBirth(int birth) {
-		this.birth = birth;
-	}
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
-	public String getGrade() {
-		return grade;
-	}
-	public void setGrade(String grade) {
-		this.grade = grade;
-	}
 }

@@ -21,13 +21,14 @@ public interface UserService {
 	public void insertboard(Board board) throws Exception;
 
 	//게시글 읽기
-	public Board readboard(int bno) throws Exception;
+	public Board readboard(int intBoardNo) throws Exception;
 
 	//수정한 게시글 저장
 	public void updateboard(Board board) throws Exception;
 	
 	//댓글 불러오기
-	public List<Comment> selectcmmtlist(int bno) throws Exception;
+	public List<Comment> selectcmmtlist(int intBoardNo) throws Exception;
 
-	
+	//댓글 저장
+	public void insertComment(Comment comment) throws Exception;
 }

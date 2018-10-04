@@ -21,6 +21,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.interntraining.admin.user.domain.Board;
 import com.interntraining.admin.user.domain.Comment;
+import com.interntraining.admin.user.domain.User;
 import com.interntraining.admin.user.service.UserService;
 
 
@@ -35,50 +36,56 @@ public class UserController {
 	
 	//첫화면 - 로그인 화면
 	@RequestMapping(value = "/")
-    public String initPage() throws Exception {
-				
-		return "login/loginForm";
-	
+    public String initPage() throws Exception {				
+		return "/login/loginForm";	
     }
 	
 	
-	//01. 로그인 화면	
-	@PostMapping(value = "loginForm")
-    public String loginForm(){
-        return "/login/loginForm";
-    }
-	
+
 	//로그인 처리
-	@RequestMapping(value="login", method=RequestMethod.POST)
+	@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public String login(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws Exception{
-					  
+		
+		//로그인 폼에서 id와 pw 가져옴
 		String id = request.getParameter("id");
 		String password = request.getParameter("pw");
-	
+		
+		
+		if(session.getAttribute("login") != null) {
+			//기존에 login이란 세션 값이 존재한다면
+			session.removeAttribute("login");	//기존값 제거
+		}
+		
+		User user = new User();
 		//로그인 성공
 		if(userService.logincheck(id, password)){
-			session.setAttribute("userid", id);
-			return "login/home";			
+			user = userService.selectOne(id);		//로그인 성공시 정보 담아놓음
+			session.setAttribute("login", user);	//세션에 login이란 이름으로 user 객체를 저장함
+			session.setAttribute("id", user.getStrUserid());
+			return "/login/home";			//로그인 성공시 홈화면으로 이동			
 		}
 		else{//로그인 실패
-			session.setAttribute("sessionID", id);
-			return "login/loginForm";
+			return "/login/loginForm";		//로그인 실패시 로그인 폼 화면으로 이동
 		}
-				  	 
+	
 	}	
 	
 	//로그아웃
-	@RequestMapping(value = "logout")
-    public String logout(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws Exception{
-		String id = null;
+	@RequestMapping(value = "logout.do")
+    public String logout(HttpSession session) throws Exception{
+		session.invalidate();    //세션 전체를 날려버림
+		return "/login/loginForm";
+    }
 	
-		session.setAttribute("sessionID", id);
-        return "/login/loginForm";
+	//회원가입
+	@RequestMapping("joinForm")
+    public String joinForm(){		
+        return "/login/join";
     }
 	
 	//게시판
 	@ResponseBody
-	@RequestMapping("boardlist")
+	@RequestMapping("boardlist.do")
 	public ModelAndView boardlist(Board board) throws Exception {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		
@@ -92,24 +99,24 @@ public class UserController {
 	
 	//게시글 작성 페이지
 	@RequestMapping("boardwrite")
-    public String boardwrite(){
+    public String boardwrite(){		
         return "/board/boardwrite";
     }
 	
 	
 	//게시글 저장
-	@RequestMapping("boardsave")
+	@RequestMapping("boardsave.do")
     public ModelAndView boardWrite(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws Exception{
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		
-		String id = (String) session.getAttribute("userid");
+		String id = (String) session.getAttribute("id");
 		String title = request.getParameter("title");
 		String contents = request.getParameter("contents");
 		
 		Board board = new Board();
-		board.setUid(id);
-		board.setTitle(title);
-		board.setCnt(contents);
+		board.setStrUserId(id);
+		board.setStrBoardTitle(title);
+		board.setStrBoardContent(contents);
 		userService.insertboard(board);
 		
 		List<Board> boardlist  = userService.selectboardlist(board);
@@ -120,24 +127,28 @@ public class UserController {
     }
 	
 	//게시글 읽기 + 댓글 뿌려주기
-	@RequestMapping("boardread")
-	public ModelAndView boardread(int bno) throws Exception{
+	@RequestMapping("boardread.do")
+	public ModelAndView boardread(HttpServletRequest request,HttpServletResponse response, HttpSession session, int intBoardNo) throws Exception{
 		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
 		
-		Board boardread = userService.readboard(bno);
-		List<Comment> cmmtlist = userService.selectcmmtlist(bno);
+		String id = (String) session.getAttribute("id"); //세션
+		
+		Board boardread = userService.readboard(intBoardNo);
+		List<Comment> cmmtlist = userService.selectcmmtlist(intBoardNo);
+		
 		mv.addObject("board", boardread);
 		mv.addObject("commentlist", cmmtlist);
+		mv.addObject("id", id);
 		mv.setViewName("/board/boardread");
 		return mv;
 	}
 	
 	//게시글 수정페이지에 글 뿌려주기
-	@RequestMapping("boardchange")
-	public ModelAndView boardchange(int bno) throws Exception{
+	@RequestMapping("boardchange.do")
+	public ModelAndView boardchange(int intBoardNo) throws Exception{
 		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
 		
-		Board boardread = userService.readboard(bno);
+		Board boardread = userService.readboard(intBoardNo);
 		
 		mv.addObject("board", boardread);
 		mv.setViewName("/board/boardchange");
@@ -146,7 +157,7 @@ public class UserController {
 	}
 	
 	//수정한 게시글 DB에 저장
-	@RequestMapping("boardupdate")
+	@RequestMapping("boardupdate.do")
 	public ModelAndView boardUpdate(HttpServletRequest request,HttpServletResponse response, HttpSession session, int bno) throws Exception{
 		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
 		
@@ -154,9 +165,9 @@ public class UserController {
 		String contents = request.getParameter("contents");
 	
 		Board board = new Board();
-		board.setBno(bno);
-		board.setTitle(title);
-		board.setCnt(contents);
+		board.setIntBoardNo(bno);
+		board.setStrBoardTitle(title);
+		board.setStrBoardContent(contents);
 		userService.updateboard(board);
 		
 		List<Board> boardlist  = userService.selectboardlist(board);
@@ -164,4 +175,29 @@ public class UserController {
 		mv.setViewName("/board/boardlist");
 		return mv;
 	}
+	
+	//댓글 등록
+	@RequestMapping("commentsave.do")
+	public ModelAndView coimmentWrite(HttpServletRequest request,HttpServletResponse response, HttpSession session, int intBoardNo) throws Exception{
+		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
+	
+		String id = (String) session.getAttribute("id"); //세션
+		String content = request.getParameter("comment");
+		
+		//댓글 DB에 저장
+		Comment comment = new Comment();
+		comment.setIntBoardNo(intBoardNo);
+		comment.setStrUserId(id);
+		comment.setStrCmmtComment(content);
+		userService.insertComment(comment);
+		
+		//상세보기에 게시글과 댓글뿌려주기
+		Board boardread = userService.readboard(intBoardNo);
+		List<Comment> cmmtlist = userService.selectcmmtlist(intBoardNo);
+		mv.addObject("board", boardread);
+		mv.addObject("commentlist", cmmtlist);
+		mv.setViewName("/board/boardread");
+		return mv;
+	}
+		
 }

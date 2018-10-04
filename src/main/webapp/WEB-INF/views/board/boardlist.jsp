@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-  
+<%  // 인증된 세션이 없는경우, 해당페이지를 볼 수 없게 함.
+    if (session.getAttribute("id")  == null) {
+        response.sendRedirect("logout.do");
+    }
+%>
 
 <!DOCTYPE html>
 <html>
@@ -34,15 +38,15 @@
 <body>
 	<header class="session text-white text-right">
 		<div class="container">
-			<%= session.getAttribute("userid") %>님 <small>반갑습니다.</small>
+			 <%= session.getAttribute("id") %>님 <small>반갑습니다.</small>
 		</div>
 	</header>	
 	
     <div class="container_t">
     
-  		<h3 style="color:#2c3e50;">게시판</h3>
+  		<h3 style="color:#2c3e50">게시판</h3>
     	<span style="float:right; margin-right:6%; font-weight:bold">
-  			<a href='boardlist'>목록</a>
+  			<a href='boardlist.do'>목록</a>
 		</span>
 		<br><br>
     	<table class="table table-hover">
@@ -64,11 +68,11 @@
 		<c:forEach var="board" items="${boardlist}">
 			
 			<tr>
-				<td>${board.bno}</td>
-				<td><a href="boardread?bno=${board.bno}">${board.title}</a></td>
-				<td>${board.uid}</td>
-				<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${board.date}"/></td>
-				<td><span>${board.hit}</span></td>
+				<td>${board.intBoardNo}</td>
+				<td><a href="boardread.do?intBoardNo=${board.intBoardNo}">${board.strBoardTitle}</a></td>
+				<td>${board.strUserId}</td>
+				<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${board.dateBoardDate}"/></td>
+				<td><span>${board.intHit}</span></td>
 				
 			</tr>	
 		</c:forEach>

@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
 		if(result == null) {
 	       	return false;
 	    } else {  
-	    	String oPwd = result.getPassword(); //db 명(키, 값)
+	    	String oPwd = result.getStrUserPw(); //db 명(키, 값)
 	        if(oPwd==null)
 	        	return false;
 	        else{
@@ -45,10 +45,10 @@ public class UserServiceImpl implements UserService {
 	        		return false;
 	        }
 	            
-	        }
+	    }
 	}
 
-	//로그인
+	//DB에서 id에 해당하는 회원 정보 가져옴(로그인)
 	@Override
 	public User selectOne(String id) throws Exception {
 		return userDAO.selectOne(id);
@@ -68,8 +68,8 @@ public class UserServiceImpl implements UserService {
 
 	//게시글 읽기
 	@Override
-	public Board readboard(int bno) throws Exception{
-		return userDAO.readboard(bno);
+	public Board readboard(int intBoardNo) throws Exception{
+		return userDAO.readboard(intBoardNo);
 	}
 	
 	//수정한 게시글 저장
@@ -80,7 +80,13 @@ public class UserServiceImpl implements UserService {
 	
 	//댓글 뿌려주기
 	@Override
-	public List<Comment> selectcmmtlist(int bno) throws Exception{
-		return userDAO.selectcmmtlist(bno); 
+	public List<Comment> selectcmmtlist(int intBoardNo) throws Exception{
+		return userDAO.selectcmmtlist(intBoardNo); 
+	}
+
+	//댓글 저장
+	@Override
+	public void insertComment(Comment comment) throws Exception {
+		userDAO.insertcommnet(comment);;
 	}
 }

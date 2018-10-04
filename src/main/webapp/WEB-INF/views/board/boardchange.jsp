@@ -1,4 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%  // 인증된 세션이 없는경우, 해당페이지를 볼 수 없게 함.
+    if (session.getAttribute("id")  == null) {
+        response.sendRedirect("logout.do");
+    }
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,24 +54,24 @@
 	
 	<header class="session text-white text-right">
 		<div class="container">
-			<%= session.getAttribute("userid") %>님 <small>반갑습니다.</small>
+			 <%= session.getAttribute("id") %>님 <small>반갑습니다.</small>
 		</div>
 	</header>
 	
 	<div class="container_t">
 		<h3 style="color:#2c3e50;">게시글 작성</h3>
 		<br>
-		<span style="float:right; margin-right:2%; font-weight:bold"><a href='boardlist'>목록</a></span>
+		<span style="float:right; margin-right:2%; font-weight:bold"><a href='boardlist.do'>목록</a></span>
 		<br><br>
-		<form method="POST" action="boardupdate?bno=${board.bno}">
+		<form method="POST" action="boardupdate.do?bno=${board.intBoardNo}">
 		<table class="table">
 			<tr>
 				<td>제목</td>
-				<td><input type="text" class="form-control" name="title" value="${board.title}"></td>
+				<td><input type="text" class="form-control" name="title" value="${board.strBoardTitle}"></td>
 			</tr>
 			<tr>
 				<td>글내용</td>
-				<td><textarea rows="10" cols="50" class="form-control" name="contents">${board.cnt}</textarea></td>
+				<td><textarea rows="10" cols="50" class="form-control" name="contents">${board.strBoardContent}</textarea></td>
 			</tr>
 		</table>
 		<div class="container_b">

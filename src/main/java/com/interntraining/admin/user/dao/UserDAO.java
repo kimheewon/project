@@ -22,9 +22,7 @@ public class UserDAO {
 		
 	//로그인
 	public User selectOne(String id) throws Exception{
-
-		return sqlSession.selectOne("sql.selectOne",id);
-		
+		return sqlSession.selectOne("sql.selectOne",id);		
 	}
 	
 	//게시판 List 뿌리기
@@ -38,8 +36,8 @@ public class UserDAO {
 	}
 	
 	//게시글 읽기
-	public Board readboard(int bno) {
-		return sqlSession.selectOne("sql.boardread", bno);
+	public Board readboard(int intBoardNo) {
+		return sqlSession.selectOne("sql.boardread", intBoardNo);
 	}
 	
 	//수정한 게시글 저장
@@ -48,7 +46,12 @@ public class UserDAO {
 	}
 	
 	//댓글 뿌리기
-	public List<Comment> selectcmmtlist(int bno){
-		return sqlSession.selectList("sql.selectcmmtlist", bno);
+	public List<Comment> selectcmmtlist(int intBoardNo){
+		return sqlSession.selectList("sql.selectcmmtlist", intBoardNo);
+	}
+	
+	//댓글 저장
+	public void insertcommnet(Comment comment) {
+		sqlSession.insert("sql.insertcomment", comment);
 	}
 }
