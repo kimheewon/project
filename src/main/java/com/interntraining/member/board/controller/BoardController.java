@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
@@ -126,7 +127,7 @@ public class BoardController {
 
 	// 댓글 등록
 	@RequestMapping("/commentsave")
-	public ModelAndView coimmentWrite(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+	public ModelAndView commentWrite(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			int intBoardNo) throws Exception {
 		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
 
@@ -150,4 +151,13 @@ public class BoardController {
 	}
 	
 	//댓글 수정
+	@RequestMapping(value="/board/boardcommentchange", method=RequestMethod.POST)
+	public ModelAndView commentUpdate(HttpServletRequest request, HttpServletResponse response, HttpSession session,int intCmmtNo) throws Exception {
+		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
+		
+		
+		
+		
+		return mv;
+	}
 }

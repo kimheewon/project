@@ -125,7 +125,7 @@
 			<div style="text-align:right;">	
 			<c:if test="${id eq comment.strUserId}">
 				<span style="float:right; margin-right:2%; font-weight:bold"><a href=''>삭제</a></span>
-				<span style="float:right; margin-right:2%; font-weight:bold"><a href='/boardcommentchange?intCmmtNo=${comment.intCmmtNo}'>수정</a></span>
+				<span style="float:right; margin-right:2%; font-weight:bold"><a href='/board/boardcommentchange?intCmmtNo=${comment.intCmmtNo}'>수정</a></span>
 			</c:if>
 			</div>
 			&nbsp;&nbsp;&nbsp;&nbsp;${comment.strCmmtComment}
