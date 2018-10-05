@@ -50,7 +50,7 @@
     <!-- Contact Section -->
     <section id="contact">
       <div class="container_t">
-        <h2 class="text-center text-uppercase text-secondary mb-0">Join Us</h2>
+        <h2 class="text-center text-uppercase text-secondary mb-0">Join</h2>
         <hr class="star-dark mb-5">
         <div class="row">
           <div class="col-lg-8 mx-auto">

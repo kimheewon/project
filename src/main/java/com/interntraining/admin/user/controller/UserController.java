@@ -24,8 +24,12 @@ import com.interntraining.admin.user.domain.Comment;
 import com.interntraining.admin.user.domain.User;
 import com.interntraining.admin.user.service.UserService;
 
-
-
+/*
+ * 회원 정보 관리
+ * 	- 회원 가입
+ * 	- 회원 정보 수정
+ * 
+ */
 @Controller
 @RequestMapping(value = "/")
 public class UserController {
@@ -80,8 +84,18 @@ public class UserController {
 	//회원가입
 	@RequestMapping("joinForm")
     public String joinForm(){		
-        return "/login/join";
+        return "/login/sample";
     }
+	
+	//회원정보 저장
+	@RequestMapping(value = "joinsave.do")
+	public ModelAndView joinSave() {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		
+		return mav;
+		
+	}
+	
 	
 	//게시판
 	@ResponseBody

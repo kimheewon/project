@@ -17,8 +17,11 @@
 		</div>
 	</header>
 	    
-
+    <!-- Footer -->
+    <footer>
+ 		<jsp:include page="../bottom.jsp" flush="true"/>
+    </footer>
     
 </body>
-<jsp:include page="../bottom.jsp" flush="true"/>
+
 </html>

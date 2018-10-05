@@ -140,7 +140,7 @@
 			<colgroup>
      		<col width = "*"/>
     		<col width = "10%"/>
-    	</colgroup>
+    		</colgroup>
 			<tr align="center" >
 				<td><textarea class="form-control" name="comment" rows="3" required autofocus ></textarea>
    				<td><input type="submit" style="width: 75pt; height: 60pt; boarder-color:#ededed;outline:0;background-color:#ededed" value="등록">
