@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
 
+
 import com.interntraining.member.user.dao.UserDAO;
+import com.interntraining.member.user.domain.Member;
 
 
 
@@ -22,6 +24,21 @@ public class UserServiceImpl implements UserService {
     @Autowired
     @Qualifier("mainDBTransactionManager")
     private DataSourceTransactionManager transactionManager;
+
+    //DB에서 id 체크
+	@Override
+	public Member selectId(String id) {
+		return userDAO.selectId(id);
+		
+	}
+
+	//회원 가입
+	@Override
+	public void insertMember(Member member) {
+		userDAO.insertmember(member);
+		
+	}
+    
     
    
     

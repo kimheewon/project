@@ -11,8 +11,7 @@
 <meta name="author" content="">
 
 <!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
 <title>로그인 폼</title>
@@ -46,7 +45,7 @@
 
 	<div class="card align-middle" style="width: 20rem; border-radius: 20px;">
 		<div class="card-title" style="margin-top: 30px;">
-			<h2 class="card-title text-center" style="color: #113366;">로그인</h2>
+			<h2 class="card-title text-center" style="color: #113366;">Payletter</h2>
 		</div>
 		<div class="card-body">
 			<form class="form-signin" method="POST" action="/login/loginCheck">
@@ -59,12 +58,13 @@
 					<label> <input type="checkbox" value="remember-me">기억하기</label>
 				</div>
 				<button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">로 그 인</button>
-				<button id="btn-Yes" class="btn btn-lg btn-primary btn-block" onclick="location.href='/join/joinForm'">회원가입</button>				
+				<button id="btn-Yes" class="btn btn-lg btn-primary btn-block" onclick="location.href='/user/joinForm'">회원가입</button>				
 			</form>
 				
 		</div>
 	</div>
-
+    <!-- Footer -->
+ 
 	<div class="modal"></div>
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -79,6 +79,7 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
+	
 </body>
 
 </html>

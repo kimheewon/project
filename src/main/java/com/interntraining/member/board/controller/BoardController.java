@@ -148,4 +148,6 @@ public class BoardController {
 		mv.setViewName("/board/boardread");
 		return mv;
 	}
+	
+	//댓글 수정
 }

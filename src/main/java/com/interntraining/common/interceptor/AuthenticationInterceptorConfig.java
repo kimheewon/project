@@ -17,7 +17,10 @@ public class AuthenticationInterceptorConfig extends WebMvcConfigurerAdapter{
 	   
 	   @Override
 	   public void addInterceptors(InterceptorRegistry registry) {
-	        registry.addInterceptor(authenticationInterceptor).addPathPatterns("/board/**").excludePathPatterns("/login/**");
+	        registry.addInterceptor(authenticationInterceptor)
+	        		.addPathPatterns("/board/**")		//세션 게시판 검사
+	        		.excludePathPatterns("/login/**")	//로그인 세션 검사 X
+	        		.excludePathPatterns("/user/**");	//회원가입 세션 검사 X
 	   }
 	 
 }

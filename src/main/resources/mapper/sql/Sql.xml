@@ -5,14 +5,7 @@
      # ■ 샘플 Mapper ■ ymkang ■ 2018. 09. 03.
      ################################################### -->
 <mapper namespace="sql">
-    
-	<insert id="insertMember" >
-		insert into TMember values(
-			#{id}, #{password}, #{name}, #{phone}, #{email}, #{gender}, #{birth}
-			)
-
-	</insert>
-	
+    	
 	<!-- 로그인시 아이디 값으로  DB에 있는 정보 가져오기 -->	
 	<select id="selectOne"  resultType="User">
 		select   UserNo AS intUserNo
@@ -28,6 +21,43 @@
 		from   TUser
 	</select>
 	
+	<!-- 아이디 중복체크 -->	
+	<select id="selectId"  resultType="Member">
+		select   UserId AS StrUserid	
+		from TUser where UserId = #{id} 
+	</select>
+	
+	<!-- 회원가입 -->	
+	<insert id="insertmember" >
+		insert into TUser(UserId,UserPw,UserName,UserPhone,UserEmail,UserSex,UserBirth) values(
+			#{StrUserId}, #{StrUserPw}, #{StrUserName}, #{StrUserPhone}, #{StrUserEmail}, #{StrUserSex}, #{StrUserBirth}
+			)
+	</insert>
+
+	<!-- 마이페이지 -->
+	<select id="selectUser"  resultType="User">
+		select	 UserId			AS StrUserid
+				,UserPw 		AS StrUserPw
+				,UserName		AS StrUserName
+				,UserPhone 	 	AS StrUserPhone
+				,UserEmail   	AS StrUserEmail
+				,UserSex   		AS StrUserSex
+				,UserBirth 		AS StrUserBirth
+				,UserDate  		AS DateUserDate
+				,UserGrade 		AS StrUserGrade
+		from   	 TUser			
+		where	 UserId = #{id} 
+	</select>
+	
+	<!--수정한 회원 정보저장 -->
+	<select id="updateMember">	
+		update	 TUser
+		set		 UserPw		= #{StrUserPw}
+				,UserName	= #{StrUserName}
+				,UserPhone	= #{StrUserPhone}
+				,UserEmail	= #{StrUserEmail}
+		where	 UserId 	= #{StrUserid} 
+	</select>	
 	<!-- 게시판 목록에 뿌려주기 -->
 	<select id="selectboardlist"  resultType="Board">
 		select	 BoardNo		AS intBoardNo

@@ -1,10 +1,10 @@
-package com.interntraining.member.login.domain;
+package com.interntraining.member.user.domain;
 
 import java.util.Date;
 
-public class User {
+public class Member {
 	private int intUserNo;
-	private String StrUserid;
+	private String StrUserId;
 	private String StrUserPw;
 	private String StrUserName;
 	private String StrUserPhone;
@@ -20,11 +20,11 @@ public class User {
 	public void setIntUserNo(int intUserNo) {
 		this.intUserNo = intUserNo;
 	}
-	public String getStrUserid() {
-		return StrUserid;
+	public String getStrUserId() {
+		return StrUserId;
 	}
-	public void setStrUserid(String strUserid) {
-		StrUserid = strUserid;
+	public void setStrUserId(String strUserid) {
+		StrUserId = strUserid;
 	}
 	public String getStrUserPw() {
 		return StrUserPw;
@@ -49,13 +49,13 @@ public class User {
 	}
 	public void setStrUserEmail(String strUserEmail) {
 		StrUserEmail = strUserEmail;
-	}
+	}	
 	public String getStrUserSex() {
 		return StrUserSex;
 	}
 	public void setStrUserSex(String strUserSex) {
 		StrUserSex = strUserSex;
-	}	
+	}
 	public String getStrUserBirth() {
 		return StrUserBirth;
 	}

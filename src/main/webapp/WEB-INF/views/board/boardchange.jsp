@@ -52,11 +52,7 @@
 </head>
 <body>
 	
-	<header class="session text-white text-right">
-		<div class="container">
-			 <%= session.getAttribute("id") %>님 <small>반갑습니다.</small>
-		</div>
-	</header>
+	
 	
 	<div class="container_t">
 		<h3 style="color:#2c3e50;">게시글 작성</h3>
@@ -74,7 +70,7 @@
 				<td><textarea rows="10" cols="50" class="form-control" name="contents">${board.strBoardContent}</textarea></td>
 			</tr>
 		</table>
-		<div class="container_b">
+		<div class="container_b" style="text-align:right;">
 			<button class="button" type="submit">저장하기</button>
 			<button class="button" type="reset">다시작성</button>			
 			</div>

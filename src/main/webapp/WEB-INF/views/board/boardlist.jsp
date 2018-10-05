@@ -36,17 +36,14 @@
 </head>
 
 <body>
-	<header class="session text-white text-right">
-		<div class="container">
-			 <%= session.getAttribute("id") %>님 <small>반갑습니다.</small>
-		</div>
-	</header>	
+
 	
+
     <div class="container_t">
     
   		<h3 style="color:#2c3e50">게시판</h3>
     	<span style="float:right; margin-right:6%; font-weight:bold">
-  			<a href='boardlist.do'>목록</a>
+  			<a href='/board/boardlist'>목록</a>
 		</span>
 		<br><br>
     	<table class="table table-hover">

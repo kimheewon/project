@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.interntraining.member.login.dao.LoginDAO;
 import com.interntraining.member.login.domain.User;
+import com.interntraining.member.user.domain.Member;
 
 
 
@@ -50,6 +51,21 @@ public class LoginServiceImpl implements LoginService {
 	public User selectOne(String id) throws Exception {
 		return loginDAO.selectOne(id);
 	}
+
+	//마이페이지
+	@Override
+	public User myPage(String id) {
+		return loginDAO.selectUser(id);
+	}
+
+	//회원정보 수정	
+	@Override
+	public void updateMember(User user) {
+		loginDAO.updateMember(user);
+		
+	}
+
+	
 
 	
 }

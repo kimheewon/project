@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-
+<%  // 인증된 세션이 없는경우, 해당페이지를 볼 수 없게 함.
+    if (session.getAttribute("id")  == null) {
+        response.sendRedirect("/login/logout");
+    }
+%>
 <html lang="ko">
 
     <meta charset="utf-8">
@@ -23,8 +27,6 @@
     <link href="/css/freelancer.min.css" rel="stylesheet"/>
 
 <style>
-  
-  	
 	  .session{
 		background : #18bc9c;
 		padding-top:calc(3rem + 55px);
@@ -37,6 +39,7 @@
 
   </head>
  <body>
+ 
      <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
       <div class="container">
@@ -51,7 +54,7 @@
              	<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/board/boardlist">게시판</a>
             </li>
             <li class="nav-item mx-0 mx-lg-1">
-				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="homepg">마이페이지</a>
+				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/login/myPageForm">마이페이지</a>
             </li>
             <li class="nav-item mx-0 mx-lg-1">
            	 	<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/login/logout">로그아웃</a>
@@ -61,5 +64,11 @@
         </div>
       </div>
     </nav>
+    
+    <header class="session text-white text-right">
+		<div class="container">
+	        <%= session.getAttribute("id") %>님 <small>반갑습니다.</small>
+		</div>
+	</header>
     </body>
 </html>

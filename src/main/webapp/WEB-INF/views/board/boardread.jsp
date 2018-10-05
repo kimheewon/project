@@ -6,7 +6,6 @@
         response.sendRedirect("/login/logout");
     }
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,11 +78,6 @@
 </head>
 <body>
 	
-	<header class="session text-white text-right">
-		<div class="container">
-			 <%= session.getAttribute("id") %>님 <small>반갑습니다.</small>		
-		</div>
-	</header>
 	
 	<div class="container_t">
 		<h3 style="color:#2c3e50;">게시글</h3>
@@ -107,7 +101,7 @@
 				<td>${board.intHit}</td>				
 			<tr height="250" >
 				<td class="color">글내용</td>
-				<td colspan="50" style="text-align:left; padding-left:3%" >${board.strBoardContent}</td>	
+				<td colspan="50" style="text-align:left; padding-left:3%; word-break:break-all;" >${board.strBoardContent}</td>	
 			</tr>
 		</table>
 		<c:if test="${id eq board.strUserId}">
@@ -123,17 +117,18 @@
 		<form method="POST" action="/board/commentsave?intBoardNo=${board.intBoardNo}">
 		<a style="font-weight:bold; color:#2c3e50;">댓글</a>
 		<br>
-		<div class="container_c">
+		<div class="container_c" >
 		<hr class="hr">			
 		<c:forEach var="comment" items="${commentlist}">
 			<a style="color:#2C3E50; font-size: large; font-weight:bold">${comment.strUserId} &nbsp;&nbsp;&nbsp;</a>
 			<a style="font-size:small;color:gray;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${comment.dateCmmtDate}"/></a>
+			<div style="text-align:right;">	
 			<c:if test="${id eq comment.strUserId}">
 				<span style="float:right; margin-right:2%; font-weight:bold"><a href=''>삭제</a></span>
 				<span style="float:right; margin-right:2%; font-weight:bold"><a href='/boardcommentchange?intCmmtNo=${comment.intCmmtNo}'>수정</a></span>
 			</c:if>
-			<br>
-			${comment.strCmmtComment}
+			</div>
+			&nbsp;&nbsp;&nbsp;&nbsp;${comment.strCmmtComment}
 			<hr class="hr">
 		</c:forEach>
 		<table class="container_d" >
