@@ -1,4 +1,4 @@
-package com.interntraining.member.common.database;
+package com.interntraining.common.database;
 
 import javax.sql.DataSource;
 

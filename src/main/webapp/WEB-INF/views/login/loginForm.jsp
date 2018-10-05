@@ -49,7 +49,7 @@
 			<h2 class="card-title text-center" style="color: #113366;">로그인</h2>
 		</div>
 		<div class="card-body">
-			<form class="form-signin" method="POST" action="login.do">
+			<form class="form-signin" method="POST" action="/login/loginCheck">
 				<h5 class="form-signin-heading">로그인 정보를 입력하세요</h5>
 				<label for="inputEmail" class="sr-only">Your ID</label>
 				<input type="text" name="id" class="form-control" placeholder="Your ID"	required autofocus><BR>
@@ -59,9 +59,9 @@
 					<label> <input type="checkbox" value="remember-me">기억하기</label>
 				</div>
 				<button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">로 그 인</button>
-				<button id="btn-Yes" class="btn btn-lg btn-primary btn-block" onclick="location.href='joinForm'">회원가입</button>
+				<button id="btn-Yes" class="btn btn-lg btn-primary btn-block" onclick="location.href='/join/joinForm'">회원가입</button>				
 			</form>
-
+				
 		</div>
 	</div>
 

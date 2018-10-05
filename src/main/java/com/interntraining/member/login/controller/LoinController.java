@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.interntraining.member.login.domain.User;
-import com.interntraining.member.login.service.UserService;
+import com.interntraining.member.login.service.LoginService;
 
 /*
  * 로그인 관리
@@ -19,20 +19,20 @@ import com.interntraining.member.login.service.UserService;
  * 
  */
 @Controller
-@RequestMapping(value="/")
+@RequestMapping(value= {"","/login"})
 public class LoinController {
 
 	@Autowired
-	private UserService userService;
+	private LoginService loginService;
 	
 	//첫화면 - 로그인 화면
-	@RequestMapping(value = "/")
+	@RequestMapping(value = {"","/","/login"})
 	public String initPage() throws Exception {				
 		return "/login/loginForm";	
 	}
 	
 	//로그인 처리
-	@RequestMapping(value="login.do", method=RequestMethod.POST)
+	@RequestMapping(value="/login/loginCheck", method=RequestMethod.POST)
 	public String login(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws Exception{
 			
 		//로그인 폼에서 id와 pw 가져옴
@@ -47,8 +47,8 @@ public class LoinController {
 			
 		User user = new User();
 		//로그인 성공
-		if(userService.logincheck(id, password)){
-			user = userService.selectOne(id);		//로그인 성공시 정보 담아놓음
+		if(loginService.logincheck(id, password)) {
+			user = loginService.selectOne(id);		//로그인 성공시 정보 담아놓음
 			session.setAttribute("login", user);	//세션에 login이란 이름으로 user 객체를 저장함
 			session.setAttribute("id", user.getStrUserid());
 			return "/login/home";			//로그인 성공시 홈화면으로 이동			
@@ -60,7 +60,7 @@ public class LoinController {
 	}	
 		
 	//로그아웃
-	@RequestMapping(value = "logout.do")
+	@RequestMapping(value = "/login/logout")
 	public String logout(HttpSession session) throws Exception{
 		session.invalidate();    //세션 전체를 날려버림
 		return "/login/loginForm";

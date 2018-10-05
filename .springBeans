@@ -9,7 +9,6 @@
 	<configs>
 	</configs>
 	<autoconfigs>
-		<config>java:com.interntraining.admin.InternTrainingApplication</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>

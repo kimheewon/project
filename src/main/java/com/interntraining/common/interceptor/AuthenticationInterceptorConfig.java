@@ -1,4 +1,4 @@
-package com.interntraining.member.common.interceptor;
+package com.interntraining.common.interceptor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ public class AuthenticationInterceptorConfig extends WebMvcConfigurerAdapter{
 	   
 	   @Override
 	   public void addInterceptors(InterceptorRegistry registry) {
-	        registry.addInterceptor(authenticationInterceptor).addPathPatterns("/user/controller/UserController/*.do");
+	        registry.addInterceptor(authenticationInterceptor).addPathPatterns("/board/**").excludePathPatterns("/login/**");
 	   }
 	 
 }

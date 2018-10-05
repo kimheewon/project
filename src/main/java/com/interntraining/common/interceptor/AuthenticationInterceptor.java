@@ -1,4 +1,4 @@
-package com.interntraining.member.common.interceptor;
+package com.interntraining.common.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

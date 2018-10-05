@@ -1,45 +1,43 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 
-<!DOCTYPE html>
 <html lang="utf-8">
-
-  <head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Freelancer - Start Bootstrap Theme</title>
+    <title>Welcome Home~!</title>
+	 <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom fonts for this template -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-
+     <!-- Custom fonts for this template -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
     <!-- Plugin CSS -->
-    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+    <link href="/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css"/>
 
     <!-- Custom styles for this template -->
-    <link href="css/freelancer.min.css" rel="stylesheet">
-    <style>
-	.container_t {
-    
-		padding-right: 15px;
-		padding-left: 15px;
-		margin-right: auto;
-		margin-left: auto;
-		width: 70%;
-		margin: 0 auto;     /* 가로로 중앙에 배치 */
-		padding-top: 3%;   /* 테두리와 내용 사이의 패딩 여백 */
-    }
-    </style>
+    <link href="/css/freelancer.min.css" rel="stylesheet"/>
+
+<style>
+  
+  	
+	  .session{
+		background : #18bc9c;
+		padding-top:calc(3rem + 55px);
+	  	font-size:16px;
+	  	line-height:1.6;
+	  	font-family: 'Lato';
+
+	  }
+  </style>
+
   </head>
-
-  <body id="page-top">
-
+ <body>
+    
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
       <div class="container">
@@ -50,7 +48,7 @@
     <!-- Contact Section -->
     <section id="contact">
       <div class="container_t">
-        <h2 class="text-center text-uppercase text-secondary mb-0">Join</h2>
+        <h2 class="text-center text-uppercase text-secondary mb-0">Join Us</h2>
         <hr class="star-dark mb-5">
         <div class="row">
           <div class="col-lg-8 mx-auto">
@@ -116,7 +114,5 @@
 
     <!-- Custom scripts for this template -->
     <script src="js/freelancer.min.js"></script>
-
-  </body>
-
+    </body>
 </html>

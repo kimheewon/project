@@ -1,4 +1,4 @@
-package com.interntraining.member.common.database;
+package com.interntraining.common.database;
 
 import java.io.IOException;
 
@@ -43,7 +43,9 @@ public abstract class AbstractMybatisConfig {
 		objSqlSessionFactoryBean.setDataSource(objDataSource);
 		objSqlSessionFactoryBean.setConfigLocation(objPathResolver.getResource(strMybatisConfigLocation));
 		objSqlSessionFactoryBean.setMapperLocations(objPathResolver.getResources(strMybatisMapperLocation));
-		objSqlSessionFactoryBean.setTypeAliasesPackage("com.interntraining.member.**.domain");
+
+		objSqlSessionFactoryBean.setTypeAliasesPackage("com.interntraining.admin.**.domain");
+
 		objSqlSessionFactoryBean.setVfs(SpringBootVFS.class);
 	}
 }

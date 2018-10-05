@@ -6,6 +6,7 @@ import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
@@ -22,7 +23,7 @@ import com.interntraining.member.user.service.UserService;
  * 
  */
 @Controller
-@RequestMapping(value = "/")
+@RequestMapping(value= "/join")
 public class UserController {
 
 	@Autowired
@@ -30,13 +31,13 @@ public class UserController {
 	
 	
 	//회원가입
-	@RequestMapping("joinForm")
+	@RequestMapping(value = "/joinForm")
     public String joinForm(){		
-        return "/login/sample";
+        return "/login/join";
     }
 	
 	//회원정보 저장
-	@RequestMapping(value = "joinsave.do")
+	@RequestMapping(value = "/join/joinsave.do")
 	public ModelAndView joinSave() {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		

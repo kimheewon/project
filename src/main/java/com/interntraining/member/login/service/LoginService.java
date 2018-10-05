@@ -1,9 +1,8 @@
 package com.interntraining.member.login.service;
 
-
 import com.interntraining.member.login.domain.User;
 
-public interface UserService {
+public interface LoginService {
 
 	//로그인 - DB에서 id 확인
 	public boolean logincheck(String id, String password) throws Exception;

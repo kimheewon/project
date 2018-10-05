@@ -11,7 +11,7 @@
         <!-- Common Alias END   -->
         
        
-        <package name="com.interntraining.admin.user.domain"/>
+
         <package name="com.interntraining.member.user.domain"/>
         <package name="com.interntraining.member.login.domain"/>
         <package name="com.interntraining.member.board.domain"/>

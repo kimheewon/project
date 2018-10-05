@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%  // 인증된 세션이 없는경우, 해당페이지를 볼 수 없게 함.
     if (session.getAttribute("id")  == null) {
-        response.sendRedirect("logout.do");
+        response.sendRedirect("/login/logout");
     }
 %>
 <!DOCTYPE html>
@@ -61,9 +61,9 @@
 	<div class="container_t">
 		<h3 style="color:#2c3e50;">게시글 작성</h3>
 		<br>
-		<span style="float:right; margin-right:2%; font-weight:bold"><a href='boardlist.do'>목록</a></span>
+		<span style="float:right; margin-right:2%; font-weight:bold"><a href='/board/boardlist'>목록</a></span>
 		<br><br>
-		<form method="POST" action="boardupdate.do?bno=${board.intBoardNo}">
+		<form method="POST" action="/board/boardupdate?bno=${board.intBoardNo}">
 		<table class="table">
 			<tr>
 				<td>제목</td>

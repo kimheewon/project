@@ -1,4 +1,4 @@
-package com.interntraining.member;
+package com.interntraining;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

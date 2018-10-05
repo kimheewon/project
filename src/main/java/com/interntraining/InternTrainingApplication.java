@@ -1,4 +1,4 @@
-package com.interntraining.member;
+package com.interntraining;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

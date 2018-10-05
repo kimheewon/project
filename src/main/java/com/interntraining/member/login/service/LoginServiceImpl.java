@@ -1,7 +1,5 @@
 package com.interntraining.member.login.service;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,17 +7,17 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
 
-import com.interntraining.member.login.dao.UserDAO;
+import com.interntraining.member.login.dao.LoginDAO;
 import com.interntraining.member.login.domain.User;
 
 
 
 
 @Service()
-public class UserServiceImpl implements UserService {
+public class LoginServiceImpl implements LoginService {
 	
-    @Resource(name = "userDAO")
-    private UserDAO userDAO;
+    @Resource(name = "loginDAO")
+    private LoginDAO loginDAO;
 
     @Autowired
     @Qualifier("mainDBTransactionManager")
@@ -29,7 +27,7 @@ public class UserServiceImpl implements UserService {
     //로그인 - DB에서 id 확인
 	@Override
 	public boolean logincheck(String id, String password) throws Exception {
-		User result = userDAO.selectOne(id);
+		User result = loginDAO.selectOne(id);
 		
 		if(result == null) {
 	       	return false;
@@ -50,7 +48,7 @@ public class UserServiceImpl implements UserService {
 	//로그인-DB에서 id에 해당하는 회원 정보 가져옴
 	@Override
 	public User selectOne(String id) throws Exception {
-		return userDAO.selectOne(id);
+		return loginDAO.selectOne(id);
 	}
 
 	

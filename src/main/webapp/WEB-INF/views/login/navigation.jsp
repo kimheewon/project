@@ -48,13 +48,13 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item mx-0 mx-lg-1">
-             	<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="boardlist.do">게시판</a>
+             	<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/board/boardlist">게시판</a>
             </li>
             <li class="nav-item mx-0 mx-lg-1">
 				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="homepg">마이페이지</a>
             </li>
             <li class="nav-item mx-0 mx-lg-1">
-           	 	<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="logout.do">로그아웃</a>
+           	 	<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/login/logout">로그아웃</a>
             </li>
             
            </ul>

@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%  // 인증된 세션이 없는경우, 해당페이지를 볼 수 없게 함.
     if (session.getAttribute("id")  == null) {
-        response.sendRedirect("logout.do");
+        response.sendRedirect("/login/logout");
     }
 %>
 
@@ -69,7 +69,7 @@
 			
 			<tr>
 				<td>${board.intBoardNo}</td>
-				<td><a href="boardread.do?intBoardNo=${board.intBoardNo}">${board.strBoardTitle}</a></td>
+				<td><a href="/board/boardread?intBoardNo=${board.intBoardNo}">${board.strBoardTitle}</a></td>
 				<td>${board.strUserId}</td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${board.dateBoardDate}"/></td>
 				<td><span>${board.intHit}</span></td>
@@ -81,7 +81,7 @@
 
 	<hr/>
 	<span style="float:right; margin-right:20%; font-weight:bold">
-  		<a href='boardwrite'>글쓰기</a>
+  		<a href='/board/boardwrite'>글쓰기</a>
 	</span>
 		
 	<div class="container_t">

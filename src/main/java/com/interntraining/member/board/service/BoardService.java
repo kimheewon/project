@@ -6,7 +6,7 @@ import com.interntraining.member.board.domain.Board;
 import com.interntraining.member.board.domain.Comment;
 
 
-public interface UserService {
+public interface BoardService {
 
 
 	//게시판 글뿌리기

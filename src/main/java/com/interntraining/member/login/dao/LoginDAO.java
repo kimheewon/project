@@ -10,8 +10,8 @@ import com.interntraining.member.login.domain.User;
 
 
 
-@Repository("userDAO")
-public class UserDAO {
+@Repository("loginDAO")
+public class LoginDAO {
 	@Autowired
     @Qualifier("mainDBSqlSession")
 	private SqlSession sqlSession;

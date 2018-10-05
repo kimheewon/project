@@ -1,4 +1,4 @@
-package com.interntraining.admin.user.dao;
+package com.interntraining.member.board.dao;
 
 import java.util.List;
 
@@ -8,22 +8,16 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 
-import com.interntraining.admin.user.domain.Board;
-import com.interntraining.admin.user.domain.Comment;
-import com.interntraining.admin.user.domain.User;
+import com.interntraining.member.board.domain.Board;
+import com.interntraining.member.board.domain.Comment;
 
 
-
-@Repository("userDAO")
-public class UserDAO {
+@Repository("boardDAO")
+public class BoardDAO {
 	@Autowired
     @Qualifier("mainDBSqlSession")
 	private SqlSession sqlSession;
 		
-	//로그인
-	public User selectOne(String id) throws Exception{
-		return sqlSession.selectOne("sql.selectOne",id);		
-	}
 	
 	//게시판 List 뿌리기
 	public List<Board> selectboardlist(Board board) {

@@ -15,7 +15,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.interntraining.member.board.domain.Board;
 import com.interntraining.member.board.domain.Comment;
-import com.interntraining.member.board.service.UserService;
+import com.interntraining.member.board.service.BoardService;
 
 /*
  * 게시판 관리
@@ -24,19 +24,19 @@ import com.interntraining.member.board.service.UserService;
  * 
  */
 @Controller
-@RequestMapping(value = "/")
+@RequestMapping(value = "/board")
 public class BoardController {
 
 	@Autowired
-	private UserService userService;
+	private BoardService boardService;
 
 	// 게시판
 	@ResponseBody
-	@RequestMapping("boardlist.do")
+	@RequestMapping(value="/boardlist")
 	public ModelAndView boardlist(Board board) throws Exception {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 
-		List<Board> boardlist = userService.selectboardlist(board);
+		List<Board> boardlist = boardService.selectboardlist(board);
 		mav.addObject("boardlist", boardlist);
 		mav.setViewName("/board/boardlist");
 		return mav;
@@ -44,13 +44,13 @@ public class BoardController {
 	}
 
 	// 게시글 작성 페이지
-	@RequestMapping("boardwrite")
+	@RequestMapping("/boardwrite")
 	public String boardwrite() {
 		return "/board/boardwrite";
 	}
 
 	// 게시글 저장
-	@RequestMapping("boardsave.do")
+	@RequestMapping("/boardsave")
 	public ModelAndView boardWrite(HttpServletRequest request, HttpServletResponse response, HttpSession session)
 			throws Exception {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
@@ -63,9 +63,9 @@ public class BoardController {
 		board.setStrUserId(id);
 		board.setStrBoardTitle(title);
 		board.setStrBoardContent(contents);
-		userService.insertboard(board);
+		boardService.insertboard(board);
 
-		List<Board> boardlist = userService.selectboardlist(board);
+		List<Board> boardlist = boardService.selectboardlist(board);
 		mav.addObject("boardlist", boardlist);
 		mav.setViewName("/board/boardlist");
 
@@ -73,15 +73,15 @@ public class BoardController {
 	}
 
 	// 게시글 읽기 + 댓글 뿌려주기
-	@RequestMapping("boardread.do")
+	@RequestMapping("/boardread")
 	public ModelAndView boardread(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			int intBoardNo) throws Exception {
 		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
 
 		String id = (String) session.getAttribute("id"); // 세션
 
-		Board boardread = userService.readboard(intBoardNo);
-		List<Comment> cmmtlist = userService.selectcmmtlist(intBoardNo);
+		Board boardread = boardService.readboard(intBoardNo);
+		List<Comment> cmmtlist = boardService.selectcmmtlist(intBoardNo);
 
 		mv.addObject("board", boardread);
 		mv.addObject("commentlist", cmmtlist);
@@ -91,11 +91,11 @@ public class BoardController {
 	}
 
 	// 게시글 수정페이지에 글 뿌려주기
-	@RequestMapping("boardchange.do")
+	@RequestMapping("/boardchange")
 	public ModelAndView boardchange(int intBoardNo) throws Exception {
 		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
 
-		Board boardread = userService.readboard(intBoardNo);
+		Board boardread = boardService.readboard(intBoardNo);
 
 		mv.addObject("board", boardread);
 		mv.setViewName("/board/boardchange");
@@ -104,7 +104,7 @@ public class BoardController {
 	}
 
 	// 수정한 게시글 DB에 저장
-	@RequestMapping("boardupdate.do")
+	@RequestMapping("/boardupdate")
 	public ModelAndView boardUpdate(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			int bno) throws Exception {
 		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
@@ -116,16 +116,16 @@ public class BoardController {
 		board.setIntBoardNo(bno);
 		board.setStrBoardTitle(title);
 		board.setStrBoardContent(contents);
-		userService.updateboard(board);
+		boardService.updateboard(board);
 
-		List<Board> boardlist = userService.selectboardlist(board);
+		List<Board> boardlist = boardService.selectboardlist(board);
 		mv.addObject("boardlist", boardlist);
 		mv.setViewName("/board/boardlist");
 		return mv;
 	}
 
 	// 댓글 등록
-	@RequestMapping("commentsave.do")
+	@RequestMapping("/commentsave")
 	public ModelAndView coimmentWrite(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			int intBoardNo) throws Exception {
 		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
@@ -138,11 +138,11 @@ public class BoardController {
 		comment.setIntBoardNo(intBoardNo);
 		comment.setStrUserId(id);
 		comment.setStrCmmtComment(content);
-		userService.insertComment(comment);
+		boardService.insertComment(comment);
 
 		// 상세보기에 게시글과 댓글뿌려주기
-		Board boardread = userService.readboard(intBoardNo);
-		List<Comment> cmmtlist = userService.selectcmmtlist(intBoardNo);
+		Board boardread = boardService.readboard(intBoardNo);
+		List<Comment> cmmtlist = boardService.selectcmmtlist(intBoardNo);
 		mv.addObject("board", boardread);
 		mv.addObject("commentlist", cmmtlist);
 		mv.setViewName("/board/boardread");

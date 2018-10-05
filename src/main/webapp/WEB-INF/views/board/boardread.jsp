@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%  // 인증된 세션이 없는경우, 해당페이지를 볼 수 없게 함.
     if (session.getAttribute("id")  == null) {
-        response.sendRedirect("logout.do");
+        response.sendRedirect("/login/logout");
     }
 %>
 
@@ -88,10 +88,10 @@
 	<div class="container_t">
 		<h3 style="color:#2c3e50;">게시글</h3>
 		<br>
-		<span style="float:right; margin-right:2%; font-weight:bold"><a href='boardlist.do'>목록</a></span>
+		<span style="float:right; margin-right:2%; font-weight:bold"><a href='/board/boardlist'>목록</a></span>
 		<br><br>
 		
-		<form method="POST" action="boardchange.do?intBoardNo=${board.intBoardNo}">
+		<form method="POST" action="/board/boardchange?intBoardNo=${board.intBoardNo}">
 		<table class="table" style="text-align:center">
 			<tr>
 				<td class="color">제목</td>
@@ -120,7 +120,7 @@
 		</form>
 	</div>
 	<div class="container_t">		
-		<form method="POST" action="commentsave.do?intBoardNo=${board.intBoardNo}">
+		<form method="POST" action="/board/commentsave?intBoardNo=${board.intBoardNo}">
 		<a style="font-weight:bold; color:#2c3e50;">댓글</a>
 		<br>
 		<div class="container_c">
@@ -130,7 +130,7 @@
 			<a style="font-size:small;color:gray;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${comment.dateCmmtDate}"/></a>
 			<c:if test="${id eq comment.strUserId}">
 				<span style="float:right; margin-right:2%; font-weight:bold"><a href=''>삭제</a></span>
-				<span style="float:right; margin-right:2%; font-weight:bold"><a href='commentchange?intCmmtNo=${comment.intCmmtNo}'>수정</a></span>
+				<span style="float:right; margin-right:2%; font-weight:bold"><a href='/boardcommentchange?intCmmtNo=${comment.intCmmtNo}'>수정</a></span>
 			</c:if>
 			<br>
 			${comment.strCmmtComment}
