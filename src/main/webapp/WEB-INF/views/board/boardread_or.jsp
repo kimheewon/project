@@ -77,13 +77,21 @@
   </style>
   
   <script type="text/javascript">
-	//댓글 수정 폼으로 이동
-	function updateComment(intCmmtNo,intBoardNo){
-		window.name = "parentForm";
-	   
-		window.open("/board/boardcommentchange?intCmmtNo ="+intCmmtNo"&intBoardNo="+intBoardNo", 'updateForm', 'width=570, height=350, resizable=no, scriollbars=no');
-	}
-					
+					//댓글 수정 폼으로 이동
+					function updateComment(strCmmtComment){
+						alert(strCmmtComment);
+						//alert(intCmmtNo);
+				
+						
+					}
+				
+					function updateC(intCmmtNo){
+						
+						alert(intCmmtNo);
+				
+						
+					}
+				
 				
 				</script>
 <jsp:include page="../login/navigation.jsp" flush="true"/>
@@ -118,10 +126,11 @@
 			</tr>
 		</table>
 		<c:if test="${id eq board.strUserId}">
-			<div class="container_b">
-				<button class="button" type="submit">수정하기</button>
-				<input type="button" class="button" onclick="location.href='/board/boardDelete?intBoardNo=${board.intBoardNo}'" value="삭제하기">
-			</div>
+
+		<div class="container_b">
+			<button class="button" type="submit">수정하기</button>
+			<button class="button" >삭제하기</button>			
+		</div>
 		</c:if>
 		</form>
 	</div>
@@ -136,11 +145,13 @@
 			<a style="font-size:small;color:gray;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${comment.dateCmmtDate}"/></a>
 			<div style="text-align:right;">	
 			<c:if test="${id eq comment.strUserId}">
-				<span style="float:right; margin-right:2%; font-weight:bold"><a href="/board/commentDelete?intCmmtNo=${comment.intCmmtNo}&intBoardNo=${board.intBoardNo}" >삭제</a></span>
-				<span style="float:right; margin-right:2%; font-weight:bold"><a href="#" onclick="javascript:updateComment(${comment.intCmmtNo},${board.intBoardNo})">수정</a></span>
+				<span style="float:right; margin-right:2%; font-weight:bold"><a href="#" onclick="updateC(${comment.intCmmtNo})">삭제</a></span>
+				<span style="float:right; margin-right:2%; font-weight:bold"><a href="#" onclick="javascript:updateComment(${comment.strCmmtComment})">수정</a></span>
+				
+				
 			</c:if>
 			</div>
-			<p id="comm">&nbsp;&nbsp;&nbsp;&nbsp;${comment.strCmmtComment}</p>
+			&nbsp;&nbsp;&nbsp;&nbsp;${comment.strCmmtComment}
 			<hr class="hr">
 		</c:forEach>
 		<table class="container_d" >

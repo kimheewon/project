@@ -46,6 +46,14 @@ public class BoardServiceImpl implements BoardService {
 	public void updateboard(Board board) throws Exception {
 		boardDAO.updateboard(board);
 	}
+	
+	//게시글 삭제
+	@Override
+	public void deleteboard(int bno) {
+		boardDAO.deleteboard(bno);
+		
+	}
+
 
 	// 댓글 뿌려주기
 	@Override
@@ -58,4 +66,20 @@ public class BoardServiceImpl implements BoardService {
 	public void insertComment(Comment comment) throws Exception {
 		boardDAO.insertcommnet(comment);
 	}
+
+	//댓글 수정
+	@Override
+	public void updateComment(Comment comment) throws Exception {
+		boardDAO.updatecomment(comment);
+		
+	}
+
+	//댓글 삭제
+	@Override
+	public void deleteComment(int intCmmtNo) throws Exception {
+		boardDAO.deletecomment(intCmmtNo);
+		
+	}
+
+	
 }

@@ -7,6 +7,9 @@
     }
 %>
 
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -93,6 +96,18 @@
 		</ul>	
 	</div>
 
+	<DIV style='width: 80%; text-align: center; margin: 1px auto;'>
+		<FORM name='frm' method='post' action="./login_list.jsp">
+			<SELECT name='col'>
+				<!-- 검색할 컬럼 -->
+				<OPTION value='title' >제 목</OPTION>
+				<OPTION value='id' >작성자</OPTION>
+				
+			</SELECT> <input type='text' name='word'>
+			<!-- 검색어 -->
+			<input type='submit' value='검색'> 
+		</FORM>
+	</DIV>
 
 
 

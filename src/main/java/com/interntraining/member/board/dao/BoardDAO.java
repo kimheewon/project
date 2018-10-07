@@ -36,9 +36,14 @@ public class BoardDAO {
 	
 	//수정한 게시글 저장
 	public void updateboard(Board board) {
-		sqlSession.insert("sql.boardupdate",board);
+		sqlSession.update("sql.boardupdate",board);
 	}
 	
+	//게시글 삭제
+	public void deleteboard(int intBoardNo) {
+		sqlSession.delete("sql.boarddelete",intBoardNo);
+	}
+		
 	//댓글 뿌리기
 	public List<Comment> selectcmmtlist(int intBoardNo){
 		return sqlSession.selectList("sql.selectcmmtlist", intBoardNo);
@@ -48,4 +53,16 @@ public class BoardDAO {
 	public void insertcommnet(Comment comment) {
 		sqlSession.insert("sql.insertcomment", comment);
 	}
+	
+	//댓글 수정
+	public void updatecomment(Comment comment) {
+		sqlSession.update("sql.updatecmmt", comment);
+	}
+	
+	//댓글 삭제
+	public void deletecomment(int intCmmtNo) {
+		sqlSession.delete("sql.deletecmmt", intCmmtNo);
+	}
+
+	
 }

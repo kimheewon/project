@@ -87,17 +87,34 @@
 				,BoardDate  	AS dateBoardDate
 				,BoardHit   	AS intHit
 		from   	 TBoard
-		where	 BoardNo = #{intBoardNo} 
+		where	 BoardNo = #{intBoardNo}
+		
+		UPDATE	 TBoard 
+  		SET		 BoardHit = BoardHit+1
+   		WHERE	 BoardNo = #{intBoardNo}
+   
 	</select>
 	
 	<!-- 수정한 게시글 Update -->
-	<select id="boardupdate">
+	<update id="boardupdate">
 		update	 TBoard
 		set		 BoardTitle = 	#{strBoardTitle}
 				,BoardContent	= #{strBoardContent}
 				,BoardDate	= GETDATE()
 		where	 BoardNo 	= #{intBoardNo} 
-	</select>
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="boarddelete">
+ 		delete from TBoard
+  		where BoardNo 	= #{intBoardNo} 
+  		
+  		delete from TComment
+  		where BoardNo 	= #{intBoardNo} 
+  		
+	</delete>
+	
+	
 	
 	<!-- 댓글 뿌리기 -->
 	<select id="selectcmmtlist"  resultType="Comment">
@@ -117,4 +134,18 @@
 			#{intBoardNo}, #{strUserId}, #{strCmmtComment}
 			)
 	</insert>
+	
+	<!-- 댓글 수정 -->
+	<update id="updatecmmt">
+		UPDATE	 TComment
+		SET   	 CmmtComment = #{strCmmtComment}
+		WHERE	 CmmtNo = #{intCmmtNo}
+		
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deletecmmt">
+ 		delete from TComment
+  		where CmmtNo = #{intCmmtNo}
+	</delete>
 </mapper>

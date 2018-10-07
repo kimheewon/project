@@ -125,6 +125,21 @@ public class BoardController {
 		return mv;
 	}
 
+	//게시글 삭제
+	@RequestMapping("/boardDelete")
+	public ModelAndView boardDelete(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			int intBoardNo) throws Exception {
+		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
+
+		boardService.deleteboard(intBoardNo);
+
+		Board board = new Board();
+		List<Board> boardlist = boardService.selectboardlist(board);
+		mv.addObject("boardlist", boardlist);
+		mv.setViewName("/board/boardlist");
+		return mv;
+	}
+	
 	// 댓글 등록
 	@RequestMapping("/commentsave")
 	public ModelAndView commentWrite(HttpServletRequest request, HttpServletResponse response, HttpSession session,
@@ -150,14 +165,44 @@ public class BoardController {
 		return mv;
 	}
 	
-	//댓글 수정
-	@RequestMapping(value="/board/boardcommentchange", method=RequestMethod.POST)
-	public ModelAndView commentUpdate(HttpServletRequest request, HttpServletResponse response, HttpSession session,int intCmmtNo) throws Exception {
+	//댓글 수정	
+	@RequestMapping("boardcommentchange")
+	public ModelAndView commentUpdate(HttpServletRequest request, HttpServletResponse response, HttpSession session,int intCmmtNo,int intBoardNo) throws Exception {
 		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
 		
+		String content = request.getParameter("comm");
+		
+		Comment comment = new Comment();
+		comment.setIntCmmtNo(intCmmtNo);
+		comment.setStrCmmtComment(content);
 		
 		
-		
+		boardService.updateComment(comment);
+
+		// 상세보기에 게시글과 댓글뿌려주기
+		Board boardread = boardService.readboard(intBoardNo);
+		List<Comment> cmmtlist = boardService.selectcmmtlist(intBoardNo);
+		mv.addObject("board", boardread);
+		mv.addObject("commentlist", cmmtlist);
+		mv.setViewName("/board/boardread");
+		return mv;
+	}
+	
+	//댓글 삭제
+	@RequestMapping("/commentDelete")
+	public ModelAndView commentDelete(HttpServletRequest request, HttpServletResponse response, HttpSession session,int intCmmtNo,int intBoardNo ) throws Exception {
+		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
+
+		String id = (String) session.getAttribute("id"); // 세션
+		boardService.deleteComment(intCmmtNo);
+
+		Board boardread = boardService.readboard(intBoardNo);
+		List<Comment> cmmtlist = boardService.selectcmmtlist(intBoardNo);
+
+		mv.addObject("board", boardread);
+		mv.addObject("commentlist", cmmtlist);
+		mv.addObject("id", id);
+		mv.setViewName("/board/boardread");
 		return mv;
 	}
 }
