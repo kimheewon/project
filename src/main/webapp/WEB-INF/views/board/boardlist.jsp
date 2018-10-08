@@ -77,9 +77,10 @@
 			</tr>	
 		</c:forEach>
 		</table>
+		<hr/>
 	</div>
 
-	<hr/>
+	
 	<span style="float:right; margin-right:20%; font-weight:bold">
   		<a href='/board/boardwrite'>글쓰기</a>
 	</span>
@@ -95,23 +96,35 @@
 			<li class="page-item"><a class="page-link" href="#">Next</a></li>		
 		</ul>	
 	</div>
+<br>
+	<div style='text-align: center; margin: 1px auto;'>
+			 <form action="/board/boardSearch" name="search" method="post">
+			 <a style="font-weight:bold; color:#2C3E50; font-size: larger;" >검색&nbsp;&nbsp;&nbsp;&nbsp;</a>
+			 <select name="keyField" size="1" style="width:110px;height: 30px;">
+	                <option value="UserId" <c:if test="${'UserId'==keyField }"> selected</c:if>> 아이디 </option>
+	                <option value="BoardTitle" <c:if test="${'BoardTitle'==keyField }"> selected</c:if>> 제목 </option>
+	                <option value="BoardContent" <c:if test="${'BoardContent'==keyField }"> selected</c:if>> 내용 </option>
+	            </select>
+	                 <input type="text" size="16" name="keyWord" value="${keyWord}">
+	                 <input type="button" value="검색" onClick="check();">
+	                 <input type="hidden" name="page" value="0">
+	    
+	   		</form>    	
+	</div>
 
-	<DIV style='width: 80%; text-align: center; margin: 1px auto;'>
-		<FORM name='frm' method='post' action="./login_list.jsp">
-			<SELECT name='col'>
-				<!-- 검색할 컬럼 -->
-				<OPTION value='title' >제 목</OPTION>
-				<OPTION value='id' >작성자</OPTION>
-				
-			</SELECT> <input type='text' name='word'>
-			<!-- 검색어 -->
-			<input type='submit' value='검색'> 
-		</FORM>
-	</DIV>
-
-
-
+<br><br>
 
 </body>
-    <jsp:include page="../bottom.jsp" flush="true"/>
+<jsp:include page="../bottom.jsp" flush="true"/>
+<script type="text/javascript">
+	function check() {
+	    if (document.search.keyWord.value == "") {
+	        alert("검색어를 입력하세요.");
+	        document.search.keyWord.focus();
+	        return;
+	    }
+	    document.search.submit();
+	}
+
+</script>
 </html>

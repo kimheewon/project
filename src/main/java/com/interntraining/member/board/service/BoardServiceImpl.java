@@ -1,6 +1,8 @@
 package com.interntraining.member.board.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -29,6 +31,13 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.selectboardlist(board);
 	}
 
+	//게시글 검색
+	@Override
+	public List<Board> searchboardlist(String keyField, String keyWord) {
+		return boardDAO.searchboardlist(keyField,keyWord);
+	}
+
+	
 	// 게시글 작성
 	@Override
 	public void insertboard(Board board) throws Exception {
@@ -53,8 +62,6 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.deleteboard(bno);
 		
 	}
-
-
 	// 댓글 뿌려주기
 	@Override
 	public List<Comment> selectcmmtlist(int intBoardNo) throws Exception {
@@ -87,6 +94,7 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.selectcomment(comment);
 		
 	}
+
 
 	
 }

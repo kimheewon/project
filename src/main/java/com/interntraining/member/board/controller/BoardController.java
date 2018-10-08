@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
@@ -50,6 +51,20 @@ public class BoardController {
 		return "/board/boardwrite";
 	}
 
+	//게시글 검색
+	@RequestMapping("/boardSearch")
+	public ModelAndView boardSearch(@RequestParam(required=false) Integer nowPage,@RequestParam(required=false)Integer nowBlock,
+            @RequestParam(required=false) String keyField, @RequestParam(required=false) String keyWord) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		
+		List<Board> list = boardService.searchboardlist(keyField, keyWord);
+		mav.addObject("boardlist", list);
+		mav.setViewName("/board/boardlist");
+		return mav;
+	}
+
+
+	
 	// 게시글 저장
 	@RequestMapping("/boardsave")
 	public ModelAndView boardWrite(HttpServletRequest request, HttpServletResponse response, HttpSession session)

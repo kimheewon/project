@@ -14,6 +14,9 @@ public interface BoardService {
 	//게시판 글뿌리기
 	public List<Board> selectboardlist(Board board) throws Exception;
 	
+	//게시글 검색
+	public List<Board> searchboardlist(String keyField, String keyWord);
+	
 	//게시글 작성
 	public void insertboard(Board board) throws Exception;
 
@@ -40,5 +43,7 @@ public interface BoardService {
 
 	//댓글 찾기
 	public Comment selectComment(Comment comment);
+
+	
 
 }

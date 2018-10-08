@@ -58,6 +58,7 @@
 				,UserEmail	= #{StrUserEmail}
 		where	 UserId 	= #{StrUserid} 
 	</select>	
+	
 	<!-- 게시판 목록에 뿌려주기 -->
 	<select id="selectboardlist"  resultType="Board">
 		select	 BoardNo		AS intBoardNo
@@ -70,6 +71,19 @@
 		ORDER BY BoardNo DESC
 	</select>
 	
+	<!-- 게시글 검색 -->
+	<select id="searchboardlist" parameterType="map" resultType="Board">
+        select  BoardNo		AS intBoardNo
+				,UserId			AS strUserId
+				,BoardTitle 	AS strBoardTitle
+				,BoardContent	AS strBoardContent
+				,BoardDate 	 	AS dateBoardDate
+				,BoardHit   	AS intHit
+        from TBoard
+        where ${keyField} like '%${keyWord}%'
+        ORDER BY BoardNo DESC
+    </select>
+    
 	<!-- 게시글 저장 -->
 	<insert id="insertboard" >
 		insert into TBoard(UserId,BoardTitle,BoardContent) values(

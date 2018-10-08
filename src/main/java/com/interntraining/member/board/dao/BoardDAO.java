@@ -1,6 +1,8 @@
 package com.interntraining.member.board.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,16 @@ public class BoardDAO {
 	//게시판 List 뿌리기
 	public List<Board> selectboardlist(Board board) {
 		return sqlSession.selectList("sql.selectboardlist", board);
+	}
+	
+	//게시글 검색
+	public List<Board> searchboardlist(String keyField, String keyWord) {
+		List<Board> list = null;
+		Map<String, String> map = new HashMap<String, String> ();
+        map.put("keyField" , keyField);
+        map.put("keyWord", keyWord);
+        list = sqlSession.selectList("sql.searchboardlist", map);
+		return list;
 	}
 	
 	//게시글 작성
@@ -68,6 +80,8 @@ public class BoardDAO {
 	public Comment selectcomment(Comment comment) {
 		return sqlSession.selectOne("sql.commentread",comment);
 	}
+
+
 
 	
 }
