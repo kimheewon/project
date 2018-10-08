@@ -81,5 +81,12 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 
+	//댓글 찾기
+	@Override
+	public Comment selectComment(Comment comment) {
+		return boardDAO.selectcomment(comment);
+		
+	}
+
 	
 }

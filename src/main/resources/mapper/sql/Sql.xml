@@ -139,6 +139,7 @@
 	<update id="updatecmmt">
 		UPDATE	 TComment
 		SET   	 CmmtComment = #{strCmmtComment}
+				,CmmtDate	= GETDATE()
 		WHERE	 CmmtNo = #{intCmmtNo}
 		
 	</update>
@@ -148,4 +149,15 @@
  		delete from TComment
   		where CmmtNo = #{intCmmtNo}
 	</delete>
+	
+	<!-- 댓글 찾기 -->
+	<select id="commentread" resultType="Comment">
+		select	 CmmtNo			AS intCmmtNo
+				,BoardNo		AS intBoardNo
+				,CmmtComment 	AS strCmmtComment
+		from   	 TComment
+		where	 CmmtNo = #{intCmmtNo}
+		
+
+	</select>
 </mapper>

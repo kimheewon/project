@@ -76,16 +76,6 @@
 
   </style>
   
-  <script type="text/javascript">
-	//댓글 수정 폼으로 이동
-	function updateComment(intCmmtNo,intBoardNo){
-		window.name = "parentForm";
-	   
-		window.open("/board/boardcommentchange?intCmmtNo ="+intCmmtNo"&intBoardNo="+intBoardNo", 'updateForm', 'width=570, height=350, resizable=no, scriollbars=no');
-	}
-					
-				
-				</script>
 <jsp:include page="../login/navigation.jsp" flush="true"/>
 
 </head>
@@ -99,6 +89,7 @@
 		<br><br>
 		
 		<form method="POST" action="/board/boardchange?intBoardNo=${board.intBoardNo}">
+		<input type="hidden" id="bno" value="${board.intBoardNo}">
 		<table class="table" style="text-align:center">
 			<tr>
 				<td class="color">제목</td>
@@ -114,7 +105,7 @@
 				<td>${board.intHit}</td>				
 			<tr height="250" >
 				<td class="color">글내용</td>
-				<td colspan="50" style="text-align:left; padding-left:3%; word-break:break-all;" >${board.strBoardContent}</td>	
+				<td colspan="50" style="text-align:left; padding-left:3%; " >${board.strBoardContent}</td>	
 			</tr>
 		</table>
 		<c:if test="${id eq board.strUserId}">
@@ -134,13 +125,19 @@
 		<c:forEach var="comment" items="${commentlist}">
 			<a style="color:#2C3E50; font-size: large; font-weight:bold">${comment.strUserId} &nbsp;&nbsp;&nbsp;</a>
 			<a style="font-size:small;color:gray;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${comment.dateCmmtDate}"/></a>
-			<div style="text-align:right;">	
-			<c:if test="${id eq comment.strUserId}">
-				<span style="float:right; margin-right:2%; font-weight:bold"><a href="/board/commentDelete?intCmmtNo=${comment.intCmmtNo}&intBoardNo=${board.intBoardNo}" >삭제</a></span>
-				<span style="float:right; margin-right:2%; font-weight:bold"><a href="#" onclick="javascript:updateComment(${comment.intCmmtNo},${board.intBoardNo})">수정</a></span>
-			</c:if>
+			<div style="text-align:right;" class="beforeUpd" id="beforeUpd${comment.intCmmtNo}">	
+				<c:if test="${id eq comment.strUserId}">
+					<span style="float:right; margin-right:2%; font-weight:bold"><a href="/board/commentDelete?intCmmtNo=${comment.intCmmtNo}&intBoardNo=${board.intBoardNo}" >삭제</a></span>
+					<span style="float:right; margin-right:2%; font-weight:bold"><a href="javascript:updateComment(${comment.intCmmtNo});">수정</a></span>	
+				</c:if>
 			</div>
-			<p id="comm">&nbsp;&nbsp;&nbsp;&nbsp;${comment.strCmmtComment}</p>
+			<div>
+			<p class="cContentAll" id="cContentAll${comment.intCmmtNo}">${comment.strCmmtComment}</p>
+			</div>
+			<div class='forUpd' id='forUpd${comment.intCmmtNo}' style='text-align:right;'>
+            </div> 
+
+            
 			<hr class="hr">
 		</c:forEach>
 		<table class="container_d" >
@@ -149,7 +146,7 @@
     		<col width = "10%"/>
     		</colgroup>
 			<tr align="center" >
-				<td><textarea class="form-control" name="comment" rows="3" required autofocus ></textarea>
+				<td><textarea class="form-control" id="commentContent"name="comment" rows="3" required ></textarea>
    				<td><input type="submit" style="width: 75pt; height: 60pt; boarder-color:#ededed;outline:0;background-color:#ededed" value="등록">
    			</tr>
 		
@@ -163,5 +160,81 @@
 	<jsp:include page="../bottom.jsp" flush="true"/>
 	
 </body>
+ <script type="text/javascript">
+	//댓글 수정 폼으로 이동
+	function updateComment(intCmmtNo){
+		 //기존 바뀌었었던 버튼,textarea 원상복구
+		 
+		
+        $(".updBtn").hide();
+        $(".beforeUpd").show();
+        $(".cContentAll").show();
+        $(".contentAll").remove();
+        
+		
+        var cId = "cContentAll" + intCmmtNo;
 
+        var html = "";
+        html += "<table class='container_d' >";
+        html += "<colgroup>";
+        html += "<col width = '*'/>";
+        html += "<col width = '5%'/>";
+        html += "<col width = '5%'/>";
+        html += "</colgroup>";
+        html += "<tr align='center' >";
+        html += "<td><textarea rows='1' class='form-control contentAll' id='commentContent'>"+document.getElementById(cId).innerHTML+"</textarea></td>";
+        html += "<td><span class='btn btn-sm btn-default updBtn' style='float:right; padding:1%; font-size:16px; font-weight:bold'><a href='javascript:commentUpd("+ intCmmtNo +");'>수정</a></span></td>";
+        html += "<td><span class='btn btn-sm btn-default updBtn' style='float:right; padding:1%; font-size:16px; font-weight:bold'><a href='javascript:commentReset("+ intCmmtNo +");'>취소</a></span></td>";
+        html += "</tr>";
+	
+		html += "</table>";
+        
+      //  html += "<a class='btn btn-link updBtn' style='float:right; margin-right:2%; font-weight:bold' href='javascript:commentUpd("+ intCmmtNo +");'>수정</a>	";
+      //댓글내용 textarea에 띄워주고 수정버튼 생성
+      //	html += "<span class='btn btn-sm btn-default updBtn' style='float:right; margin-right:2%; font-weight:bold'><a href='javascript:commentUpd("+ intCmmtNo +");'>수정</a></span>";	
+      //  html += "<textarea rows='1' cols='30' class='form-control contentAll' id='commentContent'>"+document.getElementById(cId).innerHTML+"</textarea>";
+      //  html += "<input type='button' class='btn btn-link updBtn' onClick='commentUpd("+ intCmmtNo +")' value='수정' />   ";
+        
+
+        $("#forUpd"+intCmmtNo).html(html);                
+        $("#beforeUpd"+intCmmtNo).hide(); //원래 수정삭제버튼 숨기기
+        $("#cContentAll"+intCmmtNo).hide();
+        
+    }
+
+	 //댓글 수정 - 수정
+    function commentUpd(intCmmtNo){
+		 
+		 var commnet
+    	$.ajax({
+            type: "POST",
+            async: false,
+            url: "/board/commentUpdate",            
+            dataType:"html",// JSON/html
+            data:{
+            	"intCmmtNo":intCmmtNo, "strCmmtContent":$("#commentContent").val()            	
+            },
+            error: function (request, status, error) {
+                alert("Ajax Error - code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            },
+            success: function () {
+              //  alert("수정되었습니다.");
+                location.href = "/board/boardread?intBoardNo=" + $("#bno").val();
+            
+              
+            }
+        })    
+    }
+	 
+	 //수정 취소
+	 function commentReset(intCmmtNo){
+		 	$(".updBtn").hide();
+	        $(".beforeUpd").show();
+	        $(".cContentAll").show();
+	        $(".contentAll").remove();
+		 
+		 
+	 }
+				
+</script>
 </html>

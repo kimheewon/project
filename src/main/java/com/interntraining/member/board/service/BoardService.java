@@ -2,6 +2,8 @@ package com.interntraining.member.board.service;
 
 import java.util.List;
 
+import org.springframework.web.servlet.ModelAndView;
+
 import com.interntraining.member.board.domain.Board;
 import com.interntraining.member.board.domain.Comment;
 
@@ -35,5 +37,8 @@ public interface BoardService {
 	
 	//댓글삭제
 	public void deleteComment(int intCmmtNo) throws Exception;
+
+	//댓글 찾기
+	public Comment selectComment(Comment comment);
 
 }

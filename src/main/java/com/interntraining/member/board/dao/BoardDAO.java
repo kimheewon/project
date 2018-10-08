@@ -64,5 +64,10 @@ public class BoardDAO {
 		sqlSession.delete("sql.deletecmmt", intCmmtNo);
 	}
 
+	//댓글 찾기
+	public Comment selectcomment(Comment comment) {
+		return sqlSession.selectOne("sql.commentread",comment);
+	}
+
 	
 }

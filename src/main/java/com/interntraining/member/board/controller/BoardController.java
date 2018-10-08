@@ -165,26 +165,24 @@ public class BoardController {
 		return mv;
 	}
 	
-	//댓글 수정	
-	@RequestMapping("boardcommentchange")
-	public ModelAndView commentUpdate(HttpServletRequest request, HttpServletResponse response, HttpSession session,int intCmmtNo,int intBoardNo) throws Exception {
+	//댓글 정보 찾기
+	@RequestMapping("/commentchange")
+	public ModelAndView commentSearch(HttpServletRequest request, HttpServletResponse response, HttpSession session,int intCmmtNo) throws Exception {
 		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
-		
-		String content = request.getParameter("comm");
 		
 		Comment comment = new Comment();
 		comment.setIntCmmtNo(intCmmtNo);
-		comment.setStrCmmtComment(content);
 		
+		Comment commentread = boardService.selectComment(comment);
 		
-		boardService.updateComment(comment);
+		//boardService.updateComment(comment);
 
 		// 상세보기에 게시글과 댓글뿌려주기
-		Board boardread = boardService.readboard(intBoardNo);
-		List<Comment> cmmtlist = boardService.selectcmmtlist(intBoardNo);
-		mv.addObject("board", boardread);
-		mv.addObject("commentlist", cmmtlist);
-		mv.setViewName("/board/boardread");
+		//Board boardread = boardService.readboard(intBoardNo);
+		//List<Comment> cmmtlist = boardService.selectcmmtlist(intBoardNo);
+		mv.addObject("comment", commentread);
+		//mv.addObject("commentlist", cmmtlist);
+		mv.setViewName("/board/commentUpdateForm");
 		return mv;
 	}
 	
@@ -203,6 +201,31 @@ public class BoardController {
 		mv.addObject("commentlist", cmmtlist);
 		mv.addObject("id", id);
 		mv.setViewName("/board/boardread");
+		return mv;
+	}
+	
+	//댓글 수정
+	@RequestMapping(value = "/commentUpdate", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	public ModelAndView commentUpdate(int intCmmtNo, String strCmmtContent ) throws Exception {
+		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
+		
+		Comment comment = new Comment();
+		comment.setIntCmmtNo(intCmmtNo);
+		comment.setStrCmmtComment(strCmmtContent);
+		
+		boardService.updateComment(comment);		//댓글 DB에 수정
+		
+		Comment commentread = boardService.selectComment(comment);
+		int intBoardNo = commentread.getIntBoardNo();
+		Board boardread = boardService.readboard(intBoardNo);
+		List<Comment> cmmtlist = boardService.selectcmmtlist(intBoardNo);
+
+		mv.addObject("board", boardread);
+		mv.addObject("commentlist", cmmtlist);
+
+		
+		
+		
 		return mv;
 	}
 }

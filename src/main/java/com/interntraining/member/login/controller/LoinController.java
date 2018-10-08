@@ -37,6 +37,13 @@ public class LoinController {
 		return "/login/loginForm";	
 	}
 	
+	//홈화면으로 이동
+	@RequestMapping("/home")
+	public String home() throws Exception {				
+		return "/login/home";	
+	}
+	
+	
 	//로그인 처리
 	@RequestMapping(value="/login/loginCheck", method=RequestMethod.POST)
 	public String login(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws Exception{
