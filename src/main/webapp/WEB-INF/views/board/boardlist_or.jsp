@@ -85,41 +85,20 @@
   		<a href='/board/boardwrite'>글쓰기</a>
 	</span>
 		
-	
-	<!-- page -->
-   <form name="frm">
-        <div class="container_t">
- 			<ul class="pagination justify-content-center">
-                    <c:if test="${pagination.curRange ne 1 }">
-                        <li class="page-item"><a class="page-link" href="#" onClick="fn_paging(1)">[처음]</a></li>
-                    </c:if>
-                    <c:if test="${pagination.curPage ne 1}">
-                        <li class="page-item"><a href="#" class="page-link" onClick="fn_paging('${pagination.prevPage }')">[이전]</a></li>
-                    </c:if>
-                    <c:forEach var="pageNum" begin="${pagination.startPage }" end="${pagination.endPage }">
-                        <c:choose>
-                            <c:when test="${pageNum eq  pagination.curPage}">
-                                <li class="page-item"><span style="font-weight: bold;"><a href="#" class="page-link" onClick="fn_paging('${pageNum }')">${pageNum }</a></span></li> 
-                            </c:when>
-                            <c:otherwise>
-                                <li class="page-item"><a href="#" class="page-link" onClick="fn_paging('${pageNum }')">${pageNum }</a></li>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
-                    <c:if test="${pagination.curPage ne pagination.pageCnt and pagination.pageCnt > 0}">
-                        <li class="page-item"><a href="#" class="page-link" onClick="fn_paging('${pagination.nextPage }')">[다음]</a></li> 
-                    </c:if>
-                    <c:if test="${pagination.curRange ne pagination.rangeCnt and pagination.rangeCnt > 0}">
-                        <li class="page-item"><a href="#" class="page-link" onClick="fn_paging('${pagination.pageCnt }')">[끝]</a></li>
-                    </c:if>
-                    </ul>
-         </div>
-                
- </form>
-
+	<div class="container_t">
+		<ul class="pagination justify-content-center">
+			<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+			<li class="page-item"><a class="page-link" href="#">1</a></li>
+			<li class="page-item"><a class="page-link" href="#">2</a></li>
+			<li class="page-item"><a class="page-link" href="#">3</a></li>
+			<li class="page-item"><a class="page-link" href="#">4</a></li>
+			<li class="page-item"><a class="page-link" href="#">5</a></li>
+			<li class="page-item"><a class="page-link" href="#">Next</a></li>		
+		</ul>	
+	</div>
 <br>
 	<div style='text-align: center; margin: 1px auto;'>
-			 <form action="/board/boardlist" name="search" method="post">
+			 <form action="/board/boardSearch" name="search" method="post">
 			 <a style="font-weight:bold; color:#2C3E50; font-size: larger;" >검색&nbsp;&nbsp;&nbsp;&nbsp;</a>
 			 <select name="keyField" size="1" style="width:110px;height: 30px;">
 	                <option value="UserId" <c:if test="${'UserId'==keyField }"> selected</c:if>> 아이디 </option>
@@ -134,6 +113,7 @@
 	</div>
 
 <br><br>
+
 </body>
 <jsp:include page="../bottom.jsp" flush="true"/>
 <script type="text/javascript">
@@ -145,16 +125,6 @@
 	    }
 	    document.search.submit();
 	}
-	function fn_paging(curPage) {
-
-        var f = document.frm;
-        f.method = "post"
-        f.action = "/board/boardlist?curPage="+curPage;
-        f.submit();
-        
-       
-    }
-
 
 </script>
 </html>

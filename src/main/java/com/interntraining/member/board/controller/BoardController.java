@@ -17,6 +17,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.interntraining.member.board.domain.Board;
 import com.interntraining.member.board.domain.Comment;
+import com.interntraining.member.board.domain.Pagination;
 import com.interntraining.member.board.service.BoardService;
 
 /*
@@ -35,15 +36,47 @@ public class BoardController {
 	// 게시판
 	@ResponseBody
 	@RequestMapping(value="/boardlist")
-	public ModelAndView boardlist(Board board) throws Exception {
+	public ModelAndView boardlist(Board board,@RequestParam(required=false) Integer nowPage,@RequestParam(required=false)Integer nowBlock,
+            @RequestParam(required=false) String keyField, @RequestParam(required=false) String keyWord, @RequestParam(defaultValue="1") int curPage) throws Exception {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
-
-		List<Board> boardlist = boardService.selectboardlist(board);
-		mav.addObject("boardlist", boardlist);
+		
+		
+		if(keyWord == null) {
+			List<Board> boardCount = boardService.selectboardlist(board);	//게시글 총 개수
+			int listCnt = boardCount.size();
+			
+			Pagination pagination = new Pagination(listCnt, curPage);
+	        
+	        /* List */
+	        List<Board> boardList = boardService.getBoardList(pagination); // 리스트
+	        
+		
+			mav.addObject("boardlist", boardList);
+			mav.addObject("listCnt", listCnt);
+			mav.addObject("pagination", pagination);
+			mav.setViewName("/board/boardlist");
+			
+			return mav;
+			
+			
+		}
+		else {//검색어
+			List<Board> boardCount = boardService.searchboardlist(keyField, keyWord);	//게시글 총 개수
+			int listCnt = boardCount.size();
+		Pagination pagination = new Pagination(listCnt, curPage);
+		pagination.setKeyField(keyField);
+		pagination.setKeyWord(keyWord);
+		pagination.setCurPage(curPage);
+		List<Board> list = boardService.searchboardlistP(pagination);
+		mav.addObject("boardlist", list);
+		mav.addObject("listCnt", listCnt);
+		mav.addObject("pagination", pagination);
 		mav.setViewName("/board/boardlist");
+		
 		return mav;
-
+		}
 	}
+
 
 	// 게시글 작성 페이지
 	@RequestMapping("/boardwrite")
@@ -52,17 +85,7 @@ public class BoardController {
 	}
 
 	//게시글 검색
-	@RequestMapping("/boardSearch")
-	public ModelAndView boardSearch(@RequestParam(required=false) Integer nowPage,@RequestParam(required=false)Integer nowBlock,
-            @RequestParam(required=false) String keyField, @RequestParam(required=false) String keyWord) {
-		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
-		
-		List<Board> list = boardService.searchboardlist(keyField, keyWord);
-		mav.addObject("boardlist", list);
-		mav.setViewName("/board/boardlist");
-		return mav;
-	}
-
+	
 
 	
 	// 게시글 저장

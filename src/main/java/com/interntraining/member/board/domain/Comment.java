@@ -8,7 +8,7 @@ public class Comment {
 	private String strUserId;		//아이디
 	private String strCmmtComment;	//댓글
 	private Date dateCmmtDate;		//작성일
-	
+
 	public int getIntCmmtNo() {
 		return intCmmtNo;
 	}
@@ -39,7 +39,7 @@ public class Comment {
 	public void setDateCmmtDate(Date dateCmmtDate) {
 		this.dateCmmtDate = dateCmmtDate;
 	}
-	
+
 	
 
 }

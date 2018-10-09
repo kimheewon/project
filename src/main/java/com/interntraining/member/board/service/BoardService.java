@@ -6,6 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.interntraining.member.board.domain.Board;
 import com.interntraining.member.board.domain.Comment;
+import com.interntraining.member.board.domain.Pagination;
 
 
 public interface BoardService {
@@ -16,6 +17,9 @@ public interface BoardService {
 	
 	//게시글 검색
 	public List<Board> searchboardlist(String keyField, String keyWord);
+	
+	//검색 페이징
+	public List<Board> searchboardlistP(Pagination pagination);
 	
 	//게시글 작성
 	public void insertboard(Board board) throws Exception;
@@ -43,6 +47,11 @@ public interface BoardService {
 
 	//댓글 찾기
 	public Comment selectComment(Comment comment);
+
+	//게시판(페이징)
+	public List<Board> getBoardList(Pagination pagination);
+
+	
 
 	
 

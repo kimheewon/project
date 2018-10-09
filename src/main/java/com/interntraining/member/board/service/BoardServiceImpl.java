@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.interntraining.member.board.dao.BoardDAO;
 import com.interntraining.member.board.domain.Board;
 import com.interntraining.member.board.domain.Comment;
+import com.interntraining.member.board.domain.Pagination;
 
 @Service()
 public class BoardServiceImpl implements BoardService {
@@ -31,10 +32,17 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.selectboardlist(board);
 	}
 
+	
 	//게시글 검색
 	@Override
 	public List<Board> searchboardlist(String keyField, String keyWord) {
 		return boardDAO.searchboardlist(keyField,keyWord);
+	}
+	
+	//게시글 검색 페이징
+	@Override
+	public List<Board> searchboardlistP(Pagination pagination) {
+		return boardDAO.searchboardlistP(pagination);
 	}
 
 	
@@ -96,5 +104,10 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 
-	
+	//게시판 페이징
+	@Override
+	public List<Board> getBoardList(Pagination pagination){
+		return boardDAO.getboardlist(pagination);
+
+	}
 }

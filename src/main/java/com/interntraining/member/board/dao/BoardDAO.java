@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.interntraining.member.board.domain.Board;
 import com.interntraining.member.board.domain.Comment;
+import com.interntraining.member.board.domain.Pagination;
 
 
 @Repository("boardDAO")
@@ -81,7 +82,16 @@ public class BoardDAO {
 		return sqlSession.selectOne("sql.commentread",comment);
 	}
 
+	//게시판 페이징
+	public List<Board> getboardlist(Pagination pagination) {
+		return sqlSession.selectList("sql.getboardlist",pagination);
+	}
 
+
+	//게시글 검색 페이징
+	public List<Board> searchboardlistP(Pagination pagination) {
+		return sqlSession.selectList("sql.searchboardlistP",pagination);
+	}
 
 	
 }

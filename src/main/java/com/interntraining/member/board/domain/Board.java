@@ -10,6 +10,8 @@ public class Board {
 	private String strBoardContent;
 	private Date dateBoardDate;
 	private int intHit;
+	private int rownumber;
+	
 	
 	public int getIntBoardNo() {
 		return intBoardNo;
@@ -46,6 +48,13 @@ public class Board {
 	}
 	public void setIntHit(int intHit) {
 		this.intHit = intHit;
+	}
+
+	public int getRownumber() {
+		return rownumber;
+	}
+	public void setRownumber(int rownumber) {
+		this.rownumber = rownumber;
 	}
 	
 	

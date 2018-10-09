@@ -70,7 +70,33 @@
 		from   	 TBoard
 		ORDER BY BoardNo DESC
 	</select>
-	
+	<!-- 게시판 페이징처리 후 뿌려주기 -->
+	<select id="getboardlist"  resultType="Board">
+		select top 10 resultTable.* from
+
+( select top (10*#{curPage}) ROW_NUMBER() over (order by BoardNo desc) as rownumber, BoardNo AS intBoardNo, UserId AS strUserId, BoardTitle AS strBoardTitle ,BoardDate 	 	AS dateBoardDate
+				,BoardHit   	AS intHit from TBoard ) as resultTable
+
+where rownumber>(#{curPage}-1)*10
+
+	 </select>
+	 
+	 <select id="searchboardlistP"  resultType="Board">
+
+        
+		select top 10 resultTable.* from
+
+( select top (10*#{curPage}) ROW_NUMBER() over (order by BoardNo desc) as rownumber, BoardNo AS intBoardNo, UserId AS strUserId, BoardTitle AS strBoardTitle ,BoardDate 	 	AS dateBoardDate
+				,BoardHit   	AS intHit from (	  select  *
+        from TBoard
+        where ${keyField} like '%${keyWord}%'
+        
+        )as TSearch ) as resultTable
+
+where rownumber>(#{curPage}-1)*10
+
+	 </select>
+	 
 	<!-- 게시글 검색 -->
 	<select id="searchboardlist" parameterType="map" resultType="Board">
         select  BoardNo		AS intBoardNo
