@@ -36,12 +36,17 @@ public class BoardController {
 	// 게시판
 	@ResponseBody
 	@RequestMapping(value="/boardlist")
-	public ModelAndView boardlist(Board board,@RequestParam(required=false) Integer nowPage,@RequestParam(required=false)Integer nowBlock,
+	public ModelAndView boardlist(HttpServletRequest request, HttpServletResponse response, HttpSession session, Board board,@RequestParam(required=false) Integer nowPage,@RequestParam(required=false)Integer nowBlock,
             @RequestParam(required=false) String keyField, @RequestParam(required=false) String keyWord, @RequestParam(defaultValue="1") int curPage) throws Exception {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		
+		String KeyWord = request.getParameter("keyWord");
+		String KeyField = request.getParameter("keyField");
 		
-		if(keyWord == null) {
+		//setAttribute로 세션에 검색어 담기?
+		//session.setAttribute("keyWord", KeyWord);
+		//session.setAttribute("keyField", KeyField);
+		if(KeyWord == null) {
 			List<Board> boardCount = boardService.selectboardlist(board);	//게시글 총 개수
 			int listCnt = boardCount.size();
 			
@@ -61,11 +66,11 @@ public class BoardController {
 			
 		}
 		else {//검색어
-			List<Board> boardCount = boardService.searchboardlist(keyField, keyWord);	//게시글 총 개수
+			List<Board> boardCount = boardService.searchboardlist(KeyField, KeyWord);	//게시글 총 개수
 			int listCnt = boardCount.size();
 		Pagination pagination = new Pagination(listCnt, curPage);
-		pagination.setKeyField(keyField);
-		pagination.setKeyWord(keyWord);
+		pagination.setKeyField(KeyField);
+		pagination.setKeyWord(KeyWord);
 		pagination.setCurPage(curPage);
 		List<Board> list = boardService.searchboardlistP(pagination);
 		mav.addObject("boardlist", list);

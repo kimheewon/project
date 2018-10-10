@@ -9,10 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.interntraining.member.login.dao.LoginDAO;
 import com.interntraining.member.login.domain.User;
-import com.interntraining.member.user.domain.Member;
-
-
-
 
 @Service()
 public class LoginServiceImpl implements LoginService {

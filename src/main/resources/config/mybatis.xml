@@ -16,6 +16,9 @@
         <package name="com.interntraining.member.login.domain"/>
         <package name="com.interntraining.member.board.domain"/>
         
+        <package name="com.interntraining.admin.loginAdmin.domain"/>
+        <package name="com.interntraining.admin.administrator.domain"/>
+        
     </typeAliases>
 
 </configuration>

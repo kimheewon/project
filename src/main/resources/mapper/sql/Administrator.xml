@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 관리자 로그인  -->
+<mapper namespace="administratorSql">
+
+	<!-- 관리자 목록 모두 가져오기 -->	
+	<select id="selectAll"  resultType="AdministratorInfo">
+		SELECT   AdminNo 	AS intAdminNo
+				,AdminId 	AS strAdminId
+		    	,AuthNo		AS intAdminNo
+		    	,AdminName	AS strAdminName
+		    	,AuthNo		AS strAdminGrade
+		    	,AdminDate	AS dateAdminDate
+		FROM 	TAdmin
+
+		
+	</select>	
+
+</mapper>
