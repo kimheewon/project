@@ -58,13 +58,26 @@ public class LoginAdminController {
 	}
 	
 	//로그아웃
-		@RequestMapping(value = "/logout")
-		public String logout(HttpSession session) throws Exception{
-			session.invalidate();    //세션 전체를 날려버림
-			return "/admin/login/login_admin";
-		}	
+	@RequestMapping(value = "/logout")
+	public String logout(HttpSession session) throws Exception{
+		session.invalidate();    //세션 전체를 날려버림
+		return "/admin/login/login_admin";
+	}	
 		
 
+	//홈 화면으로 이동
+	@RequestMapping(value="/home")
+	public String home(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws Exception{
+			
+		String id = (String) session.getAttribute("AdminId");
+		if(id != null) {
+			return "/admin/login/AdminHome";		//로그인 성공시 관리자 홈화면으로 이동			
+		}
+		else{//로그인 실패
+			return "/admin/login/login_admin";		//로그인 실패시 관리자 로그인 폼 화면으로 이동
+		}
+	}
+		
 }	
 	
 	

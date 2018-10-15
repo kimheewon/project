@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.interntraining.admin.administrator.domain.AdministratorInfo;
+import com.interntraining.admin.authority.domain.AuthInfo;
 
 @Repository("administratorDAO")
 public class AdministratorDAO {
@@ -19,5 +20,26 @@ public class AdministratorDAO {
 	public List<AdministratorInfo> selectAdminList() {
 		return sqlSession.selectList("administratorSql.selectAll");
 	}
+
+	//DB에서 id 체크
+	public AdministratorInfo selectId(String id) {
+		return sqlSession.selectOne("administratorSql.selectId",id);
+	}
+
+	//관리자 등록
+	public void insertmember(AdministratorInfo admin) {
+		sqlSession.insert("administratorSql.insertAdmin",admin);
+	}
+
+	//권한명 모두 가져오기
+	public List<AuthInfo> selectAllAuth() {
+		return sqlSession.selectList("authSql.selectAllAuth");
+	}
+
+	//권한명 가져오기
+	public String selectAuth(int auth) {
+		return sqlSession.selectOne("authSql.selectAuth", auth);
+	}
+
 
 }

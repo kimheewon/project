@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 관리자 로그인  -->
+<mapper namespace="authSql">
+
+	<!--권한명 중복체크 -->
+	<select id="selectName"  resultType="AuthInfo">
+		select  AuthName 	AS 	strAuthName
+		from	TAuth
+		where	AuthName = #{name} 
+	</select>
+
+	<!--권한 항목 모두 불러오기 -->
+	<select id="selectAllAuthItem"  resultType="AuthItemInfo">
+		select  AuthItemNo  	AS 	intAuthItemNo
+				,AuthItemName	AS	strAuthItemName
+		from	TAuthItem
+	</select>
+
+	<!--권한명 저장 -->
+	<insert id="insertAuth" >
+		insert into TAuth (AuthName)
+		values(#{authName})
+	</insert>
+	
+	<!--권한명 번호가져오기-->
+	<select id="selectAuthNo"  resultType="int">
+		SELECT AuthNo 
+		from TAuth
+		where AuthName = #{authName}
+	</select>
+	
+	<!--권한명 가져오기-->
+	<select id="selectAuth"  resultType="String">
+		SELECT AuthName 
+		from TAuth
+		where AuthNo = #{auth}
+	</select>
+	
+	<!--  매핑테이블 저장 -->
+	<insert id="insertAuthMapp" >
+		insert into TAuthMapp(AuthNo, AuthItemNo)
+		values(#{intAuthNo}, #{intAuthItemNo})
+	</insert>
+	
+	
+	<!--권한명 모두 불러오기 -->
+	<select id="selectAllAuth"  resultType="AuthInfo">
+		select   AuthNo  	AS 	intAuthNo
+				,AuthName	AS	strAuthName
+		from	 TAuth
+	</select>
+
+</mapper>

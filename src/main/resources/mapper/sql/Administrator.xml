@@ -9,13 +9,27 @@
 	<select id="selectAll"  resultType="AdministratorInfo">
 		SELECT   AdminNo 	AS intAdminNo
 				,AdminId 	AS strAdminId
-		    	,AuthNo		AS intAdminNo
+		    	,AdminPw	AS strAdminPw
 		    	,AdminName	AS strAdminName
-		    	,AuthNo		AS strAdminGrade
+		    	,AuthNo		AS intAdminAuth
 		    	,AdminDate	AS dateAdminDate
 		FROM 	TAdmin
-
-		
 	</select>	
+	
+	<!-- 아이디 중복체크 -->	
+	<select id="selectId"  resultType="AdministratorInfo">
+		select   AdminId 	AS strAdminId	
+		from TAdmin where AdminId = #{id} 
+	</select>
+
+	<!-- 관리자 등록 -->	
+	<insert id="insertAdmin" >
+		insert into TAdmin(AdminId,AdminPw,AdminName,AdminPhone,AdminEmail, AuthNo) values(
+			#{StrAdminId}, #{StrAdminPw}, #{StrAdminName}, #{StrAdminPhone}, #{StrAdminEmail}, #{intAdminAuth}
+			)
+	</insert>
+	
+	
 
 </mapper>
+

@@ -18,6 +18,7 @@
         
         <package name="com.interntraining.admin.loginAdmin.domain"/>
         <package name="com.interntraining.admin.administrator.domain"/>
+        <package name="com.interntraining.admin.authority.domain"/>
         
     </typeAliases>
 

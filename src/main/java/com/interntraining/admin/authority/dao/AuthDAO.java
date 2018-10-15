@@ -1,0 +1,56 @@
+package com.interntraining.admin.authority.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
+
+import com.interntraining.admin.authority.domain.AuthInfo;
+import com.interntraining.admin.authority.domain.AuthItemInfo;
+import com.interntraining.admin.authority.domain.AuthMapp;
+
+@Repository("authDAO")
+public class AuthDAO {
+	
+	@Autowired
+    @Qualifier("mainDBSqlSession")
+	private SqlSession sqlSession;
+
+	
+	//권한명 중복 체크
+	public AuthInfo selectName(String name) {
+		return sqlSession.selectOne("authSql.selectName",name);
+	}
+
+	//모든 권한 항목 불러오기
+	public List<AuthItemInfo> selectAllAuthItem() {
+		return sqlSession.selectList("authSql.selectAllAuthItem");
+	}
+
+	//권한명 저장
+	public void insertAuthName(String authName) {
+		sqlSession.insert("authSql.insertAuth", authName);		
+	}
+
+	//권한명 번호가져오기
+	public int selectAuthNo(String authName) {
+	 	return sqlSession.selectOne("authSql.selectAuthNo", authName);
+	}
+	
+
+	//매핑테이블에 저장
+	public void insertAuthMapp(AuthMapp authMapp) {
+		sqlSession.insert("authSql.insertAuthMapp",authMapp);
+		
+	}
+
+	//권한명 모두 가져오기
+	public List<AuthInfo> selectAllAuth() {
+		return sqlSession.selectList("authSql.selectAllAuth");
+	}
+	
+
+
+}

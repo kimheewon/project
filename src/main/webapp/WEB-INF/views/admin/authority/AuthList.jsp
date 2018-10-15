@@ -15,7 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>관리자 목록 리스트</title>
+    <title>권한 목록 리스트</title>
 
      <!-- Bootstrap -->
     <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -48,7 +48,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Administrator <small>목록</small></h3>
+                <h3>Authority <small>목록</small></h3>
               </div>
 
               <div class="title_right">
@@ -69,7 +69,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>관리자 목록 <small>관리자</small></h2>
+                    <h2>권한 목록 <small>권한</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -95,23 +95,16 @@
                       <thead>
                         <tr>
                           <th>번호</th>
-                          <th>아이디</th>
                           <th>권한 유형</th>
-                          <th>이름</th>
-                          <th>가입일</th>
                           <th>작업</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <c:forEach var="list" items="${adminList}">
-
+                        <c:forEach var="authList" items="${authList}">
 							<tr>
-								<td>${list.intAdminNo}</td>
-								<td><a href="/board/boardread?intBoardNo=${list.intAdminNo}">${list.strAdminId}</a></td>
-								<td>${list.strAdminGrade}</td>
-								<td>${list.strAdminName}</td>
-								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.dateAdminDate}"/></td>
-								<td>수정하기</td>
+								<td>${authList.intAuthNo}</td>							
+								<td>${authList.strAuthName}</td>
+								<td><a href="/board/boardread?intBoardNo=${authList.intAuthNo}">수정하기</td>
 							</tr>	
 						</c:forEach>
                       </tbody>

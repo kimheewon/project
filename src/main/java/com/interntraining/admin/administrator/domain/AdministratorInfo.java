@@ -10,6 +10,7 @@ public class AdministratorInfo {
 	private String StrAdminName;
 	private String StrAdminPhone;
 	private String StrAdminEmail;
+	private int intAdminAuth;
 	private String StrAdminGrade;
 	private Date DateAdminDate;
 	
@@ -49,6 +50,14 @@ public class AdministratorInfo {
 	public void setStrAdminEmail(String strAdminEmail) {
 		StrAdminEmail = strAdminEmail;
 	}
+	
+
+	public int getIntAdminAuth() {
+		return intAdminAuth;
+	}
+	public void setIntAdminAuth(int intAdminAuth) {
+		this.intAdminAuth = intAdminAuth;
+	}
 	public String getStrAdminGrade() {
 		return StrAdminGrade;
 	}
@@ -61,6 +70,7 @@ public class AdministratorInfo {
 	public void setDateAdminDate(Date dateAdminDate) {
 		DateAdminDate = dateAdminDate;
 	}
+
 
 	
 }

@@ -29,7 +29,7 @@ public class LoginAdminServiceImpl implements LoginAdminService{
 		return loginAdminDAO.selectOne(id);
 	}
 
-	 //로그인 - DB에서 id 확인
+	//로그인 - DB에서 id 확인
 	@Override
 	public boolean logincheck(String id, String password) throws Exception {
 		LoginAdminInfo result = loginAdminDAO.selectOne(id);

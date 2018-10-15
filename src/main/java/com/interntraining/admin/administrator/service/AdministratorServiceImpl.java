@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.interntraining.admin.administrator.dao.AdministratorDAO;
 import com.interntraining.admin.administrator.domain.AdministratorInfo;
+import com.interntraining.admin.authority.domain.AuthInfo;
 
 @Service()
 public class AdministratorServiceImpl implements AdministratorService{
@@ -26,6 +27,31 @@ public class AdministratorServiceImpl implements AdministratorService{
 	@Override
 	public List<AdministratorInfo> selectAdminList() {
 		return administratorDAO.selectAdminList();
+	}
+
+    //DB에서 id 체크
+	@Override
+	public AdministratorInfo selectId(String id) {
+		return administratorDAO.selectId(id);
+	}
+
+	//관리자 등록
+	@Override
+	public void insertAdmin(AdministratorInfo admin) {
+		administratorDAO.insertmember(admin);
+		
+	}
+
+	//권한명 모두 가져오기
+	@Override
+	public List<AuthInfo> selectAllAuth() {
+		return administratorDAO.selectAllAuth();
+	}
+
+	//권한명 가져오기
+	@Override
+	public String selectAuth(int auth) {
+		return administratorDAO.selectAuth(auth);
 	}
 
 }
