@@ -92,7 +92,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id">아이디 <span class="required">*</span>
                         </label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="admin_Id" name="admin_Id">
+                            <input type="text" class="form-control" id="admin_Id" name="admin_Id" required="required">
                             <span class="input-group-btn"><button type="button"  class="btn btn-primary"  id="adminIdCheck">중복확인</button></span>
                        </div>
                       </div>
@@ -107,24 +107,40 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password2">비밀번호 확인 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="admin_Pw2" class="form-control col-md-7 col-xs-12" type="password" name="admin_Pw2" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자">
+                          <input id="admin_Pw2" class="form-control col-md-7 col-xs-12" required="required" type="password" name="admin_Pw2" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자">
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">이름 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="admin_Name" class="form-control col-md-7 col-xs-12" type="text" name="admin_Name">
+                          <input id="admin_Name" class="form-control col-md-7 col-xs-12" type="text" name="admin_Name" required="required">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phone">전화번호 <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="admin_Phone" class="form-control col-md-7 col-xs-12" required="required" type="text" name="admin_Phone" placeholder="- 없이 입력하세요">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">이메일 <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="admin_Email" class="form-control col-md-7 col-xs-12" required="required" type="email" name="admin_Email">
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">관리자 권한 유형 <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select  id="admin_Auth" name="admin_Auth" class="form-control">
-                          <option value="0" selected>====Select====</option>
-                          <c:forEach var="authList" items="${authList}">				                           
-                            <option value="${authList.intAuthNo}" id="auth">${authList.strAuthName}</option>
-                            </c:forEach>
+                          <select  id="admin_Auth" name="admin_Auth" class="form-control">                        
+                          <option value="0" selected>=============== Select ===============</option>
+                            <c:if test="${1 eq AuthNo}">
+	                          <c:forEach var="authList" items="${authList}">				                           
+	                            <option value="${authList.intAuthNo}" id="auth">${authList.strAuthName}</option>
+	                          </c:forEach>
+                            </c:if>
                           </select>
                         </div>
                       </div>
@@ -241,6 +257,7 @@ ga('send', 'pageview');
 			var pw2 = document.getElementById("admin_Pw2");
 			var target = document.getElementById("admin_Auth");
      		var auth = target.options[target.selectedIndex].value;
+     		var phone = documnet.getElementById("admin_Phone");
      		
      		
 			if(str.admin_Id.value == ""){
@@ -280,8 +297,22 @@ ga('send', 'pageview');
 			}	
 	       	if(str.admin_Name.value == ""){
 				alert("이름을 입력하지 않았습니다. 입력해주세요");
-				str.admin_Name.focus();
+				document.getElementById("admin_Name").focus();
 	           	return false;
+	       	}
+	       	if(str.admin_Phone.value == ""){
+	       		alert("전화번호를 입력하지 않았습니다. 입력해주세요");
+	       		document.getElementById("admin_Phone").focus();
+	           	return false;
+	       	}
+	       	else{	//전화번호 형식 확인
+	       		var phoneNumberRegex = /^[0-9]{3}[0-9]{4}[0-9]{4}$/;
+
+	    		if(!phoneNumberRegex.test(phone)) {
+	    			alert("전화번호가 잘못된 형식입니다.");
+	    			document.getElementById("admin_Phone").value="";
+	    			return false; 
+	    		}
 	       	}
 	       //관리자 권한 확인
 		});		

@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import = "com.interntraining.admin.authority.domain.AuthMapp" %>
+<%@ page import ="java.util.ArrayList"%>
+<%@ page import ="java.util.List"%>
 <%  // 인증된 세션이 없는경우, 해당페이지를 볼 수 없게 함.
     if (session.getAttribute("AdminId")  == null) {
         response.sendRedirect("/login/logout");
@@ -73,18 +78,41 @@
                       <li><a href="index3.html">Dashboard3</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-edit"></i> 권한 관리 <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="/Auth/AuthList">권한 목록</a></li>
-                      <li><a href="/Auth/AuthEnrollForm">권한 등록</a></li>                      
-                    </ul>
-                  </li>
+                  
+                  <c:forEach var="item" items="${items}">
+                	<c:if test="${1 eq item.intAuthItemNo}">
+	                  <li><a><i class="fa fa-edit"></i> 권한 관리 <span class="fa fa-chevron-down"></span></a>
+	                    <ul class="nav child_menu">
+	                      <li><a href="/Auth/AuthList">권한 목록</a></li>
+	                      <li><a href="/Auth/AuthEnrollForm">권한 등록</a></li>                      
+	                    </ul>
+	                  </li>
+                  </c:if>
+                  </c:forEach>
+                  
+                  <c:forEach var="item" items="${items}">
+                  	<c:if test="${2 eq item.intAuthItemNo}">
                   <li><a><i class="fa fa-desktop"></i> 관리자 관리 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="/Administrator/AdministratorList">관리자 목록</a></li>
                       <li><a href="/Administrator/AdministratorEnrollForm">관리자 등록</a></li>                      
                     </ul>
                   </li>
+                  </c:if>
+                  </c:forEach>
+                  
+                   <c:forEach var="item" items="${items}">
+                  	<c:if test="${3 eq item.intAuthItemNo}">
+                  <li><a><i class="fa fa-desktop"></i> 회원 관리 <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="/Administrator/AdministratorList">회원 목록</a></li>
+                      <li><a href="/Administrator/AdministratorEnrollForm">회원 등록</a></li>                      
+                    </ul>
+                  </li>
+                  </c:if>
+                  </c:forEach>
+                  
+                  
                   <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="tables.html">Tables</a></li>

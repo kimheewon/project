@@ -52,5 +52,14 @@
 				,AuthName	AS	strAuthName
 		from	 TAuth
 	</select>
+	
+	<!-- 권한 항목들 가져오기 -->
+	<select id="selectItemList"  resultType="AuthMapp">
+		select  AuthNo  	AS 	intAuthNo
+				,AuthItemNo	AS	intAuthItemNo
+		from	TAuthMapp
+		where AuthNo = #{authno}
+	</select>
+
 
 </mapper>

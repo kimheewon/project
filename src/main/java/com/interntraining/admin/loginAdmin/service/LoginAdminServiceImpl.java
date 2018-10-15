@@ -1,5 +1,7 @@
 package com.interntraining.admin.loginAdmin.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
 
+import com.interntraining.admin.authority.domain.AuthItemInfo;
+import com.interntraining.admin.authority.domain.AuthMapp;
 import com.interntraining.admin.loginAdmin.dao.LoginAdminDAO;
 import com.interntraining.admin.loginAdmin.domain.LoginAdminInfo;
 
@@ -48,6 +52,12 @@ public class LoginAdminServiceImpl implements LoginAdminService{
 	        }
 	            
 	    }
+	}
+
+	//권항 항목 가져오기
+	@Override
+	public List<AuthMapp> selectItemList(int authno) {
+		return loginAdminDAO.selectItemList(authno);
 	}
 
 }

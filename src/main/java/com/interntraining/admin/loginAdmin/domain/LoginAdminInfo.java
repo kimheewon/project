@@ -10,6 +10,7 @@ public class LoginAdminInfo {
 	private String StrAdminName;
 	private String StrAdminPhone;
 	private String StrAdminEmail;
+	private int intAuthNo;
 	private String StrAdminGrade;
 	private Date DateAdminDate;
 	public int getIntAdminNo() {
@@ -47,6 +48,13 @@ public class LoginAdminInfo {
 	}
 	public void setStrAdminEmail(String strAdminEmail) {
 		StrAdminEmail = strAdminEmail;
+	}
+	
+	public int getIntAuthNo() {
+		return intAuthNo;
+	}
+	public void setIntAuthNo(int intAuthNo) {
+		this.intAuthNo = intAuthNo;
 	}
 	public String getStrAdminGrade() {
 		return StrAdminGrade;

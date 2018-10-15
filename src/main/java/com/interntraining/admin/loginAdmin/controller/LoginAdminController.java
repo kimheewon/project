@@ -1,5 +1,7 @@
 package com.interntraining.admin.loginAdmin.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.interntraining.admin.authority.domain.AuthMapp;
 import com.interntraining.admin.loginAdmin.domain.LoginAdminInfo;
 import com.interntraining.admin.loginAdmin.service.LoginAdminService;
 
@@ -49,6 +52,10 @@ public class LoginAdminController {
 			admin = loginAdminService.selectOne(id);		//로그인 성공시 정보 담아놓음
 			session.setAttribute("AdminLogin", admin);	//세션에 admin이란 이름으로 관리자 객체를 저장함
 			session.setAttribute("AdminId", admin.getStrAdminId());
+			int authno = admin.getIntAuthNo();
+			session.setAttribute("AuthNo", authno); 	//권한 번호
+			List<AuthMapp> authItem = loginAdminService.selectItemList(authno);	//권항 항목 가져오기
+			session.setAttribute("items", authItem); //권한 매핑 테이블 세션에 담기
 			
 			return "/admin/login/AdminHome";		//로그인 성공시 관리자 홈화면으로 이동			
 		}

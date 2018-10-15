@@ -90,26 +90,33 @@ public class AdministratorController {
 		String name = request.getParameter("admin_Name");
 		String auth_s = request.getParameter("admin_Auth");
 		int auth =  Integer.parseInt(auth_s);
+		String phone = request.getParameter("admin_Phone");
+		String email = request.getParameter("admin_Email");
+		String grade = administratorService.selectAuth(auth); 
 		
-		
-		
-		String phone = "0100000000";
-		String email = "ohhh@naver.com";
 		
 		AdministratorInfo admin = new AdministratorInfo();
 		admin.setStrAdminId(id);
 		admin.setStrAdminPw(password);
 		admin.setStrAdminName(name);
-		admin.setStrAdminGrade(auth_s);	//권한명
+		admin.setStrAdminGrade(grade);	//권한명
 		admin.setStrAdminPhone(phone);
 		admin.setStrAdminEmail(email);
 		admin.setIntAdminAuth(auth);
 		
 		administratorService.insertAdmin(admin);	//관리자 등록
 		
-		List<AdministratorInfo> list = administratorService.selectAdminList();
+		List<AdministratorInfo> listA = administratorService.selectAdminList();
 		
-		mav.addObject("adminList", list);
+		
+		for(int i=0; i<listA.size(); i++) {
+			AdministratorInfo objAdmInfo = listA.get(i);
+			grade = administratorService.selectAuth(objAdmInfo.getIntAdminAuth()); 
+			objAdmInfo.setStrAdminGrade(grade);
+			listA.set(i, objAdmInfo);
+		}
+		
+		mav.addObject("adminList", listA);
 		mav.setViewName("/admin/administrator/AdminManagement");	//오른쪽 위 관리자 클릭시 안됨
 		return mav;
 	}

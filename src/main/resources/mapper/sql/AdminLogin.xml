@@ -8,7 +8,8 @@
 	<select id="selectOne"  resultType="LoginAdminInfo">
 		select   AdminNo AS intAdminNo
 				,AdminId AS StrAdminId
-		    	,AdminPw AS StrAdminPw	
+		    	,AdminPw AS StrAdminPw
+		    	,AuthNo  AS intAuthNo
 		from TAdmin where AdminId = #{id} 
 	</select>	
 	
