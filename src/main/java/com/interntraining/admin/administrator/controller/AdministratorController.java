@@ -89,9 +89,7 @@ public class AdministratorController {
 		String password = request.getParameter("admin_Pw");
 		String name = request.getParameter("admin_Name");
 		String auth_s = request.getParameter("admin_Auth");
-		int auth =  Integer.parseInt(auth_s);
-		String phone = request.getParameter("admin_Phone");
-		String email = request.getParameter("admin_Email");
+		int auth =  Integer.parseInt(auth_s);		
 		String grade = administratorService.selectAuth(auth); 
 		
 		
@@ -99,9 +97,7 @@ public class AdministratorController {
 		admin.setStrAdminId(id);
 		admin.setStrAdminPw(password);
 		admin.setStrAdminName(name);
-		admin.setStrAdminGrade(grade);	//권한명
-		admin.setStrAdminPhone(phone);
-		admin.setStrAdminEmail(email);
+		admin.setStrAdminGrade(grade);	//권한명		
 		admin.setIntAdminAuth(auth);
 		
 		administratorService.insertAdmin(admin);	//관리자 등록
@@ -121,5 +117,20 @@ public class AdministratorController {
 		return mav;
 	}
 	
-
+	
+	//관리자 수정
+	@RequestMapping(value="/UpdateFrom", method=RequestMethod.POST)
+	public ModelAndView AdminUpdateForm(HttpServletRequest request, HttpServletResponse response,HttpSession session, int intAdminNo) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		
+		AdministratorInfo admin = administratorService.selectAdmin(intAdminNo);//관리자번호로 관리자 데이터 찾기
+		
+		mav.addObject("adminInfo", admin);
+		//더 작성하기
+		
+		mav.setViewName("/admin/administrator/AdminEnroll");
+		
+		return mav;
+		
+	}
 }

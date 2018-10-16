@@ -33,7 +33,7 @@
 							<div class="form-group floating-label-form-group controls mb-0 pb-2" >
 								<a class="font_required">아이디</a>
 								<p class="help-block "></p>
-								<a style="color:#2C3E50; font-size:25px; font-weight:bold; padding-left:7em">${member.strUserid}</a>
+								<a style="color:#2C3E50; font-size:22px; font-weight:bold; padding-left:7em">${member.strUserid}</a>
 								<p class="help-block "></p>
 							</div>
 						</div>
@@ -42,7 +42,7 @@
 								class="form-group floating-label-form-group controls mb-0 pb-2">
 								<a class="font_required">비밀번호</a>
 								<p class="help-block"></p>
-								<a style="color:#2C3E50; font-size:25px; font-weight:bold; padding-left:7em">${member.strUserPw}</a>
+								<a style="color:#2C3E50; font-size:22px; font-weight:bold; padding-left:7em">${member.strUserPw}</a>
 								<p class="help-block "></p>
 							</div>
 						</div>						
@@ -51,7 +51,7 @@
 								class="form-group floating-label-form-group controls mb-0 pb-2">
 								<a class="font_required">이름</a>
 								<p class="help-block "></p>
-								<a style="color:#2C3E50; font-size:25px; font-weight:bold; padding-left:7em">${member.strUserName}</a>
+								<a style="color:#2C3E50; font-size:22px; font-weight:bold; padding-left:7em">${member.strUserName}</a>
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>
@@ -60,7 +60,7 @@
 								class="form-group floating-label-form-group controls mb-0 pb-2">
 								<a class="font_required">전화번호</a>
 								<p class="help-block "></p>
-								<a style="color:#2C3E50; font-size:25px; font-weight:bold; padding-left:7em">${member.strUserPhone}</a>
+								<a style="color:#2C3E50; font-size:22px; font-weight:bold; padding-left:7em">${member.strUserPhone}</a>
 								<p class="help-block "></p>
 							</div>
 						</div>
@@ -68,14 +68,14 @@
 							<div
 								class="form-group floating-label-form-group controls mb-0 pb-2">
 								<a class="font_required">이메일</a><p class="help-block "></p>
-								<a style="color:#2C3E50; font-size:25px; font-weight:bold; padding-left:7em">${member.strUserEmail}</a>
+								<a style="color:#2C3E50; font-size:25px; font-weight:bold; padding-left:6em">${member.strUserEmail}</a>
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>
 						<div class="control-group">
 							<div class="form-group floating-label-form-group controls mb-0 pb-2">
 								<a class="fontsize">성별</a><p class="help-block "></p>
-								<a style="color:#2C3E50; font-size:25px; font-weight:bold; padding-left:7em">${member.strUserSex}</a>
+								<a style="color:#2C3E50; font-size:22px; font-weight:bold; padding-left:7em">${member.strUserSex}</a>
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>						
@@ -84,7 +84,7 @@
 								class="form-group floating-label-form-group controls mb-0 pb-2">
 								<a class="fontsize">가입일</a>								
 								<p class="help-block "></p>
-								<a style="color:#2C3E50; font-size:25px; font-weight:bold; padding-left:7em"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${member.dateUserDate}"/></a>
+								<a style="color:#2C3E50; font-size:25px; font-weight:bold; padding-left:6em"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${member.dateUserDate}"/></a>
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>
@@ -93,7 +93,7 @@
 								class="form-group floating-label-form-group controls mb-0 pb-2">
 								<a class="fontsize">등급</a>								
 								<p class="help-block "></p>
-								<a style="color:#2C3E50; font-size:25px; font-weight:bold; padding-left:7em">${member.strUserGrade}</a>
+								<a style="color:#2C3E50; font-size:22px; font-weight:bold; padding-left:7em">${member.strUserGrade}</a>
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>

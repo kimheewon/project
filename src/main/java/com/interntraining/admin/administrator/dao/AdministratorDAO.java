@@ -41,5 +41,10 @@ public class AdministratorDAO {
 		return sqlSession.selectOne("authSql.selectAuth", auth);
 	}
 
+	//관리자 정보 가져오기
+	public AdministratorInfo selectAdmin(int intAdminNo) {
+		return sqlSession.selectOne("administratorSql.selectAdmin", intAdminNo);
+	}
+
 
 }

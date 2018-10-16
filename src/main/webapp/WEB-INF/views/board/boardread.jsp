@@ -124,11 +124,11 @@
 				</tr>
 			</table>
 			<c:if test="${id eq board.strUserId}">
-				<div class="container_b">
-					<button class="button" type="submit">수정하기</button>
+				<div class="container_b">					
 					<input type="button" class="button"
 						onclick="location.href='/board/boardDelete?intBoardNo=${board.intBoardNo}'"
 						value="삭제하기">
+						<button class="button" type="submit">수정하기</button>
 				</div>
 			</c:if>
 		</form>

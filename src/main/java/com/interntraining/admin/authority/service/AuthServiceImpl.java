@@ -63,4 +63,16 @@ public class AuthServiceImpl implements AuthService{
 		return authDAO.selectAllAuth();
 	}
 
+	//권한번호로 권한명 찾기(Auth 테이블에서)
+	@Override
+	public String selectAuthName(int authNo) {
+		return authDAO.selectAuthName(authNo);
+	}
+
+	//권한번호로 권한항목 찾기(AuthMapp 테이블에서)
+	@Override
+	public List<AuthMapp> selectAuthItem(int authNo) {
+		return authDAO.selectAuthItem(authNo);
+	}
+
 }

@@ -24,12 +24,23 @@
 
 	<!-- 관리자 등록 -->	
 	<insert id="insertAdmin" >
-		insert into TAdmin(AdminId,AdminPw,AdminName,AdminPhone,AdminEmail, AuthNo) values(
-			#{StrAdminId}, #{StrAdminPw}, #{StrAdminName}, #{StrAdminPhone}, #{StrAdminEmail}, #{intAdminAuth}
+		insert into TAdmin(AdminId,AdminPw,AdminName, AuthNo) values(
+			#{StrAdminId}, #{StrAdminPw}, #{StrAdminName}, #{intAdminAuth}
 			)
 	</insert>
 	
 	
+	<!-- 관리자 정보 가져오기 -->	
+	<select id="selectAdmin"  resultType="AdministratorInfo">
+		SELECT   AdminNo 	AS intAdminNo
+				,AdminId 	AS strAdminId
+		    	,AdminPw	AS strAdminPw
+		    	,AdminName	AS strAdminName
+		    	,AuthNo		AS intAdminAuth
+		    	,AdminDate	AS dateAdminDate
+		FROM 	TAdmin
+		where AdminNo	=	#{intAdminNo}
+	</select>	
 
 </mapper>
 

@@ -69,9 +69,9 @@
 				<td><textarea rows="10" cols="50" class="form-control" name="contents" required autofocus></textarea></td>
 			</tr>
 		</table>
-		<div class="container_b">
-			<button class="button" type="submit">저장하기</button>
-			<button class="button" type="reset">다시작성</button>			
+		<div class="container_b">			
+			<button class="button" type="reset">다시작성</button>
+			<button class="button" type="submit">저장하기</button>			
 		</div>
 		</form>
 	</div>

@@ -40,7 +40,7 @@ public class AuthController {
 	
 	//권한 등록페이지로 이동
 	@RequestMapping(value="/AuthEnrollForm")
-	public ModelAndView AuthEnrollForm() {
+	public ModelAndView AuthEnrollForm(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		
 		List<AuthItemInfo> item = authService.selectAllAuthItem();	//권항 항목 모두 불러오기
@@ -76,7 +76,7 @@ public class AuthController {
 		AuthMapp authMapp = new AuthMapp();		//매핑테이블 객체 생성
 		authMapp.setIntAuthNo(authNo);
 		
-		String[] authItem = request.getParameterValues("items[]");
+		String[] authItem = request.getParameterValues("items");
 		
 		for(int i=0; i<authItem.length; i++) {
 			int authItemNo = Integer.parseInt(authItem[i]);	//선택한 권한 항목명			
@@ -100,6 +100,22 @@ public class AuthController {
 		
 		mav.addObject("authList",auth);
 		mav.setViewName("/admin/authority/AuthList");	
+		return mav;
+	}
+	
+	//권한 수정 페이지로 이동
+	@RequestMapping(value="/AuthUpdateForm")
+	public ModelAndView AuthUpdateForm(HttpServletRequest request, HttpServletResponse response, HttpSession session, int authNo) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		
+		String authName = authService.selectAuthName(authNo);	//권한번호로 권한명 찾기(Auth 테이블에서)
+		List<AuthMapp> selectedItems = authService.selectAuthItem(authNo);	//권한번호로 권한항목 찾기(AuthMapp 테이블에서)
+		List<AuthItemInfo> item = authService.selectAllAuthItem();	//권항 항목 모두 불러오기
+		
+		mav.addObject("AuthItem", item);	//불러온 모든 권한 항목들
+		mav.addObject("authName",authName);	
+		mav.addObject("selectedItems", selectedItems);	//저장된 권한 항목들
+		mav.setViewName("/admin/authority/AuthUpdate");	//수정페이지로 이동
 		return mav;
 	}
 

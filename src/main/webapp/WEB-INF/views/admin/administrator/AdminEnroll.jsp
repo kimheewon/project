@@ -91,9 +91,9 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id">아이디 <span class="required">*</span>
                         </label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="admin_Id" name="admin_Id" required="required">
-                            <span class="input-group-btn"><button type="button"  class="btn btn-primary"  id="adminIdCheck">중복확인</button></span>
+                        <div class="input-group" style="width:44%; padding-left:0.9rem">
+                            <span class="input-group-btn"><input type="text" class="form-control" id="admin_Id" name="admin_Id" required="required">
+                            <button type="button"  class="btn btn-primary"  id="adminIdCheck">중복확인</button></span>
                        </div>
                       </div>
                       <div class="form-group">
@@ -117,30 +117,17 @@
                           <input id="admin_Name" class="form-control col-md-7 col-xs-12" type="text" name="admin_Name" required="required">
                         </div>
                       </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phone">전화번호 <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="admin_Phone" class="form-control col-md-7 col-xs-12" required="required" type="text" name="admin_Phone" placeholder="- 없이 입력하세요">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">이메일 <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="admin_Email" class="form-control col-md-7 col-xs-12" required="required" type="email" name="admin_Email">
-                        </div>
-                      </div>
+                      
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">관리자 권한 유형 <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select  id="admin_Auth" name="admin_Auth" class="form-control">                        
                           <option value="0" selected>=============== Select ===============</option>
-                            <c:if test="${1 eq AuthNo}">
-	                          <c:forEach var="authList" items="${authList}">				                           
-	                            <option value="${authList.intAuthNo}" id="auth">${authList.strAuthName}</option>
-	                          </c:forEach>
-                            </c:if>
+                          <c:forEach var="authList" items="${authList}">                           
+                            <c:if test="${authList.intAuthNo ge AuthNo}">                                    
+	                            <option value="${authList.intAuthNo}" id="auth" >${authList.strAuthName}</option>
+	                          </c:if>                           
+                            </c:forEach>
                           </select>
                         </div>
                       </div>
@@ -169,14 +156,7 @@
       </div>
     </div>
 <jsp:include page="../bottomAdmin.jsp" flush="true"/>
-    <!-- jQuery -->
-    <script src="/vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="/vendors/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="/vendors/nprogress/nprogress.js"></script>
+    
     <!-- bootstrap-progressbar -->
     <script src="/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
     <!-- iCheck -->
@@ -255,10 +235,8 @@ ga('send', 'pageview');
 			var str = document.enrollInfo;
 			var pw1 = document.getElementById("admin_Pw");
 			var pw2 = document.getElementById("admin_Pw2");
-			var target = document.getElementById("admin_Auth");
-     		var auth = target.options[target.selectedIndex].value;
-     		var phone = documnet.getElementById("admin_Phone");
-     		
+			var count=$("#admin_Auth").val(); //<-- option값
+		     
      		
 			if(str.admin_Id.value == ""){
 		 		alert("아이디를 입력하지 않았습니다. 입력해주세요");
@@ -300,21 +278,11 @@ ga('send', 'pageview');
 				document.getElementById("admin_Name").focus();
 	           	return false;
 	       	}
-	       	if(str.admin_Phone.value == ""){
-	       		alert("전화번호를 입력하지 않았습니다. 입력해주세요");
-	       		document.getElementById("admin_Phone").focus();
-	           	return false;
-	       	}
-	       	else{	//전화번호 형식 확인
-	       		var phoneNumberRegex = /^[0-9]{3}[0-9]{4}[0-9]{4}$/;
-
-	    		if(!phoneNumberRegex.test(phone)) {
-	    			alert("전화번호가 잘못된 형식입니다.");
-	    			document.getElementById("admin_Phone").value="";
-	    			return false; 
-	    		}
-	       	}
-	       //관리자 권한 확인
+	      
+			if(count == '0'){
+	       		alert("권한 항목을 선택하지 않습니다.");
+	       		return false;
+	       	}   
 		});		
 	});
 

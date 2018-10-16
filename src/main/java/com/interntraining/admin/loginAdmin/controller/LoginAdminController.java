@@ -28,7 +28,7 @@ public class LoginAdminController {
 	@Autowired
 	private LoginAdminService loginAdminService;
 	
-	//관리자 로그인 확인
+	//관리자 로그인 
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws Exception{
 		

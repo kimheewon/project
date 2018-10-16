@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <title>권한 등록 </title>
+    <title>권한 수정 </title>
 
  <!-- Bootstrap -->
     <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -50,7 +50,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>권한 등록</h3>
+                <h3>권한 수정</h3>
               </div>
 
               <div class="title_right">
@@ -66,18 +66,13 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Form Basic Elements <small>different form elements</small></h2>
+                    
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
+                        
                       </li>
                       <li><a class="close-link"><i class="fa fa-close"></i></a>
                       </li>
@@ -92,7 +87,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="authName">권한명 <span class="required">*</span>
                         </label>                       
                         <div class="input-group" style="width:50%">
-                            <input type="text" class="form-control" id="authName" name="authName">
+                            <input type="text" class="form-control" id="authName" name="authName" value="${authName}">
                             <span class="input-group-btn">&nbsp;&nbsp;&nbsp;<button type="button"  class="btn btn-primary"  id="authNameCheck">중복확인</button></span>
                        </div>                      
                       </div>
@@ -104,11 +99,33 @@
 
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="checkbox">
-                          <c:forEach var="AuthItem" items="${AuthItem}">
-                            <label>
-                              <input type="checkbox" name="items" id="check" class="flat" value="${AuthItem.intAuthItemNo}"> ${AuthItem.strAuthItemName}
-                            </label>
-                            </c:forEach>
+                          	
+                         	 <c:set var="test123" value="f"/>    
+                         	 <c:forEach var="AuthItem" items="${AuthItem}">
+                         	 		          
+                         	 	<c:set var="test123" value="f"/>    
+                          		<c:forEach var="selectedItems" items="${selectedItems}">            
+	                          		<c:choose>
+			                            <c:when test="${AuthItem.intAuthItemNo eq selectedItems.intAuthItemNo}">      
+				                            <label>                            	
+				                              <input type="checkbox" name="items" id="check" class="flat" checked="checked" value="${AuthItem.intAuthItemNo}"> ${AuthItem.strAuthItemName}
+				                            </label>
+				                            <c:set var="test123" value="t"/>   
+				                            
+				                         </c:when>
+				                         
+	                            	</c:choose>
+	                            </c:forEach>
+	                            <c:choose>
+	                             <c:when test="${test123 eq 'f'}">
+	                            	<label>                            	
+		                              <input type="checkbox" name="items" id="check" class="flat" value="${AuthItem.intAuthItemNo}"> ${AuthItem.strAuthItemName}
+		                            </label>
+		                            </c:when>
+	                            </c:choose>
+	                            
+	                            
+	                       </c:forEach>
                           </div>
                           
                         </div>

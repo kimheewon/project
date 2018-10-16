@@ -54,4 +54,10 @@ public class AdministratorServiceImpl implements AdministratorService{
 		return administratorDAO.selectAuth(auth);
 	}
 
+	//관리자 정보 가져왹
+	@Override
+	public AdministratorInfo selectAdmin(int intAdminNo) {
+		return administratorDAO.selectAdmin(intAdminNo);
+	}
+
 }

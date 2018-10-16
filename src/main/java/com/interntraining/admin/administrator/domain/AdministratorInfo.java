@@ -7,9 +7,7 @@ public class AdministratorInfo {
 	private int intAdminNo;
 	private String StrAdminId;
 	private String StrAdminPw;
-	private String StrAdminName;
-	private String StrAdminPhone;
-	private String StrAdminEmail;
+	private String StrAdminName;	
 	private int intAdminAuth;
 	private String StrAdminGrade;
 	private Date DateAdminDate;
@@ -38,20 +36,7 @@ public class AdministratorInfo {
 	public void setStrAdminName(String strAdminName) {
 		StrAdminName = strAdminName;
 	}
-	public String getStrAdminPhone() {
-		return StrAdminPhone;
-	}
-	public void setStrAdminPhone(String strAdminPhone) {
-		StrAdminPhone = strAdminPhone;
-	}
-	public String getStrAdminEmail() {
-		return StrAdminEmail;
-	}
-	public void setStrAdminEmail(String strAdminEmail) {
-		StrAdminEmail = strAdminEmail;
-	}
 	
-
 	public int getIntAdminAuth() {
 		return intAdminAuth;
 	}

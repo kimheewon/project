@@ -17,14 +17,7 @@
 
     <title>권한 목록 리스트</title>
 
-     <!-- Bootstrap -->
-    <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="/vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    
     <!-- Datatables -->
     <link href="/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
@@ -35,7 +28,6 @@
     <!-- Custom Theme Style -->
     <link href="/build/css/custom.min.css" rel="stylesheet">
 
-	
   </head>
 
   <body class="nav-md">
@@ -48,49 +40,24 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Authority <small>목록</small></h3>
+                <h3>권한 관리 </h3>
               </div>
 
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                  </div>
-                </div>
-              </div>
+              
             </div>
 
             <div class="clearfix"></div>
 
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
+                <div class="x_panel" >
                   <div class="x_title">
-                    <h2>권한 목록 <small>권한</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
+                    <h2>목록</h2>
+                    
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content">
-                    <p class="text-muted font-13 m-b-30">
-                      DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction function: <code>$().DataTable();</code>
-                    </p>
+                  <div class="x_content" style="font-size:15px">
+                    
                     <table id="datatable" class="table table-striped table-bordered" id="AdminList">
                       <thead>
                         <tr>
@@ -104,7 +71,7 @@
 							<tr>
 								<td>${authList.intAuthNo}</td>							
 								<td>${authList.strAuthName}</td>
-								<td><a href="/board/boardread?intBoardNo=${authList.intAuthNo}">수정하기</td>
+								<td><a href="/Auth/AuthUpdateForm?authNo=${authList.intAuthNo}">수정하기</a></td>
 							</tr>	
 						</c:forEach>
                       </tbody>
@@ -115,22 +82,19 @@
 
             </div>
  
-        <!-- /page content -->
+
 
         </div>
       </div>
+              <!-- /page content -->
+          
+
+
 </div>
 </div>
 
     <!-- jQuery -->
-     <!--<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>-->
- <script src="/vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="/vendors/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="/vendors/nprogress/nprogress.js"></script>
+    
     <!-- iCheck -->
     <script src="/vendors/iCheck/icheck.min.js"></script>
     <!-- Datatables -->
@@ -163,6 +127,9 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
 ga('create', 'UA-23581568-13', 'auto');
 ga('send', 'pageview');
+
+
+
 
 </script>
   </body>

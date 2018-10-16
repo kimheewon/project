@@ -95,7 +95,8 @@ public class BoardController {
 	
 	// 게시글 저장
 	@RequestMapping("/boardsave")
-	public ModelAndView boardWrite(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+	public ModelAndView boardWrite(HttpServletRequest request, HttpServletResponse response, HttpSession session,@RequestParam(required=false) Integer nowPage,@RequestParam(required=false)Integer nowBlock,
+            @RequestParam(required=false) String keyField, @RequestParam(required=false) String keyWord, @RequestParam(defaultValue="1") int curPage)
 			throws Exception {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 
@@ -109,8 +110,16 @@ public class BoardController {
 		board.setStrBoardContent(contents);
 		boardService.insertboard(board);
 
-		List<Board> boardlist = boardService.selectboardlist(board);
+		List<Board> boardCount = boardService.selectboardlist(board);	//게시글 총 개수
+		int listCnt = boardCount.size();
+	
+		Pagination pagination = new Pagination(listCnt, curPage);
+					
+		//List<Board> boardlist = boardService.selectboardlist(board);
+		List<Board> boardlist = boardService.getBoardList(pagination); // 리스트
 		mav.addObject("boardlist", boardlist);
+		mav.addObject("listCnt", listCnt);
+		mav.addObject("pagination", pagination);
 		mav.setViewName("/board/boardlist");
 
 		return mav;
@@ -150,7 +159,8 @@ public class BoardController {
 	// 수정한 게시글 DB에 저장
 	@RequestMapping("/boardupdate")
 	public ModelAndView boardUpdate(HttpServletRequest request, HttpServletResponse response, HttpSession session,
-			int bno) throws Exception {
+			int bno,@RequestParam(required=false) Integer nowPage,@RequestParam(required=false)Integer nowBlock,
+            @RequestParam(required=false) String keyField, @RequestParam(required=false) String keyWord, @RequestParam(defaultValue="1") int curPage) throws Exception {
 		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
 
 		String title = request.getParameter("title");
@@ -162,8 +172,16 @@ public class BoardController {
 		board.setStrBoardContent(contents);
 		boardService.updateboard(board);
 
-		List<Board> boardlist = boardService.selectboardlist(board);
+		List<Board> boardCount = boardService.selectboardlist(board);	//게시글 총 개수
+		int listCnt = boardCount.size();
+		
+		Pagination pagination = new Pagination(listCnt, curPage);
+		
+		List<Board> boardlist = boardService.getBoardList(pagination); // 리스트
+		//List<Board> boardlist = boardService.selectboardlist(board);
 		mv.addObject("boardlist", boardlist);
+		mv.addObject("listCnt", listCnt);
+		mv.addObject("pagination", pagination);
 		mv.setViewName("/board/boardlist");
 		return mv;
 	}

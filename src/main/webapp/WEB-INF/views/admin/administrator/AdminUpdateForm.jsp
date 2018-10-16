@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <title>권한 등록 </title>
+    <title>관리자 수정 </title>
 
  <!-- Bootstrap -->
     <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -50,7 +50,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>권한 등록</h3>
+                <h3>관리자 수정</h3>
               </div>
 
               <div class="title_right">
@@ -70,15 +70,7 @@
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
+                      
                       <li><a class="close-link"><i class="fa fa-close"></i></a>
                       </li>
                     </ul>
@@ -86,31 +78,49 @@
                   </div>
                    <div class="x_content">
                     <br />
-                    <form id="AuthEnrollInfo" name="AuthEnrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Auth/AuthEnroll" method="POST">
+                    <form id="enrollInfo" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Administrator/Enroll" method="POST">
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="authName">권한명 <span class="required">*</span>
-                        </label>                       
-                        <div class="input-group" style="width:50%">
-                            <input type="text" class="form-control" id="authName" name="authName">
-                            <span class="input-group-btn">&nbsp;&nbsp;&nbsp;<button type="button"  class="btn btn-primary"  id="authNameCheck">중복확인</button></span>
-                       </div>                      
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id">아이디 <span class="required">*</span>
+                        </label>
+                        <div class="input-group" style="width:44%; padding-left:0.9rem">
+                            <span class="input-group-btn"><input type="text" class="form-control" id="admin_Id" name="admin_Id" required="required">
+                            <button type="button"  class="btn btn-primary"  id="adminIdCheck">중복확인</button></span>
+                       </div>
                       </div>
                       <div class="form-group">
-                        <label class="col-md-3 col-sm-3 col-xs-12 control-label">권한 항목 <span class="required">*</span>
-                          <br>
-                          <small class="text-navy">권한 항목 중복 체크 가능</small>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">비밀번호 <span class="required">*</span>
                         </label>
-
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <div class="checkbox">
-                          <c:forEach var="AuthItem" items="${AuthItem}">
-                            <label>
-                              <input type="checkbox" name="items" id="check" class="flat" value="${AuthItem.intAuthItemNo}"> ${AuthItem.strAuthItemName}
-                            </label>
+                          <input type="password" id="admin_Pw" name="admin_Pw" required="required" class="form-control col-md-7 col-xs-12" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password2">비밀번호 확인 <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="admin_Pw2" class="form-control col-md-7 col-xs-12" required="required" type="password" name="admin_Pw2" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">이름 <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="admin_Name" class="form-control col-md-7 col-xs-12" type="text" name="admin_Name" required="required">
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">관리자 권한 유형 <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select  id="admin_Auth" name="admin_Auth" class="form-control">                        
+                          <option value="0" selected>=============== Select ===============</option>
+                          <c:forEach var="authList" items="${authList}">                           
+                            <c:if test="${authList.intAuthNo ge AuthNo}">                                    
+	                            <option value="${authList.intAuthNo}" id="auth" >${authList.strAuthName}</option>
+	                          </c:if>                           
                             </c:forEach>
-                          </div>
-                          
+                          </select>
                         </div>
                       </div>
                       
@@ -119,7 +129,7 @@
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <button class="btn btn-primary" type="button">Cancel</button>
 						  <button class="btn btn-primary" type="reset">Reset</button>
-                          <button type="submit" class="btn btn-success" id="authEnroll">등록</button>
+                          <button type="submit" class="btn btn-success" id="adminEnroll">등록</button>
                         </div>
                       </div>
 
@@ -178,31 +188,32 @@ ga('send', 'pageview');
 
 	$(document).ready(function () {
 		var val = 1;
-		$("#authNameCheck").on("click",function(){
-			if(document.getElementById("authName").value==""){
-				alert("권한명을 입력하세요.");
-	     		document.getElementById("authName").value="";	
+		$("#adminIdCheck").on("click",function(){
+			
+			if(document.getElementById("admin_Id").value==""){
+				alert("아이디를 입력하세요.");
+	     		document.getElementById("admin_Id").value="";	
 			}
 			else{
 			 $.ajax({   
 				type:"POST",
-				url:"/Auth/AuthNameCheck",   
+				url:"/Administrator/AdministratorIdCheck",   
 				dataType:"html",// JSON/html
 				async: false,
 	          	data:{ 
-	                "name": $("#authName").val()
+	                "id": $("#admin_Id").val()
 	            },
 			
 	            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 	            	
 	            	if(data==0){					
-	             		alert("사용해도 되는 권한명입니다.");
+	             		alert("사용해도 되는 아이디입니다.");
 	             		val = 0; //중복체크함
 	             		
 	             	}
 	             	else{
-	             		alert("중복된 권한명입니다.");
-	             		document.getElementById("authName").value="";	
+	             		alert("중복된 아이디입니다.");
+	             		document.getElementById("admin_Id").value="";	
 	             	}
 	            }
 			}); //--ajax
@@ -212,35 +223,59 @@ ga('send', 'pageview');
 		
 		
 		//빈값 확인
-		$("#authEnroll").on("click",function(){
-			var str = document.AuthEnrollInfo;
-			var size = document.getElementsByName("items").length;	//체크박스 총 개수
-			var count =0;
-		    for(var i = 0; i < size; i++){
-		        if(document.getElementsByName("items")[i].checked == true){
-		            count++;
-		        }		   
-		    }
+		$("#adminEnroll").on("click",function(){
+			var str = document.enrollInfo;
+			var pw1 = document.getElementById("admin_Pw");
+			var pw2 = document.getElementById("admin_Pw2");
+			var count=$("#admin_Auth").val(); //<-- option값
+		     
      		
-			if(str.authName.value == ""){
-		 		alert("권한명를 입력하지 않았습니다. 입력해주세요");
-		     	str.authName.focus();
+			if(str.admin_Id.value == ""){
+		 		alert("아이디를 입력하지 않았습니다. 입력해주세요");
+		     	str.adminEnroll.focus();
 		   		return false;
 		       }
 			if(val == 1){
 				alert("중복체크를 해주세요");
 				return false;
 			}
-	      	if(count <1){
-	      		alert("권한 항목을 체크해주세요");
-				return false;
+	      	if(str.admin_Pw.value == ""){
+	           	alert("비밀번호를 입력하지 않았습니다. 입력해주세요");
+	           	str.admin_Pw.focus();
+	           	return false;
+	       	}
+	      	else{	//비밀번호 유효성 검사
+	      		var pw = str.admin_Pw.value;
+				var reg_pw ="^(?=.*\\d)(?=.*[~`!@#$%\\^&*()-])(?=.*[a-z])(?=.*[A-Z]).{8,20}$";
+	
+				if(!pw.match(reg_pw)) {
+					alert("8~20자 영문 대 소문자, 숫자, 특수문자를 사용하세요."); 
+	      		    document.enrollInfo.admin_Pw.value="";
+	      			document.enrollInfo.admin_Pw2.value="";
+	      		    return false; 
+	      		}
 	      	}
-	       //관리자 권한 확인
-		});	
-		
-		
-
-		
+	       	if(str.admin_Pw2.value == ""){
+	           	alert("비밀번호 확인을 입력하지 않았습니다. 입력해주세요");
+	           	str.admin_Pw2.focus();
+	           	return false;
+	       	}
+	       	if(pw1.equals(pw2)){			
+				alert("비밀번호가 일치하지 않습니다");
+				document.getElementById("admin_Pw2").value="";
+				return false;
+			}	
+	       	if(str.admin_Name.value == ""){
+				alert("이름을 입력하지 않았습니다. 입력해주세요");
+				document.getElementById("admin_Name").focus();
+	           	return false;
+	       	}
+	      
+			if(count == '0'){
+	       		alert("권한 항목을 선택하지 않습니다.");
+	       		return false;
+	       	}   
+		});		
 	});
 
 	

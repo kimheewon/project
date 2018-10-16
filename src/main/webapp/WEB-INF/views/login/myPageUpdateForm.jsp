@@ -146,7 +146,7 @@
 						<div class="control-group">
 							<div class="form-group floating-label-form-group controls mb-0 pb-2" >
 								<a class="font_required">아이디</a>
-								<a style="color:#2C3E50; font-size:15px; font-weight:bold; padding-left:7em">${member.strUserid}</a>
+								<a style="color:#2C3E50; font-size:18px; font-weight:bold; padding-left:7em">${member.strUserid}</a>
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>
@@ -154,8 +154,8 @@
 							<div
 								class="form-group floating-label-form-group controls mb-0 pb-2">
 								<a class="font_required">* 비밀번호</a>
-								<p class="help-block text-danger">
-								<input class="form-control" id="pw1" name="pw1" type="text" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자" required="required" value="${member.strUserPw}">
+								<p class="help-block text-danger"><p class="help-block text-danger">
+								&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="pw1" name="pw1" type="text" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자" required="required" style="display:inline; border-radius: 8px;width:80%;background-color:#efefef ">
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>
@@ -164,7 +164,7 @@
 								class="form-group floating-label-form-group controls mb-0 pb-2">
 								<a class="font_required">* 비밀번호 확인</a>
 								<p class="help-block text-danger"></p>
-								<input class="form-control" id="pw2" name = "pw2" type="text" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자" required="required" onblur="javascript:onblur_event();">
+								&nbsp;&nbsp; &nbsp;&nbsp;<input class="form-control" id="pw2" name = "pw2" type="text" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자" required="required" style="display:inline; border-radius: 8px;width:80%;background-color:#efefef "  onblur="javascript:onblur_event();">
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>
@@ -173,7 +173,7 @@
 								class="form-group floating-label-form-group controls mb-0 pb-2">
 								<a class="font_required">* 이름</a>
 								<p class="help-block text-danger">
-								<input class="form-control" id="name" name="name" type="text" required="required" value="${member.strUserName}">
+								&nbsp;&nbsp; &nbsp;&nbsp;<input class="form-control" id="name" name="name" type="text" required="required" value="${member.strUserName}" style="display:inline; border-radius: 8px;width:80%;background-color:#efefef ">
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>
@@ -183,7 +183,7 @@
 								<a class="font_required">* 전화번호</a>
 								<p class="help-block text-danger"></p>
 								&nbsp;&nbsp; &nbsp;&nbsp;
-								<input type="tel" id="phone" name="phone" size="20" required="required" placeholder="- 없이 입력하세요" value="${member.strUserPhone}"/>
+								<input type="tel" id="phone" name="phone" size="20" required="required" placeholder="- 없이 입력하세요" value="${member.strUserPhone}" style="display:inline; border-radius: 8px;width:80%;background-color:#efefef;padding: 0.5rem;"/>
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>
@@ -191,14 +191,15 @@
 							<div
 								class="form-group floating-label-form-group controls mb-0 pb-2">
 								<a class="font_required">이메일</a><p class="help-block text-danger"></p>
-								<input class="form-control" id="email" name="email" type="email" data-validation-required-message="Please enter your email address." value="${member.strUserEmail}">
+								&nbsp;&nbsp; &nbsp;&nbsp;<input class="form-control" id="email" name="email" type="email" data-validation-required-message="Please enter your email address." value="${member.strUserEmail}" style="display:inline; border-radius: 8px;width:80%;background-color:#efefef ">
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>						
 						<br>
 						<div id="success"></div>
 						<div class="form-group" style="text-align:right;">
-							<button class="btn btn-primary btn-xl" >수 정</button>
+							<button class="btn btn-primary btn-xl" onclick="location.href='/login/myPageForm'">취 소</button>
+							&nbsp;&nbsp;<button class="btn btn-primary btn-xl" >수 정</button>
 						</div>
 					</form>
 						

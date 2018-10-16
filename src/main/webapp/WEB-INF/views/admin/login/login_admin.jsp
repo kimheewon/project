@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -33,24 +33,25 @@
         <div class="animate form login_form">
           <section class="login_content">
             <form method="POST" action="/loginAdmin/login">
-              <h1>Login Admin</h1>
+              <h1 style="color: #2c3e50; font-weight: bold;">관리자 로그인</h1>
+              <br><br>
               <div>
-                <input type="text" name="AdminId" class="form-control" placeholder="Admin ID" required="required" autofocus="autofocus"/>
+                <input type="text" name="AdminId" class="form-control" placeholder="Admin ID" required="required" style="font-size: 18px;padding: 18px;" autofocus="autofocus"/>
               </div>
               <div>
-                <input type="password" name="Password" class="form-control" placeholder="Password" required="required" />
+                <input type="password" name="Password" class="form-control" placeholder="Password" style="font-size:18px;padding: 18px;" required="required" />
               </div>
+              <br>
+              <br>
               <div>
-                <button class="btn btn-default submit" type="submit">Log in</button>
-                <a class="reset_pass" href="#">Lost your password?</a>
+                <button class="btn btn-default submit" type="submit" style=" background-color:#2c3e50; color:white; border: #2c3e50;">로그인</button>
+                
               </div>
 
               <div class="clearfix"></div>
 
               <div class="separator">
-                <p class="change_link">New to site?
-                  <a href="#signup" class="to_register"> Create Account </a>
-                </p>
+                
 
                 <div class="clearfix"></div>
                 <br />

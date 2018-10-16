@@ -29,8 +29,8 @@
 	
 	<!-- 회원가입 -->	
 	<insert id="insertmember" >
-		insert into TUser(UserId,UserPw,UserName,UserPhone,UserEmail,UserSex,UserBirth) values(
-			#{StrUserId}, #{StrUserPw}, #{StrUserName}, #{StrUserPhone}, #{StrUserEmail}, #{StrUserSex}, #{StrUserBirth}
+		insert into TUser(UserId,UserPw,UserName,UserPhone,UserEmail,UserSex) values(
+			#{StrUserId}, #{StrUserPw}, #{StrUserName}, #{StrUserPhone}, #{StrUserEmail}, #{StrUserSex}
 			)
 	</insert>
 
@@ -42,7 +42,6 @@
 				,UserPhone 	 	AS StrUserPhone
 				,UserEmail   	AS StrUserEmail
 				,UserSex   		AS StrUserSex
-				,UserBirth 		AS StrUserBirth
 				,UserDate  		AS DateUserDate
 				,UserGrade 		AS StrUserGrade
 		from   	 TUser			

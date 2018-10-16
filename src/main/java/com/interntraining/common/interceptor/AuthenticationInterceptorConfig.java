@@ -21,7 +21,10 @@ public class AuthenticationInterceptorConfig extends WebMvcConfigurerAdapter{
 	        		.addPathPatterns("/board/**")		//세션 게시판 검사
 	        		.excludePathPatterns("/login/**")	//로그인 세션 검사 X
 	        		.excludePathPatterns("/user/**")	//회원가입 세션 검사 X
-	        		.excludePathPatterns("/loginAdmin/**");	//관리자 로그인 세션 검사 X
+	        		.excludePathPatterns("/loginAdmin/**")	//관리자 로그인 세션 검사 X
+    				.addPathPatterns("/Auth/**")	
+	        		.addPathPatterns("/Administrator/**");
+	        //addPathPatterns
 	   }
 	 
 }

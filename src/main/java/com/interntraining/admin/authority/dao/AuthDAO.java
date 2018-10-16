@@ -50,6 +50,16 @@ public class AuthDAO {
 	public List<AuthInfo> selectAllAuth() {
 		return sqlSession.selectList("authSql.selectAllAuth");
 	}
+
+	//권한번호로 권한명 찾기(Auth 테이블에서)
+	public String selectAuthName(int authNo) {
+		return sqlSession.selectOne("authSql.selectAuthName", authNo);
+	}
+
+	//권한번호로 권한항목 찾기(AuthMapp 테이블에서)
+	public List<AuthMapp> selectAuthItem(int authNo) {
+		return sqlSession.selectList("authSql.selectAuthItem", authNo);
+	}
 	
 
 

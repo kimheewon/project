@@ -22,4 +22,7 @@ public interface AdministratorService {
 	//권한명 가져오기
 	public String selectAuth(int auth);
 
+	//관리자 정보 가져오기
+	public AdministratorInfo selectAdmin(int intAdminNo);
+
 }

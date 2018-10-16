@@ -124,7 +124,7 @@
 		   		return false;
 		       }
 			if(val == 1){
-				alert("중복체크해라");
+				alert("중복체크를 하지 않았습니다.");
 				return false;
 			}
 	      	if(str.pw1.value == ""){
@@ -161,11 +161,11 @@
 	       	}
 	       	else{	//전화번호 형식 확인
 	       		var phoneNumberRegex = /^[0-9]{3}[0-9]{4}[0-9]{4}$/;
-	    		var phone = document.joinInfo.phonefirst.value;
+	    		var phone = document.joinInfo.phone.value;
 	    		
 	    		if(!phoneNumberRegex.test(phone)) {
 	    			alert("전화번호가 잘못된 형식입니다.");
-	    			document.joinInfo.phonefirst.value="";
+	    			document.joinInfo.phone.value="";
 	    			return false; 
 	    		}
 	       	}
@@ -213,8 +213,9 @@
 						<div class="control-group">
 							<div class="form-group floating-label-form-group controls mb-0 pb-2" >
 								<a class="font_required">* 아이디</a>
-								<input class="form-control" id="userId" name="userId"	type="text" size="15">
-								<input type="button" id="userIdCheck" value="중복확인" required="required"/>
+								<p class="help-block text-danger"><p class="help-block text-danger">
+								<span>&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="userId" name="userId"	type="text" required="required" size="15" style="display:inline; border-radius: 8px;width:80%;background-color:#efefef ">
+								&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="userIdCheck" value="중복확인" style="background-color:#2c3e50; color:white;padding: 0.5rem;border-radius: 8px;"/></span>
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>
@@ -222,8 +223,8 @@
 							<div
 								class="form-group floating-label-form-group controls mb-0 pb-2">
 								<a class="font_required">* 비밀번호</a>
-								<p class="help-block text-danger">
-								<input class="form-control" id="pw1" name="pw1" type="text" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자" required="required" >
+								<p class="help-block text-danger"><p class="help-block text-danger">
+								&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="pw1" name="pw1" type="text" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자" required="required"  style="display:inline; border-radius: 8px;width:80%;background-color:#efefef ">
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>
@@ -232,7 +233,8 @@
 								class="form-group floating-label-form-group controls mb-0 pb-2">
 								<a class="font_required">* 비밀번호 확인</a>
 								<p class="help-block text-danger"></p>
-								<input class="form-control" id="pw2" name = "pw2" type="text" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자" required="required" onblur="javascript:onblur_event();">
+								<p class="help-block text-danger">
+								&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="pw2" name = "pw2" type="text" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자" required="required"style="display:inline; border-radius: 8px;width:80%;background-color:#efefef " onblur="javascript:onblur_event();">
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>
@@ -240,8 +242,8 @@
 							<div
 								class="form-group floating-label-form-group controls mb-0 pb-2">
 								<a class="font_required">* 이름</a>
-								<p class="help-block text-danger">
-								<input class="form-control" id="name" name="name" type="text" required="required">
+								<p class="help-block text-danger"><p class="help-block text-danger">
+								&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="name" name="name" type="text" required="required"style="display:inline; border-radius: 8px;width:80%;background-color:#efefef ">
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>
@@ -249,23 +251,24 @@
 							<div
 								class="form-group floating-label-form-group controls mb-0 pb-2">
 								<a class="font_required">* 전화번호</a>
-								<p class="help-block text-danger"></p>
-								&nbsp;&nbsp; &nbsp;&nbsp;
-								<input type="tel" id="phone" name="phone" size="20" required="required" placeholder="- 없이 입력하세요"/>
+								<p class="help-block text-danger"></p><p class="help-block text-danger">
+								&nbsp;&nbsp; &nbsp;&nbsp;<input type="tel" id="phone" name="phone" required="required" placeholder="- 없이 입력하세요" style="display:inline; border-radius: 8px;width:80%;background-color:#efefef; padding: 0.5rem;"/>
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>
 						<div class="control-group">
 							<div
 								class="form-group floating-label-form-group controls mb-0 pb-2">
-								<a class="font_required">이메일</a><p class="help-block text-danger"></p>
-								<input class="form-control" id="email" name="email" type="email" data-validation-required-message="Please enter your email address.">
+								<a class="font_required">이메일</a>
+								<p class="help-block text-danger"></p>
+								&nbsp;&nbsp; &nbsp;&nbsp;<input class="form-control" id="email" name="email" type="email" data-validation-required-message="Please enter your email address." style="display:inline; border-radius: 8px;width:80%;background-color:#efefef ">
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>
 						<div class="control-group">
 							<div class="form-group floating-label-form-group controls mb-0 pb-2">
-								<a class="fontsize">* 성별</a><p class="help-block text-danger"></p> &nbsp;&nbsp; &nbsp;&nbsp;
+								<a class="fontsize">* 성별</a>
+								<p class="help-block text-danger"></p> &nbsp;&nbsp; &nbsp;&nbsp;
 								<input class="sex_f" id="sex" type="radio" name="sex"  value="남성" checked="checked" >남성 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<input class="sex_f" type="radio" id="sex" name="sex" value="여성" />여성								
 								<p class="help-block text-danger"></p>
@@ -275,8 +278,10 @@
 						<br>
 						<div id="success"></div>
 						<div class="form-group" style="text-align:right;">
-							<button class="btn btn-primary btn-xl" id="joinInformation">가 입</button>
+							<button class="btn btn-primary btn-xl" onclick="location='/login'">취 소</button>
+							<button class="btn btn-primary btn-xl" id="joinInformation">가 입</button>							
 						</div>
+						
 					</form>
 						
 				</div>

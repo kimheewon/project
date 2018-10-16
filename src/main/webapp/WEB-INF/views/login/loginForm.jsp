@@ -55,9 +55,7 @@
 				<input type="text" name="id" class="form-control" placeholder="Your ID"	required autofocus><BR>
 				<label for="inputPassword" class="sr-only">Password</label>
 				<input type="password" name="pw" class="form-control" placeholder="Password" required><br>
-				<div class="checkbox">
-					<label> <input type="checkbox" value="remember-me">기억하기</label>
-				</div>
+				<br>
 				<button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">로 그 인</button>
 				<button id="btn-Yes" class="btn btn-lg btn-primary btn-block" onclick="location.href='/user/joinForm'">회원가입</button>	
 				<span style="float:right; font-weight:bold"><a href='/login/adminLoginForm'>관리자 모드</a></span>
