@@ -46,5 +46,25 @@ public class AdministratorDAO {
 		return sqlSession.selectOne("administratorSql.selectAdmin", intAdminNo);
 	}
 
+	//권한번호로 맨 상위 권한 항목 가져오기
+	public int selectItemNo(int authNo) {
+		return sqlSession.selectOne("administratorSql.selectItemNo", authNo);
+	}
+
+	//수정할 권한번호로 권한항목 개수 가져오기
+	public int selectItemCount(int authNo) {
+		return sqlSession.selectOne("administratorSql.selectItemCount", authNo);
+	}
+
+	//수정할 관리자의 번호로 권한 번호 찾기
+	public int selectAuthNo(int adminNo) {
+		return sqlSession.selectOne("administratorSql.selectAuthNo", adminNo);
+	}
+
+	//관리자 정보 업데이트
+	public void updateAdmin(AdministratorInfo admin) {
+		sqlSession.update("administratorSql.updateAdmin",admin );
+	}
+
 
 }

@@ -35,7 +35,7 @@ public class AdministratorController {
 	@Autowired
 	private AdministratorService administratorService;
 	
-	//관리자 로그인 확인
+	//관리자 목록페이지로 이동
 	@RequestMapping(value="/AdministratorList")
 	public ModelAndView administratorList (HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
@@ -44,8 +44,9 @@ public class AdministratorController {
 		
 		String grade = null;
 		for(int i=0; i<list.size(); i++) {
+			
 			AdministratorInfo objAdmInfo = list.get(i);
-			grade = administratorService.selectAuth(objAdmInfo.getIntAdminAuth()); 
+			grade = administratorService.selectAuth(objAdmInfo.getIntAdminAuth()); 			
 			objAdmInfo.setStrAdminGrade(grade);
 			list.set(i, objAdmInfo);
 		}
@@ -57,12 +58,15 @@ public class AdministratorController {
 	
 	//관리자 등록 페이지로 이동
 	@RequestMapping(value="/AdministratorEnrollForm")
-	public ModelAndView AdminEnrollForm() {
+	public ModelAndView AdminEnrollForm(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		
+		int AuthNo = (int) session.getAttribute("AuthNo");	//세션에서 권한 번호 가져오기
 		List<AuthInfo> auth = administratorService.selectAllAuth();	//권한명 모두 가져오기
+		int itemNo = administratorService.selectItemNo(AuthNo);//매핑테이블에서 권한명에 따른 권한 항목 젤 처음꺼 가져오기 
 		
 		mav.addObject("authList", auth);
+		mav.addObject("itemNo", itemNo);
 		mav.setViewName("/admin/administrator/AdminEnroll");
 		return mav;
 	}
@@ -102,35 +106,113 @@ public class AdministratorController {
 		
 		administratorService.insertAdmin(admin);	//관리자 등록
 		
-		List<AdministratorInfo> listA = administratorService.selectAdminList();
+		List<AdministratorInfo> listA = administratorService.selectAdminList();	//모든 권한 항목들 가져오기(TAuthItem)
 		
 		
-		for(int i=0; i<listA.size(); i++) {
+		for(int i=0; i<listA.size(); i++) {		//리스트에 뿌려줄 관리자들의 정보에서 권한번호를 통해 권한명 찾아 객체에 권한명 저장
 			AdministratorInfo objAdmInfo = listA.get(i);
-			grade = administratorService.selectAuth(objAdmInfo.getIntAdminAuth()); 
+			grade = administratorService.selectAuth(objAdmInfo.getIntAdminAuth()); //권한명 가져오기
 			objAdmInfo.setStrAdminGrade(grade);
 			listA.set(i, objAdmInfo);
 		}
 		
 		mav.addObject("adminList", listA);
-		mav.setViewName("/admin/administrator/AdminManagement");	//오른쪽 위 관리자 클릭시 안됨
+		mav.setViewName("/admin/administrator/AdminManagement");	
 		return mav;
 	}
 	
+	//수정할 권한이 있는지 확인
+	@RequestMapping(value="checkItemCount", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public int checkItemCount(String no, HttpServletRequest request, HttpServletResponse response,HttpSession session) throws Exception{
+		
+		int check=0;//수정할 권한 없음
+		
+		int adminNo = Integer.parseInt(no);	//수정할 관리자의 번호
+		int authNo = administratorService.selectAuthNo(adminNo);//수정할 관리자의 번호로 권한 번호 찾기
+		int adminAuthNo = (int) session.getAttribute("AuthNo");	//세션에서 권한 번호 가져오기
+		
+		int itemCount =3;//모든 권한 항목들의 개수 가져오기
+		int count = administratorService.selectItemCount(authNo);	//수정할 관리자의 권한 항목의 총 개수
+		int count2 = administratorService.selectItemCount(adminAuthNo); //로그인한 관리자의 권한 항목의 총 개수
+		
+		if(count == itemCount) {		//수정할 관리자의 권한 항목의 총 개수 == 총 권한 항목의 개수(T: 선택인은 마스터)
+			if(count2 == itemCount) {	//로그인한 관리자의 권한 항목의 총 개수 == 총 권한 항목의 개수(T: 로그인 관리자는 마스터) 
+				check=1;//수정가능
+			}
+			else {
+				check=0; //수정 불가		//F: 로그인 관리자는 마스터아님 
+			}
+		}
+		else {
+			check=1;	//그 이외는 수정 가능
+		}
+		
+		return check;
+	}
 	
-	//관리자 수정
-	@RequestMapping(value="/UpdateFrom", method=RequestMethod.POST)
+	
+	
+	//관리자 수정페이지로 이동
+	@RequestMapping(value="/UpdateFrom")
 	public ModelAndView AdminUpdateForm(HttpServletRequest request, HttpServletResponse response,HttpSession session, int intAdminNo) {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		
-		AdministratorInfo admin = administratorService.selectAdmin(intAdminNo);//관리자번호로 관리자 데이터 찾기
+		//현재 로그인한 사람의 권한 확인해서 관리자 수정할수있는 사람인지 확인
+		//만약 수정할 권한 없으면 목록페이지로 이동하도록 수정
 		
-		mav.addObject("adminInfo", admin);
-		//더 작성하기
+		int AuthNo = (int) session.getAttribute("AuthNo");	//세션에서 권한 번호 가져오기
+		List<AuthInfo> auth = administratorService.selectAllAuth();	//권한명 모두 가져오기
+		int itemNo = administratorService.selectItemNo(AuthNo);//매핑테이블에서 권한명에 따른 권한 항목 젤 처음꺼 가져오기
 		
-		mav.setViewName("/admin/administrator/AdminEnroll");
+		AdministratorInfo admin = administratorService.selectAdmin(intAdminNo);//관리자 번호로 관리자 데이터 찾기
+		mav.addObject("adminInfo", admin);	//변경할 관리자 정보들
 		
-		return mav;
+		mav.addObject("authList", auth);
+		mav.addObject("itemNo", itemNo);
+			
+		mav.setViewName("/admin/administrator/AdminUpdateForm");
 		
+		return mav;		
 	}
+	
+	//수정된 관리자 정보 업데이트
+	@RequestMapping(value="/Update", method=RequestMethod.POST)
+	public ModelAndView AdminUpdate(HttpServletRequest request, HttpServletResponse response,HttpSession session){
+		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
+		
+		String id = request.getParameter("admin_Id");
+		String password = request.getParameter("admin_Pw");
+		String name = request.getParameter("admin_Name");
+		String auth_s = request.getParameter("admin_Auth");
+		int auth =  Integer.parseInt(auth_s);		
+		String grade = administratorService.selectAuth(auth); //권한명
+		
+		AdministratorInfo admin = new AdministratorInfo();
+		admin.setStrAdminId(id);
+		admin.setStrAdminPw(password);
+		admin.setStrAdminName(name);	
+		admin.setIntAdminAuth(auth);	//권한 번호
+		
+		administratorService.updateAdmin(admin);	//관리자 정보 업데이트
+		
+		List<AdministratorInfo> listA = administratorService.selectAdminList();	//모든 권한 항목들 가져오기(TAuthItem)
+		
+		
+		for(int i=0; i<listA.size(); i++) {	
+			AdministratorInfo objAdmInfo = listA.get(i);
+			grade = administratorService.selectAuth(objAdmInfo.getIntAdminAuth()); //권한명 가져오기
+			objAdmInfo.setStrAdminGrade(grade);
+			listA.set(i, objAdmInfo);
+		}
+		
+		mv.addObject("adminList", listA);
+		mv.setViewName("/admin/administrator/AdminManagement");	
+		
+		
+		
+		return mv;
+	}
+	
+	
 }

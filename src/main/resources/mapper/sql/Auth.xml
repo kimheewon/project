@@ -78,4 +78,23 @@
 	</select>
 	
 	
+	<!--수정시 권한명 중복체크 -->
+	<select id="selectUpdateAuthName"  resultType="AuthInfo">
+		select  a.AuthName 	AS 	strAuthNameUpdate
+		from	(select AuthName From TAuth where AuthName NOT IN(#{strAuthName})) a
+		where	a.AuthName = #{strAuthNameUpdate} 
+	</select>
+	
+	<!-- 권한명 변경 -->
+	<update id="updateAuthName">
+		update	TAuth
+		set		AuthName = #{strAuthNameUpdate}
+		where	AuthNo = #{intAuthNo}
+	</update>
+	
+	<!--  매핑테이블에서 삭제 -->
+	<delete id="deleteItems">
+		delete from TAuthMapp where AuthNo = #{authNo}	
+	</delete>
+	
 </mapper>

@@ -41,6 +41,39 @@
 		FROM 	TAdmin
 		where AdminNo	=	#{intAdminNo}
 	</select>	
+	
+	
+	<!-- 권한번호로 맨 상위 권한 항목 가져오기 -->	
+	<select id="selectItemNo" resultType="int">
+		select top 1 AuthItemNo
+		from TAuthMapp
+		where AuthNo = #{authNo}	
+	</select>
+	
+	<!-- 수정할 관리자의 번호로 권한 번호 찾기 -->
+	<select id="selectAuthNo" resultType="int">
+		SELECT   AuthNo		AS intAdminAuth
+		FROM 	TAdmin
+		where AdminNo	=	#{adminNo}
+	
+	</select>
+	
+	<!-- 수정할 권한번호로 권한항목 개수 가져오기 -->	
+	<select id="selectItemCount" resultType="int">
+		select  count(AuthItemNo)
+		from	TAuthMapp
+		where AuthNo = #{authNo}
+	</select>
+	
+	<!-- 관리자 정보 업데이트 -->
+	<update id="updateAdmin">
+		update	TAdmin
+		set		AdminPw		= #{StrAdminPw}
+				,AdminName	= #{StrAdminName}
+				,AuthNo		= #{intAdminAuth}
+		where	AdminId = #{StrAdminId}
+	
+	</update>
 
 </mapper>
 

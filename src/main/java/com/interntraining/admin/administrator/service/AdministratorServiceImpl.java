@@ -60,4 +60,28 @@ public class AdministratorServiceImpl implements AdministratorService{
 		return administratorDAO.selectAdmin(intAdminNo);
 	}
 
+	//권한번호로 맨 상위 권한 항목 가져오기
+	@Override
+	public int selectItemNo(int authNo) {
+		return administratorDAO.selectItemNo(authNo);
+	}
+
+	//수정할 권한번호로 권한항목 개수 가져오기
+	@Override
+	public int selectItemCount(int authNo) {
+		return administratorDAO.selectItemCount(authNo);
+	}
+
+	//수정할 관리자의 번호로 권한 번호 찾기
+	@Override
+	public int selectAuthNo(int adminNo) {
+		return administratorDAO.selectAuthNo(adminNo);
+	}
+
+	//관리자 정보 업데이트
+	@Override
+	public void updateAdmin(AdministratorInfo admin) {
+		administratorDAO.updateAdmin(admin);
+	}
+
 }

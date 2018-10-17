@@ -117,6 +117,8 @@
 		//빈값 확인
 		$("#joinInformation").on("click",function(){
 			var str = document.joinInfo;
+			var pw1 = document.joinInfo.pw1.value;
+			var pw2 = document.joinInfo.pw2.value;
 			
 			if(str.userId.value == ""){
 		 		alert("아이디를 입력하지 않았습니다. 입력해주세요");
@@ -148,7 +150,10 @@
 	           	str.pw2.focus();
 	           	return false;
 	       	}
-	       	
+	       	if(pw1 != pw2){
+	       		alert("비밀번호가 일치하지 않습니다");
+				document.joinInfo.pw2.value="";		
+	       	}
 	       	if(str.name.value == ""){
 				alert("이름을 입력하지 않았습니다. 입력해주세요");
 				str.name.focus();
@@ -172,18 +177,24 @@
 		});		
 	});
 	
-	
-	
 	//비밀번호 확인
-	function onblur_event(){
+	function go(val){
 		var pw1 = document.joinInfo.pw1.value;
 		var pw2 = document.joinInfo.pw2.value;
 		
 		if(pw1 != pw2){			
-			alert("비밀번호가 일치하지 않습니다");
-			document.joinInfo.pw2.value="";		
-		}	
-	 }
+			document.getElementById("welcome").value = '비밀번호가 일치하지않습니다.';
+		}
+		else{
+			document.getElementById("welcome").value = '비밀번호가 일치합니다.';
+		}
+		
+	   
+	 
+	}
+	
+	
+	
 	
 </script>
 </head>
@@ -224,17 +235,18 @@
 								class="form-group floating-label-form-group controls mb-0 pb-2">
 								<a class="font_required">* 비밀번호</a>
 								<p class="help-block text-danger"><p class="help-block text-danger">
-								&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="pw1" name="pw1" type="text" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자" required="required"  style="display:inline; border-radius: 8px;width:80%;background-color:#efefef ">
+								&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="pw1" name="pw1" type="password" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자" required="required"  style="display:inline; border-radius: 8px;width:80%;background-color:#efefef ">
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>
 						<div class="control-group">
-							<div
-								class="form-group floating-label-form-group controls mb-0 pb-2">
+							<div class="form-group floating-label-form-group controls mb-0 pb-2">
 								<a class="font_required">* 비밀번호 확인</a>
 								<p class="help-block text-danger"></p>
 								<p class="help-block text-danger">
-								&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="pw2" name = "pw2" type="text" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자" required="required"style="display:inline; border-radius: 8px;width:80%;background-color:#efefef " onblur="javascript:onblur_event();">
+								&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="pw2" name = "pw2" type="password" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자" required="required"
+								style="display:inline; border-radius: 8px;width:80%;background-color:#efefef " onkeyup="go(this.value)">
+								<br><span>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="welcome" style="color:#cc0000;font-size:10pt;width:50%" disabled></span>
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>
@@ -243,7 +255,7 @@
 								class="form-group floating-label-form-group controls mb-0 pb-2">
 								<a class="font_required">* 이름</a>
 								<p class="help-block text-danger"><p class="help-block text-danger">
-								&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="name" name="name" type="text" required="required"style="display:inline; border-radius: 8px;width:80%;background-color:#efefef ">
+								&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="name" name="name" type="text" style="display:inline; border-radius: 8px;width:80%;background-color:#efefef ">
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>

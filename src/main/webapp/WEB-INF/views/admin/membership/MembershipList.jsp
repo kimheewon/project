@@ -15,7 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>관리자 목록 리스트</title>
+    <title>회원 목록 리스트</title>
 
      <!-- Bootstrap -->
     <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -48,7 +48,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>관리자 관리</h3>
+                <h3>회원 관리</h3>
               </div>
 
               <div class="title_right">
@@ -79,16 +79,16 @@
                           <th>아이디</th>
                           <th>권한 유형</th>
                           <th>이름</th>
-                          <th>가입일시</th>
+                          <th>가입일</th>
                           <th>작업</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <c:forEach var="list" items="${adminList}" varStatus="status">
+                        <c:forEach var="list" items="${adminList}">
 
 							<tr>
-								<td>${status.count}</td>
-								<td>${list.strAdminId}</td>
+								<td>${list.intAdminNo}</td>
+								<td><a href="/board/boardread?intBoardNo=${list.intAdminNo}">${list.strAdminId}</a></td>
 								<td>${list.strAdminGrade}</td>
 								<td>${list.strAdminName}</td>
 								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.dateAdminDate}"/></td>

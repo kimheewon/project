@@ -67,9 +67,9 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <c:forEach var="authList" items="${authList}">
+                        <c:forEach var="authList" items="${authList}" varStatus="status">
 							<tr>
-								<td>${authList.intAuthNo}</td>							
+								<td>${status.count}</td>							
 								<td>${authList.strAuthName}</td>
 								<td><a href="/Auth/AuthUpdateForm?authNo=${authList.intAuthNo}">수정하기</a></td>
 							</tr>	

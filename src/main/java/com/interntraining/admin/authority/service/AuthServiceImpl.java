@@ -75,4 +75,24 @@ public class AuthServiceImpl implements AuthService{
 		return authDAO.selectAuthItem(authNo);
 	}
 
+	//수정에서 권한명 중복체크
+	@Override
+	public AuthInfo selectUpdateAuthName(AuthInfo auth) {
+		return authDAO.selectUpdateAuthName(auth);
+	}
+
+	//권한명 업데이트
+	@Override
+	public void updateAuthName(AuthInfo auth) {
+		authDAO.updateAuthName(auth);
+		
+	}
+
+	//권한 번호로 Mapp 테이블에 있는 데이터 삭제
+	@Override
+	public void deleteItems(int authNo) {
+		authDAO.deleteItems(authNo);
+		
+	}
+
 }

@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class AdministratorInfo {
 
+
 	private int intAdminNo;
 	private String StrAdminId;
 	private String StrAdminPw;
@@ -11,6 +12,8 @@ public class AdministratorInfo {
 	private int intAdminAuth;
 	private String StrAdminGrade;
 	private Date DateAdminDate;
+	
+	
 	
 	public int getIntAdminNo() {
 		return intAdminNo;

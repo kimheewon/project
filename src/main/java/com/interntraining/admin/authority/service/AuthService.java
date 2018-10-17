@@ -31,7 +31,16 @@ public interface AuthService {
 
 	//권한번호로 권한항목 찾기(AuthMapp 테이블에서)
 	public List<AuthMapp> selectAuthItem(int authNo);
-	
+
+	//수정에서 권한명 중복체크
+	public AuthInfo selectUpdateAuthName(AuthInfo auth);
+
+	//권한명 업데이트
+	public void updateAuthName(AuthInfo auth);
+
+	//권한 번호로 Mapp 테이블에 있는 데이터 삭제
+	public void deleteItems(int authNo);
+
 	
 
 }

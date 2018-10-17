@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%  // 인증된 세션이 없는경우, 해당페이지를 볼 수 없게 함.
     if (session.getAttribute("AdminId")  == null) {
         response.sendRedirect("/loginAdmin/logout");
@@ -8,183 +9,177 @@
 %>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <title>권한 수정 </title>
+<title>권한 수정</title>
 
- <!-- Bootstrap -->
-    <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="/vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-    <!-- Datatables -->
-    <link href="/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link href="/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-    <link href="/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-    <link href="/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-    <link href="/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap -->
+<link href="/vendors/bootstrap/dist/css/bootstrap.min.css"	rel="stylesheet">
+<!-- Font Awesome -->
+<link href="/vendors/font-awesome/css/font-awesome.min.css"	rel="stylesheet">
+<!-- NProgress -->
+<link href="/vendors/nprogress/nprogress.css" rel="stylesheet">
+<!-- iCheck -->
+<link href="/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+<!-- Datatables -->
+<link href="/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css"	rel="stylesheet">
+<link
+	href="/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css"	rel="stylesheet">
+<link
+	href="/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css"	rel="stylesheet">
+<link
+	href="/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css"	rel="stylesheet">
+<link
+	href="/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css"	rel="stylesheet">
 
-    <!-- Custom Theme Style -->
-    <link href="/build/css/custom.min.css" rel="stylesheet">
+<!-- Custom Theme Style -->
+<link href="/build/css/custom.min.css" rel="stylesheet">
 <script src="/js/jquery-1.12.3.min.js"></script>
 <script src="/js/jquery-ui.min.js"></script>
-	
-  </head>
 
-  <body class="nav-md">
-    <div class="container body">
-      <div class="main_container">
-		<jsp:include page="../navigationAdmin.jsp" flush="true"/>
+</head>
 
-        <!-- page content -->
-        <div class="right_col" role="main">
-          <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>권한 수정</h3>
-              </div>
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+			<jsp:include page="../navigationAdmin.jsp" flush="true" />
 
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-          
-            <div class="row">              
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                   <div class="x_content">
-                    <br />
-                    <form id="AuthEnrollInfo" name="AuthEnrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Auth/AuthEnroll" method="POST">
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div class="">
+					<div class="page-title">
+						<div class="title_left">
+							<h3>권한 수정</h3>
+						</div>
 
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="authName">권한명 <span class="required">*</span>
-                        </label>                       
-                        <div class="input-group" style="width:50%">
-                            <input type="text" class="form-control" id="authName" name="authName" value="${authName}">
-                            <span class="input-group-btn">&nbsp;&nbsp;&nbsp;<button type="button"  class="btn btn-primary"  id="authNameCheck">중복확인</button></span>
-                       </div>                      
-                      </div>
-                      <div class="form-group">
-                        <label class="col-md-3 col-sm-3 col-xs-12 control-label">권한 항목 <span class="required">*</span>
-                          <br>
-                          <small class="text-navy">권한 항목 중복 체크 가능</small>
-                        </label>
+						<div class="title_right">
+							<div
+								class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+								<div class="input-group"></div>
+							</div>
+						</div>
+					</div>
 
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <div class="checkbox">
-                          	
-                         	 <c:set var="test123" value="f"/>    
-                         	 <c:forEach var="AuthItem" items="${AuthItem}">
-                         	 		          
-                         	 	<c:set var="test123" value="f"/>    
-                          		<c:forEach var="selectedItems" items="${selectedItems}">            
-	                          		<c:choose>
-			                            <c:when test="${AuthItem.intAuthItemNo eq selectedItems.intAuthItemNo}">      
-				                            <label>                            	
-				                              <input type="checkbox" name="items" id="check" class="flat" checked="checked" value="${AuthItem.intAuthItemNo}"> ${AuthItem.strAuthItemName}
-				                            </label>
-				                            <c:set var="test123" value="t"/>   
-				                            
-				                         </c:when>
-				                         
-	                            	</c:choose>
-	                            </c:forEach>
-	                            <c:choose>
-	                             <c:when test="${test123 eq 'f'}">
-	                            	<label>                            	
-		                              <input type="checkbox" name="items" id="check" class="flat" value="${AuthItem.intAuthItemNo}"> ${AuthItem.strAuthItemName}
-		                            </label>
-		                            </c:when>
-	                            </c:choose>
-	                            
-	                            
-	                       </c:forEach>
-                          </div>
-                          
-                        </div>
-                      </div>
-                      
-                      <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button class="btn btn-primary" type="button">Cancel</button>
-						  <button class="btn btn-primary" type="reset">Reset</button>
-                          <button type="submit" class="btn btn-success" id="authEnroll">등록</button>
-                        </div>
-                      </div>
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="x_panel">
+								<div class="x_title">
 
-                    </form>
-                  </div>
-                </div>
-              </div>
+									
+									<div class="clearfix"></div>
+								</div>
+								<div class="x_content">
+									<br />
+									<form id="AuthEnrollInfo" name="AuthEnrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Auth/AuthUpdate" method="POST">
+										<input type="hidden" name="no" id="no" value="${authNo}">	
+										<div class="form-group">
+											<label class="control-label col-md-3 col-sm-3 col-xs-12"
+												for="authName">권한명 <span class="required">*</span>
+											</label>
+											<div class="input-group" style="width: 50%">
+												<input type="text" class="form-control" id="authName"
+													name="authName" value="${authName}"> <span
+													class="input-group-btn">&nbsp;&nbsp;&nbsp;
+													<button type="button" class="btn btn-primary"
+														id="authNameCheck">중복확인</button>
+												</span>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-md-3 col-sm-3 col-xs-12 control-label">권한
+												항목 <span class="required">*</span> <br> <small
+												class="text-navy">권한 항목 중복 체크 가능</small>
+											</label>
 
+											<div class="col-md-6 col-sm-6 col-xs-12">
+												<div class="checkbox">
+													<c:set var="test123" value="f" />
+													<c:forEach var="AuthItem" items="${AuthItem}">
+														<c:set var="test123" value="f" />
+														<c:forEach var="selectedItems" items="${selectedItems}">
+															<c:choose>
+																<c:when
+																	test="${AuthItem.intAuthItemNo eq selectedItems.intAuthItemNo}">
+																	<label> <input type="checkbox" name="items"
+																		id="check" class="flat" checked="checked"
+																		value="${AuthItem.intAuthItemNo}">
+																		${AuthItem.strAuthItemName}
+																	</label>
+																	<c:set var="test123" value="t" />
+																</c:when>
+															</c:choose>
+														</c:forEach>
+														<c:choose>
+															<c:when test="${test123 eq 'f'}">
+																<label> <input type="checkbox" name="items"
+																	id="check" class="flat"
+																	value="${AuthItem.intAuthItemNo}">
+																	${AuthItem.strAuthItemName}
+																</label>
+															</c:when>
+														</c:choose>
+													</c:forEach>
+												</div>
 
-            </div>
-          </div>
-        </div>
-        <!-- /page content -->
+											</div>
+										</div>
 
-      
-      </div>
-    </div>
-<jsp:include page="../bottomAdmin.jsp" flush="true"/>
-    
-    <!-- bootstrap-progressbar -->
-    <script src="/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-    <!-- iCheck -->
-    <script src="/vendors/iCheck/icheck.min.js"></script>
-    <!-- bootstrap-daterangepicker -->
-    <script src="/vendors/moment/min/moment.min.js"></script>
-    <script src="/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <!-- bootstrap-wysiwyg -->
-    <script src="/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
-    <script src="/vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
-    <script src="/vendors/google-code-prettify/src/prettify.js"></script>
-    <!-- jQuery Tags Input -->
-    <script src="/vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
-    <!-- Switchery -->
-    <script src="/vendors/switchery/dist/switchery.min.js"></script>
-    <!-- Select2 -->
-    <script src="/vendors/select2/dist/js/select2.full.min.js"></script>
-    <!-- Parsley -->
-    <script src="/vendors/parsleyjs/dist/parsley.min.js"></script>
-    <!-- Autosize -->
-    <script src="/vendors/autosize/dist/autosize.min.js"></script>
-    <!-- jQuery autocomplete -->
-    <script src="/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
-    <!-- starrr -->
-    <script src="/vendors/starrr/dist/starrr.js"></script>
-    <!-- Custom Theme Scripts -->
-    <script src="/build/js/custom.min.js"></script>
-<!-- Google Analytics -->
-<script type="text/javascript" >
+										<div class="ln_solid"></div>
+										<div class="form-group">
+											<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+												<button class="btn btn-primary" type="button" onclick="location.href='/Auth/AuthList'">취소</button>
+												<button type="submit" class="btn btn-success" id="authEnroll">수정</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /page content -->
+		</div>
+	</div>
+	<jsp:include page="../bottomAdmin.jsp" flush="true" />
+
+	<!-- bootstrap-progressbar -->
+	<script
+		src="/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+	<!-- iCheck -->
+	<script src="/vendors/iCheck/icheck.min.js"></script>
+	<!-- bootstrap-daterangepicker -->
+	<script src="/vendors/moment/min/moment.min.js"></script>
+	<script src="/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+	<!-- bootstrap-wysiwyg -->
+	<script src="/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
+	<script src="/vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
+	<script src="/vendors/google-code-prettify/src/prettify.js"></script>
+	<!-- jQuery Tags Input -->
+	<script src="/vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
+	<!-- Switchery -->
+	<script src="/vendors/switchery/dist/switchery.min.js"></script>
+	<!-- Select2 -->
+	<script src="/vendors/select2/dist/js/select2.full.min.js"></script>
+	<!-- Parsley -->
+	<script src="/vendors/parsleyjs/dist/parsley.min.js"></script>
+	<!-- Autosize -->
+	<script src="/vendors/autosize/dist/autosize.min.js"></script>
+	<!-- jQuery autocomplete -->
+	<script
+		src="/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+	<!-- starrr -->
+	<script src="/vendors/starrr/dist/starrr.js"></script>
+	<!-- Custom Theme Scripts -->
+	<script src="/build/js/custom.min.js"></script>
+	<!-- Google Analytics -->
+	<script type="text/javascript">
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -200,14 +195,18 @@ ga('send', 'pageview');
 				alert("권한명을 입력하세요.");
 	     		document.getElementById("authName").value="";	
 			}
+			else if(document.getElementById("authName").value==""){
+				
+			}
 			else{
 			 $.ajax({   
 				type:"POST",
-				url:"/Auth/AuthNameCheck",   
+				url:"/Auth/UpdateAuthNameCheck",   
 				dataType:"html",// JSON/html
 				async: false,
 	          	data:{ 
-	                "name": $("#authName").val()
+	                "name": $("#authName").val(),
+	                "no": $("#no").val()
 	            },
 			
 	            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
@@ -217,6 +216,10 @@ ga('send', 'pageview');
 	             		val = 0; //중복체크함
 	             		
 	             	}
+	            	else if(data==2){
+	            		alert("기존 권한명입니다.");
+	            		val=0;
+	            	}
 	             	else{
 	             		alert("중복된 권한명입니다.");
 	             		document.getElementById("authName").value="";	
@@ -264,6 +267,6 @@ ga('send', 'pageview');
 
 
 </script>
-	
-  </body>
+
+</body>
 </html>

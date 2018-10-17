@@ -85,7 +85,7 @@ public class AuthController {
 		}
 		
 		List<AuthInfo> auth = authService.selectAllAuth();	//권한명 모두 가져오기
-				
+		
 		mav.addObject("authList",auth);
 		mav.setViewName("/admin/authority/AuthList");	
 		return mav;
@@ -113,10 +113,75 @@ public class AuthController {
 		List<AuthItemInfo> item = authService.selectAllAuthItem();	//권항 항목 모두 불러오기
 		
 		mav.addObject("AuthItem", item);	//불러온 모든 권한 항목들
+		mav.addObject("authNo", authNo);
 		mav.addObject("authName",authName);	
 		mav.addObject("selectedItems", selectedItems);	//저장된 권한 항목들
 		mav.setViewName("/admin/authority/AuthUpdate");	//수정페이지로 이동
 		return mav;
 	}
 
+	//권한명 이름 중복 체크
+	@RequestMapping(value="/UpdateAuthNameCheck", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public int UpdateAuthNameCheck(String name, String no) throws Exception{
+	
+		int authNo = Integer.parseInt(no); 
+		String authName = authService.selectAuthName(authNo);	//권한번호로 권한명 찾기(Auth 테이블에서)
+		
+		AuthInfo auth = new AuthInfo();
+		auth.setStrAuthName(authName);		//기존 권한명
+		auth.setStrAuthNameUpdate(name); 	//수정한 권한명
+		
+		//DB에서 Id 체크
+		AuthInfo  inputAuthName = authService.selectUpdateAuthName(auth);
+		int check = 0;	//사용해도 되는 id
+		if(inputAuthName != null) {
+			check = 1;	//DB에 있는 Id 있음(사용 불가)
+		}
+		else if(authName.equals(name)) {
+			check =2;	//기존  권한명
+		}
+		return check;	
+	}
+	
+	//권한명 수정
+	@RequestMapping("/AuthUpdate")
+	public ModelAndView AuthUpdate(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
+
+		String no = request.getParameter("no");//권한번호
+		int authNo = Integer.parseInt(no); 
+		
+		String authName = authService.selectAuthName(authNo);	//권한번호로 권한명 찾기(Auth 테이블에서)
+		String inputAuthName = request.getParameter("authName");	//입력한 권한명
+		AuthInfo authN = new AuthInfo();
+		
+		if(!authName.equals(inputAuthName)) {
+			authN.setIntAuthNo(authNo);	//권한번호
+			authN.setStrAuthNameUpdate(inputAuthName);	//권한명
+			authService.updateAuthName(authN);	//다르면 db에 권한명 업데이트			
+		}
+		
+		AuthMapp authMapp = new AuthMapp();		//매핑테이블 객체 생성
+		authMapp.setIntAuthNo(authNo);		//권한 번호
+		authService.deleteItems(authNo);	//권한 번호로 Mapp 테이블에 있는 데이터 삭제
+		
+		String[] authItem = request.getParameterValues("items");		//사용자가 선택한 권한 항목 가져옴
+		//List<AuthMapp> selectedItems = authService.selectAuthItem(authNo);	//권한번호로 권한항목 DB에서 가져욤(AuthMapp 테이블에서)
+		
+		for(int i=0; i<authItem.length; i++) {
+			int authItemNo = Integer.parseInt(authItem[i]);	//선택한 권한 항목번호			
+			authMapp.setIntAuthItemNo(authItemNo);		//권한 항목번호 객체에 담기
+			authService.insertAuthMapp(authMapp);	//매핑테이블에 저장		
+		}
+		
+		List<AuthInfo> auth = authService.selectAllAuth();	//권한명 모두 가져오기
+		
+		mv.addObject("authList",auth);
+		mv.setViewName("/admin/authority/AuthList");	
+	
+		
+		return mv;
+	}
+	
 }

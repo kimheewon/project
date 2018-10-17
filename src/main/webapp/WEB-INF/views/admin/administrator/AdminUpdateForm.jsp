@@ -66,26 +66,19 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Form Basic Elements <small>different form elements</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
+                    <h2>Form Basic Elements <small>different form elements</small></h2>                    
                     <div class="clearfix"></div>
                   </div>
                    <div class="x_content">
                     <br />
-                    <form id="enrollInfo" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Administrator/Enroll" method="POST">
+                    <form id="enrollInfo" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Administrator/Update" method="POST">
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id">아이디 <span class="required">*</span>
                         </label>
-                        <div class="input-group" style="width:44%; padding-left:0.9rem">
-                            <span class="input-group-btn"><input type="text" class="form-control" id="admin_Id" name="admin_Id" required="required">
-                            <button type="button"  class="btn btn-primary"  id="adminIdCheck">중복확인</button></span>
+                        <div class="input-group" style="width:49.4%; padding-left:0.9rem">
+                            <span class="input-group-btn"><input type="text" class="form-control" id="admin_Id" name="admin_Id"  value="${adminInfo.strAdminId}" readonly>
+                           </span>
                        </div>
                       </div>
                       <div class="form-group">
@@ -99,14 +92,18 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password2">비밀번호 확인 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="admin_Pw2" class="form-control col-md-7 col-xs-12" required="required" type="password" name="admin_Pw2" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자">
+                          <input id="admin_Pw2" class="form-control col-md-7 col-xs-12" required="required" type="password" name="admin_Pw2" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자"
+                          onkeyup="go(this.value)" >
+                        </div>
+                         <div>
+                        <span id="welcome" style="color:#cc0000;font-size:10pt;width:50%;line-height: 35px;" ></span>
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">이름 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="admin_Name" class="form-control col-md-7 col-xs-12" type="text" name="admin_Name" required="required">
+                          <input id="admin_Name" class="form-control col-md-7 col-xs-12" type="text" name="admin_Name" required="required" value="${adminInfo.strAdminName}">
                         </div>
                       </div>
                       
@@ -114,9 +111,9 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">관리자 권한 유형 <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select  id="admin_Auth" name="admin_Auth" class="form-control">                        
-                          <option value="0" selected>=============== Select ===============</option>
+                          <option value="0" selected>=======================================&nbsp;&nbsp;&nbsp;Select&nbsp;&nbsp;&nbsp;=======================================</option>
                           <c:forEach var="authList" items="${authList}">                           
-                            <c:if test="${authList.intAuthNo ge AuthNo}">                                    
+                            <c:if test="${authList.intAuthNo ge itemNo}">                                    
 	                            <option value="${authList.intAuthNo}" id="auth" >${authList.strAuthName}</option>
 	                          </c:if>                           
                             </c:forEach>
@@ -127,9 +124,8 @@
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button class="btn btn-primary" type="button">Cancel</button>
-						  <button class="btn btn-primary" type="reset">Reset</button>
-                          <button type="submit" class="btn btn-success" id="adminEnroll">등록</button>
+                          <button class="btn btn-primary" type="button" onclick="location.href='/Administrator/AdministratorList'">취소</button>
+                          <button type="submit" class="btn btn-success" id="adminEnroll">수정</button>
                         </div>
                       </div>
 
@@ -187,58 +183,17 @@ ga('create', 'UA-23581568-13', 'auto');
 ga('send', 'pageview');
 
 	$(document).ready(function () {
-		var val = 1;
-		$("#adminIdCheck").on("click",function(){
-			
-			if(document.getElementById("admin_Id").value==""){
-				alert("아이디를 입력하세요.");
-	     		document.getElementById("admin_Id").value="";	
-			}
-			else{
-			 $.ajax({   
-				type:"POST",
-				url:"/Administrator/AdministratorIdCheck",   
-				dataType:"html",// JSON/html
-				async: false,
-	          	data:{ 
-	                "id": $("#admin_Id").val()
-	            },
-			
-	            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-	            	
-	            	if(data==0){					
-	             		alert("사용해도 되는 아이디입니다.");
-	             		val = 0; //중복체크함
-	             		
-	             	}
-	             	else{
-	             		alert("중복된 아이디입니다.");
-	             		document.getElementById("admin_Id").value="";	
-	             	}
-	            }
-			}); //--ajax
-			}
-			
-		});
+		
 		
 		
 		//빈값 확인
 		$("#adminEnroll").on("click",function(){
 			var str = document.enrollInfo;
-			var pw1 = document.getElementById("admin_Pw");
-			var pw2 = document.getElementById("admin_Pw2");
+			var pw1 = str.admin_Pw.value;
+			var pw2 = str.admin_Pw2.value;
 			var count=$("#admin_Auth").val(); //<-- option값
 		     
      		
-			if(str.admin_Id.value == ""){
-		 		alert("아이디를 입력하지 않았습니다. 입력해주세요");
-		     	str.adminEnroll.focus();
-		   		return false;
-		       }
-			if(val == 1){
-				alert("중복체크를 해주세요");
-				return false;
-			}
 	      	if(str.admin_Pw.value == ""){
 	           	alert("비밀번호를 입력하지 않았습니다. 입력해주세요");
 	           	str.admin_Pw.focus();
@@ -260,7 +215,7 @@ ga('send', 'pageview');
 	           	str.admin_Pw2.focus();
 	           	return false;
 	       	}
-	       	if(pw1.equals(pw2)){			
+	       	if(pw1 != pw2){			
 				alert("비밀번호가 일치하지 않습니다");
 				document.getElementById("admin_Pw2").value="";
 				return false;
@@ -278,6 +233,21 @@ ga('send', 'pageview');
 		});		
 	});
 
+	//비밀번호 확인
+	function go(val){
+		var pw1 = document.enrollInfo.admin_Pw.value;
+		var pw2 = document.enrollInfo.admin_Pw2.value;
+		
+		if(pw1 != pw2){			
+			document.getElementById("welcome").textContent = '비밀번호가 일치하지않습니다.';
+		}
+		else{
+			document.getElementById("welcome").textContent= '비밀번호가 일치합니다.';
+		}
+		
+	   
+	 
+	}
 	
 
 

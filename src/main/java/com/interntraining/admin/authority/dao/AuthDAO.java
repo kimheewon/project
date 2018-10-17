@@ -60,6 +60,21 @@ public class AuthDAO {
 	public List<AuthMapp> selectAuthItem(int authNo) {
 		return sqlSession.selectList("authSql.selectAuthItem", authNo);
 	}
+
+	//수정에서 권한명 중복체크
+	public AuthInfo selectUpdateAuthName(AuthInfo auth) {
+		return sqlSession.selectOne("authSql.selectUpdateAuthName", auth);
+	}
+
+	//권한명 업데이트
+	public void updateAuthName(AuthInfo auth) {
+		sqlSession.update("authSql.updateAuthName",auth);
+	}
+
+	//권한 번호로 Mapp 테이블에 있는 데이터 삭제
+	public void deleteItems(int authNo) {
+		sqlSession.delete("authSql.deleteItems", authNo);
+	}
 	
 
 

@@ -67,21 +67,7 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Form Basic Elements <small>different form elements</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
+                   
                     <div class="clearfix"></div>
                   </div>
                    <div class="x_content">
@@ -107,7 +93,11 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password2">비밀번호 확인 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="admin_Pw2" class="form-control col-md-7 col-xs-12" required="required" type="password" name="admin_Pw2" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자">
+                          <input id="admin_Pw2" class="form-control col-md-7 col-xs-12" required="required" type="password" name="admin_Pw2" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자" 
+                          onkeyup="go(this.value)" >
+                        </div>
+                        <div>
+                        <span id="welcome" style="color:#cc0000;font-size:10pt;width:50%;line-height: 35px;" ></span>
                         </div>
                       </div>
                       <div class="form-group">
@@ -122,9 +112,9 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">관리자 권한 유형 <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select  id="admin_Auth" name="admin_Auth" class="form-control">                        
-                          <option value="0" selected>=============== Select ===============</option>
+                          <option value="0" selected>=======================================&nbsp;&nbsp;&nbsp;Select&nbsp;&nbsp;&nbsp;=======================================</option>
                           <c:forEach var="authList" items="${authList}">                           
-                            <c:if test="${authList.intAuthNo ge AuthNo}">                                    
+                            <c:if test="${authList.intAuthNo ge itemNo}">                                    
 	                            <option value="${authList.intAuthNo}" id="auth" >${authList.strAuthName}</option>
 	                          </c:if>                           
                             </c:forEach>
@@ -135,8 +125,7 @@
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button class="btn btn-primary" type="button">Cancel</button>
-						  <button class="btn btn-primary" type="reset">Reset</button>
+                          <button class="btn btn-primary" type="button" onclick="location.href='/Administrator/AdministratorList'">취소</button>
                           <button type="submit" class="btn btn-success" id="adminEnroll">등록</button>
                         </div>
                       </div>
@@ -233,14 +222,14 @@ ga('send', 'pageview');
 		//빈값 확인
 		$("#adminEnroll").on("click",function(){
 			var str = document.enrollInfo;
-			var pw1 = document.getElementById("admin_Pw");
-			var pw2 = document.getElementById("admin_Pw2");
+			var pw1 = str.admin_Pw.value;
+			var pw2 = str.admin_Pw2.value;
 			var count=$("#admin_Auth").val(); //<-- option값
 		     
      		
 			if(str.admin_Id.value == ""){
 		 		alert("아이디를 입력하지 않았습니다. 입력해주세요");
-		     	str.adminEnroll.focus();
+		     	str.admin_Id.focus();
 		   		return false;
 		       }
 			if(val == 1){
@@ -268,7 +257,7 @@ ga('send', 'pageview');
 	           	str.admin_Pw2.focus();
 	           	return false;
 	       	}
-	       	if(pw1.equals(pw2)){			
+	       	if(pw1 != pw2){			
 				alert("비밀번호가 일치하지 않습니다");
 				document.getElementById("admin_Pw2").value="";
 				return false;
@@ -287,7 +276,22 @@ ga('send', 'pageview');
 	});
 
 	
-
+	//비밀번호 확인
+	function go(val){
+		var pw1 = document.enrollInfo.admin_Pw.value;
+		var pw2 = document.enrollInfo.admin_Pw2.value;
+		
+		if(pw1 != pw2){			
+			document.getElementById("welcome").textContent = '비밀번호가 일치하지않습니다.';
+		}
+		else{
+			document.getElementById("welcome").textContent= '비밀번호가 일치합니다.';
+		}
+		
+	   
+	 
+	}
+	
 
 </script>
 	
