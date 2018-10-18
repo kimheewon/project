@@ -13,6 +13,7 @@ import com.interntraining.admin.authority.domain.AuthItemInfo;
 import com.interntraining.admin.authority.domain.AuthMapp;
 import com.interntraining.admin.loginAdmin.dao.LoginAdminDAO;
 import com.interntraining.admin.loginAdmin.domain.LoginAdminInfo;
+import com.interntraining.member.board.domain.Board;
 
 
 
@@ -59,5 +60,18 @@ public class LoginAdminServiceImpl implements LoginAdminService{
 	public List<AuthMapp> selectItemList(int authno) {
 		return loginAdminDAO.selectItemList(authno);
 	}
+
+	//가입자수
+	@Override
+	public int count(String word) {
+		return loginAdminDAO.count(word);
+	}
+
+	//게시글 Top 10
+	@Override
+	public List<Board> getBoadList() {
+		return loginAdminDAO.getBoardList();
+	}
+	
 
 }

@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <title>권한 등록 </title>
+    <title>회원정보 상세보기 </title>
 
  <!-- Bootstrap -->
     <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -50,7 +50,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>권한 등록</h3>
+                <h3>회원정보 상세보기</h3>
               </div>
 
               <div class="title_right">
@@ -66,45 +66,76 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Form Basic Elements <small>different form elements</small></h2>
-                    
+                    <h2>Form Basic Elements <small>different form elements</small></h2>                    
                     <div class="clearfix"></div>
                   </div>
                    <div class="x_content">
                     <br />
-                    <form id="AuthEnrollInfo" name="AuthEnrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Auth/AuthEnroll" method="POST">
+                    <form id="enrollInfo" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Membership/MembershipUpdateForm?intUserNo=${intUserNo}" method="POST">
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="authName" style="font-size: 15px; color: #00003f;">권한명 <span class="required">*</span>
-                        </label>                       
-                        <div class="input-group" style="width:50%">
-                            <input type="text" class="form-control" id="authName" name="authName">
-                            <span class="input-group-btn">&nbsp;&nbsp;&nbsp;<button type="button"  class="btn btn-primary"  id="authNameCheck">중복확인</button></span>
-                       </div>                      
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id" style="font-size: 13px; color: #00003f;">아이디
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12" >
+                            <span class="input-group-btn"><input type="text" class="form-control" id="id" name="id" style="background-color: white;" value="${member.strUserId}" readonly>
+                           </span>
+                       </div>
                       </div>
                       <div class="form-group">
-                        <label class="col-md-3 col-sm-3 col-xs-12 control-label" style="font-size: 15px; color: #00003f;">권한 항목 <span class="required">*</span>
-                          <br>
-                          <small class="text-navy" style="color:#00003f">(권한 항목 중복 체크 가능)</small>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password" style="font-size: 13px; color: #00003f;">비밀번호
                         </label>
-
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <div class="checkbox">
-                          <c:forEach var="AuthItem" items="${AuthItem}">
-                            <label style="font-size: 14px; color: #192632;">
-                              <input type="checkbox" name="items" id="check" class="flat" value="${AuthItem.intAuthItemNo}" > ${AuthItem.strAuthItemName}
-                            </label>
-                            </c:forEach>
-                          </div>
-                          
+                         <input type="text" class="form-control" style="background-color: white;" readonly>
+                        </div>
+                      </div>                      
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name" style="font-size: 13px; color: #00003f;">이름 
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="name" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;" type="text" name="name"value="${member.strUserName}">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phone" style="font-size: 13px; color: #00003f;">전화번호 
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="phone" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;" type="tel" name="phone"value="${member.strUserPhone}">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email" style="font-size: 13px; color: #00003f;">이메일 
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="email" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;" type="email" name="email"value="${member.strUserEmail}">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sex" style="font-size: 13px; color: #00003f;">성별
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="sex" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;" type="text" name="sex" value="${member.strUserSex}">
+                        </div>
+                      </div>                     
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="date" style="font-size: 13px; color: #00003f;">가입일시
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <a class="form-control col-md-7 col-xs-12" style="background-color: white;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${member.dateUserDate}"/></a>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 13px; color: #00003f;">등급 </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                               
+                        <input id="grade" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;" type="text" name="grade" value="${member.strUserGrade} 회원">
                         </div>
                       </div>
                       
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3" style="margin-left: 43%;">
-                          <button class="btn btn-primary" type="button" onclick="location.href='/Auth/AuthList'">취소</button>
-                          <button type="submit" class="btn btn-success" id="authEnroll">등록</button>
+                          <button class="btn btn-primary" type="button" onclick="location.href='/Membership/MembershipList'">취소</button>
+                          <button type="submit" class="btn btn-success" id="adminEnroll">수정</button>
                         </div>
                       </div>
 
@@ -160,73 +191,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
 ga('create', 'UA-23581568-13', 'auto');
 ga('send', 'pageview');
-
-	$(document).ready(function () {
-		var val = 1;
-		$("#authNameCheck").on("click",function(){
-			if(document.getElementById("authName").value==""){
-				alert("권한명을 입력하세요.");
-	     		document.getElementById("authName").value="";	
-			}
-			else{
-			 $.ajax({   
-				type:"POST",
-				url:"/Auth/AuthNameCheck",   
-				dataType:"html",// JSON/html
-				async: false,
-	          	data:{ 
-	                "name": $("#authName").val()
-	            },
-			
-	            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-	            	
-	            	if(data==0){					
-	             		alert("사용해도 되는 권한명입니다.");
-	             		val = 0; //중복체크함
-	             		
-	             	}
-	             	else{
-	             		alert("중복된 권한명입니다.");
-	             		document.getElementById("authName").value="";	
-	             	}
-	            }
-			}); //--ajax
-			}
-			
-		});
-		
-		
-		//빈값 확인
-		$("#authEnroll").on("click",function(){
-			var str = document.AuthEnrollInfo;
-			var size = document.getElementsByName("items").length;	//체크박스 총 개수
-			var count =0;
-		    for(var i = 0; i < size; i++){
-		        if(document.getElementsByName("items")[i].checked == true){
-		            count++;
-		        }		   
-		    }
-     		
-			if(str.authName.value == ""){
-		 		alert("권한명를 입력하지 않았습니다. 입력해주세요");
-		     	str.authName.focus();
-		   		return false;
-		       }
-			if(val == 1){
-				alert("중복체크를 해주세요");
-				return false;
-			}
-	      	if(count <1){
-	      		alert("권한 항목을 체크해주세요");
-				return false;
-	      	}
-	       //관리자 권한 확인
-		});	
-		
-		
-
-		
-	});
 
 	
 

@@ -59,19 +59,24 @@
                   <div class="x_content" style="font-size:15px">
                     
                     <table id="datatable" class="table table-striped table-bordered" id="AdminList">
+                       <colgroup>
+			    		<col width = "7%"/>
+			    		<col width = "*"/>
+			    		<col width = "15%"/>		    		
+			    	</colgroup>
                       <thead>
                         <tr>
-                          <th>번호</th>
-                          <th>권한 유형</th>
-                          <th>작업</th>
+                          <th style="text-align: center; padding-left: 1.5%; color:#00003f">번    호</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">권한 유형</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">작    업</th>
                         </tr>
                       </thead>
                       <tbody>
                         <c:forEach var="authList" items="${authList}" varStatus="status">
 							<tr>
-								<td>${status.count}</td>							
-								<td>${authList.strAuthName}</td>
-								<td><a href="/Auth/AuthUpdateForm?authNo=${authList.intAuthNo}">수정하기</a></td>
+								<td style="text-align: center; color:#3b5976;">${status.count}</td>							
+								<td style="text-align: center; color:#3b5976;">${authList.strAuthName}</td>
+								<td style="text-align: center; color:#3b5976;"><a href="/Auth/AuthUpdateForm?authNo=${authList.intAuthNo}" style="text-align: center; color:#3b5976;">수정하기</a></td>
 							</tr>	
 						</c:forEach>
                       </tbody>

@@ -75,22 +75,22 @@
                     <form id="enrollInfo" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Administrator/Enroll" method="POST">
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id">아이디 <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id" style="font-size: 13px; color: #00003f;">아이디 <span class="required">*</span>
                         </label>
-                        <div class="input-group" style="width:44%; padding-left:0.9rem">
+                        <div class="input-group" style="width:49.5%; padding-left:0.9rem">
                             <span class="input-group-btn"><input type="text" class="form-control" id="admin_Id" name="admin_Id" required="required">
                             <button type="button"  class="btn btn-primary"  id="adminIdCheck">중복확인</button></span>
                        </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">비밀번호 <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password" style="font-size: 13px; color: #00003f;">비밀번호 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="password" id="admin_Pw" name="admin_Pw" required="required" class="form-control col-md-7 col-xs-12" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password2">비밀번호 확인 <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password2" style="font-size: 13px; color: #00003f;">비밀번호 확인 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input id="admin_Pw2" class="form-control col-md-7 col-xs-12" required="required" type="password" name="admin_Pw2" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자" 
@@ -101,7 +101,7 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">이름 <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name" style="font-size: 13px; color: #00003f;">이름 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input id="admin_Name" class="form-control col-md-7 col-xs-12" type="text" name="admin_Name" required="required">
@@ -109,7 +109,7 @@
                       </div>
                       
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">관리자 권한 유형 <span class="required">*</span></label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 13px; color: #00003f;">관리자 권한 유형 <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select  id="admin_Auth" name="admin_Auth" class="form-control">                        
                           <option value="0" selected>=======================================&nbsp;&nbsp;&nbsp;Select&nbsp;&nbsp;&nbsp;=======================================</option>
@@ -124,7 +124,7 @@
                       
                       <div class="ln_solid"></div>
                       <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3" style="margin-left: 43%;">
                           <button class="btn btn-primary" type="button" onclick="location.href='/Administrator/AdministratorList'">취소</button>
                           <button type="submit" class="btn btn-success" id="adminEnroll">등록</button>
                         </div>

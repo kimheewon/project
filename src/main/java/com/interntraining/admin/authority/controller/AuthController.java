@@ -1,5 +1,6 @@
 package com.interntraining.admin.authority.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -38,15 +39,78 @@ public class AuthController {
 	@Autowired
 	private AuthService authService;
 	
+	//권한 목록페이지로 이동
+	@RequestMapping(value="/AuthList")
+	public ModelAndView AuthList(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		
+		/*
+		 * 권한 제어		
+		 * - 로그인한 관리자가 해당 권한 가지고 있는지 확인
+		 * 
+		 */
+		
+		@SuppressWarnings("unchecked")
+		List<AuthMapp> authItem =  (List<AuthMapp>) session.getAttribute("items");
+	
+		int authCheck=0;	//권한 가지고 있는 체크
+		
+		for(int i=0; i<authItem.size(); i++) {
+			if(authItem.get(i).getIntAuthItemNo() == 1) {
+				authCheck=1;	//권한 가지고 있음
+			}			
+		}
+		
+		if(authCheck == 1) {	//권한 가지고 있으면
+			List<AuthInfo> auth = authService.selectAllAuth();	//권한명 모두 가져오기
+				
+			mav.addObject("authList",auth);
+			mav.setViewName("/admin/authority/AuthList");
+		}
+	
+		else {		//권한 없으면 홈으로
+			mav.setViewName("/admin/login/AdminHome_No");
+		}
+		return mav;
+	}
+		
+		
+		
+		
 	//권한 등록페이지로 이동
 	@RequestMapping(value="/AuthEnrollForm")
 	public ModelAndView AuthEnrollForm(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		
-		List<AuthItemInfo> item = authService.selectAllAuthItem();	//권항 항목 모두 불러오기
+		/*
+		 * 권한 제어		
+		 * - 로그인한 관리자가 해당 권한 가지고 있는지 확인
+		 * 
+		 */
 		
-		mav.addObject("AuthItem", item);		
-		mav.setViewName("/admin/authority/AuthEnroll");
+		@SuppressWarnings("unchecked")
+		List<AuthMapp> authItem =  (List<AuthMapp>) session.getAttribute("items");
+	
+		int authCheck=0;	//권한 가지고 있는 체크
+		
+		for(int i=0; i<authItem.size(); i++) {
+			if(authItem.get(i).getIntAuthItemNo() == 1) {
+				authCheck=1;	//권한 가지고 있음
+			}			
+		}
+		
+		if(authCheck == 1) {	//권한 가지고 있으면
+			List<AuthItemInfo> item = authService.selectAllAuthItem();	//권항 항목 모두 불러오기
+			
+			mav.addObject("AuthItem", item);		
+			mav.setViewName("/admin/authority/AuthEnroll");
+		}
+		else {		//권한 없으면 홈으로
+			mav.setViewName("/admin/login/AdminHome_No");
+		}
+			
+		
+		
 		return mav;
 	}
 
@@ -54,6 +118,7 @@ public class AuthController {
 	@RequestMapping(value="/AuthNameCheck", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public int AuthNameCheck(String name) throws Exception{
+		
 		//DB에서 Id 체크
 		AuthInfo authName = authService.selectName(name);
 		int check = 0;
@@ -91,32 +156,44 @@ public class AuthController {
 		return mav;
 	}
 	
-	//권한 목록페이지로 이동
-	@RequestMapping(value="/AuthList")
-	public ModelAndView AuthList(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
-			
-		List<AuthInfo> auth = authService.selectAllAuth();	//권한명 모두 가져오기
-		
-		mav.addObject("authList",auth);
-		mav.setViewName("/admin/authority/AuthList");	
-		return mav;
-	}
 	
 	//권한 수정 페이지로 이동
 	@RequestMapping(value="/AuthUpdateForm")
 	public ModelAndView AuthUpdateForm(HttpServletRequest request, HttpServletResponse response, HttpSession session, int authNo) {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		
-		String authName = authService.selectAuthName(authNo);	//권한번호로 권한명 찾기(Auth 테이블에서)
-		List<AuthMapp> selectedItems = authService.selectAuthItem(authNo);	//권한번호로 권한항목 찾기(AuthMapp 테이블에서)
-		List<AuthItemInfo> item = authService.selectAllAuthItem();	//권항 항목 모두 불러오기
+		/*
+		 * 권한 제어		
+		 * - 로그인한 관리자가 해당 권한 가지고 있는지 확인
+		 * 
+		 */
 		
-		mav.addObject("AuthItem", item);	//불러온 모든 권한 항목들
-		mav.addObject("authNo", authNo);
-		mav.addObject("authName",authName);	
-		mav.addObject("selectedItems", selectedItems);	//저장된 권한 항목들
-		mav.setViewName("/admin/authority/AuthUpdate");	//수정페이지로 이동
+		@SuppressWarnings("unchecked")
+		List<AuthMapp> authItem =  (List<AuthMapp>) session.getAttribute("items");
+	
+		int authCheck=0;	//권한 가지고 있는 체크
+		
+		for(int i=0; i<authItem.size(); i++) {
+			if(authItem.get(i).getIntAuthItemNo() == 1) {
+				authCheck=1;	//권한 가지고 있음
+			}			
+		}
+		
+		if(authCheck == 1) {	//권한 가지고 있으면
+			String authName = authService.selectAuthName(authNo);	//권한번호로 권한명 찾기(Auth 테이블에서)
+			List<AuthMapp> selectedItems = authService.selectAuthItem(authNo);	//권한번호로 권한항목 찾기(AuthMapp 테이블에서)
+			List<AuthItemInfo> item = authService.selectAllAuthItem();	//권항 항목 모두 불러오기
+			
+			mav.addObject("AuthItem", item);	//불러온 모든 권한 항목들
+			mav.addObject("authNo", authNo);
+			mav.addObject("authName",authName);	
+			mav.addObject("selectedItems", selectedItems);	//저장된 권한 항목들
+			mav.setViewName("/admin/authority/AuthUpdate");	//수정페이지로 이동
+		}
+		else {		//권한 없으면 홈으로
+			mav.setViewName("/admin/login/AdminHome_No");
+		}
+		
 		return mav;
 	}
 
@@ -167,7 +244,7 @@ public class AuthController {
 		authService.deleteItems(authNo);	//권한 번호로 Mapp 테이블에 있는 데이터 삭제
 		
 		String[] authItem = request.getParameterValues("items");		//사용자가 선택한 권한 항목 가져옴
-		//List<AuthMapp> selectedItems = authService.selectAuthItem(authNo);	//권한번호로 권한항목 DB에서 가져욤(AuthMapp 테이블에서)
+		//List<AuthMapp> selectedItems = authService.selectAuthItem(authNo);	//권한번호로 권한항목 DB에서 가져옴(AuthMapp 테이블에서)
 		
 		for(int i=0; i<authItem.length; i++) {
 			int authItemNo = Integer.parseInt(authItem[i]);	//선택한 권한 항목번호			

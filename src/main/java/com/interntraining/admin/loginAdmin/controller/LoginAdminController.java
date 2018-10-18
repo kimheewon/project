@@ -10,10 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.interntraining.admin.authority.domain.AuthMapp;
 import com.interntraining.admin.loginAdmin.domain.LoginAdminInfo;
 import com.interntraining.admin.loginAdmin.service.LoginAdminService;
+import com.interntraining.member.board.domain.Board;
 
 /*
  * 관리자 로그인 관리
@@ -30,8 +33,8 @@ public class LoginAdminController {
 	
 	//관리자 로그인 
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws Exception{
-		
+	public ModelAndView login(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
 		//로그인 폼에서 id와 pw 가져옴
 		String id = request.getParameter("AdminId");
 		String password = request.getParameter("Password");
@@ -57,11 +60,40 @@ public class LoginAdminController {
 			List<AuthMapp> authItem = loginAdminService.selectItemList(authno);	//권항 항목 가져오기
 			session.setAttribute("items", authItem); //권한 매핑 테이블 세션에 담기
 			
-			return "/admin/login/AdminHome";		//로그인 성공시 관리자 홈화면으로 이동			
+			
+			//남녀 가입률
+			
+			String word;
+			word="남성";
+			int men = loginAdminService.count(word);//남자 가입자 수 가져오기
+			
+			word="여성";
+			int women = loginAdminService.count(word);//여자 가입자 수 가져오기
+			
+			int total = men+women;
+			
+			int menP = (men*100)/total;	//남자 퍼센트
+			int womenP = (women*100)/total;//여자 퍼센트
+			
+			mv.addObject("men",men);
+			mv.addObject("women",women);
+			mv.addObject("menP", menP);
+			mv.addObject("womenP", womenP);
+			
+			
+			//게시글 Top 10
+			
+			List<Board> boardList = loginAdminService.getBoadList();
+			mv.addObject("boardlist", boardList);			
+			
+			
+			
+			mv.setViewName("/admin/login/AdminHome");//로그인 성공시 관리자 홈화면으로 이동			
 		}
 		else{//로그인 실패
-			return "/admin/login/login_admin";		//로그인 실패시 관리자 로그인 폼 화면으로 이동
+			mv.setViewName("/admin/login/login_admin");		//로그인 실패시 관리자 로그인 폼 화면으로 이동
 		}
+		return mv;
 	}
 	
 	//로그아웃

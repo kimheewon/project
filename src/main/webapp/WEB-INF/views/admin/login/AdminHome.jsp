@@ -1,15 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-    
-<%  // ¿Œ¡ıµ» ººº«¿Ã æ¯¥¬∞ÊøÏ, «ÿ¥Á∆‰¿Ã¡ˆ∏¶ ∫º ºˆ æ¯∞‘ «‘.
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%  // Ïù∏Ï¶ùÎêú ÏÑ∏ÏÖòÏù¥ ÏóÜÎäîÍ≤ΩÏö∞, Ìï¥ÎãπÌéòÏù¥ÏßÄÎ•º Î≥º Ïàò ÏóÜÍ≤å Ìï®.
     if (session.getAttribute("AdminId")  == null) {
         response.sendRedirect("/loginAdmin/logout");
     }
 %>
 <!DOCTYPE html>
 <html lang="UTF-8">
- 
-
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
@@ -20,7 +18,7 @@
          <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>∞¸∏Æ¿⁄ Home <small>¿‘¥œ¥Ÿ</small></h3>
+              
               </div>
 
               <div class="title_right">
@@ -35,21 +33,119 @@
 		   <div class="clearfix"></div>
 		   
           <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
-	            <div class="x_title">
-	             <div class="clearfix"></div>
-	            </div>
-	            <div class="x_content">
-	            	 <p class="text-muted font-13 m-b-30">
-                      DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction function: <code>$().DataTable();</code>
-                    </p>
-	            </div>
-	            </div>
+            <div class="col-md-3 col-xs-12 widget widget_tally_box" style="margin-left: 2%;">
+                <div class="x_panel fixed_height_500">
+                  <div class="x_title">
+                    <h2 style="font-weight:bold; color:#34495e">ÏÑ±Î≥Ñ Í∞ÄÏûÖÎ•†</h2>
+  
+                     <div class="clearfix"></div>
+                  </div>
+                  <div class="clearfix"></div>
+                
+                         <div class="x_content">
+
+                            <div style="text-align: center; margin-top:20px; margin-bottom: 60px">
+                              <ul class="verticle_bars list-inline" style="height: 200px;">
+                                <li>
+                                  <div class="progress vertical progress_wide bottom" style="width: 100%; height: 200px">
+                                    <div class="progress-bar progress-bar-dark" role="progressbar" data-transitiongoal="${menP}">
+                                    <div>${men}Î™Ö</div>
+                                    </div>
+                                  	 
+                                  </div>
+                                </li>
+                                <li style="width:10%">
+                                <div ></div>
+                                </li>
+                                <li>
+                                  <div class="progress vertical progress_wide bottom" style="width: 100%; height: 200px">
+                                    <div class="progress-bar progress-bar-info" role="progressbar" data-transitiongoal="${womenP}">
+                                    <div>${women}Î™Ö</</div>
+                                    </div>
+                                  </div>
+                                </li>
+                                
+                              </ul>
+                            </div>
+                            <div class="divider"></div>
+
+                            <ul class="legend list-unstyled" >
+                              <li style="margin-top: 15%;">
+                                <p>
+                                  <span class="icon" >
+                                  <i class="fa fa-square dark" style="margin-top: 60%;"></i></span> <span class="name" style="font-size: 18px; font-weight: bold;color:#4f6f8f">ÎÇ®  ÏÑ±</span>
+                                </p>
+                              </li>
+                              
+                              <li style="margin-top: 8%;margin-bottom: 11%;">
+                                <p>
+                                  <span class="icon" >
+                                  <i class="fa fa-square blue" style="margin-top: 60%;"></i></span> <span class="name" style="font-size: 18px; font-weight: bold; color:#4f6f8f">Ïó¨  ÏÑ±</span>
+                                </p>
+                              </li>
+                              
+                            </ul>
+
+                          </div>
+          				</div>
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12" style="width:75%; margin-left: 20px;">
+            			<div class="x_panel" >
+	           				<div class="x_title">
+                    			<h2 style="font-weight:bold; color:#34495e">Í≤åÏãúÍ∏Ä Top 10</h2>	  
+                    		 <div class="clearfix"></div>
+                  			</div>
+	             		<div class="clearfix"></div>
+	             		<div class="x_content">
+							<table class="table table-striped table-bordered" >
+		                    <colgroup>
+					    		<col width = "6%"/>
+					    		<col width = "*"/>
+					    		<col width = "10%"/>
+					    		<col width = "15%"/>
+					    		<col width = "7%"/>			    		
+					    	</colgroup>
+		                      <thead>
+		                        <tr>
+		                          <th style="text-align: center; color:#00003f; font-size: 15px;">Î≤à  Ìò∏</th>
+		                          <th style="text-align: center; color:#00003f; font-size: 15px;">Ï†ú   Î™©</th>
+		                          <th style="text-align: center; color:#00003f; font-size: 15px;">ÏûëÏÑ±Ïûê</th>
+		                          <th style="text-align: center; color:#00003f; font-size: 15px;">ÏûëÏÑ±ÏùºÏãú</th>
+		                          <th style="text-align: center; color:#00003f; font-size: 15px;">Ï°∞ÌöåÏàò</th>
+		                        </tr>
+		                      </thead>
+		                      <tbody>
+		                        <c:forEach var="list" items="${boardlist}" varStatus="status">
+		
+									<tr>
+										<td style="text-align: center; color:#3b5976;font-size: 15px;">${status.count}</td>
+										<td style="text-align: center; color:#3b5976;font-size: 15px;">${list.strBoardTitle}</td>
+										<td style="text-align: center; color:#3b5976;font-size: 15px;">${list.strUserId}</td>
+										<td style="text-align: center; color:#3b5976;font-size: 15px;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.dateBoardDate}"/></td>										
+										<td style="text-align: center; color:#3b5976;font-size: 15px;">${list.intHit}</td>
+									</tr>	
+								</c:forEach>
+		                      </tbody>
+		                    </table>	
+	           		 	</div>
+	            	</div>
+              	</div>
+					
+                </div>
+
+                
               </div>
             </div>
+            
+            
+            
+          
+          
+          
+            
+            </div>
           </div>
-        </div>
+      
         <!-- /page content -->
   
    

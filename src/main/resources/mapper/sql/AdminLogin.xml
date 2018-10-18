@@ -13,4 +13,21 @@
 		from TAdmin where AdminId = #{id} 
 	</select>	
 	
+	<!-- 가입자 수 -->
+	<select id="count" resultType="int">
+		select 	count(UserSex)
+		from 	TUser
+		where 	UserSex=#{count} 	
+	</select>
+	
+	<!-- 게시글 Top 10 -->
+	<select id="getBoardList" resultType="Board">
+		select top 10 UserId 		AS strUserId	
+					, BoardTitle	AS strBoardTitle
+					, BoardDate		AS dateBoardDate
+					, BoardHit 		AS intHit
+		from TBoard
+		ORDER BY BoardDate DESC
+	
+	</select>
 </mapper>

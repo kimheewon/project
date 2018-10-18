@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.interntraining.admin.authority.domain.AuthItemInfo;
 import com.interntraining.admin.authority.domain.AuthMapp;
 import com.interntraining.admin.loginAdmin.domain.LoginAdminInfo;
+import com.interntraining.member.board.domain.Board;
 
 @Repository("loginAdminDAO")
 public class LoginAdminDAO {
@@ -27,5 +28,17 @@ public class LoginAdminDAO {
 	public List<AuthMapp> selectItemList(int authno) {
 		return sqlSession.selectList("authSql.selectItemList",authno);
 	}
+
+	// 가입자수
+	public int count(String word) {
+		return sqlSession.selectOne("adminloginSql.count", word);
+	}
+
+	//게시글 Top 10
+	public List<Board> getBoardList() {
+		return sqlSession.selectList("adminloginSql.getBoardList");
+	}
+
+	
 
 }

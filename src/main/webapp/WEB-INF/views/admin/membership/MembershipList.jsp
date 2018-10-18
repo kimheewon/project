@@ -35,7 +35,12 @@
     <!-- Custom Theme Style -->
     <link href="/build/css/custom.min.css" rel="stylesheet">
 
+	<style>
+	th {
+    text-align: center;
+    }
 	
+	</style>
   </head>
 
   <body class="nav-md">
@@ -70,29 +75,42 @@
                     
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content">
+                  <div class="x_content" style="font-size:15px">
                     
                     <table id="datatable" class="table table-striped table-bordered" id="AdminList">
+                    <colgroup>
+			    		<col width = "6%"/>
+			    		<col width = "*"/>
+			    		<col width = "10%"/>
+			    		<col width = "15%"/>
+			    		<col width = "12%"/>
+			    		<col width = "9%"/>
+			    		<col width = "17%"/>
+			    	</colgroup>
                       <thead>
                         <tr>
-                          <th>번호</th>
-                          <th>아이디</th>
-                          <th>권한 유형</th>
-                          <th>이름</th>
-                          <th>가입일</th>
-                          <th>작업</th>
+                          <th style="text-align: center; padding-left: 1.5%; color:#00003f">번  호</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">아이디</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">이   름</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">전화번호</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">가입 일시</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">등   급</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">작   업</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <c:forEach var="list" items="${adminList}">
+                        <c:forEach var="userList" items="${userList}" varStatus="status">
 
 							<tr>
-								<td>${list.intAdminNo}</td>
-								<td><a href="/board/boardread?intBoardNo=${list.intAdminNo}">${list.strAdminId}</a></td>
-								<td>${list.strAdminGrade}</td>
-								<td>${list.strAdminName}</td>
-								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.dateAdminDate}"/></td>
-								<td><a href="javascript:checkFunction(${list.intAdminNo});">수정하기</a></td>
+								<td style="text-align: center; color:#3b5976;">${status.count}</td>		
+								<td style="padding-left: 2%; color:#3b5976;">${userList.strUserId}</td>
+								<td style="text-align: center; color:#3b5976;">${userList.strUserName}</td>
+								<td style="text-align: center; color:#3b5976;">${userList.strUserPhone}</td>
+								<td style="text-align: center; color:#3b5976;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${userList.dateUserDate}"/></td>
+								<td style="text-align: center; color:#3b5976;">${userList.strUserGrade} 회원</td>
+								<td style="text-align: center; color:#3b5976; "><a href="/Membership/MembershipRead?intUserNo=${userList.intUserNo}" style="color:#3b5976;">상세보기</a>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="/Membership/MembershipUpdateForm?intUserNo=${userList.intUserNo}" style="color:#3b5976;">수정하기</a></td>
 							</tr>	
 						</c:forEach>
                       </tbody>

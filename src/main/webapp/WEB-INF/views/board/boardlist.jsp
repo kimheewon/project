@@ -34,13 +34,13 @@
 
 </style>
 
-<jsp:include page="../login/navigation.jsp" flush="true"/>
 
 </head>
 
 <body>
 
 	
+<jsp:include page="../login/navigation.jsp" flush="true"/>
 
     <div class="container_t">
     

@@ -80,7 +80,7 @@
 										<input type="hidden" name="no" id="no" value="${authNo}">	
 										<div class="form-group">
 											<label class="control-label col-md-3 col-sm-3 col-xs-12"
-												for="authName">권한명 <span class="required">*</span>
+												for="authName" style="font-size: 15px; color: #00003f;">권한명 <span class="required">*</span>
 											</label>
 											<div class="input-group" style="width: 50%">
 												<input type="text" class="form-control" id="authName"
@@ -92,9 +92,8 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-md-3 col-sm-3 col-xs-12 control-label">권한
-												항목 <span class="required">*</span> <br> <small
-												class="text-navy">권한 항목 중복 체크 가능</small>
+											<label class="col-md-3 col-sm-3 col-xs-12 control-label"style="font-size: 15px; color: #00003f;">권한 항목 <span class="required">*</span> <br> <small
+												class="text-navy" >(권한 항목 중복 체크 가능)</small>
 											</label>
 
 											<div class="col-md-6 col-sm-6 col-xs-12">
@@ -104,11 +103,8 @@
 														<c:set var="test123" value="f" />
 														<c:forEach var="selectedItems" items="${selectedItems}">
 															<c:choose>
-																<c:when
-																	test="${AuthItem.intAuthItemNo eq selectedItems.intAuthItemNo}">
-																	<label> <input type="checkbox" name="items"
-																		id="check" class="flat" checked="checked"
-																		value="${AuthItem.intAuthItemNo}">
+																<c:when test="${AuthItem.intAuthItemNo eq selectedItems.intAuthItemNo}">
+																	<label style="font-size: 14px; color: #192632;"> <input type="checkbox" name="items" id="check" class="flat" checked="checked" value="${AuthItem.intAuthItemNo}">
 																		${AuthItem.strAuthItemName}
 																	</label>
 																	<c:set var="test123" value="t" />
@@ -117,9 +113,7 @@
 														</c:forEach>
 														<c:choose>
 															<c:when test="${test123 eq 'f'}">
-																<label> <input type="checkbox" name="items"
-																	id="check" class="flat"
-																	value="${AuthItem.intAuthItemNo}">
+																<label style="font-size: 14px; color: #192632;"> <input type="checkbox" name="items" id="check" class="flat"  value="${AuthItem.intAuthItemNo}">
 																	${AuthItem.strAuthItemName}
 																</label>
 															</c:when>
@@ -132,7 +126,7 @@
 
 										<div class="ln_solid"></div>
 										<div class="form-group">
-											<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+											<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3" style="margin-left: 43%;">
 												<button class="btn btn-primary" type="button" onclick="location.href='/Auth/AuthList'">취소</button>
 												<button type="submit" class="btn btn-success" id="authEnroll">수정</button>
 											</div>

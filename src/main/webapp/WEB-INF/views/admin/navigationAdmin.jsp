@@ -71,13 +71,13 @@
               <div class="menu_section">
                 
                 <ul class="nav side-menu">
-                  <li><a href="/loginAdmin/home"><i class="fa fa-home"></i> Home </a>
+                  <li><a href="/loginAdmin/home" style=" font-size: 14px;"><i class="fa fa-home"></i> Home </a>
                     
                   </li>
                   
                   <c:forEach var="item" items="${items}">
                 	<c:if test="${1 eq item.intAuthItemNo}">
-	                  <li><a><i class="fa fa-edit"></i> 권한 관리 <span class="fa fa-chevron-down"></span> </a>
+	                  <li><a style=" font-size: 14px;"><i class="fa fa-edit"></i> 권  한 <span class="fa fa-chevron-down"></span> </a>
 	                    <ul class="nav child_menu">
 	                      <li><a href="/Auth/AuthList">권한 목록</a></li>
 	                      <li><a href="/Auth/AuthEnrollForm">권한 등록</a></li>                      
@@ -88,7 +88,7 @@
                   
                   <c:forEach var="item" items="${items}">
                   	<c:if test="${2 eq item.intAuthItemNo}">
-                  <li><a><i class="fa fa-desktop"></i> 관리자 관리 <span class="fa fa-chevron-down"></span></a>
+                  <li><a style=" font-size: 14px;"><i class="fa fa-desktop"></i> 관리자 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="/Administrator/AdministratorList">관리자 목록</a></li>
                       <li><a href="/Administrator/AdministratorEnrollForm">관리자 등록</a></li>                      
@@ -99,10 +99,10 @@
                   
                    <c:forEach var="item" items="${items}">
                   	<c:if test="${3 eq item.intAuthItemNo}">
-                  <li><a><i class="fa fa-sitemap"></i> 회원 관리 <span class="fa fa-chevron-down"></span></a>
+                  <li><a style=" font-size: 14px;"><i class="fa fa-sitemap"></i> 회  원 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="/Administrator/AdministratorList">회원 목록</a></li>
-                      <li><a href="/Administrator/AdministratorEnrollForm">회원 등록</a></li>                      
+                      <li><a href="/Membership/MembershipList">회원 목록</a></li>
+                      <li><a href="/Membership/MembershipEnrollForm">회원 등록</a></li>                      
                     </ul>
                   </li>
                   </c:if>
@@ -135,7 +135,7 @@
 
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="font-weight:bold">
                     <img src="/production/images/img.jpg" alt=""><%= session.getAttribute("AdminId") %> 관리자님
                     <span class=" fa fa-angle-down"></span>
                   </a>

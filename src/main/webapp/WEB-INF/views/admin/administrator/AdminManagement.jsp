@@ -70,29 +70,37 @@
                     
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content">
+                  <div class="x_content" style="font-size:15px">
                     
                     <table id="datatable" class="table table-striped table-bordered" id="AdminList">
+                    <colgroup>
+			    		<col width = "6%"/>
+			    		<col width = "10%"/>
+			    		<col width = "*"/>
+			    		<col width = "10%"/>
+			    		<col width = "15%"/>
+			    		<col width = "12%"/>			    		
+			    	</colgroup>
                       <thead>
                         <tr>
-                          <th>번호</th>
-                          <th>아이디</th>
-                          <th>권한 유형</th>
-                          <th>이름</th>
-                          <th>가입일시</th>
-                          <th>작업</th>
+                          <th style="text-align: center; padding-left: 1.5%; color:#00003f">번  호</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">아이디</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">권한 유형</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">이   름</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">가입 일시</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">작   업</th>
                         </tr>
                       </thead>
                       <tbody>
                         <c:forEach var="list" items="${adminList}" varStatus="status">
 
 							<tr>
-								<td>${status.count}</td>
-								<td>${list.strAdminId}</td>
-								<td>${list.strAdminGrade}</td>
-								<td>${list.strAdminName}</td>
-								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.dateAdminDate}"/></td>
-								<td><a href="javascript:checkFunction(${list.intAdminNo});">수정하기</a></td>
+								<td style="text-align: center; color:#3b5976;">${status.count}</td>
+								<td style="text-align: center; color:#3b5976;">${list.strAdminId}</td>
+								<td style="text-align: center; color:#3b5976;">${list.strAdminGrade}</td>
+								<td style="text-align: center; color:#3b5976;">${list.strAdminName}</td>
+								<td style="text-align: center; color:#3b5976;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.dateAdminDate}"/></td>
+								<td style="text-align: center; color:#3b5976;"><a href="javascript:checkFunction(${list.intAdminNo});" style="color:#3b5976;">수정하기</a></td>
 							</tr>	
 						</c:forEach>
                       </tbody>

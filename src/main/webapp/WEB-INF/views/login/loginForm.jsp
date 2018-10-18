@@ -58,7 +58,7 @@
 				<br>
 				<button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">로 그 인</button>
 				<button id="btn-Yes" class="btn btn-lg btn-primary btn-block" onclick="location.href='/user/joinForm'">회원가입</button>	
-				<span style="float:right; font-weight:bold"><a href='/login/adminLoginForm'>관리자 모드</a></span>
+				<span style="float:right; font-weight:bold; "><a href='/login/adminLoginForm' style="color:#2c3e50">관리자 모드</a></span>
 			</form>
 				
 		</div>

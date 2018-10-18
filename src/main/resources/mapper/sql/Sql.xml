@@ -69,6 +69,7 @@
 		from   	 TBoard
 		ORDER BY BoardNo DESC
 	</select>
+	
 	<!-- 게시판 페이징처리 후 뿌려주기 -->
 	<select id="getboardlist"  resultType="Board">
 		select top 10 resultTable.* from

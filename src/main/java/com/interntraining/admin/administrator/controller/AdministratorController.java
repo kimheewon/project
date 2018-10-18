@@ -17,6 +17,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import com.interntraining.admin.administrator.domain.AdministratorInfo;
 import com.interntraining.admin.administrator.service.AdministratorService;
 import com.interntraining.admin.authority.domain.AuthInfo;
+import com.interntraining.admin.authority.domain.AuthMapp;
 import com.interntraining.member.user.domain.Member;
 
 
@@ -40,19 +41,42 @@ public class AdministratorController {
 	public ModelAndView administratorList (HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		
-		List<AdministratorInfo> list = administratorService.selectAdminList();
+		/*
+		 * 권한 제어		
+		 * - 로그인한 관리자가 해당 권한 가지고 있는지 확인
+		 * 
+		 */
 		
-		String grade = null;
-		for(int i=0; i<list.size(); i++) {
-			
-			AdministratorInfo objAdmInfo = list.get(i);
-			grade = administratorService.selectAuth(objAdmInfo.getIntAdminAuth()); 			
-			objAdmInfo.setStrAdminGrade(grade);
-			list.set(i, objAdmInfo);
+		@SuppressWarnings("unchecked")
+		List<AuthMapp> authItem =  (List<AuthMapp>) session.getAttribute("items");
+	
+		int authCheck=0;	//권한 가지고 있는 체크
+		
+		for(int i=0; i<authItem.size(); i++) {
+			if(authItem.get(i).getIntAuthItemNo() == 2) {
+				authCheck=1;	//권한 가지고 있음
+			}			
 		}
-					
-		mav.addObject("adminList", list);
-		mav.setViewName("/admin/administrator/AdminManagement");	//오른쪽 위 관리자 클릭시 안됨
+		
+		if(authCheck == 1) {	//권한 가지고 있으면
+			List<AdministratorInfo> list = administratorService.selectAdminList();
+			
+			String grade = null;
+			for(int i=0; i<list.size(); i++) {
+				
+				AdministratorInfo objAdmInfo = list.get(i);
+				grade = administratorService.selectAuth(objAdmInfo.getIntAdminAuth()); 			
+				objAdmInfo.setStrAdminGrade(grade);
+				list.set(i, objAdmInfo);
+			}
+						
+			mav.addObject("adminList", list);
+			mav.setViewName("/admin/administrator/AdminManagement");	//오른쪽 위 관리자 클릭시 안됨
+		}
+		
+		else {		//권한 없으면 홈으로
+			mav.setViewName("/admin/login/AdminHome_No");
+		}
 		return mav;
 	}
 	
@@ -61,13 +85,36 @@ public class AdministratorController {
 	public ModelAndView AdminEnrollForm(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		
-		int AuthNo = (int) session.getAttribute("AuthNo");	//세션에서 권한 번호 가져오기
-		List<AuthInfo> auth = administratorService.selectAllAuth();	//권한명 모두 가져오기
-		int itemNo = administratorService.selectItemNo(AuthNo);//매핑테이블에서 권한명에 따른 권한 항목 젤 처음꺼 가져오기 
+		/*
+		 * 권한 제어		
+		 * - 로그인한 관리자가 해당 권한 가지고 있는지 확인
+		 * 
+		 */
 		
-		mav.addObject("authList", auth);
-		mav.addObject("itemNo", itemNo);
-		mav.setViewName("/admin/administrator/AdminEnroll");
+		@SuppressWarnings("unchecked")
+		List<AuthMapp> authItem =  (List<AuthMapp>) session.getAttribute("items");
+	
+		int authCheck=0;	//권한 가지고 있는 체크
+		
+		for(int i=0; i<authItem.size(); i++) {
+			if(authItem.get(i).getIntAuthItemNo() == 2) {
+				authCheck=1;	//권한 가지고 있음
+			}			
+		}
+		
+		if(authCheck == 1) {	//권한 가지고 있으면
+			int AuthNo = (int) session.getAttribute("AuthNo");	//세션에서 권한 번호 가져오기
+			List<AuthInfo> auth = administratorService.selectAllAuth();	//권한명 모두 가져오기
+			int itemNo = administratorService.selectItemNo(AuthNo);//매핑테이블에서 권한명에 따른 권한 항목 젤 처음꺼 가져오기 
+			
+			mav.addObject("authList", auth);
+			mav.addObject("itemNo", itemNo);
+			mav.setViewName("/admin/administrator/AdminEnroll");
+		}
+		
+		else {		//권한 없으면 홈으로
+			mav.setViewName("/admin/login/AdminHome_No");
+		}
 		return mav;
 	}
 	
@@ -150,29 +197,48 @@ public class AdministratorController {
 		
 		return check;
 	}
-	
-	
+		
 	
 	//관리자 수정페이지로 이동
 	@RequestMapping(value="/UpdateFrom")
 	public ModelAndView AdminUpdateForm(HttpServletRequest request, HttpServletResponse response,HttpSession session, int intAdminNo) {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		
-		//현재 로그인한 사람의 권한 확인해서 관리자 수정할수있는 사람인지 확인
-		//만약 수정할 권한 없으면 목록페이지로 이동하도록 수정
+		/*
+		 * 권한 제어		
+		 * - 로그인한 관리자가 해당 권한 가지고 있는지 확인
+		 * 
+		 */
 		
-		int AuthNo = (int) session.getAttribute("AuthNo");	//세션에서 권한 번호 가져오기
-		List<AuthInfo> auth = administratorService.selectAllAuth();	//권한명 모두 가져오기
-		int itemNo = administratorService.selectItemNo(AuthNo);//매핑테이블에서 권한명에 따른 권한 항목 젤 처음꺼 가져오기
+		@SuppressWarnings("unchecked")
+		List<AuthMapp> authItem =  (List<AuthMapp>) session.getAttribute("items");
+	
+		int authCheck=0;	//권한 가지고 있는 체크
 		
-		AdministratorInfo admin = administratorService.selectAdmin(intAdminNo);//관리자 번호로 관리자 데이터 찾기
-		mav.addObject("adminInfo", admin);	//변경할 관리자 정보들
+		for(int i=0; i<authItem.size(); i++) {
+			if(authItem.get(i).getIntAuthItemNo() == 2) {
+				authCheck=1;	//권한 가지고 있음
+			}			
+		}
 		
-		mav.addObject("authList", auth);
-		mav.addObject("itemNo", itemNo);
+		if(authCheck == 1) {	//권한 가지고 있으면
+		
+			int AuthNo = (int) session.getAttribute("AuthNo");	//세션에서 권한 번호 가져오기
+			List<AuthInfo> auth = administratorService.selectAllAuth();	//권한명 모두 가져오기
+			int itemNo = administratorService.selectItemNo(AuthNo);//매핑테이블에서 권한명에 따른 권한 항목 젤 처음꺼 가져오기
 			
-		mav.setViewName("/admin/administrator/AdminUpdateForm");
+			AdministratorInfo admin = administratorService.selectAdmin(intAdminNo);//관리자 번호로 관리자 데이터 찾기
+			mav.addObject("adminInfo", admin);	//변경할 관리자 정보들
+			
+			mav.addObject("authList", auth);
+			mav.addObject("itemNo", itemNo);
+				
+			mav.setViewName("/admin/administrator/AdminUpdateForm");
+		}
 		
+		else {		//권한 없으면 홈으로
+			mav.setViewName("/admin/login/AdminHome_No");
+		}
 		return mav;		
 	}
 	
