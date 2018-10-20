@@ -89,7 +89,16 @@
 		 		alert("아이디를 입력하지 않았습니다. 입력해주세요");
 		     	str.id.focus();
 		   		return false;
-		       }
+		    }
+			else{
+				var idReg = /^[a-zA-Z](?=.{0,28}[0-9])[0-9a-zA-Z]{6,15}$/	//영문 대문자 또는 소문자로 시작하는 아이디, 길이는 6~15자, 끝날때 제한 없음
+					if(!idReg.test(str.id.value)) {
+						alert("6~15자 영문대소문자,숫자를 사용하세요.");
+						str.id.value="";
+						str.id.focus();
+				   		return false;	
+					}
+			}
 			if(val == 1){
 				alert("중복체크를 해주세요");
 				return false;
@@ -180,7 +189,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>회원등록 수정</h3>
+                <h3>회원정보 수정</h3>
               </div>
 
               <div class="title_right">
@@ -209,7 +218,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id" style="font-size: 13px; color: #00003f;">아이디 <span class="required">*</span>
                         </label>
                         <div class="input-group" style="width:49.5%; padding-left:0.9rem">
-                            <span class="input-group-btn"><input type="text" class="form-control" id="id" name="id" required="required">
+                            <span class="input-group-btn"><input type="text" class="form-control" id="id" name="id" required="required" placeholder="첫글자는 영문대소자. 영문대소문자,숫자 모두 포함 최소 6자~최대 15자" >
                             <button type="button"  class="btn btn-primary"  id="idCheck">중복확인</button></span>
                        </div>
                       </div>
@@ -258,11 +267,9 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sex" style="font-size: 13px; color: #00003f;">성별 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-	                       <div class="form-control col-md-7 col-xs-12" style="border: 0px white; box-shadow: 0px 0px 0px white;">
-	                           
+	                       <div class="form-control col-md-7 col-xs-12" style="border: 0px white; box-shadow: 0px 0px 0px white;">	                         
 			                         <input type="radio" class="flat" name="gender" id="gender" value="남성" checked="checked" />&nbsp;&nbsp;남성
-			                      	 &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" class="flat" name="gender" id="gender" value="여성" />&nbsp;&nbsp;여성
-			                    
+			                      	 &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" class="flat" name="gender" id="gender" value="여성" />&nbsp;&nbsp;여성			                    
 	                        </div>
 	                        
                         </div>

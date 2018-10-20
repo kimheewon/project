@@ -129,18 +129,35 @@ where rownumber>(#{curPage}-1)*10
 		from   	 TBoard
 		where	 BoardNo = #{intBoardNo}
 		
+
+	</select>
+	
+	<!-- 게시글 번호를 통해 DB에서 찾아 게시글 읽기(조회수 증가) -->
+	<select id="boardreadHit" resultType="Board">
+		
+		
 		UPDATE	 TBoard 
   		SET		 BoardHit = BoardHit+1
    		WHERE	 BoardNo = #{intBoardNo}
+   		
+   		select	 BoardNo		AS intBoardNo
+				,UserId			AS strUserId
+				,BoardTitle 	AS strBoardTitle
+				,BoardContent	AS strBoardContent
+				,BoardDate  	AS dateBoardDate
+				,BoardHit   	AS intHit
+		from   	 TBoard
+		where	 BoardNo = #{intBoardNo}
    
 	</select>
+	
+	
 	
 	<!-- 수정한 게시글 Update -->
 	<update id="boardupdate">
 		update	 TBoard
 		set		 BoardTitle = 	#{strBoardTitle}
 				,BoardContent	= #{strBoardContent}
-				,BoardDate	= GETDATE()
 		where	 BoardNo 	= #{intBoardNo} 
 	</update>
 	
@@ -179,7 +196,6 @@ where rownumber>(#{curPage}-1)*10
 	<update id="updatecmmt">
 		UPDATE	 TComment
 		SET   	 CmmtComment = #{strCmmtComment}
-				,CmmtDate	= GETDATE()
 		WHERE	 CmmtNo = #{intCmmtNo}
 		
 	</update>
@@ -197,7 +213,13 @@ where rownumber>(#{curPage}-1)*10
 				,CmmtComment 	AS strCmmtComment
 		from   	 TComment
 		where	 CmmtNo = #{intCmmtNo}
-		
-
+	</select>
+	
+	<!--  댓글수 -->
+	<select id="totalComment" resultType="int">
+		select count(*)
+		from TComment
+		where BoardNo = #{intBoardNo}
+	
 	</select>
 </mapper>

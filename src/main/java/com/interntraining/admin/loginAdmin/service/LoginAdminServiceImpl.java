@@ -72,6 +72,24 @@ public class LoginAdminServiceImpl implements LoginAdminService{
 	public List<Board> getBoadList() {
 		return loginAdminDAO.getBoardList();
 	}
+
+	//오늘의 가입자수
+	@Override
+	public int enrollCount() {
+		return loginAdminDAO.enrollCount();
+	}
+
+	//오늘의 게시물 수
+	@Override
+	public int boardCount() {
+		return loginAdminDAO.boardCount();
+	}
+
+	//총 게시물 수
+	@Override
+	public int totalBoardCount() {
+		return loginAdminDAO.totalBoardCount();
+	}
 	
 
 }

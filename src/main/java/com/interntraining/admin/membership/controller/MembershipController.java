@@ -1,6 +1,8 @@
 package com.interntraining.admin.membership.controller;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -59,6 +61,49 @@ public class MembershipController {
 		
 			List<MembershipInfo> list = membershipService.selectAllMember(); //DB에 저장된 회원들의 정보 모두 가져오기			
 			
+			//마스킹 처리
+			for(int i=0; i<list.size(); i++) {
+				
+				//이름 마스킹
+				String name = list.get(i).getStrUserName();
+				String firstName = name.substring(0, 1);
+				int lastNameStartPoint = name.indexOf(firstName);
+				String lastName = name.substring(lastNameStartPoint + 1, name.length());
+	 
+	            String makers = "";
+	 
+	            for(int j = 0; j < lastName.length(); j++){
+	                makers += "*";
+	            }
+	 
+	            lastName = lastName.replace(lastName, makers);
+	            String maskedName = firstName + lastName;
+
+	            list.get(i).setStrUserName(maskedName);
+
+				
+				//전화번호 마스킹
+				String phone = list.get(i).getStrUserPhone();
+				Pattern pattern = Pattern.compile("^(\\d{3})-?(\\d{3,4})-?(\\d{4})$"); 
+				
+				         
+		        Matcher matcher = pattern.matcher(phone);
+		        
+		        if(matcher.find()){ //        
+		            String Fhp = matcher.group(1);
+		            String Mhp = matcher.group(2).substring(0, matcher.group(2).length()-2);
+		            String Bhp = matcher.group(3).substring(1);            
+		            phone =  Fhp + "-" + Mhp + "**" + "-*" + Bhp; 
+		        } else {
+		            phone= "***";
+		        }
+
+		        list.get(i).setStrUserPhone(phone);
+
+
+			}
+			
+			
 			mav.addObject("userList",list);
 			mav.setViewName("/admin/membership/MembershipList");
 		}
@@ -93,6 +138,20 @@ public class MembershipController {
 		
 		if(authCheck == 1) {	//권한 가지고 있으면
 			MembershipInfo member = membershipService.selectMember(intUserNo);//회원 번호를 통해 DB에서 회원 정보 받아오기
+			
+			//전화번호 - 처리
+			String phone = member.getStrUserPhone();
+			Pattern pattern = Pattern.compile("^(\\d{3})-?(\\d{3,4})-?(\\d{4})$"); 
+			Matcher matcher = pattern.matcher(phone);
+			
+			if(matcher.find()){ //        
+	            String Fhp = matcher.group(1);
+	            String Mhp = matcher.group(2);
+	            String Bhp = matcher.group(3);            
+	            phone =  Fhp + "-" + Mhp + "-" + Bhp; 
+	        }
+			
+			member.setStrUserPhone(phone);
 			
 			mav.addObject("intUserNo", intUserNo);
 			mav.addObject("member",member);
@@ -185,6 +244,49 @@ public class MembershipController {
 		//목록페이지로 이동
 		List<MembershipInfo> list = membershipService.selectAllMember(); //DB에 저장된 회원들의 정보 모두 가져오기
 		
+		//마스킹 처리
+		for(int i=0; i<list.size(); i++) {
+			
+			//이름 마스킹
+			String nameM = list.get(i).getStrUserName();
+			String firstName = nameM.substring(0, 1);
+			int lastNameStartPoint = nameM.indexOf(firstName);
+			String lastName = nameM.substring(lastNameStartPoint + 1, nameM.length());
+ 
+            String makers = "";
+ 
+            for(int j = 0; j < lastName.length(); j++){
+                makers += "*";
+            }
+ 
+            lastName = lastName.replace(lastName, makers);
+            String maskedName = firstName + lastName;
+
+            list.get(i).setStrUserName(maskedName);
+
+			
+			//전화번호 마스킹
+			String phoneM = list.get(i).getStrUserPhone();
+			Pattern pattern = Pattern.compile("^(\\d{3})-?(\\d{3,4})-?(\\d{4})$"); 
+			
+			         
+	        Matcher matcher = pattern.matcher(phoneM);
+	        
+	        if(matcher.find()){ //        
+	            String Fhp = matcher.group(1);
+	            String Mhp = matcher.group(2).substring(0, matcher.group(2).length()-2);
+	            String Bhp = matcher.group(3).substring(1);            
+	            phoneM =  Fhp + "-" + Mhp + "**" + "-*" + Bhp; 
+	        } else {
+	        	phoneM= "***";
+	        }
+
+	        list.get(i).setStrUserPhone(phoneM);
+
+
+		}
+		
+		
 		
 		mav.addObject("userList",list);
 		mav.setViewName("/admin/membership/MembershipList");
@@ -261,6 +363,46 @@ public class MembershipController {
 		
 		//수정완료후 목록 페이지로 이동
 		List<MembershipInfo> list = membershipService.selectAllMember(); //DB에 저장된 회원들의 정보 모두 가져오기
+		
+		//마스킹 처리
+		for(int i=0; i<list.size(); i++) {
+					
+			//이름 마스킹
+			String nameM = list.get(i).getStrUserName();
+			String firstName = nameM.substring(0, 1);
+			int lastNameStartPoint = nameM.indexOf(firstName);
+			String lastName = nameM.substring(lastNameStartPoint + 1, nameM.length());
+			String makers = "";
+		 
+			for(int j = 0; j < lastName.length(); j++){
+				makers += "*";
+			}
+			
+			lastName = lastName.replace(lastName, makers);
+			String maskedName = firstName + lastName;
+
+			list.get(i).setStrUserName(maskedName);
+
+					
+			//전화번호 마스킹
+			String phoneM = list.get(i).getStrUserPhone();
+			Pattern pattern = Pattern.compile("^(\\d{3})-?(\\d{3,4})-?(\\d{4})$"); 
+					
+			Matcher matcher = pattern.matcher(phoneM);
+			        
+			if(matcher.find()){ //        
+				String Fhp = matcher.group(1);
+				String Mhp = matcher.group(2).substring(0, matcher.group(2).length()-2);
+				String Bhp = matcher.group(3).substring(1);            
+				phoneM =  Fhp + "-" + Mhp + "**" + "-*" + Bhp; 
+			} else {
+				phoneM= "***";
+			}
+
+			list.get(i).setStrUserPhone(phoneM);
+
+
+		}
 		
 		
 		mav.addObject("userList",list);

@@ -4,15 +4,15 @@ import java.util.Date;
 
 public class Member {
 	private int intUserNo;
-	private String strUserId;
-	private String strUserPw;
-	private String strUserName;
-	private String strUserPhone;
-	private String strUserEmail;
-	private String strUserSex;	
-	private String strUserBirth;
-	private Date dateUserDate;
-	private String strUserGrade;
+	private String StrUserId;
+	private String StrUserPw;
+	private String StrUserName;
+	private String StrUserPhone;
+	private String StrUserEmail;
+	private String StrUserSex;	
+	private String StrUserBirth;
+	private Date DateUserDate;
+	private String StrUserGrade;
 	public int getIntUserNo() {
 		return intUserNo;
 	}
@@ -20,59 +20,60 @@ public class Member {
 		this.intUserNo = intUserNo;
 	}
 	public String getStrUserId() {
-		return strUserId;
+		return StrUserId;
 	}
 	public void setStrUserId(String strUserId) {
-		this.strUserId = strUserId;
+		StrUserId = strUserId;
 	}
 	public String getStrUserPw() {
-		return strUserPw;
+		return StrUserPw;
 	}
 	public void setStrUserPw(String strUserPw) {
-		this.strUserPw = strUserPw;
+		StrUserPw = strUserPw;
 	}
 	public String getStrUserName() {
-		return strUserName;
+		return StrUserName;
 	}
 	public void setStrUserName(String strUserName) {
-		this.strUserName = strUserName;
+		StrUserName = strUserName;
 	}
 	public String getStrUserPhone() {
-		return strUserPhone;
+		return StrUserPhone;
 	}
 	public void setStrUserPhone(String strUserPhone) {
-		this.strUserPhone = strUserPhone;
+		StrUserPhone = strUserPhone;
 	}
 	public String getStrUserEmail() {
-		return strUserEmail;
+		return StrUserEmail;
 	}
 	public void setStrUserEmail(String strUserEmail) {
-		this.strUserEmail = strUserEmail;
+		StrUserEmail = strUserEmail;
 	}
 	public String getStrUserSex() {
-		return strUserSex;
+		return StrUserSex;
 	}
 	public void setStrUserSex(String strUserSex) {
-		this.strUserSex = strUserSex;
+		StrUserSex = strUserSex;
 	}
 	public String getStrUserBirth() {
-		return strUserBirth;
+		return StrUserBirth;
 	}
 	public void setStrUserBirth(String strUserBirth) {
-		this.strUserBirth = strUserBirth;
+		StrUserBirth = strUserBirth;
 	}
 	public Date getDateUserDate() {
-		return dateUserDate;
+		return DateUserDate;
 	}
 	public void setDateUserDate(Date dateUserDate) {
-		this.dateUserDate = dateUserDate;
+		DateUserDate = dateUserDate;
 	}
 	public String getStrUserGrade() {
-		return strUserGrade;
+		return StrUserGrade;
 	}
 	public void setStrUserGrade(String strUserGrade) {
-		this.strUserGrade = strUserGrade;
+		StrUserGrade = strUserGrade;
 	}
+	
 
 	
 

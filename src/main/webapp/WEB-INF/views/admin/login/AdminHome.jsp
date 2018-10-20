@@ -14,26 +14,29 @@
 
 <jsp:include page="../navigationAdmin.jsp" flush="true"/>
         <!-- page content -->
-        <div class="right_col" role="main">
-         <div class="">
-            <div class="page-title">
-              <div class="title_left">
-              
-              </div>
-
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    
-                  </div>
-                </div>
-              </div>
+        <div class="right_col" role="main" style="min-height: 900px;">
+        <!-- top tiles -->
+          <div class="row tile_count" style="margin-bottom: 0px;">
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" style="margin-left: 2%;margin-top:1%">
+              <span class="count_top" ><i class="fa fa-user"></i> 오늘의 가입자 수</span>
+              <div class="count green" style="margin-top:2%">${enrollCount}&nbsp;<small style="font-size: 20px;">명</small></div>
             </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" style="margin-top:1%">
+              <span class="count_top" ><i class="fa fa-book"></i> 오늘의 게시물 수</span>
+              <div class="count" style="margin-top:2%">${boardCount}&nbsp;<small style="font-size: 20px;">글</small></div>
+            </div>
+            
+          </div>
+          <!-- /top tiles -->
+        
+         <div class="">
+
             
 		   <div class="clearfix"></div>
 		   
           <div class="row">
-            <div class="col-md-3 col-xs-12 widget widget_tally_box" style="margin-left: 2%;">
+            <div class="col-md-3 col-xs-12 widget widget_tally_box" style="margin-left: 1%;">
+            
                 <div class="x_panel fixed_height_500">
                   <div class="x_title">
                     <h2 style="font-weight:bold; color:#34495e">성별 가입률</h2>
@@ -82,10 +85,8 @@
                                   <span class="icon" >
                                   <i class="fa fa-square blue" style="margin-top: 60%;"></i></span> <span class="name" style="font-size: 18px; font-weight: bold; color:#4f6f8f">여  성</span>
                                 </p>
-                              </li>
-                              
+                              </li>                              
                             </ul>
-
                           </div>
           				</div>
 					</div>
@@ -101,13 +102,13 @@
 		                    <colgroup>
 					    		<col width = "6%"/>
 					    		<col width = "*"/>
-					    		<col width = "10%"/>
+					    		<col width = "12%"/>
 					    		<col width = "15%"/>
 					    		<col width = "7%"/>			    		
 					    	</colgroup>
 		                      <thead>
 		                        <tr>
-		                          <th style="text-align: center; color:#00003f; font-size: 15px;">번  호</th>
+		                          <th style="text-align: center; color:#00003f; font-size: 15px;">#</th>
 		                          <th style="text-align: center; color:#00003f; font-size: 15px;">제   목</th>
 		                          <th style="text-align: center; color:#00003f; font-size: 15px;">작성자</th>
 		                          <th style="text-align: center; color:#00003f; font-size: 15px;">작성일시</th>
@@ -119,9 +120,15 @@
 		
 									<tr>
 										<td style="text-align: center; color:#3b5976;font-size: 15px;">${status.count}</td>
-										<td style="text-align: center; color:#3b5976;font-size: 15px;">${list.strBoardTitle}</td>
+										<td style="padding-left: 3%; color:#3b5976;font-size: 15px;">${list.strBoardTitle}
+										<c:choose>
+											<c:when test="${list.intNewCheck eq 1}">
+												<img src="/img/new.png" alt="..." style="height: 20px;">
+											</c:when>
+										</c:choose>										
+										</td>
 										<td style="text-align: center; color:#3b5976;font-size: 15px;">${list.strUserId}</td>
-										<td style="text-align: center; color:#3b5976;font-size: 15px;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.dateBoardDate}"/></td>										
+										<td style="text-align: center; color:#3b5976;font-size: 15px;">${list.strBoardDate}</td>										
 										<td style="text-align: center; color:#3b5976;font-size: 15px;">${list.intHit}</td>
 									</tr>	
 								</c:forEach>
@@ -169,8 +176,7 @@
     <!-- Custom Theme Scripts -->
     <script src="/build/js/custom.min.js"></script>
         <jsp:include page="../bottomAdmin.jsp" flush="true"/>
-      </div>
-    </div>
+
 <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

@@ -79,17 +79,19 @@
                     
                     <table id="datatable" class="table table-striped table-bordered" id="AdminList">
                     <colgroup>
+			    		<col width = "3%"/>
 			    		<col width = "6%"/>
 			    		<col width = "*"/>
-			    		<col width = "10%"/>
-			    		<col width = "15%"/>
+			    		<col width = "9%"/>
+			    		<col width = "13%"/>
 			    		<col width = "12%"/>
 			    		<col width = "9%"/>
 			    		<col width = "17%"/>
 			    	</colgroup>
                       <thead>
                         <tr>
-                          <th style="text-align: center; padding-left: 1.5%; color:#00003f">번  호</th>
+                          <th style="text-align: center; padding-left: 1.5%; color:#00003f">#</th>
+                          <th style="text-align: center; padding-left: 1.5%; color:#00003f">번   호</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">아이디</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">이   름</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">전화번호</th>
@@ -102,7 +104,8 @@
                         <c:forEach var="userList" items="${userList}" varStatus="status">
 
 							<tr>
-								<td style="text-align: center; color:#3b5976;">${status.count}</td>		
+								<td style="text-align: center; color:#3b5976;">${status.count}</td>									
+								<td style="text-align: center; color:#3b5976;">${userList.intUserNo}</td>		
 								<td style="padding-left: 2%; color:#3b5976;">${userList.strUserId}</td>
 								<td style="text-align: center; color:#3b5976;">${userList.strUserName}</td>
 								<td style="text-align: center; color:#3b5976;">${userList.strUserPhone}</td>

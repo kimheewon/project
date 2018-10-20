@@ -39,6 +39,21 @@ public class LoginAdminDAO {
 		return sqlSession.selectList("adminloginSql.getBoardList");
 	}
 
+	//오늘의 가입자수
+	public int enrollCount() {
+		return sqlSession.selectOne("adminloginSql.enrollCount");
+	}
+
+	//오늘의 게시물 수
+	public int boardCount() {
+		return sqlSession.selectOne("adminloginSql.boardCount");
+	}
+
+	//총 게시물 수
+	public int totalBoardCount() {
+		return sqlSession.selectOne("adminloginSql.totalBoardCount");
+	}
+
 	
 
 }

@@ -22,4 +22,13 @@ public interface LoginAdminService {
 
 	//게시글 Top 10
 	public List<Board> getBoadList();
+
+	//오늘의 가입자수
+	public int enrollCount();
+
+	//오늘의 게시물 수
+	public int boardCount();
+
+	//총 게시물 수
+	public int totalBoardCount();
 }

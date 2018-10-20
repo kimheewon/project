@@ -57,6 +57,12 @@ public class BoardServiceImpl implements BoardService {
 	public Board readboard(int intBoardNo) throws Exception {
 		return boardDAO.readboard(intBoardNo);
 	}
+	
+	//게시글 읽기(조회수 증가)
+	@Override
+	public Board readboardHit(int intBoardNo) {
+		return boardDAO.readboardHit(intBoardNo);
+	}
 
 	// 수정한 게시글 저장
 	@Override
@@ -110,4 +116,14 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.getboardlist(pagination);
 
 	}
+
+
+	//댓글수
+	@Override
+	public int totalComment(int intBoardNo) {
+		return boardDAO.totalComment(intBoardNo);
+	}
+
+
+
 }

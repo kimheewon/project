@@ -1,80 +1,58 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-    
-<%  // ÀÎÁõµÈ ¼¼¼ÇÀÌ ¾ø´Â°æ¿ì, ÇØ´çÆäÀÌÁö¸¦ º¼ ¼ö ¾ø°Ô ÇÔ.
-    if (session.getAttribute("AdminId")  == null) {
-        response.sendRedirect("/loginAdmin/logout");
-    }
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="UTF-8">
- 
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ì—ëŸ¬</title>
+
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+  </head>
 
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
-
-<jsp:include page="../navigationAdmin.jsp" flush="true"/>
         <!-- page content -->
-        <div class="right_col" role="main">
-         <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>°ü¸®ÀÚ Home </h3>
-              </div>
-
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-		   <div class="clearfix"></div>
-		   
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
-	            <div class="x_title">
-	             <div class="clearfix"></div>
-	            </div>
-	            <div class="x_content">
-	            	 <p class="text-muted font-13 m-b-30" style="font-size:20px;color:#670000">
-                      	±ÇÇÑÀÌ ¾ø½À´Ï´Ù.
-                    </p>
-	            </div>
-	            </div>
-              </div>
+        <div class="col-md-12">
+          <div class="col-middle">
+            <div class="text-center text-center">
+              <h1 class="error-number">404</h1>
+              <h2>ì£„ì†¡í•©ë‹ˆë‹¤. ì´ í˜ì´ì§€ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.</h2>
+              <p>ì°¾ê³  ìˆëŠ” ì´ í˜ì´ì§€ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤. <a href="/loginAdmin/home" style="color:#a0adbc; text-decoration:underline">í™ˆìœ¼ë¡œ ëŒì•„ê°€ê¸°</a>
+              </p>
+              
             </div>
           </div>
         </div>
         <!-- /page content -->
-  
-   
-    <!-- Datatables -->
-    <script src="/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script src="/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script src="/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    <script src="/vendors/jszip/dist/jszip.min.js"></script>
-    <script src="/vendors/pdfmake/build/pdfmake.min.js"></script>
-    <script src="/vendors/pdfmake/build/vfs_fonts.js"></script>
-
-    <!-- Custom Theme Scripts -->
-    <script src="/build/js/custom.min.js"></script>
-        <jsp:include page="../bottomAdmin.jsp" flush="true"/>
       </div>
     </div>
+
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
+<!-- Google Analytics -->
 <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -85,6 +63,5 @@ ga('create', 'UA-23581568-13', 'auto');
 ga('send', 'pageview');
 
 </script>
-   
   </body>
 </html>

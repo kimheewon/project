@@ -9,8 +9,11 @@ public class Board {
 	private String strBoardTitle;
 	private String strBoardContent;
 	private Date dateBoardDate;
+	private String strBoardDate;
+	private int intNewCheck;
 	private int intHit;
 	private int rownumber;
+	private int inttotalComment;
 	
 	
 	public int getIntBoardNo() {
@@ -43,6 +46,21 @@ public class Board {
 	public void setDateBoardDate(Date dateBoardDate) {
 		this.dateBoardDate = dateBoardDate;
 	}
+	
+	public String getStrBoardDate() {
+		return strBoardDate;
+	}
+	public void setStrBoardDate(String strBoardDate) {
+		this.strBoardDate = strBoardDate;
+	}
+	
+	
+	public int getIntNewCheck() {
+		return intNewCheck;
+	}
+	public void setIntNewCheck(int intNewCheck) {
+		this.intNewCheck = intNewCheck;
+	}
 	public int getIntHit() {
 		return intHit;
 	}
@@ -55,6 +73,12 @@ public class Board {
 	}
 	public void setRownumber(int rownumber) {
 		this.rownumber = rownumber;
+	}
+	public int getInttotalComment() {
+		return inttotalComment;
+	}
+	public void setInttotalComment(int inttotalComment) {
+		this.inttotalComment = inttotalComment;
 	}
 	
 	

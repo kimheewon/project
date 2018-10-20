@@ -79,17 +79,14 @@
 									<form id="AuthEnrollInfo" name="AuthEnrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Auth/AuthUpdate" method="POST">
 										<input type="hidden" name="no" id="no" value="${authNo}">	
 										<div class="form-group">
-											<label class="control-label col-md-3 col-sm-3 col-xs-12"
-												for="authName" style="font-size: 15px; color: #00003f;">권한명 <span class="required">*</span>
+											<label class="control-label col-md-3 col-sm-3 col-xs-12" for="authName" style="font-size: 15px; color: #00003f;">권한명 <span class="required">*</span>
 											</label>
 											<div class="input-group" style="width: 50%">
-												<input type="text" class="form-control" id="authName"
-													name="authName" value="${authName}"> <span
-													class="input-group-btn">&nbsp;&nbsp;&nbsp;
-													<button type="button" class="btn btn-primary"
-														id="authNameCheck">중복확인</button>
-												</span>
+												<input type="text" class="form-control" id="authName"name="authName" value="${authName}" placeholder="최대 15자"> 
+												<span class="input-group-btn">&nbsp;&nbsp;&nbsp;	<button type="button" class="btn btn-primary" id="authNameCheck">중복확인</button>
+												</span>												
 											</div>
+											
 										</div>
 										<div class="form-group">
 											<label class="col-md-3 col-sm-3 col-xs-12 control-label"style="font-size: 15px; color: #00003f;">권한 항목 <span class="required">*</span> <br> <small
@@ -241,6 +238,7 @@ ga('send', 'pageview');
 		     	str.authName.focus();
 		   		return false;
 		       }
+			
 			if(val == 1){
 				alert("중복체크를 해주세요");
 				return false;
@@ -257,6 +255,9 @@ ga('send', 'pageview');
 		
 	});
 
+	
+	
+	
 	
 
 

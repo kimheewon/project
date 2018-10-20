@@ -23,6 +23,9 @@ public interface BoardService {
 	
 	//게시글 작성
 	public void insertboard(Board board) throws Exception;
+	
+	//게시글 읽기(조회수 증가)
+	public Board readboardHit(int intBoardNo);	
 
 	//게시글 읽기
 	public Board readboard(int intBoardNo) throws Exception;
@@ -50,6 +53,11 @@ public interface BoardService {
 
 	//게시판(페이징)
 	public List<Board> getBoardList(Pagination pagination);
+
+	//댓글수
+	public int totalComment(int intBoardNo);
+
+	
 
 	
 

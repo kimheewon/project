@@ -12,6 +12,7 @@
 
 <title>Join</title>
 
+    
 <!-- Bootstrap core CSS -->
 <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -34,7 +35,7 @@
 <!-- Custom styles for this template -->
 <link href="/css/freelancer.min.css" rel="stylesheet">
 <style>
-	.sex{
+	.flat{
 		top: 0;
 	    opacity: 1;
 		font-size: .85em;
@@ -125,6 +126,15 @@
 		     	str.userId.focus();
 		   		return false;
 		       }
+			else{
+				var idReg = /^[a-zA-Z](?=.{0,28}[0-9])[0-9a-zA-Z]{6,15}$/	//영문 대문자 또는 소문자로 시작하는 아이디, 길이는 6~15자, 끝날때 제한 없음
+				if(!idReg.test(str.userId.value)) {
+					alert("6~15자 영문대소문자,숫자를 사용하세요.");
+					str.userId.focus();
+			   		return false;
+			}	
+				
+			}
 			if(val == 1){
 				alert("중복체크를 하지 않았습니다.");
 				return false;
@@ -189,14 +199,30 @@
 			document.getElementById("welcome").value = '비밀번호가 일치합니다.';
 		}
 		
-	   
-	 
+	}
+	
+	//아이디 확인
+	function go2(val){
+		var userId = document.joinInfo.userId.value;
+		
+		//var idReg = /^[A-za-z0-9]{6,15}$/g;		
+		
+		var idReg = /^[a-zA-Z](?=.{0,28}[0-9])[0-9a-zA-Z]{6,15}$/;	//영문 대문자 또는 소문자로 시작하는 아이디, 길이는 6~15자, 끝날때 제한 없음
+		
+		if(!idReg.test(userId)) {
+			document.getElementById("welcome2").value = '아이디 형식이 맞지않습니다.';
+		}
+		else{
+			document.getElementById("welcome2").value = '맞는 형식입니다.';
+		}
+		
 	}
 	
 	
 	
-	
 </script>
+
+
 </head>
 
 <body id="page-top">
@@ -225,8 +251,10 @@
 							<div class="form-group floating-label-form-group controls mb-0 pb-2" >
 								<a class="font_required">* 아이디</a>
 								<p class="help-block text-danger"><p class="help-block text-danger">
-								<span>&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="userId" name="userId"	type="text" required="required" size="15" style="display:inline; border-radius: 8px;width:80%;background-color:#efefef ">
+								<span>&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="userId" name="userId"	type="text" required="required" placeholder="첫글자는 영문대소자. 영문대소문자,숫자 모두 포함 최소 6자~최대 15자" 
+								size="15" style="display:inline; border-radius: 8px;width:80%;background-color:#efefef" onkeyup="go2(this.value)">
 								&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="userIdCheck" value="중복확인" style="background-color:#2c3e50; color:white;padding: 0.5rem;border-radius: 8px;"/></span>
+								<br><span>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="welcome2" style="color:#cc0000;font-size:10pt;width:50%" disabled></span>
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>
@@ -269,8 +297,7 @@
 							</div>
 						</div>
 						<div class="control-group">
-							<div
-								class="form-group floating-label-form-group controls mb-0 pb-2">
+							<div class="form-group floating-label-form-group controls mb-0 pb-2">
 								<a class="font_required">이메일</a>
 								<p class="help-block text-danger"></p>
 								&nbsp;&nbsp; &nbsp;&nbsp;<input class="form-control" id="email" name="email" type="email" data-validation-required-message="Please enter your email address." style="display:inline; border-radius: 8px;width:80%;background-color:#efefef ">
@@ -278,20 +305,25 @@
 							</div>
 						</div>
 						<div class="control-group">
-							<div class="form-group floating-label-form-group controls mb-0 pb-2">
-								<a class="fontsize">* 성별</a>
-								<p class="help-block text-danger"></p> &nbsp;&nbsp; &nbsp;&nbsp;
-								<input class="sex_f" id="sex" type="radio" name="sex"  value="남성" checked="checked" >남성 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<input class="sex_f" type="radio" id="sex" name="sex" value="여성" />여성								
-								<p class="help-block text-danger"></p>
+							<div class="form-group">
+								<div class="form-group floating-label-form-group controls mb-0 pb-2">
+									<a class="fontsize">* 성별</a>   
+									<p class="help-block text-danger"></p>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<input class="radio" id="sex" type="radio" name="sex"  value="남성" checked="checked" > &nbsp;남성 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<input class="radio" type="radio" id="sex2" name="sex" value="여성" /> &nbsp;여성								
+										
+									<p class="help-block text-danger"></p>
+							</div>
 							</div>
 						</div>
-						
+      
+    
 						<br>
 						<div id="success"></div>
-						<div class="form-group" style="text-align:right;">
-							<button class="btn btn-primary btn-xl" onclick="location='/login'">취 소</button>
-							<button class="btn btn-primary btn-xl" id="joinInformation">가 입</button>							
+						<div class="form-group" style="text-align:right; margin-right: 10%;">
+							<button class="btn btn-primary btn-x" onclick="location='/login'">취 소</button>
+							&nbsp;&nbsp;&nbsp;<button class="btn btn-primary btn-x" id="joinInformation">가 입</button>							
 						</div>
 						
 					</form>
@@ -309,7 +341,7 @@
 		</a>
 	</div>
 
-
+ 
 	<!-- Bootstrap core JavaScript -->
 	<script src="/vendor/jquery/jquery.min.js"></script>
 	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -327,6 +359,7 @@
     <footer>
  		<jsp:include page="../bottom.jsp" flush="true"/>
     </footer>
+
 </body>
 
 </html>

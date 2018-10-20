@@ -46,8 +46,8 @@
 	}
 	
 	.button {
-		background-color: #18bc9c;
-		border: thick solid #18bc9c;
+		background-color: #2c3e50;
+		border: thick solid #2c3e50;
 		border-radius: 5px 5px 5px 5px;
 		padding: 1px;
 		margin: 1%;
@@ -104,30 +104,24 @@
 		<form method="POST"
 			action="/board/boardchange?intBoardNo=${board.intBoardNo}">
 			<input type="hidden" id="bno" value="${board.intBoardNo}">
-			<table class="table" style="text-align: center">
-				<tr>
-					<td class="color">제목</td>
-					<td colspan="50">${board.strBoardTitle}</td>
+			<table class="" style="text-align: center">
+				<tr style="    border-bottom: 1px dashed  #c1c1c1;">
+					
+					<td style="width: 10%;font-weight: bold;font-size: 20px;color: #2c3e50;text-align: left;padding-left: 6%;    padding-bottom: 0.5%;">${board.strBoardTitle}</td>
+					<td style="width: 80%;  text-align: right;  font-size: 15px;  padding-right: 3%;    color: #7f7f7f; padding-top: 0.6%;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${board.dateBoardDate}" /></td>
 				</tr>
 
 				<tr>
-					<td class="color">작성자</td>
-					<td>${board.strUserId}</td>
-					<td class="color">작성일</td>
-					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-							value="${board.dateBoardDate}" /></td>
-					<td class="color">조회수</td>
-					<td>${board.intHit}</td>
-				<tr height="250">
-					<td class="color">글내용</td>
-					<td colspan="50" style="text-align: left; padding-left: 3%;">${board.strBoardContent}</td>
+					<td style="width: 18%;text-align: left;padding-left: 6.1%;font-weight: bold;color: #4d4d4d;  font-size: 18px;  padding-top: 1.3%;"><img class="btn-img" src="/img/lego.png" style=" width: 20%; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${board.strUserId}</td>
+					
+					<td style="width:25%; text-align:right;padding-right: 3%; border-bottom:hidden">조회수&nbsp;&nbsp;&nbsp;${board.intHit}</td>
+				<tr height="250">					
+					<td colspan="50" style="text-align: left; padding-left: 7%;    padding-top: 2%;">${board.strBoardContent}</td>
 				</tr>
 			</table>
 			<c:if test="${id eq board.strUserId}">
 				<div class="container_b">					
-					<input type="button" class="button"
-						onclick="location.href='/board/boardDelete?intBoardNo=${board.intBoardNo}'"
-						value="삭제하기">
+					<input type="button" class="button" onclick="checkDelete(${board.intBoardNo})" value="삭제하기">
 						<button class="button" type="submit">수정하기</button>
 				</div>
 			</c:if>
@@ -148,9 +142,9 @@
 					<div style="text-align: right;" class="beforeUpd"
 						id="beforeUpd${comment.intCmmtNo}">
 						<c:if test="${id eq comment.strUserId}">
-							<span style="float: right; margin-right: 2%; font-weight: bold"><a
+							<span style="float: right; margin-right: 1%; font-weight: bold; color:#2c3e50" ><a
 								href="/board/commentDelete?intCmmtNo=${comment.intCmmtNo}&intBoardNo=${board.intBoardNo}">삭제</a></span>
-							<span style="float: right; margin-right: 2%; font-weight: bold"><a
+							<span style="float: right; margin-right: 2%; font-weight: bold; color:#2c3e50"><a
 								href="javascript:updateComment(${comment.intCmmtNo});">수정</a></span>
 						</c:if>
 					</div>
@@ -272,6 +266,20 @@
 		 
 		 
 	 }
+	 
+	 //글 삭제 확인
+	 	
+	//글 삭제 확인
+	function checkDelete(bno){
+		if((confirm("정말 삭제 하시겠습니까?") == true)){
+			location.href="/board/boardDelete?intBoardNo="+bno;
+		}
+			
+		else
+			return;
+		
+	}
+
 				
 </script>
 </html>

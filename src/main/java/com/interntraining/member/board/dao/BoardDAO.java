@@ -93,5 +93,15 @@ public class BoardDAO {
 		return sqlSession.selectList("sql.searchboardlistP",pagination);
 	}
 
+	//댓글수
+	public int totalComment(int intBoardNo) {
+		return sqlSession.selectOne("sql.totalComment",intBoardNo);
+	}
+
+	//게시글 읽기(조회수 증가)
+	public Board readboardHit(int intBoardNo) {
+		return sqlSession.selectOne("sql.boardreadHit", intBoardNo);
+	}
+
 	
 }

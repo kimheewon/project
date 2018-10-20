@@ -1,5 +1,7 @@
 package com.interntraining.member.board.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,7 +57,37 @@ public class BoardController {
 	        /* List */
 	        List<Board> boardList = boardService.getBoardList(pagination); // 리스트
 	        
-		
+	        
+	        //날짜 변환
+	        Date dateB = new Date();
+	        String boardDate;
+	        int Commentotal;
+
+	        
+	        Date today = new Date();
+	        SimpleDateFormat date = new SimpleDateFormat("yyy/MM/dd");
+	        SimpleDateFormat dateTime = new SimpleDateFormat("hh:mm");
+	        int check;
+	        for(int j=0; j<boardList.size();j++) {
+	        	dateB = boardList.get(j).getDateBoardDate();
+	        	check=0;
+	        	//댓글 수
+	        	Commentotal = boardService.totalComment(boardList.get(j).getIntBoardNo());
+	        	boardList.get(j).setInttotalComment(Commentotal);
+	        	
+		       
+		        if(! date.format(today).equals(date.format(dateB))) {	//오늘 쓴 글이 아니면
+		        	boardDate = date.format(dateB);
+		        	boardList.get(j).setStrBoardDate(boardDate);
+		        }
+		        else {	//오늘 쓴 글이면
+		        	check=1;
+		        	boardDate=dateTime.format(dateB);
+		        	boardList.get(j).setStrBoardDate(boardDate);
+		        	boardList.get(j).setIntNewCheck(check); //오늘 글인지 확인 new
+		        }
+		    }
+
 			mav.addObject("boardlist", boardList);
 			mav.addObject("listCnt", listCnt);
 			mav.addObject("pagination", pagination);
@@ -68,17 +100,48 @@ public class BoardController {
 		else {//검색어
 			List<Board> boardCount = boardService.searchboardlist(KeyField, KeyWord);	//게시글 총 개수
 			int listCnt = boardCount.size();
-		Pagination pagination = new Pagination(listCnt, curPage);
-		pagination.setKeyField(KeyField);
-		pagination.setKeyWord(KeyWord);
-		pagination.setCurPage(curPage);
-		List<Board> list = boardService.searchboardlistP(pagination);
-		mav.addObject("boardlist", list);
-		mav.addObject("listCnt", listCnt);
-		mav.addObject("pagination", pagination);
-		mav.setViewName("/board/boardlist");
-		
-		return mav;
+			Pagination pagination = new Pagination(listCnt, curPage);
+			pagination.setKeyField(KeyField);
+			pagination.setKeyWord(KeyWord);
+			pagination.setCurPage(curPage);
+			List<Board> list = boardService.searchboardlistP(pagination);
+			
+			//날짜 변환
+	        Date dateB = new Date();
+	        String boardDate;
+	        int Commentotal;
+
+	        
+	        Date today = new Date();
+	        SimpleDateFormat date = new SimpleDateFormat("yyy/MM/dd");
+	        SimpleDateFormat dateTime = new SimpleDateFormat("hh:mm");
+	        int check;
+	        for(int j=0; j<list.size();j++) {
+	        	dateB = list.get(j).getDateBoardDate();
+	        	check=0;
+	        	//댓글 수
+	        	Commentotal = boardService.totalComment(list.get(j).getIntBoardNo());
+	        	list.get(j).setInttotalComment(Commentotal);
+	        	
+		       
+		        if(! date.format(today).equals(date.format(dateB))) {	//오늘 쓴 글이 아니면
+		        	boardDate = date.format(dateB);
+		        	list.get(j).setStrBoardDate(boardDate);
+		        }
+		        else {	//오늘 쓴 글이면
+		        	check=1;
+		        	boardDate=dateTime.format(dateB);
+		        	list.get(j).setStrBoardDate(boardDate);
+		        	list.get(j).setIntNewCheck(check); //오늘 글인지 확인 new
+		        }
+		    }
+			
+			mav.addObject("boardlist", list);
+			mav.addObject("listCnt", listCnt);
+			mav.addObject("pagination", pagination);
+			mav.setViewName("/board/boardlist");
+			
+			return mav;
 		}
 	}
 
@@ -117,6 +180,39 @@ public class BoardController {
 					
 		//List<Board> boardlist = boardService.selectboardlist(board);
 		List<Board> boardlist = boardService.getBoardList(pagination); // 리스트
+		
+		 //날짜 변환+new
+        Date dateB = new Date();
+        String boardDate;
+        int Commentotal;
+
+        
+        Date today = new Date();
+        SimpleDateFormat date = new SimpleDateFormat("yyy/MM/dd");
+        SimpleDateFormat dateTime = new SimpleDateFormat("hh:mm");
+        int check;
+        for(int j=0; j<boardlist.size();j++) {
+        	dateB = boardlist.get(j).getDateBoardDate();
+        	check=0;
+        	//댓글 수
+        	Commentotal = boardService.totalComment(boardlist.get(j).getIntBoardNo());
+        	boardlist.get(j).setInttotalComment(Commentotal);
+        	
+	       
+	        if(! date.format(today).equals(date.format(dateB))) {	//오늘 쓴 글이 아니면
+	        	boardDate = date.format(dateB);
+	        	boardlist.get(j).setStrBoardDate(boardDate);
+	        }
+	        else {	//오늘 쓴 글이면
+	        	check=1;
+	        	boardDate=dateTime.format(dateB);
+	        	boardlist.get(j).setStrBoardDate(boardDate);
+	        	boardlist.get(j).setIntNewCheck(check); //오늘 글인지 확인 new
+	        }
+	    }
+        
+        
+        
 		mav.addObject("boardlist", boardlist);
 		mav.addObject("listCnt", listCnt);
 		mav.addObject("pagination", pagination);
@@ -125,6 +221,24 @@ public class BoardController {
 		return mav;
 	}
 
+	// 게시글 읽기 + 댓글 뿌려주기(조회수 증가)
+	@RequestMapping("/boardreadHit")
+	public ModelAndView boardreadHit(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+		int intBoardNo) throws Exception {
+		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
+		String id = (String) session.getAttribute("id"); // 세션
+
+		Board boardread = boardService.readboardHit(intBoardNo);	//조회수 증가
+		List<Comment> cmmtlist = boardService.selectcmmtlist(intBoardNo);
+
+		mv.addObject("board", boardread);
+		mv.addObject("commentlist", cmmtlist);
+		mv.addObject("id", id);
+		mv.setViewName("/board/boardread");
+		return mv;
+	}	
+		
+		
 	// 게시글 읽기 + 댓글 뿌려주기
 	@RequestMapping("/boardread")
 	public ModelAndView boardread(HttpServletRequest request, HttpServletResponse response, HttpSession session,
@@ -133,7 +247,7 @@ public class BoardController {
 
 		String id = (String) session.getAttribute("id"); // 세션
 
-		Board boardread = boardService.readboard(intBoardNo);
+		Board boardread = boardService.readboard(intBoardNo);	//조회수 증가No
 		List<Comment> cmmtlist = boardService.selectcmmtlist(intBoardNo);
 
 		mv.addObject("board", boardread);
@@ -179,6 +293,37 @@ public class BoardController {
 		
 		List<Board> boardlist = boardService.getBoardList(pagination); // 리스트
 		//List<Board> boardlist = boardService.selectboardlist(board);
+		
+		 //날짜 변환+new
+        Date dateB = new Date();
+        String boardDate;
+        int Commentotal;
+
+        
+        Date today = new Date();
+        SimpleDateFormat date = new SimpleDateFormat("yyy/MM/dd");
+        SimpleDateFormat dateTime = new SimpleDateFormat("hh:mm");
+        int check;
+        for(int j=0; j<boardlist.size();j++) {
+        	dateB = boardlist.get(j).getDateBoardDate();
+        	check=0;
+        	//댓글 수
+        	Commentotal = boardService.totalComment(boardlist.get(j).getIntBoardNo());
+        	boardlist.get(j).setInttotalComment(Commentotal);
+        	
+	       
+	        if(! date.format(today).equals(date.format(dateB))) {	//오늘 쓴 글이 아니면
+	        	boardDate = date.format(dateB);
+	        	boardlist.get(j).setStrBoardDate(boardDate);
+	        }
+	        else {	//오늘 쓴 글이면
+	        	check=1;
+	        	boardDate=dateTime.format(dateB);
+	        	boardlist.get(j).setStrBoardDate(boardDate);
+	        	boardlist.get(j).setIntNewCheck(check); //오늘 글인지 확인 new
+	        }
+	    }
+        
 		mv.addObject("boardlist", boardlist);
 		mv.addObject("listCnt", listCnt);
 		mv.addObject("pagination", pagination);
@@ -189,14 +334,53 @@ public class BoardController {
 	//게시글 삭제
 	@RequestMapping("/boardDelete")
 	public ModelAndView boardDelete(HttpServletRequest request, HttpServletResponse response, HttpSession session,
-			int intBoardNo) throws Exception {
+			int intBoardNo, @RequestParam(required=false) Integer nowPage,@RequestParam(required=false)Integer nowBlock,
+            @RequestParam(required=false) String keyField, @RequestParam(required=false) String keyWord, @RequestParam(defaultValue="1") int curPage) throws Exception {
 		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
 
-		boardService.deleteboard(intBoardNo);
-
+		boardService.deleteboard(intBoardNo);	
+		
 		Board board = new Board();
-		List<Board> boardlist = boardService.selectboardlist(board);
+		List<Board> boardlistA = boardService.selectboardlist(board);
+		int listCnt = boardlistA.size();
+		
+		Pagination pagination = new Pagination(listCnt, curPage);
+		
+		List<Board> boardlist = boardService.getBoardList(pagination); // 리스트
+		
+		 //날짜 변환+new
+        Date dateB = new Date();
+        String boardDate;
+        int Commentotal;
+
+        
+        Date today = new Date();
+        SimpleDateFormat date = new SimpleDateFormat("yyy/MM/dd");
+        SimpleDateFormat dateTime = new SimpleDateFormat("hh:mm");
+        int check;
+        for(int j=0; j<boardlist.size();j++) {
+        	dateB = boardlist.get(j).getDateBoardDate();
+        	check=0;
+        	//댓글 수
+        	Commentotal = boardService.totalComment(boardlist.get(j).getIntBoardNo());
+        	boardlist.get(j).setInttotalComment(Commentotal);
+        	
+	       
+	        if(! date.format(today).equals(date.format(dateB))) {	//오늘 쓴 글이 아니면
+	        	boardDate = date.format(dateB);
+	        	boardlist.get(j).setStrBoardDate(boardDate);
+	        }
+	        else {	//오늘 쓴 글이면
+	        	check=1;
+	        	boardDate=dateTime.format(dateB);
+	        	boardlist.get(j).setStrBoardDate(boardDate);
+	        	boardlist.get(j).setIntNewCheck(check); //오늘 글인지 확인 new
+	        }
+	    }
+        
 		mv.addObject("boardlist", boardlist);
+		mv.addObject("listCnt", listCnt);
+		mv.addObject("pagination", pagination);
 		mv.setViewName("/board/boardlist");
 		return mv;
 	}

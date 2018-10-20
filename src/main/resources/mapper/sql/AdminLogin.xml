@@ -27,7 +27,27 @@
 					, BoardDate		AS dateBoardDate
 					, BoardHit 		AS intHit
 		from TBoard
-		ORDER BY BoardDate DESC
+		ORDER BY BoardDate DESC	
+	</select>
 	
+	
+	<!-- 오늘의 가입자수 -->
+	<select id="enrollCount" resultType="int">
+		select 	count(*)
+		from 	TUser
+		where	(Select Convert(varchar(10),UserDate,111)) = (Select Convert(varchar(10),Getdate(),111))	
+	</select>
+	
+	<!-- 오늘의 게시물수 -->
+	<select id="boardCount" resultType="int">
+		select 	count(*)
+		from 	TBoard
+		where	(Select Convert(varchar(10),BoardDate,111)) = (Select Convert(varchar(10),Getdate(),111))			
+	</select>
+	
+	<!-- 총 게시물 수 -->
+	<select id="totalBoardCount" resultType="int">
+		select 	count(*)
+		from 	TBoard
 	</select>
 </mapper>

@@ -66,7 +66,7 @@
 			    	</colgroup>
                       <thead>
                         <tr>
-                          <th style="text-align: center; padding-left: 1.5%; color:#00003f">번    호</th>
+                          <th style="text-align: center; padding-left: 1.5%; color:#00003f">#</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">권한 유형</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">작    업</th>
                         </tr>

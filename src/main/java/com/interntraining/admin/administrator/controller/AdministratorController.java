@@ -68,6 +68,24 @@ public class AdministratorController {
 				grade = administratorService.selectAuth(objAdmInfo.getIntAdminAuth()); 			
 				objAdmInfo.setStrAdminGrade(grade);
 				list.set(i, objAdmInfo);
+				
+				//이름 마스킹
+				String name = list.get(i).getStrAdminName();
+				String firstName = name.substring(0, 1);
+				int lastNameStartPoint = name.indexOf(firstName);
+				String lastName = name.substring(lastNameStartPoint + 1, name.length());
+	 
+	            String makers = "";
+	 
+	            for(int j = 0; j < lastName.length(); j++){
+	                makers += "*";
+	            }
+	 
+	            lastName = lastName.replace(lastName, makers);
+	            String maskedName = firstName + lastName;
+
+	            list.get(i).setStrAdminName(maskedName);
+				
 			}
 						
 			mav.addObject("adminList", list);
@@ -161,7 +179,27 @@ public class AdministratorController {
 			grade = administratorService.selectAuth(objAdmInfo.getIntAdminAuth()); //권한명 가져오기
 			objAdmInfo.setStrAdminGrade(grade);
 			listA.set(i, objAdmInfo);
+			
+			//이름 마스킹
+			String nameM = listA.get(i).getStrAdminName();
+			String firstName = nameM.substring(0, 1);
+			int lastNameStartPoint = nameM.indexOf(firstName);
+			String lastName = nameM.substring(lastNameStartPoint + 1, nameM.length());
+ 
+            String makers = "";
+ 
+            for(int j = 0; j < lastName.length(); j++){
+                makers += "*";
+            }
+ 
+            lastName = lastName.replace(lastName, makers);
+            String maskedName = firstName + lastName;
+
+            listA.get(i).setStrAdminName(maskedName);
+			
 		}
+		
+		
 		
 		mav.addObject("adminList", listA);
 		mav.setViewName("/admin/administrator/AdminManagement");	
@@ -210,19 +248,42 @@ public class AdministratorController {
 		 * 
 		 */
 		
+		int loginAuth = (int) session.getAttribute("AuthNo");			
+				
 		@SuppressWarnings("unchecked")
 		List<AuthMapp> authItem =  (List<AuthMapp>) session.getAttribute("items");
 	
 		int authCheck=0;	//권한 가지고 있는 체크
 		
 		for(int i=0; i<authItem.size(); i++) {
-			if(authItem.get(i).getIntAuthItemNo() == 2) {
-				authCheck=1;	//권한 가지고 있음
+			if(authItem.get(i).getIntAuthItemNo() == 2) {	//관리자가 관리자 관리 권한 가지고 있으면				
+				
+				authCheck=1;	//권한 가지고 있음			
+			
 			}			
 		}
 		
-		if(authCheck == 1) {	//권한 가지고 있으면
+		//수정할 관리자가 마스터 인지 여부 확인
+		int authNo = administratorService.selectAuthNo(intAdminNo);//수정할 관리자의 번호로 권한 번호 찾기
+		int count = administratorService.selectItemCount(authNo);	//수정할 관리자의 권한 항목의 총 개수
+		int count2 = administratorService.selectItemCount(loginAuth);	//로그인한 관리자의 권한 항목의 총 개수
 		
+		if(count == 3) {		//수정할 관리자의 권한 항목의 총 개수 == 총 권한 항목의 개수(3)(T: 선택인은 마스터)
+			if(count2 == 3) {	//로그인한 관리자의 권한 항목의 총 개수 == 총 권한 항목의 개수(3)(T: 로그인 관리자는 마스터) 
+				authCheck=1;//수정가능
+			}
+			else {
+				authCheck=0; //수정 불가		//F: 로그인 관리자는 마스터아님 
+			}
+		}
+		else {
+			authCheck=1;	//그 이외는 수정 가능
+		}
+		
+		
+		
+		if(authCheck == 1) {	//권한 가지고 있으면
+			authCheck = 0;
 			int AuthNo = (int) session.getAttribute("AuthNo");	//세션에서 권한 번호 가져오기
 			List<AuthInfo> auth = administratorService.selectAllAuth();	//권한명 모두 가져오기
 			int itemNo = administratorService.selectItemNo(AuthNo);//매핑테이블에서 권한명에 따른 권한 항목 젤 처음꺼 가져오기
@@ -270,6 +331,23 @@ public class AdministratorController {
 			grade = administratorService.selectAuth(objAdmInfo.getIntAdminAuth()); //권한명 가져오기
 			objAdmInfo.setStrAdminGrade(grade);
 			listA.set(i, objAdmInfo);
+			
+			//이름 마스킹
+			String nameM = listA.get(i).getStrAdminName();
+			String firstName = nameM.substring(0, 1);
+			int lastNameStartPoint = nameM.indexOf(firstName);
+			String lastName = nameM.substring(lastNameStartPoint + 1, nameM.length());
+ 
+            String makers = "";
+ 
+            for(int j = 0; j < lastName.length(); j++){
+                makers += "*";
+            }
+ 
+            lastName = lastName.replace(lastName, makers);
+            String maskedName = firstName + lastName;
+
+            listA.get(i).setStrAdminName(maskedName);
 		}
 		
 		mv.addObject("adminList", listA);
