@@ -1,5 +1,8 @@
 package com.interntraining.member.login.controller;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -89,6 +92,23 @@ public class LoginController {
 		
 		User user = loginService.myPage(id);
 		
+		//전화번호 마스킹
+		String phone = user.getStrUserPhone();
+		Pattern pattern = Pattern.compile("^(\\d{3})-?(\\d{3,4})-?(\\d{4})$"); 
+		
+		Matcher matcher = pattern.matcher(phone);
+		
+		if(matcher.find()){ //        
+            String Fhp = matcher.group(1);
+            String Mhp = matcher.group(2).substring(0, matcher.group(2).length()-2);
+            String Bhp = matcher.group(3).substring(1);            
+            phone =  Fhp + "-" + Mhp + "**" + "-*" + Bhp; 
+        } else {
+            phone= "***";
+        }
+
+       user.setStrUserPhone(phone);
+        
 		mv.addObject("member", user);
 		mv.setViewName("/login/myPage");
 		return mv;		

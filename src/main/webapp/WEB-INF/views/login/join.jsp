@@ -130,11 +130,11 @@
 				var idReg = /^[a-zA-Z](?=.{0,28}[0-9])[0-9a-zA-Z]{6,15}$/	//영문 대문자 또는 소문자로 시작하는 아이디, 길이는 6~15자, 끝날때 제한 없음
 				if(!idReg.test(str.userId.value)) {
 					alert("6~15자 영문대소문자,숫자를 사용하세요.");
-					str.userId.focus();
+					str.userId.value = "";
+					str.userId.focus();					
 			   		return false;
-			}	
-				
-			}
+				}	
+			}				
 			if(val == 1){
 				alert("중복체크를 하지 않았습니다.");
 				return false;
@@ -143,6 +143,17 @@
 	           	alert("비밀번호를 입력하지 않았습니다. 입력해주세요");
 	           	str.pw1.focus();
 	           	return false;
+	       	}
+	      	if(str.pw2.value == ""){
+	           	alert("비밀번호 확인을 입력하지 않았습니다. 입력해주세요");
+	           	str.pw2.focus();
+	           	return false;
+	       	}
+	      	if(pw1 != pw2){
+	       		alert("비밀번호가 일치하지 않습니다");
+				document.joinInfo.pw2.value="";
+				str.pw2.focus()
+				return false;
 	       	}
 	      	else{	//비밀번호 유효성 검사
 	      		var pw = str.pw1.value;
@@ -154,16 +165,7 @@
 	      			document.joinInfo.pw2.value="";
 	      		    return false; 
 	      		}
-	      	}
-	       	if(str.pw2.value == ""){
-	           	alert("비밀번호 확인을 입력하지 않았습니다. 입력해주세요");
-	           	str.pw2.focus();
-	           	return false;
-	       	}
-	       	if(pw1 != pw2){
-	       		alert("비밀번호가 일치하지 않습니다");
-				document.joinInfo.pw2.value="";		
-	       	}
+	      	}	       	
 	       	if(str.name.value == ""){
 				alert("이름을 입력하지 않았습니다. 입력해주세요");
 				str.name.focus();
@@ -237,7 +239,7 @@
 	<!-- Contact Section -->
 	<section id="contact">
 		<div class="container">
-			<h2 class="text-center text-uppercase text-secondary mb-0">Join	Us</h2>
+			<h2 class="text-center text-uppercase text-secondary mb-0">회원가입</h2>
 			<hr class="star-dark mb-5">
 			<div class="row">
 				<div class="col-lg-10 mx-auto">
@@ -263,7 +265,8 @@
 								class="form-group floating-label-form-group controls mb-0 pb-2">
 								<a class="font_required">* 비밀번호</a>
 								<p class="help-block text-danger"><p class="help-block text-danger">
-								&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="pw1" name="pw1" type="password" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자" required="required"  style="display:inline; border-radius: 8px;width:80%;background-color:#efefef ">
+								&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="pw1" name="pw1" type="password" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자" required="required"  
+								style="display:inline; border-radius: 8px;width:80%;background-color:#efefef ">
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>

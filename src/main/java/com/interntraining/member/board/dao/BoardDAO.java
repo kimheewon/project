@@ -103,5 +103,10 @@ public class BoardDAO {
 		return sqlSession.selectOne("sql.boardreadHit", intBoardNo);
 	}
 
+	//id로 유저의 등급 찾기
+	public String getUserGrade(String id) {
+		return sqlSession.selectOne("sql.getUserGrade", id);
+	}
+
 	
 }

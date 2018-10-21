@@ -72,7 +72,13 @@
 	           	str.pw1.focus();
 	           	return false;
 	       	}
-	      	else{	//비밀번호 유효성 검사
+	      	
+	       	if(str.pw2.value == ""){
+	           	alert("비밀번호 확인을 입력하지 않았습니다. 입력해주세요");
+	           	str.pw2.focus();
+	           	return false;
+	       	}
+	       	if(str.pw2.value == str.pw1.value){	//비밀번호 유효성 검사
 	      		var pw = str.pw1.value;
 				var reg_pw ="^(?=.*\\d)(?=.*[~`!@#$%\\^&*()-])(?=.*[a-z])(?=.*[A-Z]).{8,20}$";
 
@@ -82,13 +88,13 @@
 	      			document.joinInfo.pw2.value="";
 	      		    return false; 
 	      		}
+	      	}else{
+	      		alert("비밀번호가 일치하지 않습니다."); 
+      		    document.joinInfo.pw1.value="";
+      			document.joinInfo.pw2.value="";
+      			document.joinInfo.pw1.focus();
+      		    return false; 
 	      	}
-	       	if(str.pw2.value == ""){
-	           	alert("비밀번호 확인을 입력하지 않았습니다. 입력해주세요");
-	           	str.pw2.focus();
-	           	return false;
-	       	}
-	       	
 	       	if(str.name.value == ""){
 				alert("이름을 입력하지 않았습니다. 입력해주세요");
 				str.name.focus();
@@ -101,11 +107,11 @@
 	       	}
 	       	else{	//전화번호 형식 확인
 	       		var phoneNumberRegex = /^[0-9]{3}[0-9]{4}[0-9]{4}$/;
-	    		var phone = document.joinInfo.phonefirst.value;
+	    		var phone = document.joinInfo.phone.value;
 	    		
 	    		if(!phoneNumberRegex.test(phone)) {
 	    			alert("전화번호가 잘못된 형식입니다.");
-	    			document.joinInfo.phonefirst.value="";
+	    			document.joinInfo.phone.value="";
 	    			return false; 
 	    		}
 	       	}	       	
@@ -113,17 +119,21 @@
 	});
 	
 	
-	
 	//비밀번호 확인
-	function onblur_event(){
+	function go(val){
 		var pw1 = document.joinInfo.pw1.value;
 		var pw2 = document.joinInfo.pw2.value;
 		
 		if(pw1 != pw2){			
-			alert("비밀번호가 일치하지 않습니다");
-			document.joinInfo.pw2.value="";		
-		}	
-	 }
+			document.getElementById("welcome").value = '비밀번호가 일치하지않습니다.';
+		}
+		else{
+			document.getElementById("welcome").value = '비밀번호가 일치합니다.';
+		}
+		
+	}
+	
+	
 	
 </script>
 </head>
@@ -133,7 +143,7 @@
 	<!-- Contact Section -->
 	<section id="contact">
 		<div class="container">
-			<h2 class="text-center text-uppercase text-secondary mb-0">My Page</h2>
+			<h2 class="text-center text-uppercase text-secondary mb-0">정보 수정</h2>
 			<hr class="star-dark mb-5">
 			<div class="row">
 				<div class="col-lg-10 mx-auto">
@@ -146,7 +156,7 @@
 						<div class="control-group">
 							<div class="form-group floating-label-form-group controls mb-0 pb-2" >
 								<a class="font_required">아이디</a>
-								<a style="color:#2C3E50; font-size:18px; font-weight:bold; padding-left:7em">${member.strUserid}</a>
+								<a style="color:#2C3E50; font-size:18px; font-weight:bold; padding-left:2em">${member.strUserid}</a>
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>
@@ -155,7 +165,8 @@
 								class="form-group floating-label-form-group controls mb-0 pb-2">
 								<a class="font_required">* 비밀번호</a>
 								<p class="help-block text-danger"><p class="help-block text-danger">
-								&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="pw1" name="pw1" type="text" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자" required="required" style="display:inline; border-radius: 8px;width:80%;background-color:#efefef ">
+								&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="pw1" name="pw1" type="password" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자" required="required" 
+								style="display:inline; border-radius: 8px;width:80%;background-color:#efefef ">
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>
@@ -164,7 +175,9 @@
 								class="form-group floating-label-form-group controls mb-0 pb-2">
 								<a class="font_required">* 비밀번호 확인</a>
 								<p class="help-block text-danger"></p>
-								&nbsp;&nbsp; &nbsp;&nbsp;<input class="form-control" id="pw2" name = "pw2" type="text" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자" required="required" style="display:inline; border-radius: 8px;width:80%;background-color:#efefef "  onblur="javascript:onblur_event();">
+								&nbsp;&nbsp; &nbsp;&nbsp;<input class="form-control" id="pw2" name = "pw2" type="password" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자" required="required" 
+								style="display:inline; border-radius: 8px;width:80%;background-color:#efefef "  onkeyup="go(this.value)">
+								<br><span>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="welcome" style="color:#cc0000;font-size:10pt;width:50%" disabled></span>
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>
@@ -198,8 +211,8 @@
 						<br>
 						<div id="success"></div>
 						<div class="form-group" style="text-align:right;">
-							<button class="btn btn-primary btn-xl" onclick="location.href='/login/myPageForm'">취 소</button>
-							&nbsp;&nbsp;<button class="btn btn-primary btn-xl" >수 정</button>
+							<button class="btn btn-primary btn-x" onclick="location.href='/login/myPageForm'">취 소</button>
+							&nbsp;&nbsp;<button class="btn btn-primary btn-x" id="joinInformation">수 정</button>
 						</div>
 					</form>
 						

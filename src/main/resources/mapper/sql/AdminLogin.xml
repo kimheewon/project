@@ -50,4 +50,12 @@
 		select 	count(*)
 		from 	TBoard
 	</select>
+	
+	<!-- 아이디로 등급 가져오기 -->
+	<select id="getUserGrade" resultType="String">
+		select	UserGrade
+		from   	 TUser			
+		where	 UserId = #{idG} 
+	
+	</select>
 </mapper>

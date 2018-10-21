@@ -3,6 +3,7 @@ package com.interntraining.member.board.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -53,10 +54,26 @@ public class BoardController {
 			int listCnt = boardCount.size();
 			
 			Pagination pagination = new Pagination(listCnt, curPage);
+			
 	        
 	        /* List */
 	        List<Board> boardList = boardService.getBoardList(pagination); // 리스트
 	        
+	        //글 스쿼스 번호
+	        int c = listCnt - (curPage-1)*10;
+	        for(int i=0; i<boardList.size(); i++) {
+	        	boardList.get(i).setIntNum(c--);
+	        
+	        }
+	        
+	        
+	        
+	        //vip 회원 구분
+	        for(int i=0; i<boardList.size(); i++){
+	        	String id = boardList.get(i).getStrUserId();
+	        	String grade = boardService.getUserGrade(id); //id로 유저의 등급 찾기
+	        	boardList.get(i).setStrGrade(grade);
+	        }
 	        
 	        //날짜 변환
 	        Date dateB = new Date();
@@ -66,7 +83,7 @@ public class BoardController {
 	        
 	        Date today = new Date();
 	        SimpleDateFormat date = new SimpleDateFormat("yyy/MM/dd");
-	        SimpleDateFormat dateTime = new SimpleDateFormat("hh:mm");
+	        SimpleDateFormat dateTime = new SimpleDateFormat("hh:mm a",Locale.US);
 	        int check;
 	        for(int j=0; j<boardList.size();j++) {
 	        	dateB = boardList.get(j).getDateBoardDate();
@@ -106,6 +123,22 @@ public class BoardController {
 			pagination.setCurPage(curPage);
 			List<Board> list = boardService.searchboardlistP(pagination);
 			
+			 //글 스쿼스 번호
+	        int c = listCnt - (curPage-1)*10;
+	        for(int i=0; i<list.size(); i++) {
+	        	list.get(i).setIntNum(c--);
+	        
+	        }
+	        
+			
+			//vip 회원 구분
+	        for(int i=0; i<list.size(); i++){
+	        	String id = list.get(i).getStrUserId();
+	        	String grade = boardService.getUserGrade(id); //id로 유저의 등급 찾기
+	        	list.get(i).setStrGrade(grade);
+	        }
+	        
+	        
 			//날짜 변환
 	        Date dateB = new Date();
 	        String boardDate;
@@ -114,7 +147,7 @@ public class BoardController {
 	        
 	        Date today = new Date();
 	        SimpleDateFormat date = new SimpleDateFormat("yyy/MM/dd");
-	        SimpleDateFormat dateTime = new SimpleDateFormat("hh:mm");
+	        SimpleDateFormat dateTime = new SimpleDateFormat("hh:mm a",Locale.US);
 	        int check;
 	        for(int j=0; j<list.size();j++) {
 	        	dateB = list.get(j).getDateBoardDate();
@@ -180,7 +213,22 @@ public class BoardController {
 					
 		//List<Board> boardlist = boardService.selectboardlist(board);
 		List<Board> boardlist = boardService.getBoardList(pagination); // 리스트
-		
+
+		 //글 스쿼스 번호
+		int c = listCnt - (curPage-1)*10;
+		for(int i=0; i<boardlist.size(); i++) {
+			boardlist.get(i).setIntNum(c--);
+       
+		}
+		//vip 회원 구분
+        for(int i=0; i<boardlist.size(); i++){
+        	String idG = boardlist.get(i).getStrUserId();
+        	String grade = boardService.getUserGrade(idG); //id로 유저의 등급 찾기
+        	boardlist.get(i).setStrGrade(grade);
+        }
+        
+        
+        
 		 //날짜 변환+new
         Date dateB = new Date();
         String boardDate;
@@ -189,7 +237,7 @@ public class BoardController {
         
         Date today = new Date();
         SimpleDateFormat date = new SimpleDateFormat("yyy/MM/dd");
-        SimpleDateFormat dateTime = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat dateTime = new SimpleDateFormat("hh:mm a",Locale.US);
         int check;
         for(int j=0; j<boardlist.size();j++) {
         	dateB = boardlist.get(j).getDateBoardDate();
@@ -230,9 +278,17 @@ public class BoardController {
 
 		Board boardread = boardService.readboardHit(intBoardNo);	//조회수 증가
 		List<Comment> cmmtlist = boardService.selectcmmtlist(intBoardNo);
+		int cmmlistCount = cmmtlist.size();
 
+		//vip 회원 구분       
+       	String idG = boardread.getStrUserId();
+       	String grade = boardService.getUserGrade(idG); //id로 유저의 등급 찾기
+        boardread.setStrGrade(grade);
+      
+        
 		mv.addObject("board", boardread);
 		mv.addObject("commentlist", cmmtlist);
+		mv.addObject("cmmlistCount",cmmlistCount);//댓글수
 		mv.addObject("id", id);
 		mv.setViewName("/board/boardread");
 		return mv;
@@ -249,9 +305,17 @@ public class BoardController {
 
 		Board boardread = boardService.readboard(intBoardNo);	//조회수 증가No
 		List<Comment> cmmtlist = boardService.selectcmmtlist(intBoardNo);
+		int cmmlistCount = cmmtlist.size();
 
+       
+		//vip 회원 구분       
+       	String idG = boardread.getStrUserId();
+       	String grade = boardService.getUserGrade(idG); //id로 유저의 등급 찾기
+        boardread.setStrGrade(grade);
+        
 		mv.addObject("board", boardread);
 		mv.addObject("commentlist", cmmtlist);
+		mv.addObject("cmmlistCount",cmmlistCount);//댓글수
 		mv.addObject("id", id);
 		mv.setViewName("/board/boardread");
 		return mv;
@@ -294,6 +358,21 @@ public class BoardController {
 		List<Board> boardlist = boardService.getBoardList(pagination); // 리스트
 		//List<Board> boardlist = boardService.selectboardlist(board);
 		
+		 //글 스쿼스 번호
+        int c = listCnt - (curPage-1)*10;
+        for(int i=0; i<boardlist.size(); i++) {
+        	boardlist.get(i).setIntNum(c--);
+        
+        }
+		
+		//vip 회원 구분
+        for(int i=0; i<boardlist.size(); i++){
+        	String idG = boardlist.get(i).getStrUserId();
+        	String grade = boardService.getUserGrade(idG); //id로 유저의 등급 찾기
+        	boardlist.get(i).setStrGrade(grade);
+        }
+        
+        
 		 //날짜 변환+new
         Date dateB = new Date();
         String boardDate;
@@ -302,7 +381,7 @@ public class BoardController {
         
         Date today = new Date();
         SimpleDateFormat date = new SimpleDateFormat("yyy/MM/dd");
-        SimpleDateFormat dateTime = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat dateTime = new SimpleDateFormat("hh:mm a",Locale.US);
         int check;
         for(int j=0; j<boardlist.size();j++) {
         	dateB = boardlist.get(j).getDateBoardDate();
@@ -348,6 +427,21 @@ public class BoardController {
 		
 		List<Board> boardlist = boardService.getBoardList(pagination); // 리스트
 		
+		 //글 스쿼스 번호
+        int c = listCnt - (curPage-1)*10;
+        for(int i=0; i<boardlist.size(); i++) {
+        	boardlist.get(i).setIntNum(c--);
+        
+        }
+        
+		//vip 회원 구분
+        for(int i=0; i<boardlist.size(); i++){
+        	String idG = boardlist.get(i).getStrUserId();
+        	String grade = boardService.getUserGrade(idG); //id로 유저의 등급 찾기
+        	boardlist.get(i).setStrGrade(grade);
+        }
+        
+        
 		 //날짜 변환+new
         Date dateB = new Date();
         String boardDate;
@@ -356,7 +450,7 @@ public class BoardController {
         
         Date today = new Date();
         SimpleDateFormat date = new SimpleDateFormat("yyy/MM/dd");
-        SimpleDateFormat dateTime = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat dateTime = new SimpleDateFormat("hh:mm a",Locale.US);
         int check;
         for(int j=0; j<boardlist.size();j++) {
         	dateB = boardlist.get(j).getDateBoardDate();
@@ -404,6 +498,13 @@ public class BoardController {
 		// 상세보기에 게시글과 댓글뿌려주기
 		Board boardread = boardService.readboard(intBoardNo);
 		List<Comment> cmmtlist = boardService.selectcmmtlist(intBoardNo);
+		
+		//vip 회원 구분	       
+       	String idG = boardread.getStrUserId();
+       	String grade = boardService.getUserGrade(idG); //id로 유저의 등급 찾기
+        boardread.setStrGrade(grade);
+        
+        
 		mv.addObject("board", boardread);
 		mv.addObject("commentlist", cmmtlist);
 		mv.setViewName("/board/boardread");
@@ -442,6 +543,11 @@ public class BoardController {
 		Board boardread = boardService.readboard(intBoardNo);
 		List<Comment> cmmtlist = boardService.selectcmmtlist(intBoardNo);
 
+		//vip 회원 구분	       
+       	String idG = boardread.getStrUserId();
+       	String grade = boardService.getUserGrade(idG); //id로 유저의 등급 찾기
+        boardread.setStrGrade(grade);
+        
 		mv.addObject("board", boardread);
 		mv.addObject("commentlist", cmmtlist);
 		mv.addObject("id", id);
@@ -468,8 +574,6 @@ public class BoardController {
 		mv.addObject("board", boardread);
 		mv.addObject("commentlist", cmmtlist);
 
-		
-		
 		
 		return mv;
 	}

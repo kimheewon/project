@@ -14,6 +14,8 @@ public class Board {
 	private int intHit;
 	private int rownumber;
 	private int inttotalComment;
+	private String strGrade;
+	private int intNum;
 	
 	
 	public int getIntBoardNo() {
@@ -52,9 +54,7 @@ public class Board {
 	}
 	public void setStrBoardDate(String strBoardDate) {
 		this.strBoardDate = strBoardDate;
-	}
-	
-	
+	}	
 	public int getIntNewCheck() {
 		return intNewCheck;
 	}
@@ -80,6 +80,18 @@ public class Board {
 	public void setInttotalComment(int inttotalComment) {
 		this.inttotalComment = inttotalComment;
 	}
-	
+	public String getStrGrade() {
+		return strGrade;
+	}
+	public void setStrGrade(String strGrade) {
+		this.strGrade = strGrade;
+	}
+	public int getIntNum() {
+		return intNum;
+	}
+	public void setIntNum(int intNum) {
+		this.intNum = intNum;
+	}
+
 	
 }

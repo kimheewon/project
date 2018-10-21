@@ -13,6 +13,7 @@ public class MembershipInfo {
 	private String strUserSex;	
 	private Date dateUserDate;
 	private String strUserGrade;
+	
 	public int getIntUserNo() {
 		return intUserNo;
 	}

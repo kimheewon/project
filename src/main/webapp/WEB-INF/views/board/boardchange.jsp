@@ -78,9 +78,10 @@
 				<td colspan="2"><textarea rows="10" cols="50" style="width: 100%;" class="form-control" id="ir1" name="contents"></textarea></td>
 			</tr>
 		</table>
-		<div class="container_b" >
-			<input type="button" class="button" onclick="location.href='/board/boardread?intBoardNo=${board.intBoardNo}'" value="돌아가기">
-			<button class="button" name="writebtn" id="writebtn" style="width: 30%;"><img class="btn-img" src="/img/check.png" style=" width: 30%;">&nbsp;저장</button>	
+		<div class="container_b" style="    margin-left: 86.3%;" >
+		
+			<button type="button" class="button" style="width: 30%;" onclick="location.href='/board/boardread?intBoardNo=${board.intBoardNo}'"><img class="btn-img" src="/img/reply.png" style=" width: 30%;">&nbsp;뒤로</button>
+			<button  class="button" name="writebtn" id="writebtn" style="width: 30%;"><img class="btn-img" src="/img/check.png" style=" width: 30%;">&nbsp;저장</button>	
 			</div>
 		</form>
 	</div>
@@ -119,10 +120,6 @@ window.onload = function(){
 function submitContents(btn) {
     // 에디터의 내용이 textarea에 적용
     oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
-  
-		
-    
-    	
     	btn.form.submit();
     	
     

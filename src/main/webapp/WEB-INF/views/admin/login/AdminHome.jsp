@@ -52,7 +52,7 @@
                                 <li>
                                   <div class="progress vertical progress_wide bottom" style="width: 100%; height: 200px">
                                     <div class="progress-bar progress-bar-dark" role="progressbar" data-transitiongoal="${menP}">
-                                    <div>${men}명</div>
+                                    <div>${menP}%</div>
                                     </div>
                                   	 
                                   </div>
@@ -63,7 +63,7 @@
                                 <li>
                                   <div class="progress vertical progress_wide bottom" style="width: 100%; height: 200px">
                                     <div class="progress-bar progress-bar-info" role="progressbar" data-transitiongoal="${womenP}">
-                                    <div>${women}명</</div>
+                                    <div>${womenP}%</</div>
                                     </div>
                                   </div>
                                 </li>
@@ -93,7 +93,7 @@
 					<div class="col-md-12 col-sm-12 col-xs-12" style="width:75%; margin-left: 20px;">
             			<div class="x_panel" >
 	           				<div class="x_title">
-                    			<h2 style="font-weight:bold; color:#34495e">게시글 Top 10</h2>	  
+                    			<h2 style="font-weight:bold; color:#34495e">최근 게시글 Top 10</h2>	  
                     		 <div class="clearfix"></div>
                   			</div>
 	             		<div class="clearfix"></div>
@@ -102,7 +102,7 @@
 		                    <colgroup>
 					    		<col width = "6%"/>
 					    		<col width = "*"/>
-					    		<col width = "12%"/>
+					    		<col width = "17%"/>
 					    		<col width = "15%"/>
 					    		<col width = "7%"/>			    		
 					    	</colgroup>
@@ -127,7 +127,17 @@
 											</c:when>
 										</c:choose>										
 										</td>
-										<td style="text-align: center; color:#3b5976;font-size: 15px;">${list.strUserId}</td>
+										
+										<c:choose>
+											<c:when test="${list.strGrade eq '일반'}">
+												<td style="text-align: center; color:#3b5976;font-size: 15px;">${list.strUserId}</td>
+											</c:when>
+											<c:otherwise>
+												<td style="text-align: center; color:#18bc9c;font-size: 15px;">${list.strUserId}&nbsp;
+												<img src="/img/crown.png" alt="..." style=" height: 20px; padding-bottom: 1%; "class=""></td>
+											</c:otherwise>
+										
+										</c:choose>										
 										<td style="text-align: center; color:#3b5976;font-size: 15px;">${list.strBoardDate}</td>										
 										<td style="text-align: center; color:#3b5976;font-size: 15px;">${list.intHit}</td>
 									</tr>	

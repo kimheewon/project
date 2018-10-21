@@ -125,5 +125,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 
+	//id로 유저의 등급 찾기
+	@Override
+	public String getUserGrade(String id) {
+		return boardDAO.getUserGrade(id);
+	}
+
+
 
 }

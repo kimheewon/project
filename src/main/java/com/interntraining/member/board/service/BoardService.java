@@ -57,6 +57,9 @@ public interface BoardService {
 	//댓글수
 	public int totalComment(int intBoardNo);
 
+	//id로 유저의 등급 찾기
+	public String getUserGrade(String id);
+
 	
 
 	

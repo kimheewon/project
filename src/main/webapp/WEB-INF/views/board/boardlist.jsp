@@ -72,7 +72,7 @@
 		<c:forEach var="board" items="${boardlist}" varStatus="status">
 
 			<tr>
-				<td style="text-align: center; color:#3b5976;">${board.intBoardNo}</td>
+				<td style="text-align: center; color:#3b5976;">${board.intNum}</td>
 				<c:choose>
 					<c:when test="${board.inttotalComment eq 0}">
 					<td style="padding-left: 2%; color:#3b5976;"><a href="/board/boardreadHit?intBoardNo=${board.intBoardNo}">${board.strBoardTitle}</a>
@@ -93,7 +93,17 @@
 					</td>
 				</c:otherwise>
 				</c:choose>
-				<td style="text-align: center; color:#3b5976;">${board.strUserId}</td>
+				
+				<c:choose>
+					<c:when test="${board.strGrade eq '일반'}">
+						<td style="text-align: center; color:#3b5976;">${board.strUserId}</td>
+					</c:when>
+					<c:otherwise>
+						<td style="text-align: center; color:#18bc9c;">${board.strUserId}
+						<img src="/img/crown.png" alt="..." style="height: 25px; padding-bottom: 1%;"class="img-circle profile_img"></td>
+					</c:otherwise>
+				
+				</c:choose>
 				<td style="text-align: center; color:#3b5976;">${board.strBoardDate}</td>
 				<td style="text-align: center; color:#3b5976;"><span>${board.intHit}</span></td>
 				

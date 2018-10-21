@@ -90,6 +90,12 @@ public class LoginAdminServiceImpl implements LoginAdminService{
 	public int totalBoardCount() {
 		return loginAdminDAO.totalBoardCount();
 	}
+
+	//vip 회원 구분
+	@Override
+	public String getUserGrade(String idG) {
+		return  loginAdminDAO.getUserGrade(idG);
+	}
 	
 
 }

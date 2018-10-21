@@ -54,6 +54,11 @@ public class LoginAdminDAO {
 		return sqlSession.selectOne("adminloginSql.totalBoardCount");
 	}
 
+	//vip 회원 구분
+	public String getUserGrade(String idG) {
+		return sqlSession.selectOne("adminloginSql.getUserGrade", idG);
+	}
+
 	
 
 }

@@ -101,37 +101,45 @@
 			href='/board/boardlist'>목록</a></span> <br>
 		<br>
 
-		<form method="POST"
-			action="/board/boardchange?intBoardNo=${board.intBoardNo}">
+	
+		<form method="POST" action="/board/boardchange?intBoardNo=${board.intBoardNo}">
+		<div style="border:1px solid #c1c1c1; padding : 1.5%">
 			<input type="hidden" id="bno" value="${board.intBoardNo}">
-			<table class="" style="text-align: center">
+			<table class="" style="text-align: center;  ">
 				<tr style="    border-bottom: 1px dashed  #c1c1c1;">
 					
-					<td style="width: 10%;font-weight: bold;font-size: 20px;color: #2c3e50;text-align: left;padding-left: 6%;    padding-bottom: 0.5%;">${board.strBoardTitle}</td>
-					<td style="width: 80%;  text-align: right;  font-size: 15px;  padding-right: 3%;    color: #7f7f7f; padding-top: 0.6%;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${board.dateBoardDate}" /></td>
+					<td style="width: 40%;font-weight: bold;font-size: 20px;color: #2c3e50;text-align: left;padding-left: 3%;    padding-bottom: 1%;">${board.strBoardTitle}</td>
+					<td style="width: 80%;  text-align: right;  font-size: 15px;  padding-right: 2%;    color: #7f7f7f; ">
+					<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${board.dateBoardDate}" /></td>
 				</tr>
 
 				<tr>
-					<td style="width: 18%;text-align: left;padding-left: 6.1%;font-weight: bold;color: #4d4d4d;  font-size: 18px;  padding-top: 1.3%;"><img class="btn-img" src="/img/lego.png" style=" width: 20%; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${board.strUserId}</td>
-					
-					<td style="width:25%; text-align:right;padding-right: 3%; border-bottom:hidden">조회수&nbsp;&nbsp;&nbsp;${board.intHit}</td>
+					<c:choose>
+						<c:when test="${board.strGrade eq '일반'}">
+							<td style="width: 7%;text-align: left;padding-left: 3.1%;font-weight: bold;color: #4d4d4d;  font-size: 18px;  padding-top: 1%;"><img class="btn-img" src="/img/lego.png" style=" width: 7%; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${board.strUserId}</td>
+						</c:when>
+						<c:otherwise>
+							<td style="width: 7%;text-align: left;padding-left: 3.1%;font-weight: bold;color: #18bc9c;  font-size: 18px;  padding-top: 1%;"><img class="btn-img" src="/img/vip.png" style=" width: 7%; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${board.strUserId}</td>
+						</c:otherwise>
+					</c:choose>
+					<td style="width:25%; text-align:right;padding-right: 2%; border-bottom:hidden">조회수&nbsp;&nbsp;&nbsp;${board.intHit}</td>
 				<tr height="250">					
-					<td colspan="50" style="text-align: left; padding-left: 7%;    padding-top: 2%;">${board.strBoardContent}</td>
+					<td colspan="50" style="text-align: left; padding-left: 3%;  padding-bottom: 18%;  padding-top: 4%;">${board.strBoardContent}</td>
 				</tr>
 			</table>
+		</div >
 			<c:if test="${id eq board.strUserId}">
-				<div class="container_b">					
-					<input type="button" class="button" onclick="checkDelete(${board.intBoardNo})" value="삭제하기">
-						<button class="button" type="submit">수정하기</button>
+				<div class="container_b" style="margin-top: 1%; margin-left: 87.3%; ">
+					<button type="button" class="button btn btn-md" style="width: 30%;" onclick="checkDelete(${board.intBoardNo})"><img class="btn-img" src="/img/delete.png" style=" width: 40%;">&nbsp;삭제</button>			
+					<button class="button btn btn-md" type="submit" style=" width: 30%;"><img class="btn-img" src="/img/edit.png" style=" width: 40%;">&nbsp;수정</button>
 				</div>
 			</c:if>
 		</form>
 	</div>
+	
 	<div class="container_t">
-		<form method="POST"
-			action="/board/commentsave?intBoardNo=${board.intBoardNo}"
-			id="comment">
-			<a style="font-weight: bold; color: #2c3e50;">댓글</a> <br>
+		<form method="POST"	action="/board/commentsave?intBoardNo=${board.intBoardNo}" id="comment">
+			<a style="font-weight: bold; color: #2c3e50;">댓글&nbsp;&nbsp;${cmmlistCount}</a> <br>
 			<div class="container_c">
 				<hr class="hr">
 				<c:forEach var="comment" items="${commentlist}">
@@ -142,10 +150,11 @@
 					<div style="text-align: right;" class="beforeUpd"
 						id="beforeUpd${comment.intCmmtNo}">
 						<c:if test="${id eq comment.strUserId}">
-							<span style="float: right; margin-right: 1%; font-weight: bold; color:#2c3e50" ><a
-								href="/board/commentDelete?intCmmtNo=${comment.intCmmtNo}&intBoardNo=${board.intBoardNo}">삭제</a></span>
-							<span style="float: right; margin-right: 2%; font-weight: bold; color:#2c3e50"><a
+							
+							<span style="float: right; margin-right: 2%; font-weight: bold; color:#2c3e50"><a style="color:#2c3e50;"
 								href="javascript:updateComment(${comment.intCmmtNo});">수정</a></span>
+							<span style="float: right; margin-right: 1%; font-weight: bold; color:#2c3e50" ><a style="color:#2c3e50;"
+								href="/board/commentDelete?intCmmtNo=${comment.intCmmtNo}&intBoardNo=${board.intBoardNo}">삭제</a></span>
 						</c:if>
 					</div>
 					<div>
@@ -164,10 +173,10 @@
 					</colgroup>
 					<tr align="center">
 						<td><textarea class="form-control" id="commentContent"
-								name="comment" rows="3" required></textarea>
+								name="comment" rows="3" style="    resize: none;" required></textarea>
 						<td><input type="submit"
-							style="width: 75pt; height: 60pt; boarder-color: #ededed; outline: 0; background-color: #ededed"
-							value="등록">
+							style="width: 75pt; height: 60pt; box-shadow:none; border:1px solid #c4c4c4; boarder-color: #ededed; outline: 0; background-color: white"
+							value="등 록">
 					</tr>
 
 				</table>
@@ -176,6 +185,8 @@
 		</form>
 
 	</div>
+	
+
 	<br>
 	<br>
 	<jsp:include page="../bottom.jsp" flush="true" />
@@ -213,9 +224,9 @@
         html += "<col width = '5%'/>";
         html += "</colgroup>";
         html += "<tr align='center' >";
-        html += "<td><textarea rows='1' class='form-control contentAll' id='commentContent'>"+document.getElementById(cId).innerHTML+"</textarea></td>";
-        html += "<td><span class='btn btn-sm btn-default updBtn' style='float:right; padding:1%; font-size:16px; font-weight:bold'><a href='javascript:commentUpd("+ intCmmtNo +");'>수정</a></span></td>";
-        html += "<td><span class='btn btn-sm btn-default updBtn' style='float:right; padding:1%; font-size:16px; font-weight:bold'><a href='javascript:commentReset("+ intCmmtNo +");'>취소</a></span></td>";
+        html += "<td><textarea rows='1' class='form-control contentAll' id='commentContent'>"+document.getElementById(cId).innerHTML+"</textarea></td>";       
+        html += "<td><span class='btn btn-sm btn-default updBtn' style='float:right; padding:1%; font-size:16px; font-weight:bold'><a style='color:#2c3e50' href='javascript:commentReset("+ intCmmtNo +");'>취소</a></span></td>";
+        html += "<td><span class='btn btn-sm btn-default updBtn' style='float:right; font-size:16px; font-weight:bold'><a style='color:#2c3e50' href='javascript:commentUpd("+ intCmmtNo +");'>수정</a></span></td>";
         html += "</tr>";
 	
 		html += "</table>";
@@ -267,7 +278,7 @@
 		 
 	 }
 	 
-	 //글 삭제 확인
+	
 	 	
 	//글 삭제 확인
 	function checkDelete(bno){
@@ -279,6 +290,8 @@
 			return;
 		
 	}
+	
+
 
 				
 </script>

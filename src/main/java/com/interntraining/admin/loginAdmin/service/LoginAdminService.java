@@ -31,4 +31,7 @@ public interface LoginAdminService {
 
 	//총 게시물 수
 	public int totalBoardCount();
+
+	//vip 회원 구분
+	public String getUserGrade(String idG);
 }

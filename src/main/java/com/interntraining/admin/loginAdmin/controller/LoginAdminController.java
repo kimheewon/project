@@ -3,6 +3,7 @@ package com.interntraining.admin.loginAdmin.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -98,6 +99,13 @@ public class LoginAdminController {
 			
 			//게시글 Top 10			
 			List<Board> boardList = loginAdminService.getBoadList();
+			//vip 회원 구분
+	        for(int i=0; i<boardList.size(); i++){
+	        	String idG = boardList.get(i).getStrUserId();
+	        	String grade = loginAdminService.getUserGrade(idG); //id로 유저의 등급 찾기
+	        	boardList.get(i).setStrGrade(grade);
+	        }
+	        
 			
 			 //날짜 변환+new
 	        Date dateB = new Date();
@@ -105,9 +113,9 @@ public class LoginAdminController {
 	       	        
 	        Date today = new Date();
 	        SimpleDateFormat date = new SimpleDateFormat("yyy/MM/dd");
-	        SimpleDateFormat dateTime = new SimpleDateFormat("hh:mm");
+	        SimpleDateFormat dateTime = new SimpleDateFormat("hh:mm a",Locale.US);
 	        int check;
-	        for(int j=0; j<boardList.size();j++) {
+	        for(int j=0; j<10;j++) {
 	        	dateB = boardList.get(j).getDateBoardDate();
 	        	check=0;
 	        	
@@ -188,6 +196,36 @@ public class LoginAdminController {
 			
 			//게시글 Top 10			
 			List<Board> boardList = loginAdminService.getBoadList();
+			//vip 회원 구분
+	        for(int i=0; i<boardList.size(); i++){
+	        	String idG = boardList.get(i).getStrUserId();
+	        	String grade = loginAdminService.getUserGrade(idG); //id로 유저의 등급 찾기
+	        	boardList.get(i).setStrGrade(grade);
+	        }
+	        //날짜 변환+new
+	        Date dateB = new Date();
+	        String boardDate;
+	       	        
+	        Date today = new Date();
+	        SimpleDateFormat date = new SimpleDateFormat("yyy/MM/dd");
+	        SimpleDateFormat dateTime = new SimpleDateFormat("hh:mm a",Locale.US);
+	        int check;
+	        for(int j=0; j<10;j++) {
+	        	dateB = boardList.get(j).getDateBoardDate();
+	        	check=0;
+	        	
+		        if(! date.format(today).equals(date.format(dateB))) {	//오늘 쓴 글이 아니면
+		        	boardDate = date.format(dateB);
+		        	boardList.get(j).setStrBoardDate(boardDate);
+		        }
+		        else {	//오늘 쓴 글이면
+		        	check=1;
+		        	boardDate=dateTime.format(dateB);
+		        	boardList.get(j).setStrBoardDate(boardDate);
+		        	boardList.get(j).setIntNewCheck(check); //오늘 글인지 확인 new
+		        }
+		    }
+	        
 			mv.addObject("boardlist", boardList);		
 			
 			mv.setViewName("/admin/login/AdminHome");//로그인 성공시 관리자 홈화면으로 이동
