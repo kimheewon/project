@@ -285,7 +285,7 @@ public class BoardController {
        	String grade = boardService.getUserGrade(idG); //id로 유저의 등급 찾기
         boardread.setStrGrade(grade);
       
-        
+
 		mv.addObject("board", boardread);
 		mv.addObject("commentlist", cmmtlist);
 		mv.addObject("cmmlistCount",cmmlistCount);//댓글수
@@ -313,6 +313,8 @@ public class BoardController {
        	String grade = boardService.getUserGrade(idG); //id로 유저의 등급 찾기
         boardread.setStrGrade(grade);
         
+      
+        
 		mv.addObject("board", boardread);
 		mv.addObject("commentlist", cmmtlist);
 		mv.addObject("cmmlistCount",cmmlistCount);//댓글수
@@ -327,7 +329,7 @@ public class BoardController {
 		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
 
 		Board boardread = boardService.readboard(intBoardNo);
-
+		boardread.setStrBoardContent(boardread.getStrBoardContent().replace("\"", "'"));	//"을 '로 치환
 		mv.addObject("board", boardread);
 		mv.setViewName("/board/boardchange");
 		return mv;

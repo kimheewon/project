@@ -111,7 +111,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 13px; color: #00003f;">관리자 권한 유형 <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select  id="admin_Auth" name="admin_Auth" class="form-control">                        
-                          <option value="0" selected>=======================================&nbsp;&nbsp;&nbsp;Select&nbsp;&nbsp;&nbsp;=======================================</option>
+                          <option value="0" selected>===========================&nbsp;&nbsp;&nbsp;Select&nbsp;&nbsp;&nbsp;===========================</option>
                           <c:forEach var="authList" items="${authList}">                           
                             <c:if test="${authList.intAuthNo ge itemNo}">                                    
 	                            <option value="${authList.intAuthNo}" id="auth" >${authList.strAuthName}</option>

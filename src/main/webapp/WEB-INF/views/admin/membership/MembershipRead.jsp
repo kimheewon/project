@@ -66,7 +66,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Form Basic Elements <small>different form elements</small></h2>                    
+                    <h2> <small></small></h2>                    
                     <div class="clearfix"></div>
                   </div>
                    <div class="x_content">
@@ -77,7 +77,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id" style="font-size: 13px; color: #00003f;">아이디
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12" >
-                            <span class="input-group-btn"><input type="text" class="form-control" id="id" name="id" style="background-color: white;" value="${member.strUserId}" readonly>
+                            <span class="input-group-btn"><input type="text" class="form-control" id="id" name="id" style="background-color: white;border: none; box-shadow: none;" value="${member.strUserId}" readonly>
                            </span>
                        </div>
                       </div>
@@ -85,49 +85,49 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password" style="font-size: 13px; color: #00003f;">비밀번호
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                         <input type="text" class="form-control" style="background-color: white;" readonly>
+                         <input type="text" class="form-control" style="background-color: white;border: none; box-shadow: none;" readonly>
                         </div>
                       </div>                      
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name" style="font-size: 13px; color: #00003f;">이름 
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="name" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;" type="text" name="name"value="${member.strUserName}">
+                          <input id="name" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;border: none; box-shadow: none;" type="text" name="name"value="${member.strUserName}">
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phone" style="font-size: 13px; color: #00003f;">전화번호 
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="phone" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;" type="tel" name="phone"value="${member.strUserPhone}">
+                          <input id="phone" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;border: none; box-shadow: none;" type="tel" name="phone"value="${member.strUserPhone}">
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email" style="font-size: 13px; color: #00003f;">이메일 
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="email" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;" type="email" name="email"value="${member.strUserEmail}">
+                          <input id="email" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;border: none; box-shadow: none;" type="email" name="email"value="${member.strUserEmail}">
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sex" style="font-size: 13px; color: #00003f;">성별
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="sex" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;" type="text" name="sex" value="${member.strUserSex}">
+                          <input id="sex" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;border: none; box-shadow: none;" type="text" name="sex" value="${member.strUserSex}">
                         </div>
                       </div>                     
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="date" style="font-size: 13px; color: #00003f;">가입일시
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                        <a class="form-control col-md-7 col-xs-12" style="background-color: white;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${member.dateUserDate}"/></a>
+                        <a class="form-control col-md-7 col-xs-12" style="background-color: white;border: none; box-shadow: none;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${member.dateUserDate}"/></a>
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 13px; color: #00003f;">등급 </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                                                
-                        <input id="grade" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;" type="text" name="grade" value="${member.strUserGrade} 회원">
+                        <input id="grade" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;border: none; box-shadow: none;" type="text" name="grade" value="${member.strUserGrade} 회원">
                         </div>
                       </div>
                       

@@ -56,7 +56,7 @@
     	<colgroup>
     		<col width = "10%"/>
     		<col width = "*"/>
-    		<col width = "15%"/>
+    		<col width = "18%"/>
     		<col width = "15%"/>
     		<col width = "10%"/>
     	</colgroup>
@@ -131,7 +131,7 @@
 	                 <input type="text" size="40" name="keyWord" value="${keyWord}">
 	                 
 	                 <button class="btn" id="btn" onclick="check();" 
-	                 	style="background-color: #2c3e50;color:white;  border: 1px solid #2c3e50;padding: 3px; padding-left: 0; width:5%; font-family: 'Lato';    margin-bottom: 4px;" >
+	                 	style="background-color: #2c3e50;color:white;  border: 1px solid #2c3e50;padding: 3px; padding-left: 0; width:6%; font-family: 'Lato';    margin-bottom: 4px;" >
 	                 <img class="btn-img" src="/img/search.png" style=" width: 25%;font-weight:bold;margin-bottom: 4px;">&nbsp;검 색</button>
 	                 <input type="hidden" name="page" value="0">
 	    

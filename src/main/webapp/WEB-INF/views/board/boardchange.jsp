@@ -78,10 +78,12 @@
 				<td colspan="2"><textarea rows="10" cols="50" style="width: 100%;" class="form-control" id="ir1" name="contents" required="required"></textarea></td>
 			</tr>
 		</table>
-		<div class="container_b" style="    margin-left: 86.3%;" >
+		<div class="container_b" style="    margin-left: 86%;" >
 		
-			<button type="button" class="button" style="width: 30%;" onclick="location.href='/board/boardread?intBoardNo=${board.intBoardNo}'"><img class="btn-img" src="/img/reply.png" style=" width: 30%;">&nbsp;뒤로</button>
-			<button  class="button" name="writebtn" id="writebtn" style="width: 30%;"><img class="btn-img" src="/img/check.png" style=" width: 30%;">&nbsp;저장</button>	
+			<button type="button" class="button" style="width: 30%;" onclick="location.href='/board/boardread?intBoardNo=${board.intBoardNo}'">
+				<img class="btn-img" src="/img/reply.png" style=" width: 30%;">&nbsp;뒤로</button>
+			<button  class="button" name="writebtn" id="writebtn" style="width: 30%;">
+				<img class="btn-img" src="/img/check.png" style=" width: 30%;">&nbsp;저장</button>	
 			</div>
 		</form>
 	</div>

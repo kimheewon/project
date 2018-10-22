@@ -129,9 +129,11 @@
 			</table>
 		</div >
 			<c:if test="${id eq board.strUserId}">
-				<div class="container_b" style="margin-top: 1%; margin-left: 87.3%; ">
-					<button type="button" class="button btn btn-md" style="width: 30%;" onclick="checkDelete(${board.intBoardNo})"><img class="btn-img" src="/img/delete.png" style=" width: 40%;">&nbsp;삭제</button>			
-					<button class="button btn btn-md" type="submit" style=" width: 30%;"><img class="btn-img" src="/img/edit.png" style=" width: 40%;">&nbsp;수정</button>
+				<div class="container_b" style="margin-top: 1%; margin-left: 84.5%; ">
+					<button type="button" class="button btn btn-md" style="width: 36%;" onclick="checkDelete(${board.intBoardNo})">
+						<img class="btn-img" src="/img/delete.png" style=" width: 40%;padding-bottom:5%">&nbsp;삭제</button>			
+					<button class="button btn btn-md" type="submit" style=" width: 36%;">
+						<img class="btn-img" src="/img/edit.png" style=" width: 40%;">&nbsp;수정</button>
 				</div>
 			</c:if>
 		</form>
@@ -284,7 +286,6 @@
 	        $(".beforeUpd").show();
 	        $(".cContentAll").show();
 	        $(".contentAll").remove();
-		 
 		 
 	 }
 	 

@@ -238,7 +238,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 13px; color: #00003f;">등급 <span class="required">*</span></label> 
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <select  id="select_grade" name="select_grade" class="form-control">                        
-                          <option value="0" selected>=======================================&nbsp;&nbsp;&nbsp;Select&nbsp;&nbsp;&nbsp;=======================================</option>           
+                          <option value="0" selected>===========================&nbsp;&nbsp;&nbsp;Select&nbsp;&nbsp;&nbsp;===========================</option>           
                             <c:choose>
                             <c:when test="${member.strUserGrade eq '일반'}">                                 
 	                            <option value="일반" id="grade" selected>일반 회원</option>

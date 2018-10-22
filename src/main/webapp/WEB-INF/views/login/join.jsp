@@ -198,7 +198,7 @@
 			document.getElementById("welcome").value = '비밀번호가 일치하지않습니다.';
 		}
 		else{
-			document.getElementById("welcome").value = '비밀번호가 일치합니다.';
+			document.getElementById("welcome").value = '';
 		}
 		
 	}
@@ -215,12 +215,26 @@
 			document.getElementById("welcome2").value = '아이디 형식이 맞지않습니다.';
 		}
 		else{
-			document.getElementById("welcome2").value = '맞는 형식입니다.';
+			document.getElementById("welcome2").value = '';
 		}
 		
 	}
 	
-	
+	//전화번호
+	function go3(val){
+		
+		
+		var phoneNumberRegex = /^[0-9]{3}[0-9]{4}[0-9]{4}$/;
+		var phone = document.joinInfo.phone.value;
+		
+		if(!phoneNumberRegex.test(phone)) {
+			document.getElementById("welcome3").value = '전화번호 형식이 맞지않습니다.';
+		}
+		else{
+			document.getElementById("welcome3").value = '';
+		}
+		
+	}
 	
 </script>
 
@@ -286,7 +300,7 @@
 								class="form-group floating-label-form-group controls mb-0 pb-2">
 								<a class="font_required">* 이름</a>
 								<p class="help-block text-danger"><p class="help-block text-danger">
-								&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="name" name="name" type="text" style="display:inline; border-radius: 8px;width:80%;background-color:#efefef ">
+								&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="name" name="name" type="text" style="display:inline; border-radius: 8px;width:80%;background-color:#efefef " >								
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>
@@ -295,7 +309,9 @@
 								class="form-group floating-label-form-group controls mb-0 pb-2">
 								<a class="font_required">* 전화번호</a>
 								<p class="help-block text-danger"></p><p class="help-block text-danger">
-								&nbsp;&nbsp; &nbsp;&nbsp;<input type="tel" id="phone" name="phone" required="required" placeholder="- 없이 입력하세요" style="display:inline; border-radius: 8px;width:80%;background-color:#efefef; padding: 0.5rem;"/>
+								&nbsp;&nbsp; &nbsp;&nbsp;<input type="tel" id="phone" name="phone" required="required" placeholder="- 없이 입력하세요" 
+									style="display:inline; border-radius: 8px;width:80%;background-color:#efefef; padding: 0.5rem;"onkeyup="go3(this.value)"/>
+									<br><span>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="welcome3" style="color:#cc0000;font-size:10pt;width:50%" disabled></span>
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>
