@@ -14,6 +14,7 @@
 		    	,AuthNo		AS intAdminAuth
 		    	,AdminDate	AS dateAdminDate
 		FROM 	TAdmin
+		ORDER BY AdminNo DESC	
 	</select>	
 	
 	<!-- 아이디 중복체크 -->	

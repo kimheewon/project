@@ -13,7 +13,8 @@
 				,UserPhone   	AS StrUserPhone
 				,UserDate  		AS DateUserDate
 				,UserGrade 		AS StrUserGrade
-		from   	 TUser					
+		from   	 TUser
+		ORDER BY UserNo DESC				
 	
 	</select>
 

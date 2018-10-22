@@ -83,7 +83,7 @@
 			<button type="button" class="button" style="width: 30%;" onclick="location.href='/board/boardread?intBoardNo=${board.intBoardNo}'">
 				<img class="btn-img" src="/img/reply.png" style=" width: 30%;">&nbsp;뒤로</button>
 			<button  class="button" name="writebtn" id="writebtn" style="width: 30%;">
-				<img class="btn-img" src="/img/check.png" style=" width: 30%;">&nbsp;저장</button>	
+				<img class="btn-img" src="/img/check.png" style=" width: 31%;">&nbsp;저장</button>	
 			</div>
 		</form>
 	</div>

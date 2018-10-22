@@ -83,7 +83,7 @@
 			    	</colgroup>
                       <thead>
                         <tr>
-                          <th style="text-align: center; padding-left: 1.5%; color:#00003f">#</th>
+                          <th style="text-align: center; padding-left: 1.5%; color:#00003f" class="sorting_desc">#</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">아이디</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">권한 유형</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">이   름</th>

@@ -89,7 +89,7 @@
 			    	</colgroup>
                       <thead>
                         <tr>
-                          <th style="text-align: center; padding-left: 1.5%; color:#00003f">#</th>
+                          <th style="text-align: center; padding-left: 1.5%; color:#00003f" class="sorting_desc">#</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">아이디</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">이   름</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">전화번호</th>
@@ -99,10 +99,11 @@
                         </tr>
                       </thead>
                       <tbody>
+                      
                         <c:forEach var="userList" items="${userList}" varStatus="status">
 
 							<tr>
-								<td style="text-align: center; color:#3b5976;">${status.count}</td>			
+								<td style="text-align: center; color:#3b5976;" class="sorting">${status.count}</td>			
 								<td style="padding-left: 2%; color:#3b5976;">${userList.strUserId}</td>
 								<td style="text-align: center; color:#3b5976;">${userList.strUserName}</td>
 								<td style="text-align: center; color:#3b5976;">${userList.strUserPhone}</td>

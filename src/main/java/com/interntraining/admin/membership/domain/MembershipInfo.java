@@ -13,6 +13,7 @@ public class MembershipInfo {
 	private String strUserSex;	
 	private Date dateUserDate;
 	private String strUserGrade;
+	private int intNo;
 	
 	public int getIntUserNo() {
 		return intUserNo;
@@ -68,6 +69,12 @@ public class MembershipInfo {
 	}
 	public void setStrUserGrade(String strUserGrade) {
 		this.strUserGrade = strUserGrade;
+	}
+	public int getIntNo() {
+		return intNo;
+	}
+	public void setIntNo(int intNo) {
+		this.intNo = intNo;
 	}
 	
 

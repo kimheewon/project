@@ -35,7 +35,7 @@
 		   <div class="clearfix"></div>
 		   
           <div class="row">
-            <div class="col-md-3 col-xs-12 widget widget_tally_box" style="width:22%;">
+            <div class="col-md-3 col-xs-12 widget widget_tally_box" style="width:22%;margin-left:1%">
             
                 <div class="x_panel fixed_height_500">
                   <div class="x_title">
@@ -102,9 +102,9 @@
 		                    <colgroup>
 					    		<col width = "6%"/>
 					    		<col width = "*"/>
-					    		<col width = "17%"/>
+					    		<col width = "18%"/>
 					    		<col width = "15%"/>
-					    		<col width = "7%"/>			    		
+					    		<col width = "10%"/>			    		
 					    	</colgroup>
 		                      <thead>
 		                        <tr>
