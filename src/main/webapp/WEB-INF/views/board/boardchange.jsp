@@ -72,10 +72,10 @@
 		<table class="table">
 			<tr>
 				<td style="width: 10%; text-align: center; padding-top: 1.5%;font-weight: bold;">제&nbsp;&nbsp;&nbsp;&nbsp;목</td>
-				<td><input type="text" class="form-control" name="title" value="${board.strBoardTitle}"></td>
+				<td><input type="text" class="form-control" name="title" value="${board.strBoardTitle}" required="required"></td>
 			</tr>
 			<tr>
-				<td colspan="2"><textarea rows="10" cols="50" style="width: 100%;" class="form-control" id="ir1" name="contents"></textarea></td>
+				<td colspan="2"><textarea rows="10" cols="50" style="width: 100%;" class="form-control" id="ir1" name="contents" required="required"></textarea></td>
 			</tr>
 		</table>
 		<div class="container_b" style="    margin-left: 86.3%;" >
@@ -120,6 +120,21 @@ window.onload = function(){
 function submitContents(btn) {
     // 에디터의 내용이 textarea에 적용
     oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+    
+    var str = document.info;
+	var title = str.title;
+	var content = document.getElementById("ir1");
+	
+	if(title.value == ""){
+		alrert("제목을 입력해 주세요");
+		title.focus();
+		return false;
+	}
+	if(content.value == ""){
+		alrert("내용을 입력해 주세요");
+		content.focus();
+		return false;
+	}
     	btn.form.submit();
     	
     

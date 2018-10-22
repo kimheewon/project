@@ -204,8 +204,8 @@
             <div class="row">              
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
-                  <div class="x_title">
-                    <h2> <small></small></h2>                    
+                   <div class="x_title" style="    padding-left: 90%;">
+                    <h2><small style="  color: #2c3e50;  font-weight: bold;">*은 필수항목입니다.</small></h2>       
                     <div class="clearfix"></div>
                   </div>
                    <div class="x_content">

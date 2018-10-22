@@ -224,7 +224,7 @@
         html += "<col width = '5%'/>";
         html += "</colgroup>";
         html += "<tr align='center' >";
-        html += "<td><textarea rows='1' class='form-control contentAll' id='commentContent'>"+document.getElementById(cId).innerHTML+"</textarea></td>";       
+        html += "<td><textarea rows='1' class='form-control contentAll' id='commentContent' required='required'>"+document.getElementById(cId).innerHTML+"</textarea></td>";       
         html += "<td><span class='btn btn-sm btn-default updBtn' style='float:right; padding:1%; font-size:16px; font-weight:bold'><a style='color:#2c3e50' href='javascript:commentReset("+ intCmmtNo +");'>취소</a></span></td>";
         html += "<td><span class='btn btn-sm btn-default updBtn' style='float:right; font-size:16px; font-weight:bold'><a style='color:#2c3e50' href='javascript:commentUpd("+ intCmmtNo +");'>수정</a></span></td>";
         html += "</tr>";
@@ -246,8 +246,18 @@
 
 	 //댓글 수정 - 수정
     function commentUpd(intCmmtNo){
+		
+		 var c = document.getElementById("commentContent");
+			 if (c.value == ""){
+				 alert("내용을 입력하세요.");
+				 c.focus();
+				 return false;
+			 }
+				
 		 
-		 var commnet
+		 
+		 var commnet;
+		 
     	$.ajax({
             type: "POST",
             async: false,
