@@ -121,13 +121,12 @@ function submitContents(btn) {
 		var content = document.getElementById("ir1");
 		
 		if(title.value == ""){
-			alrert("제목을 입력해 주세요");
+			alert("제목을 입력해 주세요");
 			title.focus();
 			return false;
 		}
 		if(content.value == ""){
-			alrert("내용을 입력해 주세요");
-			content.focus();
+			alert("내용을 입력해 주세요");
 			return false;
 		}
 	

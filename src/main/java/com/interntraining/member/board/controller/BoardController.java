@@ -473,7 +473,7 @@ public class BoardController {
 	    }
         
 		mv.addObject("boardlist", boardlist);
-		mv.addObject("listCnt", listCnt);
+		mv.addObject("listCnt", listCnt);		
 		mv.addObject("pagination", pagination);
 		mv.setViewName("/board/boardlist");
 		return mv;
@@ -498,13 +498,14 @@ public class BoardController {
 		// 상세보기에 게시글과 댓글뿌려주기
 		Board boardread = boardService.readboard(intBoardNo);
 		List<Comment> cmmtlist = boardService.selectcmmtlist(intBoardNo);
+		int cmmlistCount = cmmtlist.size();
 		
 		//vip 회원 구분	       
        	String idG = boardread.getStrUserId();
        	String grade = boardService.getUserGrade(idG); //id로 유저의 등급 찾기
         boardread.setStrGrade(grade);
         
-        
+        mv.addObject("cmmlistCount",cmmlistCount);//댓글수
 		mv.addObject("board", boardread);
 		mv.addObject("commentlist", cmmtlist);
 		mv.setViewName("/board/boardread");
@@ -542,14 +543,17 @@ public class BoardController {
 
 		Board boardread = boardService.readboard(intBoardNo);
 		List<Comment> cmmtlist = boardService.selectcmmtlist(intBoardNo);
+		int cmmlistCount = cmmtlist.size();       
 
 		//vip 회원 구분	       
        	String idG = boardread.getStrUserId();
        	String grade = boardService.getUserGrade(idG); //id로 유저의 등급 찾기
         boardread.setStrGrade(grade);
         
+        
 		mv.addObject("board", boardread);
 		mv.addObject("commentlist", cmmtlist);
+		mv.addObject("cmmlistCount",cmmlistCount);//댓글수
 		mv.addObject("id", id);
 		mv.setViewName("/board/boardread");
 		return mv;

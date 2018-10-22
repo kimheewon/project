@@ -107,7 +107,7 @@ public class LoginController {
             phone= "***";
         }
 
-       user.setStrUserPhone(phone);
+		user.setStrUserPhone(phone);
         
 		mv.addObject("member", user);
 		mv.setViewName("/login/myPage");
@@ -135,7 +135,7 @@ public class LoginController {
 		String id = (String) session.getAttribute("id"); // 세션
 		String password = request.getParameter("pw1");
 		String name = request.getParameter("name");
-		String phone = request.getParameter("phone");
+		String phoneP = request.getParameter("phone");
 		String email = request.getParameter("email");
 
 		User user = new User();
@@ -143,7 +143,7 @@ public class LoginController {
 		user.setStrUserid(id);
 		user.setStrUserPw(password);
 		user.setStrUserName(name);
-		user.setStrUserPhone(phone);
+		user.setStrUserPhone(phoneP);
 		user.setStrUserEmail(email);
 
 		
@@ -151,6 +151,23 @@ public class LoginController {
 		
 		
 		user = loginService.myPage(id);		
+		
+		//전화번호 마스킹
+		String phone = user.getStrUserPhone();
+		Pattern pattern = Pattern.compile("^(\\d{3})-?(\\d{3,4})-?(\\d{4})$"); 
+				
+		Matcher matcher = pattern.matcher(phone);
+				
+		if(matcher.find()){ //        
+			String Fhp = matcher.group(1);
+			String Mhp = matcher.group(2).substring(0, matcher.group(2).length()-2);
+			String Bhp = matcher.group(3).substring(1);            
+			phone =  Fhp + "-" + Mhp + "**" + "-*" + Bhp; 
+		} else {
+			phone= "***";
+		}
+
+		user.setStrUserPhone(phone);
 		
 		mv.addObject("member", user);
 		mv.setViewName("/login/myPage");
