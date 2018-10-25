@@ -92,6 +92,14 @@
 								<p class="help-block text-danger"></p>
 							</div>
 						</div>
+						<div class="control-group" style="margin-top: 1%;">
+                            <div
+                                class="form-group floating-label-form-group controls mb-0 pb-2">
+                                <a class="fontsize">주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</a>  
+                                <a style="color:#2C3E50; font-size:21px; font-weight:bold; padding-left:3.2em">(${member.strPostCode}) ${member.strAdress} ${member.strAdress2}</a>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
 
 						<br>
 						<div id="success"></div>

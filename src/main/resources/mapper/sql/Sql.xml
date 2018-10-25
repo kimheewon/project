@@ -29,9 +29,10 @@
 	
 	<!-- 회원가입 -->	
 	<insert id="insertmember" >
-		insert into TUser(UserId,UserPw,UserName,UserPhone,UserEmail,UserSex) values(
-			#{StrUserId}, #{StrUserPw}, #{StrUserName}, #{StrUserPhone}, #{StrUserEmail}, #{StrUserSex}
-			)
+		insert into TUser(UserId, UserPw, UserName, UserPhone, UserEmail
+		                 ,UserSex, UserPostCode, UserAdress, UserAdress2)
+		           values(#{StrUserId}, #{StrUserPw}, #{StrUserName}, #{StrUserPhone}, #{StrUserEmail}
+		                 ,#{StrUserSex}, #{StrPostCode}, #{StrAdress}, #{StrAdress2})
 	</insert>
 
 	<!-- 마이페이지 -->
@@ -44,6 +45,9 @@
 				,UserSex   		AS StrUserSex
 				,UserDate  		AS DateUserDate
 				,UserGrade 		AS StrUserGrade
+				,UserPostCode   AS StrPostCode
+				,UserAdress     AS StrAdress
+				,UserAdress2    AS StrAdress2
 		from   	 TUser			
 		where	 UserId = #{id} 
 	</select>
@@ -55,6 +59,9 @@
 				,UserName	= #{StrUserName}
 				,UserPhone	= #{StrUserPhone}
 				,UserEmail	= #{StrUserEmail}
+				,UserPostCode = #{StrPostCode}
+                ,UserAdress   = #{StrAdress}
+                ,UserAdress2  = #{StrAdress2}
 		where	 UserId 	= #{StrUserid} 
 	</select>	
 	

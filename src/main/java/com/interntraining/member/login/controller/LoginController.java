@@ -137,6 +137,9 @@ public class LoginController {
 		String name = request.getParameter("name");
 		String phoneP = request.getParameter("phone");
 		String email = request.getParameter("email");
+		String postcode = request.getParameter("postcode");
+		String address = request.getParameter("address");
+		String address2 = request.getParameter("address2");
 
 		User user = new User();
 
@@ -145,6 +148,9 @@ public class LoginController {
 		user.setStrUserName(name);
 		user.setStrUserPhone(phoneP);
 		user.setStrUserEmail(email);
+		user.setStrPostCode(postcode);
+		user.setStrAdress(address);
+		user.setStrAdress2(address2);
 
 		
 		loginService.updateMember(user);
@@ -173,6 +179,8 @@ public class LoginController {
 		mv.setViewName("/login/myPage");
 		return mv;
 	}
+	
+	
 	
 	
 }

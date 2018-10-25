@@ -53,8 +53,10 @@ public class UserController {
 
 	//회원정보 저장
 	@RequestMapping(value = "/joinSave", method=RequestMethod.POST)
-	public ModelAndView joinSave(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView joinSave( HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+	
+	
 		String id = request.getParameter("userId");
 		String password = request.getParameter("pw1");
 		String name = request.getParameter("name");
@@ -62,7 +64,10 @@ public class UserController {
 		String email = request.getParameter("email");
 		String sex = request.getParameter("sex");
 		String birth = request.getParameter("birth");
-	
+		String postcode = request.getParameter("postcode");
+		String address = request.getParameter("address");
+		String address2 = request.getParameter("address2");
+		
 		Member member = new Member();
 		member.setStrUserId(id);
 		member.setStrUserPw(password);
@@ -71,6 +76,9 @@ public class UserController {
 		member.setStrUserEmail(email);
 		member.setStrUserSex(sex);
 		member.setStrUserBirth(birth);
+		member.setStrPostCode(postcode);
+		member.setStrAdress(address);
+		member.setStrAdress2(address2);
 		
 		userService.insertMember(member);
 		
@@ -78,8 +86,7 @@ public class UserController {
 		mav.setViewName("/login/loginForm");
 		
 		
-		return mav;
-		
+		return mav;		
 	}
 	
 	

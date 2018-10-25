@@ -13,6 +13,9 @@ public class User {
 	private String StrUserBirth;
 	private Date DateUserDate;
 	private String StrUserGrade;
+	private String StrPostCode;
+	private String StrAdress;
+	private String StrAdress2;
 
 	public int getIntUserNo() {
 		return intUserNo;
@@ -73,6 +76,24 @@ public class User {
 	}
 	public void setStrUserGrade(String strUserGrade) {
 		StrUserGrade = strUserGrade;
+	}
+	public String getStrPostCode() {
+		return StrPostCode;
+	}
+	public void setStrPostCode(String strPostCode) {
+		StrPostCode = strPostCode;
+	}
+	public String getStrAdress() {
+		return StrAdress;
+	}
+	public void setStrAdress(String strAdress) {
+		StrAdress = strAdress;
+	}
+	public String getStrAdress2() {
+		return StrAdress2;
+	}
+	public void setStrAdress2(String strAdress2) {
+		StrAdress2 = strAdress2;
 	}
 
 	
