@@ -7,20 +7,20 @@
 
 	<!-- 회원 목록 가져오기 -->
 	<select id="selectAll" resultType="MembershipInfo">
-		select	UserNo			AS intUserNo 
-				,UserId			AS StrUserId
-				,UserName		AS StrUserName
-				,UserPhone   	AS StrUserPhone
-				,UserDate  		AS DateUserDate
-				,UserGrade 		AS StrUserGrade
-		from   	 TUser
+        SELECT	 UserNo	        AS intUserNo      
+				,UserId	        AS StrUserId      
+				,UserName       AS StrUserName
+				,UserPhone      AS StrUserPhone
+				,UserDate       AS DateUserDate
+				,UserGrade      AS StrUserGrade
+		FROM   	 TUser
 		ORDER BY UserNo DESC				
 	
 	</select>
 
 	<!-- 회원 정보 가져오기 -->
 	<select id="selectMember" resultType="MembershipInfo">
-		select	 UserId			AS StrUserid
+		SELECT	 UserId			AS StrUserid
 				,UserPw 		AS StrUserPw
 				,UserName		AS StrUserName
 				,UserPhone 	 	AS StrUserPhone
@@ -28,35 +28,36 @@
 				,UserSex   		AS StrUserSex
 				,UserDate  		AS DateUserDate
 				,UserGrade 		AS StrUserGrade
-		from   	 TUser			
-		where	 UserNo = #{intUserNo} 
+		FROM   	 TUser			
+		WHERE	 UserNo = #{intUserNo} 
 	
 	</select>
 	
 	<!-- 회원 정보 업데이트 -->
 	<update id="updateMember">
-		update	 TUser
-		set		 UserPw		= #{strUserPw}
-				,UserName	= #{strUserName}
-				,UserPhone	= #{strUserPhone}
-				,UserEmail	= #{strUserEmail}
-				,UserSex	= #{strUserSex}
-				,UserGrade	= #{strUserGrade}
-		where	 UserNo 	= #{intUserNo} 
+		UPDATE	 TUser
+		SET		 UserPw          = #{strUserPw}
+				,UserName	     = #{strUserName}
+				,UserPhone	     = #{strUserPhone}
+				,UserEmail	     = #{strUserEmail}
+				,UserSex	     = #{strUserSex}
+				,UserGrade	     = #{strUserGrade}
+		WHERE	 UserNo 	     = #{intUserNo} 
 	</update>
 
 	<!-- 아이디 중복 확인 -->
 	<select id="checkId" resultType="String">
-		select	 UserId			
-		from   	 TUser			
-		where	 UserId = #{idNo} 
+		SELECT	 UserId			
+		FROM   	 TUser			
+		WHERE	 UserId         = #{idNo} 
 	
 	</select>
+	
 	<!-- 회원 정보 등록 -->
 	<insert id="insertMember">
-	insert into TUser(UserId,UserPw,UserName,UserPhone,UserEmail,UserSex,UserGrade)
-	values(#{strUserId}, #{strUserPw}, #{strUserName}, #{strUserPhone}, #{strUserEmail}, #{strUserSex}, #{strUserGrade})
-	
-	
+	INSERT INTO TUser(UserId, UserPw, UserName, UserPhone, UserEmail
+	                 ,UserSex, UserGrade)
+	           VALUES(#{strUserId}, #{strUserPw}, #{strUserName}, #{strUserPhone}, #{strUserEmail},
+	                  #{strUserSex}, #{strUserGrade})	
 	</insert>
 </mapper>

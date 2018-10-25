@@ -6,56 +6,56 @@
     	
 	<!-- 로그인시 아이디 값으로  DB에 있는 정보 가져오기 -->	
 	<select id="selectOne"  resultType="LoginAdminInfo">
-		select   AdminNo AS intAdminNo
+		SELECT   AdminNo AS intAdminNo
 				,AdminId AS StrAdminId
 		    	,AdminPw AS StrAdminPw
 		    	,AuthNo  AS intAuthNo
-		from TAdmin where AdminId = #{id} 
+		FROM     TAdmin
+		WHERE    AdminId = #{id} 
 	</select>	
 	
 	<!-- 가입자 수 -->
 	<select id="count" resultType="int">
-		select 	count(UserSex)
-		from 	TUser
-		where 	UserSex=#{count} 	
+		SELECT 	COUNT(UserSex)
+		FROM 	TUser
+		WHERE 	UserSex = #{count} 	
 	</select>
 	
 	<!-- 게시글 Top 10 -->
 	<select id="getBoardList" resultType="Board">
-		select top 10 UserId 		AS strUserId	
+		SELECT top 10 UserId 		AS strUserId	
 					, BoardTitle	AS strBoardTitle
 					, BoardDate		AS dateBoardDate
 					, BoardHit 		AS intHit
-		from TBoard
+		FROM TBoard
 		ORDER BY BoardDate DESC	
 	</select>
 	
 	
 	<!-- 오늘의 가입자수 -->
 	<select id="enrollCount" resultType="int">
-		select 	count(*)
-		from 	TUser
-		where	(Select Convert(varchar(10),UserDate,111)) = (Select Convert(varchar(10),Getdate(),111))	
+		SELECT 	COUNT(*)
+		FROM 	TUser
+		WHERE	(SELECT Convert(varchar(10),UserDate,111)) = (SELECT Convert(varchar(10),Getdate(),111))	
 	</select>
 	
 	<!-- 오늘의 게시물수 -->
 	<select id="boardCount" resultType="int">
-		select 	count(*)
-		from 	TBoard
-		where	(Select Convert(varchar(10),BoardDate,111)) = (Select Convert(varchar(10),Getdate(),111))			
+		SELECT 	COUNT(*)
+		FROM 	TBoard
+		WHERE	(SELECT Convert(varchar(10),BoardDate,111)) = (SELECT Convert(varchar(10),Getdate(),111))			
 	</select>
 	
 	<!-- 총 게시물 수 -->
 	<select id="totalBoardCount" resultType="int">
-		select 	count(*)
-		from 	TBoard
+		SELECT 	COUNT(*)
+		FROM 	TBoard
 	</select>
 	
 	<!-- 아이디로 등급 가져오기 -->
 	<select id="getUserGrade" resultType="String">
-		select	UserGrade
-		from   	 TUser			
-		where	 UserId = #{idG} 
-	
+		SELECT   UserGrade
+		FROM   	 TUser			
+		WHERE	 UserId = #{idG} 	
 	</select>
 </mapper>

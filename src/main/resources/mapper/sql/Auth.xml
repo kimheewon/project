@@ -7,94 +7,97 @@
 
 	<!--권한명 중복체크 -->
 	<select id="selectName"  resultType="AuthInfo">
-		select  AuthName 	AS 	strAuthName
-		from	TAuth
-		where	AuthName = #{name} 
+		SELECT  AuthName 	AS strAuthName
+		FROM	TAuth
+		WHERE	AuthName = #{name} 
 	</select>
 
 	<!--권한 항목 모두 불러오기 -->
 	<select id="selectAllAuthItem"  resultType="AuthItemInfo">
-		select  AuthItemNo  	AS 	intAuthItemNo
-				,AuthItemName	AS	strAuthItemName
-		from	TAuthItem
+		SELECT  AuthItemNo  	AS intAuthItemNo
+			   ,AuthItemName	AS strAuthItemName
+		FROM	TAuthItem
 	</select>
 
 	<!--권한명 저장 -->
 	<insert id="insertAuth" >
-		insert into TAuth (AuthName)
-		values(#{authName})
+		INSERT INTO TAuth(AuthName)
+		           VALUES(#{authName})
 	</insert>
 	
 	<!--권한명 번호가져오기-->
 	<select id="selectAuthNo"  resultType="int">
 		SELECT AuthNo 
-		from TAuth
-		where AuthName = #{authName}
+		FROM   TAuth
+		WHERE  AuthName = #{authName}
 	</select>
 	
 	<!--권한명 가져오기-->
 	<select id="selectAuth"  resultType="String">
 		SELECT AuthName 
-		from TAuth
-		where AuthNo = #{auth}
+		FROM   TAuth
+		WHERE  AuthNo = #{auth}
 	</select>
 	
 	<!--  매핑테이블 저장 -->
 	<insert id="insertAuthMapp" >
-		insert into TAuthMapp(AuthNo, AuthItemNo)
-		values(#{intAuthNo}, #{intAuthItemNo})
+		INSERT INTO TAuthMapp(AuthNo, AuthItemNo)
+		               VALUES(#{intAuthNo}, #{intAuthItemNo})
 	</insert>
 	
 	
 	<!--권한명 모두 불러오기 -->
 	<select id="selectAllAuth"  resultType="AuthInfo">
-		select   AuthNo  	AS 	intAuthNo
+		SELECT   AuthNo  	AS 	intAuthNo
 				,AuthName	AS	strAuthName
-		from	 TAuth
+		FROM	 TAuth
 	</select>
 	
 	<!-- 권한 항목들 가져오기 -->
 	<select id="selectItemList"  resultType="AuthMapp">
-		select   AuthNo  	AS 	intAuthNo
+		SELECT   AuthNo  	AS 	intAuthNo
 				,AuthItemNo	AS	intAuthItemNo
-		from	TAuthMapp
-		where AuthNo = #{authno}
+		FROM	TAuthMapp
+		WHERE AuthNo = #{authno}
 	</select>
 
 
 	<!-- 권한번호로 권한명 가져오기 -->
 	<select id="selectAuthName"  resultType="String">
-		select  AuthName	AS	strAuthName
-		from	TAuth
-		where AuthNo = #{authNo}
+		SELECT  AuthName	AS	strAuthName
+		FROM	TAuth
+		WHERE AuthNo = #{authNo}
 	</select>
 
 
 	<!-- 권한번호로 권한 항목들 가져오기 -->
 	<select id="selectAuthItem"  resultType="AuthMapp">
-		select  AuthItemNo	AS	intAuthItemNo
-		from	TAuthMapp
-		where AuthNo = #{authNo}
+		SELECT  AuthItemNo	AS	intAuthItemNo
+		FROM	TAuthMapp
+		WHERE AuthNo = #{authNo}
 	</select>
 	
 	
 	<!--수정시 권한명 중복체크 -->
 	<select id="selectUpdateAuthName"  resultType="AuthInfo">
-		select  a.AuthName 	AS 	strAuthNameUpdate
-		from	(select AuthName From TAuth where AuthName NOT IN(#{strAuthName})) a
-		where	a.AuthName = #{strAuthNameUpdate} 
+		SELECT  a.AuthName 	AS 	strAuthNameUpdate
+		FROM	(SELECT AuthName
+		         From   TAuth
+		         WHERE AuthName NOT IN(#{strAuthName})) a
+		WHERE	a.AuthName = #{strAuthNameUpdate} 
 	</select>
 	
 	<!-- 권한명 변경 -->
 	<update id="updateAuthName">
-		update	TAuth
-		set		AuthName = #{strAuthNameUpdate}
-		where	AuthNo = #{intAuthNo}
+		UPDATE	TAuth
+		SET		AuthName = #{strAuthNameUpdate}
+		WHERE	AuthNo   = #{intAuthNo}
 	</update>
 	
 	<!--  매핑테이블에서 삭제 -->
 	<delete id="deleteItems">
-		delete from TAuthMapp where AuthNo = #{authNo}	
+		delete FROM TAuthMapp
+		WHERE AuthNo = #{authNo}	
 	</delete>
 	
 </mapper>

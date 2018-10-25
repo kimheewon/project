@@ -60,62 +60,60 @@
 	
 	<!-- 게시판 목록에 뿌려주기 -->
 	<select id="selectboardlist"  resultType="Board">
-		select	 BoardNo		AS intBoardNo
+		SELECT	 BoardNo		AS intBoardNo
 				,UserId			AS strUserId
 				,BoardTitle 	AS strBoardTitle
 				,BoardContent	AS strBoardContent
 				,BoardDate 	 	AS dateBoardDate
 				,BoardHit   	AS intHit
-		from   	 TBoard
+		FROM   	 TBoard
 		ORDER BY BoardNo DESC
 	</select>
 	
 	<!-- 게시판 페이징처리 후 뿌려주기 -->
 	<select id="getboardlist"  resultType="Board">
-		select top 10 resultTable.* from
-
-( select top (10*#{curPage}) ROW_NUMBER() over (order by BoardNo desc) as rownumber, BoardNo AS intBoardNo, UserId AS strUserId, BoardTitle AS strBoardTitle ,BoardDate 	 	AS dateBoardDate
-				,BoardHit   	AS intHit from TBoard ) as resultTable
-
-where rownumber>(#{curPage}-1)*10
-
+		SELECT TOP 10 resultTable.*
+		FROM   (SELECT TOP (10 * #{curPage}) ROW_NUMBER() OVER (ORDER BY BoardNo DESC)    AS rownumber
+		                                                                      ,BoardNo    AS intBoardNo
+		                                                                      ,UserId     AS strUserId
+		                                                                      ,BoardTitle AS strBoardTitle
+		                                                                      ,BoardDate  AS dateBoardDate
+		                                                                      ,BoardHit   AS intHit
+		        FROM TBoard ) AS resultTable
+		WHERE rownumber > (#{curPage} - 1) * 10
 	 </select>
 	 
-	 <select id="searchboardlistP"  resultType="Board">
-
-        
-		select top 10 resultTable.* from
-
-( select top (10*#{curPage}) ROW_NUMBER() over (order by BoardNo desc) as rownumber, BoardNo AS intBoardNo, UserId AS strUserId, BoardTitle AS strBoardTitle ,BoardDate 	 	AS dateBoardDate
-				,BoardHit   	AS intHit from (	  select  *
-        from TBoard
-        where ${keyField} like '%${keyWord}%'
-        
-        )as TSearch ) as resultTable
-
-where rownumber>(#{curPage}-1)*10
-
+	 <select id="searchboardlistP"  resultType="Board">        
+		SELECT TOP 10 resultTable.*
+		FROM   (SELECT TOP (10 * #{curPage}) ROW_NUMBER() OVER (ORDER BY BoardNo DESC)    AS rownumber
+		                                                                      ,BoardNo    AS intBoardNo
+		                                                                      ,UserId     AS strUserId
+		                                                                      ,BoardTitle AS strBoardTitle
+		                                                                      ,BoardDate  AS dateBoardDate
+		                                                                  	  ,BoardHit   AS intHit
+		        FROM (SELECT  *
+                      FROM TBoard
+                      WHERE ${keyField} LIKE '%${keyWord}%')    AS TSearch ) AS resultTable
+        WHERE rownumber > (#{curPage} - 1) * 10
 	 </select>
 	 
 	<!-- 게시글 검색 -->
 	<select id="searchboardlist" parameterType="map" resultType="Board">
-        select  BoardNo		AS intBoardNo
-				,UserId			AS strUserId
+        SELECT   BoardNo		AS intBoardNo
+			    ,UserId			AS strUserId
 				,BoardTitle 	AS strBoardTitle
 				,BoardContent	AS strBoardContent
 				,BoardDate 	 	AS dateBoardDate
 				,BoardHit   	AS intHit
-        from TBoard
-        where ${keyField} like '%${keyWord}%'
+        FROM TBoard
+        WHERE ${keyField} LIKE '%${keyWord}%'
         ORDER BY BoardNo DESC
     </select>
     
 	<!-- 게시글 저장 -->
 	<insert id="insertboard" >
-		insert into TBoard(UserId,BoardTitle,BoardContent) values(
-			#{strUserId}, #{strBoardTitle}, #{strBoardContent}
-			)
-
+		INSERT INTO TBoard(UserId, BoardTitle, BoardContent)
+		            VALUES(#{strUserId}, #{strBoardTitle}, #{strBoardContent})
 	</insert>
 	
 	<!-- 게시글 번호를 통해 DB에서 찾아 게시글 읽기 -->
@@ -133,21 +131,19 @@ where rownumber>(#{curPage}-1)*10
 	</select>
 	
 	<!-- 게시글 번호를 통해 DB에서 찾아 게시글 읽기(조회수 증가) -->
-	<select id="boardreadHit" resultType="Board">
-		
-		
+	<select id="boardreadHit" resultType="Board">		
 		UPDATE	 TBoard 
-  		SET		 BoardHit = BoardHit+1
-   		WHERE	 BoardNo = #{intBoardNo}
+  		SET		 BoardHit = BoardHit + 1
+   		WHERE	 BoardNo  = #{intBoardNo}
    		
-   		select	 BoardNo		AS intBoardNo
+   		SELECT	 BoardNo		AS intBoardNo
 				,UserId			AS strUserId
 				,BoardTitle 	AS strBoardTitle
 				,BoardContent	AS strBoardContent
 				,BoardDate  	AS dateBoardDate
 				,BoardHit   	AS intHit
-		from   	 TBoard
-		where	 BoardNo = #{intBoardNo}
+		FROM   	 TBoard
+		WHERE	 BoardNo = #{intBoardNo}
    
 	</select>
 	
@@ -155,19 +151,19 @@ where rownumber>(#{curPage}-1)*10
 	
 	<!-- 수정한 게시글 Update -->
 	<update id="boardupdate">
-		update	 TBoard
-		set		 BoardTitle = 	#{strBoardTitle}
-				,BoardContent	= #{strBoardContent}
-		where	 BoardNo 	= #{intBoardNo} 
+		UPDATE	 TBoard
+		SET		 BoardTitle   = #{strBoardTitle}
+				,BoardContent = #{strBoardContent}
+		WHERE	 BoardNo = #{intBoardNo} 
 	</update>
 	
 	<!-- 게시글 삭제 -->
 	<delete id="boarddelete">
- 		delete from TBoard
-  		where BoardNo 	= #{intBoardNo} 
+ 		DELETE FROM TBoard
+  		WHERE BoardNo 	= #{intBoardNo} 
   		
-  		delete from TComment
-  		where BoardNo 	= #{intBoardNo} 
+  		DELETE FROM TComment
+  		WHERE BoardNo 	= #{intBoardNo} 
   		
 	</delete>
 	
@@ -175,21 +171,20 @@ where rownumber>(#{curPage}-1)*10
 	
 	<!-- 댓글 뿌리기 -->
 	<select id="selectcmmtlist"  resultType="Comment">
-		select	 CmmtNo			AS intCmmtNo
+		SELECT	 CmmtNo			AS intCmmtNo
 				,BoardNo		AS intBoardNo
 				,UserId			AS strUserId
 				,CmmtComment 	AS strCmmtComment
 				,CmmtDate		AS dateCmmtDate		
-		from   	 TComment
-		where	 BoardNo = #{intBoardNo}
+		FROM   	 TComment
+		WHERE	 BoardNo = #{intBoardNo}
 		ORDER BY CmmtNo	DESC
 	</select>
 	
 	<!-- 댓글 저장 -->
 	<insert id="insertcomment" >
-		insert into TComment(BoardNo,UserId,CmmtComment) values(
-			#{intBoardNo}, #{strUserId}, #{strCmmtComment}
-			)
+		INSERT INTO TComment(BoardNo, UserId, CmmtComment)
+		              VALUES(#{intBoardNo}, #{strUserId}, #{strCmmtComment})
 	</insert>
 	
 	<!-- 댓글 수정 -->
@@ -202,31 +197,31 @@ where rownumber>(#{curPage}-1)*10
 	
 	<!-- 댓글 삭제 -->
 	<delete id="deletecmmt">
- 		delete from TComment
-  		where CmmtNo = #{intCmmtNo}
+ 		DELETE  FROM TComment
+  		WHERE   CmmtNo = #{intCmmtNo}
 	</delete>
 	
 	<!-- 댓글 찾기 -->
 	<select id="commentread" resultType="Comment">
-		select	 CmmtNo			AS intCmmtNo
+		SELECT	 CmmtNo			AS intCmmtNo
 				,BoardNo		AS intBoardNo
 				,CmmtComment 	AS strCmmtComment
-		from   	 TComment
-		where	 CmmtNo = #{intCmmtNo}
+		FROM   	 TComment
+		WHERE	 CmmtNo = #{intCmmtNo}
 	</select>
 	
 	<!--  댓글수 -->
 	<select id="totalComment" resultType="int">
-		select count(*)
-		from TComment
-		where BoardNo = #{intBoardNo}	
+		SELECT    count(*)
+		FROM      TComment
+		WHERE     BoardNo = #{intBoardNo}	
 	</select>
 	
 	<!-- 아이디로 등급 가져오기 -->
 	<select id="getUserGrade" resultType="String">
-		select	UserGrade
-		from   	 TUser			
-		where	 UserId = #{id} 
+		SELECT    UserGrade
+		FROM      TUser			
+		WHERE     UserId = #{id} 
 	
 	</select>
 </mapper>

@@ -7,27 +7,27 @@
 
 	<!-- 관리자 목록 모두 가져오기 -->	
 	<select id="selectAll"  resultType="AdministratorInfo">
-		SELECT   AdminNo 	AS intAdminNo
-				,AdminId 	AS strAdminId
-		    	,AdminPw	AS strAdminPw
-		    	,AdminName	AS strAdminName
-		    	,AuthNo		AS intAdminAuth
-		    	,AdminDate	AS dateAdminDate
-		FROM 	TAdmin
-		ORDER BY AdminNo DESC	
+		SELECT    AdminNo 	AS intAdminNo
+				 ,AdminId 	AS strAdminId
+		    	 ,AdminPw	AS strAdminPw
+		    	 ,AdminName	AS strAdminName
+		    	 ,AuthNo		AS intAdminAuth
+		    	 ,AdminDate	AS dateAdminDate
+		FROM      TAdmin
+		ORDER BY  AdminNo DESC	
 	</select>	
 	
 	<!-- 아이디 중복체크 -->	
 	<select id="selectId"  resultType="AdministratorInfo">
-		select   AdminId 	AS strAdminId	
-		from TAdmin where AdminId = #{id} 
+		SELECT    AdminId 	AS strAdminId	
+		FROM      TAdmin
+		WHERE     AdminId = #{id} 
 	</select>
 
 	<!-- 관리자 등록 -->	
 	<insert id="insertAdmin" >
-		insert into TAdmin(AdminId,AdminPw,AdminName, AuthNo) values(
-			#{StrAdminId}, #{StrAdminPw}, #{StrAdminName}, #{intAdminAuth}
-			)
+		INSERT INTO TAdmin(AdminId, AdminPw, AdminName, AuthNo)
+		            VALUES(#{StrAdminId}, #{StrAdminPw}, #{StrAdminName}, #{intAdminAuth})
 	</insert>
 	
 	
@@ -39,41 +39,40 @@
 		    	,AdminName	AS strAdminName
 		    	,AuthNo		AS intAdminAuth
 		    	,AdminDate	AS dateAdminDate
-		FROM 	TAdmin
-		where AdminNo	=	#{intAdminNo}
+		FROM 	 TAdmin
+		WHERE    AdminNo	= #{intAdminNo}
 	</select>	
 	
 	
 	<!-- 권한번호로 맨 상위 권한 항목 가져오기 -->	
 	<select id="selectItemNo" resultType="int">
-		select top 1 AuthItemNo
-		from TAuthMapp
-		where AuthNo = #{authNo}	
+		SELECT TOP 1 AuthItemNo
+		FROM  TAuthMapp
+		WHERE AuthNo = #{authNo}	
 	</select>
 	
 	<!-- 수정할 관리자의 번호로 권한 번호 찾기 -->
 	<select id="selectAuthNo" resultType="int">
-		SELECT   AuthNo		AS intAdminAuth
-		FROM 	TAdmin
-		where AdminNo	=	#{adminNo}
+		SELECT    AuthNo  AS intAdminAuth
+		FROM      TAdmin
+		WHERE     AdminNo =	#{adminNo}
 	
 	</select>
 	
 	<!-- 수정할 권한번호로 권한항목 개수 가져오기 -->	
 	<select id="selectItemCount" resultType="int">
-		select  count(AuthItemNo)
-		from	TAuthMapp
-		where AuthNo = #{authNo}
+		SELECT    COUNT(AuthItemNo)
+		FROM      TAuthMapp
+		WHERE     AuthNo = #{authNo}
 	</select>
 	
 	<!-- 관리자 정보 업데이트 -->
 	<update id="updateAdmin">
-		update	TAdmin
-		set		AdminPw		= #{StrAdminPw}
-				,AdminName	= #{StrAdminName}
-				,AuthNo		= #{intAdminAuth}
-		where	AdminId = #{StrAdminId}
-	
+		UPDATE	TAdmin
+		SET		AdminPw		= #{StrAdminPw}
+			   ,AdminName	= #{StrAdminName}
+			   ,AuthNo		= #{intAdminAuth}
+		WHERE	AdminId = #{StrAdminId}	
 	</update>
 
 </mapper>
