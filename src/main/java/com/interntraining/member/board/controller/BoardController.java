@@ -59,7 +59,7 @@ public class BoardController {
 	        /* List */
 	        List<Board> boardList = boardService.getBoardList(pagination); // 리스트
 	        
-	        //글 스쿼스 번호
+	        //글 시퀀스 번호
 	        int c = listCnt - (curPage-1)*10;
 	        for(int i=0; i<boardList.size(); i++) {
 	        	boardList.get(i).setIntNum(c--);

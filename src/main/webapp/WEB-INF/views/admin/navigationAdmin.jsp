@@ -68,8 +68,7 @@
 
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                
+              <div class="menu_section">                
                 <ul class="nav side-menu">
                   <li><a href="/loginAdmin/home" style=" font-size: 14px;"><i class="fa fa-home"></i> Home </a>
                     
@@ -108,7 +107,16 @@
                   </c:if>
                   </c:forEach>
                   
-                  
+                  <c:forEach var="item" items="${items}">
+                    <c:if test="${4 eq item.intAuthItemNo}">
+	                  <li><a style=" font-size: 14px;"><i class="fa fa-desktop"></i> 게시판 <span class="fa fa-chevron-down"></span></a>
+	                    <ul class="nav child_menu">
+	                      <li><a href="/BoardCategory/BoardCategoryList">게시판 목록</a></li>
+	                      <li><a href="/BoardCategory/BoardCategoryEnrollForm">게시판 등록</a></li>                      
+	                    </ul>
+	                  </li>
+	                  </c:if>
+                  </c:forEach>
           
            
                   

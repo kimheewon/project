@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 관리자 로그인  -->
+<mapper namespace="boardCategorySql">
+
+    <!-- 게시판 카테고리 모두 가져오기 -->
+    <select id="selectAllBoardCategory" resultType="BoardCategoryInfo"> 
+        SELECT   A.BoardCateNo      AS intBoardCateNo
+                ,A.BoardCateName    AS strBoardCateName
+                ,B.AdminId          AS strBoardCreateAdminId
+                ,A.BoardDate        AS dateBoardDate
+        FROM     TBoardCategory A, TAdmin B
+        WHERE    A.BoardCreateAdminNo = B.AdminNo
+    </select>
+    
+    <!-- 게시판명 중복 체크 -->
+    <select id="selectName" resultType="BoardCategoryInfo"> 
+        SELECT  BoardCateName   AS strBoardCateName
+        FROM    TBoardCategory  
+        WHERE   BoardCateName = #{boardName}
+    </select>
+    
+    <!-- 게시판 카테고리 저장 -->
+    <insert id="boardCategoryInsert" >
+        INSERT INTO TBoardCategory(BoardCateName,BoardCreateAdminNo )
+                       VALUES(#{strBoardCateName}, #{intBoardCreateAdminNo})
+     </insert>
+</mapper>

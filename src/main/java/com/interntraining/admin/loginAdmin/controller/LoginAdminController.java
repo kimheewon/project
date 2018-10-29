@@ -57,6 +57,7 @@ public class LoginAdminController {
 			admin = loginAdminService.selectOne(id);		//로그인 성공시 정보 담아놓음
 			session.setAttribute("AdminLogin", admin);	//세션에 admin이란 이름으로 관리자 객체를 저장함
 			session.setAttribute("AdminId", admin.getStrAdminId());
+			session.setAttribute("AdminNo", admin.getIntAdminNo());
 			int authno = admin.getIntAuthNo();
 			session.setAttribute("AuthNo", authno); 	//권한 번호
 			List<AuthMapp> authItem = loginAdminService.selectItemList(authno);	//권항 항목 가져오기

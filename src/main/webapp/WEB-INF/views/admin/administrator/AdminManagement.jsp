@@ -161,11 +161,9 @@ ga('send', 'pageview');
 	                "no": no
 	            },
 			
-	            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-	            	
+	            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수	            	
 	            	if(data==1){					//마스터
-	            		location.href="/Administrator/UpdateFrom?intAdminNo="+no;
-	             		
+	            		location.href="/Administrator/UpdateFrom?intAdminNo="+no;	             		
 	             	}
 	             	else{							//그 이외
 	             		alert("수정할 권한이 없습니다.");	

@@ -39,21 +39,38 @@
 
   </head>
  <body>
- 
+
+
      <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+     
+ <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Action
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#">Separated link</a>
+  </div>
       <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="/login/home">PayLetter</a>
-        <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          Menu
-          <i class="fas fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
+   
+   
+        <div class="collapse navbar-collapse " id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item mx-0 mx-lg-1">
-             	<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/board/boardlist">게시판</a>
-             	  
-            </li>
+            <li class="dropdown nav-item mx-0 mx-lg-1 ">
+             	<a class="dropdown-toggle nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger  "  data-toggle="dropdown">게시판</a>
+                     <ul class="dropdown-menu" role="menu">
+			            <li>
+			                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/board/boardlist">자유 게시판</a>
+			            </li>
+			            <li >
+                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/board/boardlist">후기 게시판</a>
+                        </li>
+		            </ul>
+              </li> 
             <li class="nav-item mx-0 mx-lg-1">
 				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/login/myPageForm">마이페이지</a>
             </li>

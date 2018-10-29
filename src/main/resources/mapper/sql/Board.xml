@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 관리자 로그인  -->
+<mapper namespace="boardSql">
+
+    <!-- 게시판 카테고리 모두 가져오기 -->
+    <select id="selectAllBoard" resultType="AdminBoardInfo"> 
+        SELECT   A.BoardNo        AS intBoardNo
+                ,A.UserId         AS strUserId
+                ,A.BoardTitle     AS strBoardTitle
+                ,A.BoardContent   AS strBoardContent
+                ,A.BoardDate      AS dateBoardDate
+                ,A.BoardHit       AS intHit
+                ,A.BoardCateNo    AS intBoardCateNo
+                ,B.UserGrade      AS strGrade
+                ,(SELECT COUNT(*)
+                  FROM TComment
+                  WHERE BoardNo = A.BoardNo ) AS inttotalComment
+        FROM     TBoard A, TUser B
+        WHERE    A.BoardCateNo = #{boardCateNo} AND A.UserId =  B.UserId
+        ORDER BY A.BoardNo DESC
+    </select>
+    
+    <!-- 게시판명 불러오기 -->
+    <select id="selectBoardName" resultType="String">
+        SELECT  BoardCateName   
+        FROM    TBoardCategory
+        WHERE   BoardCateNo = #{boardCateNo}
+    </select>
+    
+</mapper>

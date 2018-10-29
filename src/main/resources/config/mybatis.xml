@@ -20,6 +20,9 @@
         <package name="com.interntraining.admin.administrator.domain"/>
         <package name="com.interntraining.admin.authority.domain"/>
         <package name="com.interntraining.admin.membership.domain"/>
+        <package name="com.interntraining.admin.boardCategory.domain"/>
+        
+         <package name="com.interntraining.admin.adminBoard.domain"/>
         
     </typeAliases>
 
