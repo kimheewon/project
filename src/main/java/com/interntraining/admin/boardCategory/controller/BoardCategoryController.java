@@ -106,7 +106,7 @@ public class BoardCategoryController {
 	@ResponseBody
 	public int BoardNameCheck(String boardName) throws Exception{
 		
-		//DB에서 Id 체크
+		//DB에서 카테고리명 중복 체크
 		BoardCategoryInfo BoardName = boardCategoryService.selectName(boardName);
 		int check = 0;
 		if(BoardName != null) {
@@ -127,7 +127,59 @@ public class BoardCategoryController {
 		board.setStrBoardCateName(boardName);
 		boardCategoryService.boardCategoryInsert(board);			//db에 게시판 카테고리 저장
 		
-		mav.setViewName("/admin/boardCategory/BoardCategoryList");
+		mav.setViewName("redirect:/BoardCategory/BoardCategoryList");
+		return mav;
+	}
+	
+	//게시판 카테고리 수정폼으로 이동
+	@RequestMapping(value="/BoardCategoryUpdateForm")
+	public ModelAndView BoardCategoryUpdateForm(int intboardCategoryNo, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		
+		BoardCategoryInfo board = boardCategoryService.selectBoardCategoryName(intboardCategoryNo);	//카테고리 번호로 게시판 명 찾기
+			
+		mav.addObject("board", board);
+		mav.setViewName("/admin/boardCategory/BoardCategoryUpdate");
+		return mav;
+	}
+	
+	//수정폼에서 중복된 게시판명 체크
+	@RequestMapping(value="/UpdateBoardCategoryNameCheck", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public int UpdateBoardCategoryNameCheck(String boardName, int no) throws Exception{
+			
+		int check = 0; //사용해도 되는 이름
+		BoardCategoryInfo board = boardCategoryService.selectBoardCategoryName(no);	//기존 게시판명
+		if(boardName.equals(board.getStrBoardCateName())){	//게시판명 수정 안했으면..
+			check = 2;
+			return check;
+		}
+		else {	//중복된 게시판 명
+			BoardCategoryInfo updateBoardName = boardCategoryService.searchBoardCateName(boardName);	//게시판 중복인지 찾기
+			if(updateBoardName != null) {	//중복된 권한
+				check=1; 
+				return check;
+			}
+			else {
+				check=0;  
+				return check;
+			}
+		}		
+	}
+	
+	//게시판 카테고리 등록
+	@RequestMapping(value="/BoardCategoryUpdate")
+	public ModelAndView BoardCategoryUpdate( HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+			
+		String boardName = request.getParameter("boardName");
+		int no = (Integer)session.getAttribute("AdminNo");		//게시판 카테고리 생성자의 id
+		BoardCategoryInfo board = new BoardCategoryInfo();
+		board.setIntBoardCreateAdminNo(no);
+		board.setStrBoardCateName(boardName);
+		boardCategoryService.boardCategoryUpdate(board);			//db에 게시판 명 수정
+			
+		mav.setViewName("redirect:/BoardCategory/BoardCategoryList");
 		return mav;
 	}
 }

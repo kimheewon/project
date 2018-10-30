@@ -4,18 +4,21 @@ package com.interntraining.member.board.domain;
 import java.util.Date;
 
 public class Board {
-	private int intBoardNo;
-	private String strUserId;
-	private String strBoardTitle;
-	private String strBoardContent;
-	private Date dateBoardDate;
-	private String strBoardDate;
-	private int intNewCheck;
-	private int intHit;
-	private int rownumber;
-	private int inttotalComment;
-	private String strGrade;
-	private int intNum;
+	private int 	intBoardNo;
+	private String 	strUserId;
+	private String 	strBoardTitle;
+	private String 	strBoardContent;
+	private Date 	dateBoardDate;
+	private String 	strBoardDate;
+	private int 	intNewCheck;
+	private int 	intHit;
+	private int 	rownumber;
+	private int 	inttotalComment;
+	private String 	strGrade;
+	private int 	intNum;
+	private int 	intBoardCateNo;		//게시판카테고리 번호
+	private String 	KeyWord;
+	private String	 KeyField;
 	
 	
 	public int getIntBoardNo() {
@@ -91,6 +94,24 @@ public class Board {
 	}
 	public void setIntNum(int intNum) {
 		this.intNum = intNum;
+	}
+	public int getIntBoardCateNo() {
+		return intBoardCateNo;
+	}
+	public void setIntBoardCateNo(int intBoardCateNo) {
+		this.intBoardCateNo = intBoardCateNo;
+	}
+	public String getKeyWord() {
+		return KeyWord;
+	}
+	public void setKeyWord(String keyWord) {
+		KeyWord = keyWord;
+	}
+	public String getKeyField() {
+		return KeyField;
+	}
+	public void setKeyField(String keyField) {
+		KeyField = keyField;
 	}
 
 	

@@ -1,5 +1,8 @@
 package com.interntraining.member.login.service;
 
+import java.util.List;
+
+import com.interntraining.admin.boardCategory.domain.BoardCategoryInfo;
 import com.interntraining.member.login.domain.User;
 
 
@@ -16,6 +19,9 @@ public interface LoginService {
 
 	//회원정보 수정
 	public void updateMember(User user);
+
+	//db에서 게시판 카테고리 항목 불러오기
+	public List<BoardCategoryInfo> boardCategoryList();
 
 	
 	

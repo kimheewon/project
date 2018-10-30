@@ -79,7 +79,7 @@
                                                     <td style="text-align: center; color:#3b5976;">${boardCategory.strBoardCateName}</td>
                                                     <td style="text-align: center; color:#3b5976;">${boardCategory.strBoardCreateAdminId}</td>
                                                     <td style="text-align: center; color:#3b5976;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardCategory.dateBoardDate}"/></td>
-					                                <td style="text-align: center; color:#3b5976;"><a href="/Auth/AuthUpdateForm?authNo=${boardCategory.intBoardCateNo}" style="text-align: center; color:#3b5976;">수정하기</a>
+					                                <td style="text-align: center; color:#3b5976;"><a href="/BoardCategory/BoardCategoryUpdateForm?intboardCategoryNo=${boardCategory.intBoardCateNo}" style="text-align: center; color:#3b5976;">수정하기</a>
 					                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                         <a href="/AdminBoard/AdminBoardList?boardCateNo=${boardCategory.intBoardCateNo}" style="color:#3b5976;">관리하기</a>
                                                     </td>

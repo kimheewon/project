@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-
+import com.interntraining.admin.boardCategory.domain.BoardCategoryInfo;
 import com.interntraining.member.board.domain.Board;
 import com.interntraining.member.board.domain.Comment;
 import com.interntraining.member.board.domain.Pagination;
@@ -28,13 +28,9 @@ public class BoardDAO {
 	}
 	
 	//게시글 검색
-	public List<Board> searchboardlist(String keyField, String keyWord) {
-		List<Board> list = null;
-		Map<String, String> map = new HashMap<String, String> ();
-        map.put("keyField" , keyField);
-        map.put("keyWord", keyWord);
-        list = sqlSession.selectList("sql.searchboardlist", map);
-		return list;
+	public List<Board> searchboardlist(Board boardInfo) {
+		return sqlSession.selectList("sql.searchboardlist", boardInfo);
+		
 	}
 	
 	//게시글 작성
@@ -106,6 +102,26 @@ public class BoardDAO {
 	//id로 유저의 등급 찾기
 	public String getUserGrade(String id) {
 		return sqlSession.selectOne("sql.getUserGrade", id);
+	}
+
+	//db에서 게시판 카테고리 항목 불러오기
+	public List<BoardCategoryInfo> boardCategoryList() {
+		return sqlSession.selectList("sql.boardCategoryList");
+	}
+
+	//게시판 카테고리 번호 찾기
+	public int selectBoardCateNo(int intBoardNo) {
+		return sqlSession.selectOne("sql.selectBoardCateNo", intBoardNo);
+	}
+
+	//댓글의 게시글번호 찾기
+	public int selectBoardNo(int intCmmtNo) {
+		return sqlSession.selectOne("sql.selectBoardNo", intCmmtNo);
+	}
+
+	//카테고리 번호로 게시판명 찾기
+	public String selectBoardCateName(int intBoardCateNo) {
+		return sqlSession.selectOne("sql.selectBoardCateName", intBoardCateNo);
 	}
 
 	

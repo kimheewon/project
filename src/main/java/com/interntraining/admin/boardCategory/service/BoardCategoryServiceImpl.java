@@ -41,6 +41,24 @@ public class BoardCategoryServiceImpl implements BoardCategoryService{
 		boardCategoryDAO.boardCategoryInsert(board);
 		
 	}
+	
+	//카테고리 번호로 카테고리 명 찾기
+	@Override
+	public BoardCategoryInfo selectBoardCategoryName(int intboardCategoryNo) {
+		return boardCategoryDAO.selectBoardCategoryName(intboardCategoryNo);
+	}
+
+	//게시판 중복인지 찾기
+	@Override
+	public BoardCategoryInfo searchBoardCateName(String boardName) {
+		return boardCategoryDAO.searchBoardCateName(boardName);
+	}
+
+	//db에 게시판 명 수정
+	@Override
+	public void boardCategoryUpdate(BoardCategoryInfo board) {
+		boardCategoryDAO.boardCategoryUpdate(board);
+	}
 
 	
 	

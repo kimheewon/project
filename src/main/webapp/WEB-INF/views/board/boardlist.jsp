@@ -7,17 +7,13 @@
     }
 %>
 
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
 <title>Board List</title>
 <style>
 	.container_t {
@@ -46,10 +42,10 @@
 
     <div class="container_t">
     
-  		<h3 style="color:#2c3e50;margin-left: 1%;">게시판</h3>
+  		<h3 style="color:#2c3e50;margin-left: 1%;">${strBoardCateName}</h3>
   		
     	<span style="float:right; margin-right:4%; font-weight:bold;">    			
-  			<a href='/board/boardlist' style="color:#18bc9c;">목록</a>
+  			<a href='/board/boardlist?intBoardCateNo=${intBoardCateNo}' style="color:#18bc9c;">목록</a>
 		</span>
 		<br><br>
     	<table class="table table-hover">
@@ -115,13 +111,13 @@
 
 	
 	<span style="float:right; font-weight:bold; width:5.5%;margin-right: 18%;">
-	<button class="btn" id="btn" onclick="location.href='/board/boardwrite'" style="background-color: white;color:#2c3e50; 
+	<button class="btn" id="btn" onclick="location.href='/board/boardwrite?intBoardCateNo=${intBoardCateNo}'" style="background-color: white;color:#2c3e50; 
 		border: 1px solid #2c3e50;padding: 3px; padding-left: 0;" >
 	<img class="btn-img" src="/img/pen.png" style=" width: 30%;">&nbsp;글쓰기</button> 		
 	</span>
 	<br>
 		<div style='text-align: center; margin: 1px auto;margin-left: 20%;'>
-			 <form action="/board/boardlist" name="search" method="post">
+			 <form action="/board/boardlist?intBoardCateNo=${intBoardCateNo}" name="search" method="post">
 			
 			 <select name="keyField" size="1" style="width:110px;height: 30px;">
 	                <option value="UserId" <c:if test="${'UserId'==keyField }"> selected</c:if>> 아이디 </option>
@@ -188,7 +184,7 @@
 
         var f = document.frm;
         f.method = "post"
-        f.action = "/board/boardlist?curPage="+curPage;
+        f.action = "/board/boardlist?curPage="+curPage+"&&intBoardCateNo="+${intBoardCateNo};
         f.submit();
         
        

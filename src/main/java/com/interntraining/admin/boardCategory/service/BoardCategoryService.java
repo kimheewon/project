@@ -16,4 +16,13 @@ public interface BoardCategoryService {
 	//db에 게시판 카테고리 저장
 	public void boardCategoryInsert(BoardCategoryInfo board);
 
+	//카테고리 번호로 카테고리 명 찾기
+	public BoardCategoryInfo selectBoardCategoryName(int intboardCategoryNo);
+
+	//게시판 중복인지 찾기
+	public BoardCategoryInfo searchBoardCateName(String boardName);
+
+	//db에 게시판 명 수정
+	public void boardCategoryUpdate(BoardCategoryInfo board);
+
 }

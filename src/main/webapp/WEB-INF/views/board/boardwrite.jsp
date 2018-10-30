@@ -9,9 +9,9 @@
 <head>
 <meta charset="EUC-KR">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
 
 <script src="/js/jquery-1.12.3.min.js"></script>
 <script src="/js/jquery-ui.min.js"></script>
@@ -59,9 +59,9 @@
 	<div class="container_t">
 		<h3 style="color:#2c3e50;">게시글 작성</h3>
 		<br>
-		<span style="float:right; margin-right:2%; font-weight:bold"><a href='/board/boardlist' >목록</a></span>
+		<span style="float:right; margin-right:2%; font-weight:bold"><a href='/board/boardlist?intBoardCateNo=${intBoardCateNo}' >목록</a></span>
 		<br><br>
-		<form method="POST" action="/board/boardsave" name="info">
+		<form method="POST" action="/board/boardsave?intBoardCateNo=${intBoardCateNo}" name="info">
 		<table class="table">
 			<tr>
 				<td style="width: 10%; text-align: center; padding-top: 1.5%;font-weight: bold;">제&nbsp;&nbsp;&nbsp;&nbsp;목</td>

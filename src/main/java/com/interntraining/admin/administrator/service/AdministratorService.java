@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.interntraining.admin.administrator.domain.AdministratorInfo;
 import com.interntraining.admin.authority.domain.AuthInfo;
+import com.interntraining.admin.boardCategory.domain.BoardCategoryInfo;
 
 public interface AdministratorService {
 
@@ -36,5 +37,7 @@ public interface AdministratorService {
 
 	//관리자 정보 업데이트
 	public void updateAdmin(AdministratorInfo admin);
+
+	
 
 }

@@ -1,5 +1,7 @@
 package com.interntraining.member.login.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
 
+import com.interntraining.admin.boardCategory.domain.BoardCategoryInfo;
 import com.interntraining.member.login.dao.LoginDAO;
 import com.interntraining.member.login.domain.User;
 
@@ -59,6 +62,12 @@ public class LoginServiceImpl implements LoginService {
 	public void updateMember(User user) {
 		loginDAO.updateMember(user);
 		
+	}
+
+	//db에서 게시판 카테고리 항목 불러오기
+	@Override
+	public List<BoardCategoryInfo> boardCategoryList() {
+		return loginDAO.boardCategoryList();
 	}
 
 	

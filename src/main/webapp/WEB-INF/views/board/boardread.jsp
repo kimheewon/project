@@ -10,14 +10,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
 <script src="/js/jquery-1.12.3.min.js"></script>
 <script src="/js/jquery-ui.min.js"></script>
 <title>BoardRead</title>
@@ -97,8 +93,8 @@
 	<div class="container_t">
 		<h3 style="color: #2c3e50;">게시글</h3>
 		<br> <span
-			style="float: right; margin-right: 2%; font-weight: bold"><a
-			href='/board/boardlist'>목록</a></span> <br>
+			style="float: right; margin-right: 2%; font-weight: bold">
+			<a href='/board/boardlist?intBoardCateNo=${intBoardCateNo}'>목록</a></span> <br>
 		<br>
 
 	
@@ -112,7 +108,6 @@
 					<td style="width: 80%;  text-align: right;  font-size: 15px;  padding-right: 2%;    color: #7f7f7f; ">
 					<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${board.dateBoardDate}" /></td>
 				</tr>
-
 				<tr>
 					<c:choose>
 						<c:when test="${board.strGrade eq '일반'}">
@@ -156,7 +151,7 @@
 							<span style="float: right; margin-right: 2%; font-weight: bold; color:#2c3e50"><a style="color:#2c3e50;"
 								href="javascript:updateComment(${comment.intCmmtNo});">수정</a></span>
 							<span style="float: right; margin-right: 1%; font-weight: bold; color:#2c3e50" ><a style="color:#2c3e50;"
-								href="/board/commentDelete?intCmmtNo=${comment.intCmmtNo}&intBoardNo=${board.intBoardNo}">삭제</a></span>
+								href="/board/commentDelete?intCmmtNo=${comment.intCmmtNo}">삭제</a></span>
 						</c:if>
 					</div>
 					<div>

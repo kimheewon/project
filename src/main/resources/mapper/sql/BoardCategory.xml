@@ -27,4 +27,27 @@
         INSERT INTO TBoardCategory(BoardCateName,BoardCreateAdminNo )
                        VALUES(#{strBoardCateName}, #{intBoardCreateAdminNo})
      </insert>
+     
+     <!-- 카테고리 번호로 카테고리 명 찾기 -->
+     <select id="selectBoardCategoryName" resultType="BoardCategoryInfo">
+        SELECT   BoardCateNo     AS intBoardCateNo
+                ,BoardCateName   AS strBoardCateName
+        FROM     TBoardCategory
+        WHERE    BoardCateNo = #{intboardCategoryNo}
+     </select>
+     
+     <!-- 게시판 중복인지 찾기 -->
+     <select id="searchBoardCateName" resultType="BoardCategoryInfo">
+        SELECT  BoardCateName
+        FROM    TBoardCategory
+        WHERE   BoardCateName = #{boardName}
+     </select>
+     
+     <!-- db에 게시판 명 수정 -->
+     <update id="boardCategoryUpdate">
+        UPDATE  TBoardCategory
+        SET     BoardCateName   = #{strBoardCateName}
+        WHERE   BoardCateNo     = #{intBoardCateNo}
+     
+     </update>
 </mapper>

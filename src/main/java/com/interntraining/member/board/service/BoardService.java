@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.interntraining.admin.boardCategory.domain.BoardCategoryInfo;
 import com.interntraining.member.board.domain.Board;
 import com.interntraining.member.board.domain.Comment;
 import com.interntraining.member.board.domain.Pagination;
@@ -16,7 +17,7 @@ public interface BoardService {
 	public List<Board> selectboardlist(Board board) throws Exception;
 	
 	//게시글 검색
-	public List<Board> searchboardlist(String keyField, String keyWord);
+	public List<Board> searchboardlist(Board boardInfo);
 	
 	//검색 페이징
 	public List<Board> searchboardlistP(Pagination pagination);
@@ -59,6 +60,18 @@ public interface BoardService {
 
 	//id로 유저의 등급 찾기
 	public String getUserGrade(String id);
+
+	//db에서 게시판 카테고리 항목 불러오기
+	public List<BoardCategoryInfo> boardCategoryList();
+
+	//게시판 카테고리 번호 찾기
+	public int selectBoardCateNo(int intBoardNo);
+
+	//댓글의 게시글번호 찾기
+	public int selectBoardNo(int intCmmtNo);
+
+	//카테고리 번호로 게시판명 찾기
+	public String selectBoardCateName(int intBoardCateNo);
 
 	
 

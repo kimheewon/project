@@ -1,5 +1,7 @@
 package com.interntraining.common.interceptor;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.interntraining.admin.administrator.service.AdministratorService;
+import com.interntraining.admin.boardCategory.domain.BoardCategoryInfo;
+import com.interntraining.member.board.service.BoardService;
 
 /*
  * 	- preHandle : 클라이언트의 요청을 컨트롤러에 전달하기 전에 호출된다. 여기서 false를 리턴하면 다음 내용(Controller)을 실행하지 않는다.
@@ -24,8 +28,7 @@ import com.interntraining.admin.administrator.service.AdministratorService;
 public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 	
 	@Autowired
-	private AdministratorService administratorService;
-	
+	private BoardService boardService;
 	
 	// preHandle() : 컨트롤러보다 먼저 수행되는 메서드
     @Override
@@ -36,7 +39,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
         Object obj = session.getAttribute("login");
         Object objAdmin = session.getAttribute("AdminLogin");
        
-        
+       
     	
          
         if ( obj == null && objAdmin == null){

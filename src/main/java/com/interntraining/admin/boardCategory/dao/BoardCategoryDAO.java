@@ -31,4 +31,20 @@ public class BoardCategoryDAO {
 		sqlSession.insert("boardCategorySql.boardCategoryInsert", board);
 	}
 
+	//카테고리 번호로 카테고리 명 찾기
+	public BoardCategoryInfo selectBoardCategoryName(int intboardCategoryNo) {
+		return sqlSession.selectOne("boardCategorySql.selectBoardCategoryName",intboardCategoryNo);
+	}
+
+	//게시판 중복인지 찾기
+	public BoardCategoryInfo searchBoardCateName(String boardName) {
+		return sqlSession.selectOne("boardCategorySql.searchBoardCateName",boardName);
+	}
+
+	//db에 게시판 명 수정
+	public void boardCategoryUpdate(BoardCategoryInfo board) {
+		sqlSession.update("boardCategorySql.boardCategoryUpdate", board);
+		
+	}
+
 }

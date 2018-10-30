@@ -74,6 +74,7 @@
 				,BoardDate 	 	AS dateBoardDate
 				,BoardHit   	AS intHit
 		FROM   	 TBoard
+		WHERE BoardCateNo = #{intBoardCateNo}   
 		ORDER BY BoardNo DESC
 	</select>
 	
@@ -86,7 +87,8 @@
 		                                                                      ,BoardTitle AS strBoardTitle
 		                                                                      ,BoardDate  AS dateBoardDate
 		                                                                      ,BoardHit   AS intHit
-		        FROM TBoard ) AS resultTable
+		        FROM TBoard
+		        WHERE BoardCateNo = #{intBoardCateNo}  ) AS resultTable
 		WHERE rownumber > (#{curPage} - 1) * 10
 	 </select>
 	 
@@ -100,7 +102,7 @@
 		                                                                  	  ,BoardHit   AS intHit
 		        FROM (SELECT  *
                       FROM TBoard
-                      WHERE ${keyField} LIKE '%${keyWord}%')    AS TSearch ) AS resultTable
+                      WHERE BoardCateNo = #{intBoardCateNo} AND ${keyField} LIKE '%${keyWord}%')    AS TSearch ) AS resultTable
         WHERE rownumber > (#{curPage} - 1) * 10
 	 </select>
 	 
@@ -113,14 +115,14 @@
 				,BoardDate 	 	AS dateBoardDate
 				,BoardHit   	AS intHit
         FROM TBoard
-        WHERE ${keyField} LIKE '%${keyWord}%'
+        WHERE ${keyField} LIKE '%${keyWord}%' AND BoardCateNo = #{intBoardCateNo}
         ORDER BY BoardNo DESC
     </select>
     
 	<!-- 게시글 저장 -->
 	<insert id="insertboard" >
-		INSERT INTO TBoard(UserId, BoardTitle, BoardContent)
-		            VALUES(#{strUserId}, #{strBoardTitle}, #{strBoardContent})
+		INSERT INTO TBoard(UserId, BoardTitle, BoardContent, BoardCateNo)
+		            VALUES(#{strUserId}, #{strBoardTitle}, #{strBoardContent}, #{intBoardCateNo})
 	</insert>
 	
 	<!-- 게시글 번호를 통해 DB에서 찾아 게시글 읽기 -->
@@ -231,4 +233,32 @@
 		WHERE     UserId = #{id} 
 	
 	</select>
+	
+	<!--db에서 게시판 카테고리 항목 불러오기 -->
+	<select id="boardCategoryList" resultType="BoardCategoryInfo">
+	   SELECT  BoardCateNo      AS intBoardCateNo    
+              ,BoardCateName    AS strBoardCateName
+	   FROM    TBoardCategory
+	</select>
+	
+	<!-- 게시판 카테고리 번호 찾기 -->
+	<select id="selectBoardCateNo" resultType="int">
+	   SELECT  BoardCateNo
+	   FROM    TBoard
+	   WHERE   BoardNo = #{intBoardNo}
+	</select>
+	
+	<!-- 댓글의 게시글번호 찾기 -->
+	<select id="selectBoardNo" resultType="int">
+        SELECT  BoardNo
+        FROM    TComment
+        WHERE   CmmtNo = #{intCmmtNo}
+	</select>
+	
+	<!-- 카테고리 번호로 게시판명 찾기 -->
+	<select id="selectBoardCateName" resultType="String">
+	   SELECT  BoardCateName
+	   FROM    TBoardCategory
+	   WHERE   BoardCateNo = #{intBoardCateNo}
+    </select>
 </mapper>

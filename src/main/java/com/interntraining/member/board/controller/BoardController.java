@@ -39,7 +39,7 @@ public class BoardController {
 	// 게시판
 	@ResponseBody
 	@RequestMapping(value="/boardlist")
-	public ModelAndView boardlist(HttpServletRequest request, HttpServletResponse response, HttpSession session, Board board,@RequestParam(required=false) Integer nowPage,@RequestParam(required=false)Integer nowBlock,
+	public ModelAndView boardlist(int intBoardCateNo, HttpServletRequest request, HttpServletResponse response, HttpSession session, Board board,@RequestParam(required=false) Integer nowPage,@RequestParam(required=false)Integer nowBlock,
             @RequestParam(required=false) String keyField, @RequestParam(required=false) String keyWord, @RequestParam(defaultValue="1") int curPage) throws Exception {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		
@@ -49,12 +49,16 @@ public class BoardController {
 		//setAttribute로 세션에 검색어 담기?
 		//session.setAttribute("keyWord", KeyWord);
 		//session.setAttribute("keyField", KeyField);
-		if(KeyWord == null) {
+		
+		board.setIntBoardCateNo(intBoardCateNo);	//게시판 카테고리 번호
+		
+		if(KeyWord == null) {	//검색어 없을 경우
 			List<Board> boardCount = boardService.selectboardlist(board);	//게시글 총 개수
 			int listCnt = boardCount.size();
 			
 			Pagination pagination = new Pagination(listCnt, curPage);
 			
+			pagination.setIntBoardCateNo(intBoardCateNo);
 	        
 	        /* List */
 	        List<Board> boardList = boardService.getBoardList(pagination); // 리스트
@@ -62,11 +66,8 @@ public class BoardController {
 	        //글 시퀀스 번호
 	        int c = listCnt - (curPage-1)*10;
 	        for(int i=0; i<boardList.size(); i++) {
-	        	boardList.get(i).setIntNum(c--);
-	        
+	        	boardList.get(i).setIntNum(c--);	        
 	        }
-	        
-	        
 	        
 	        //vip 회원 구분
 	        for(int i=0; i<boardList.size(); i++){
@@ -105,6 +106,10 @@ public class BoardController {
 		        }
 		    }
 
+	        String strBoardCateName = boardService.selectBoardCateName(intBoardCateNo);	//카테고리 번호로 게시판명 찾기
+	       
+			mav.addObject("intBoardCateNo", intBoardCateNo);	//카테고리 번호
+			mav.addObject("strBoardCateName", strBoardCateName);	//게시판 명
 			mav.addObject("boardlist", boardList);
 			mav.addObject("listCnt", listCnt);
 			mav.addObject("pagination", pagination);
@@ -115,12 +120,18 @@ public class BoardController {
 			
 		}
 		else {//검색어
-			List<Board> boardCount = boardService.searchboardlist(KeyField, KeyWord);	//게시글 총 개수
+			Board boardInfo = new Board();
+			boardInfo.setKeyField(KeyField);
+			boardInfo.setKeyWord(KeyWord);
+			boardInfo.setIntBoardCateNo(intBoardCateNo);
+			List<Board> boardCount = boardService.searchboardlist(boardInfo);	//게시글 총 개수
+			
 			int listCnt = boardCount.size();
 			Pagination pagination = new Pagination(listCnt, curPage);
 			pagination.setKeyField(KeyField);
 			pagination.setKeyWord(KeyWord);
 			pagination.setCurPage(curPage);
+			pagination.setIntBoardCateNo(intBoardCateNo);
 			List<Board> list = boardService.searchboardlistP(pagination);
 			
 			 //글 스쿼스 번호
@@ -169,10 +180,13 @@ public class BoardController {
 		        }
 		    }
 			
+	        
+			mav.addObject("intBoardCateNo", intBoardCateNo);
 			mav.addObject("boardlist", list);
 			mav.addObject("listCnt", listCnt);
 			mav.addObject("pagination", pagination);
 			mav.setViewName("/board/boardlist");
+			
 			
 			return mav;
 		}
@@ -181,17 +195,18 @@ public class BoardController {
 
 	// 게시글 작성 페이지
 	@RequestMapping("/boardwrite")
-	public String boardwrite() {
-		return "/board/boardwrite";
+	public ModelAndView boardwrite(int intBoardCateNo) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());	
+		
+		mav.addObject("intBoardCateNo",intBoardCateNo);
+		mav.setViewName("/board/boardwrite");
+		return mav;
 	}
-
-	//게시글 검색
-	
 
 	
 	// 게시글 저장
 	@RequestMapping("/boardsave")
-	public ModelAndView boardWrite(HttpServletRequest request, HttpServletResponse response, HttpSession session,@RequestParam(required=false) Integer nowPage,@RequestParam(required=false)Integer nowBlock,
+	public ModelAndView boardWrite(int intBoardCateNo, HttpServletRequest request, HttpServletResponse response, HttpSession session,@RequestParam(required=false) Integer nowPage,@RequestParam(required=false)Integer nowBlock,
             @RequestParam(required=false) String keyField, @RequestParam(required=false) String keyWord, @RequestParam(defaultValue="1") int curPage)
 			throws Exception {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
@@ -204,75 +219,16 @@ public class BoardController {
 		board.setStrUserId(id);
 		board.setStrBoardTitle(title);
 		board.setStrBoardContent(contents);
-		boardService.insertboard(board);
+		board.setIntBoardCateNo(intBoardCateNo);	//게시판 카테고리 번호
+		boardService.insertboard(board);			//게시글 저장
 
-		List<Board> boardCount = boardService.selectboardlist(board);	//게시글 총 개수
-		int listCnt = boardCount.size();
-	
-		Pagination pagination = new Pagination(listCnt, curPage);
-					
-		//List<Board> boardlist = boardService.selectboardlist(board);
-		List<Board> boardlist = boardService.getBoardList(pagination); // 리스트
-
-		 //글 스쿼스 번호
-		int c = listCnt - (curPage-1)*10;
-		for(int i=0; i<boardlist.size(); i++) {
-			boardlist.get(i).setIntNum(c--);
-       
-		}
-		//vip 회원 구분
-        for(int i=0; i<boardlist.size(); i++){
-        	String idG = boardlist.get(i).getStrUserId();
-        	String grade = boardService.getUserGrade(idG); //id로 유저의 등급 찾기
-        	boardlist.get(i).setStrGrade(grade);
-        }
-        
-        
-        
-		 //날짜 변환+new
-        Date dateB = new Date();
-        String boardDate;
-        int Commentotal;
-
-        
-        Date today = new Date();
-        SimpleDateFormat date = new SimpleDateFormat("yyy/MM/dd");
-        SimpleDateFormat dateTime = new SimpleDateFormat("hh:mm a",Locale.US);
-        int check;
-        for(int j=0; j<boardlist.size();j++) {
-        	dateB = boardlist.get(j).getDateBoardDate();
-        	check=0;
-        	//댓글 수
-        	Commentotal = boardService.totalComment(boardlist.get(j).getIntBoardNo());
-        	boardlist.get(j).setInttotalComment(Commentotal);
-        	
-	       
-	        if(! date.format(today).equals(date.format(dateB))) {	//오늘 쓴 글이 아니면
-	        	boardDate = date.format(dateB);
-	        	boardlist.get(j).setStrBoardDate(boardDate);
-	        }
-	        else {	//오늘 쓴 글이면
-	        	check=1;
-	        	boardDate=dateTime.format(dateB);
-	        	boardlist.get(j).setStrBoardDate(boardDate);
-	        	boardlist.get(j).setIntNewCheck(check); //오늘 글인지 확인 new
-	        }
-	    }
-        
-        
-        
-		mav.addObject("boardlist", boardlist);
-		mav.addObject("listCnt", listCnt);
-		mav.addObject("pagination", pagination);
-		mav.setViewName("/board/boardlist");
-
+		mav.setViewName("redirect:/board/boardlist?intBoardCateNo="+intBoardCateNo);
 		return mav;
 	}
 
 	// 게시글 읽기 + 댓글 뿌려주기(조회수 증가)
 	@RequestMapping("/boardreadHit")
-	public ModelAndView boardreadHit(HttpServletRequest request, HttpServletResponse response, HttpSession session,
-		int intBoardNo) throws Exception {
+	public ModelAndView boardreadHit(HttpServletRequest request, HttpServletResponse response, HttpSession session,int intBoardNo) throws Exception {
 		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
 		String id = (String) session.getAttribute("id"); // 세션
 
@@ -283,13 +239,16 @@ public class BoardController {
 		//vip 회원 구분       
        	String idG = boardread.getStrUserId();
        	String grade = boardService.getUserGrade(idG); //id로 유저의 등급 찾기
-        boardread.setStrGrade(grade);
-      
+        boardread.setStrGrade(grade);      
 
+        //게시판 카테고리 번호 찾기
+      	int intBoardCateNo = boardService.selectBoardCateNo(intBoardNo);      		
+       
 		mv.addObject("board", boardread);
 		mv.addObject("commentlist", cmmtlist);
 		mv.addObject("cmmlistCount",cmmlistCount);//댓글수
 		mv.addObject("id", id);
+		mv.addObject("intBoardCateNo",intBoardCateNo);	//게시판 카테고리 번호
 		mv.setViewName("/board/boardread");
 		return mv;
 	}	
@@ -297,8 +256,7 @@ public class BoardController {
 		
 	// 게시글 읽기 + 댓글 뿌려주기
 	@RequestMapping("/boardread")
-	public ModelAndView boardread(HttpServletRequest request, HttpServletResponse response, HttpSession session,
-			int intBoardNo) throws Exception {
+	public ModelAndView boardread(HttpServletRequest request, HttpServletResponse response, HttpSession session,int intBoardNo) throws Exception {
 		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
 
 		String id = (String) session.getAttribute("id"); // 세션
@@ -307,14 +265,15 @@ public class BoardController {
 		List<Comment> cmmtlist = boardService.selectcmmtlist(intBoardNo);
 		int cmmlistCount = cmmtlist.size();
 
+		//게시판 카테고리 번호 찾기
+		int intBoardCateNo = boardService.selectBoardCateNo(intBoardNo);
        
 		//vip 회원 구분       
        	String idG = boardread.getStrUserId();
        	String grade = boardService.getUserGrade(idG); //id로 유저의 등급 찾기
-        boardread.setStrGrade(grade);
+        boardread.setStrGrade(grade); 
         
-      
-        
+		mv.addObject("intBoardCateNo",intBoardCateNo);	//게시판 카테고리 번호
 		mv.addObject("board", boardread);
 		mv.addObject("commentlist", cmmtlist);
 		mv.addObject("cmmlistCount",cmmlistCount);//댓글수
@@ -330,6 +289,11 @@ public class BoardController {
 
 		Board boardread = boardService.readboard(intBoardNo);
 		boardread.setStrBoardContent(boardread.getStrBoardContent().replace("\"", "'"));	//"을 '로 치환
+		
+		//게시판 카테고리 번호 찾기
+		int intBoardCateNo = boardService.selectBoardCateNo(intBoardNo);
+		
+		mv.addObject("intBoardCateNo",intBoardCateNo);	//게시판 카테고리 번호
 		mv.addObject("board", boardread);
 		mv.setViewName("/board/boardchange");
 		return mv;
@@ -350,65 +314,9 @@ public class BoardController {
 		board.setIntBoardNo(bno);
 		board.setStrBoardTitle(title);
 		board.setStrBoardContent(contents);
-		boardService.updateboard(board);
-
-		List<Board> boardCount = boardService.selectboardlist(board);	//게시글 총 개수
-		int listCnt = boardCount.size();
+		boardService.updateboard(board);		//글 수정
 		
-		Pagination pagination = new Pagination(listCnt, curPage);
-		
-		List<Board> boardlist = boardService.getBoardList(pagination); // 리스트
-		//List<Board> boardlist = boardService.selectboardlist(board);
-		
-		 //글 스쿼스 번호
-        int c = listCnt - (curPage-1)*10;
-        for(int i=0; i<boardlist.size(); i++) {
-        	boardlist.get(i).setIntNum(c--);
-        
-        }
-		
-		//vip 회원 구분
-        for(int i=0; i<boardlist.size(); i++){
-        	String idG = boardlist.get(i).getStrUserId();
-        	String grade = boardService.getUserGrade(idG); //id로 유저의 등급 찾기
-        	boardlist.get(i).setStrGrade(grade);
-        }
-        
-        
-		 //날짜 변환+new
-        Date dateB = new Date();
-        String boardDate;
-        int Commentotal;
-
-        
-        Date today = new Date();
-        SimpleDateFormat date = new SimpleDateFormat("yyy/MM/dd");
-        SimpleDateFormat dateTime = new SimpleDateFormat("hh:mm a",Locale.US);
-        int check;
-        for(int j=0; j<boardlist.size();j++) {
-        	dateB = boardlist.get(j).getDateBoardDate();
-        	check=0;
-        	//댓글 수
-        	Commentotal = boardService.totalComment(boardlist.get(j).getIntBoardNo());
-        	boardlist.get(j).setInttotalComment(Commentotal);
-        	
-	       
-	        if(! date.format(today).equals(date.format(dateB))) {	//오늘 쓴 글이 아니면
-	        	boardDate = date.format(dateB);
-	        	boardlist.get(j).setStrBoardDate(boardDate);
-	        }
-	        else {	//오늘 쓴 글이면
-	        	check=1;
-	        	boardDate=dateTime.format(dateB);
-	        	boardlist.get(j).setStrBoardDate(boardDate);
-	        	boardlist.get(j).setIntNewCheck(check); //오늘 글인지 확인 new
-	        }
-	    }
-        
-		mv.addObject("boardlist", boardlist);
-		mv.addObject("listCnt", listCnt);
-		mv.addObject("pagination", pagination);
-		mv.setViewName("/board/boardlist");
+		mv.setViewName("redirect:/board/boardread?intBoardNo="+bno);
 		return mv;
 	}
 
@@ -419,65 +327,15 @@ public class BoardController {
             @RequestParam(required=false) String keyField, @RequestParam(required=false) String keyWord, @RequestParam(defaultValue="1") int curPage) throws Exception {
 		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
 
-		boardService.deleteboard(intBoardNo);	
+		//게시판 카테고리 번호 찾기
+		int intBoardCateNo = boardService.selectBoardCateNo(intBoardNo);
 		
-		Board board = new Board();
-		List<Board> boardlistA = boardService.selectboardlist(board);
-		int listCnt = boardlistA.size();
-		
-		Pagination pagination = new Pagination(listCnt, curPage);
-		
-		List<Board> boardlist = boardService.getBoardList(pagination); // 리스트
-		
-		 //글 스쿼스 번호
-        int c = listCnt - (curPage-1)*10;
-        for(int i=0; i<boardlist.size(); i++) {
-        	boardlist.get(i).setIntNum(c--);
-        
-        }
-        
-		//vip 회원 구분
-        for(int i=0; i<boardlist.size(); i++){
-        	String idG = boardlist.get(i).getStrUserId();
-        	String grade = boardService.getUserGrade(idG); //id로 유저의 등급 찾기
-        	boardlist.get(i).setStrGrade(grade);
-        }
-        
-        
-		 //날짜 변환+new
-        Date dateB = new Date();
-        String boardDate;
-        int Commentotal;
+		boardService.deleteboard(intBoardNo);	//글 삭제
 
-        
-        Date today = new Date();
-        SimpleDateFormat date = new SimpleDateFormat("yyy/MM/dd");
-        SimpleDateFormat dateTime = new SimpleDateFormat("hh:mm a",Locale.US);
-        int check;
-        for(int j=0; j<boardlist.size();j++) {
-        	dateB = boardlist.get(j).getDateBoardDate();
-        	check=0;
-        	//댓글 수
-        	Commentotal = boardService.totalComment(boardlist.get(j).getIntBoardNo());
-        	boardlist.get(j).setInttotalComment(Commentotal);
-        	
-	       
-	        if(! date.format(today).equals(date.format(dateB))) {	//오늘 쓴 글이 아니면
-	        	boardDate = date.format(dateB);
-	        	boardlist.get(j).setStrBoardDate(boardDate);
-	        }
-	        else {	//오늘 쓴 글이면
-	        	check=1;
-	        	boardDate=dateTime.format(dateB);
-	        	boardlist.get(j).setStrBoardDate(boardDate);
-	        	boardlist.get(j).setIntNewCheck(check); //오늘 글인지 확인 new
-	        }
-	    }
-        
-		mv.addObject("boardlist", boardlist);
-		mv.addObject("listCnt", listCnt);		
-		mv.addObject("pagination", pagination);
-		mv.setViewName("/board/boardlist");
+		
+		
+		mv.setViewName("redirect:/board/boardlist?intBoardCateNo="+intBoardCateNo);
+		
 		return mv;
 	}
 	
@@ -497,20 +355,9 @@ public class BoardController {
 		comment.setStrCmmtComment(content);
 		boardService.insertComment(comment);
 
-		// 상세보기에 게시글과 댓글뿌려주기
-		Board boardread = boardService.readboard(intBoardNo);
-		List<Comment> cmmtlist = boardService.selectcmmtlist(intBoardNo);
-		int cmmlistCount = cmmtlist.size();
+		mv.setViewName("redirect:/board/boardread?intBoardNo="+intBoardNo);
 		
-		//vip 회원 구분	       
-       	String idG = boardread.getStrUserId();
-       	String grade = boardService.getUserGrade(idG); //id로 유저의 등급 찾기
-        boardread.setStrGrade(grade);
-        
-        mv.addObject("cmmlistCount",cmmlistCount);//댓글수
-		mv.addObject("board", boardread);
-		mv.addObject("commentlist", cmmtlist);
-		mv.setViewName("/board/boardread");
+		
 		return mv;
 	}
 	
@@ -522,42 +369,24 @@ public class BoardController {
 		Comment comment = new Comment();
 		comment.setIntCmmtNo(intCmmtNo);
 		
-		Comment commentread = boardService.selectComment(comment);
-		
-		//boardService.updateComment(comment);
-
-		// 상세보기에 게시글과 댓글뿌려주기
-		//Board boardread = boardService.readboard(intBoardNo);
-		//List<Comment> cmmtlist = boardService.selectcmmtlist(intBoardNo);
-		mv.addObject("comment", commentread);
-		//mv.addObject("commentlist", cmmtlist);
+		Comment commentread = boardService.selectComment(comment);	
+			
+		mv.addObject("comment", commentread);		
 		mv.setViewName("/board/commentUpdateForm");
 		return mv;
 	}
 	
 	//댓글 삭제
 	@RequestMapping("/commentDelete")
-	public ModelAndView commentDelete(HttpServletRequest request, HttpServletResponse response, HttpSession session,int intCmmtNo,int intBoardNo ) throws Exception {
+	public ModelAndView commentDelete(HttpServletRequest request, HttpServletResponse response, HttpSession session,int intCmmtNo) throws Exception {
 		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
 
-		String id = (String) session.getAttribute("id"); // 세션
-		boardService.deleteComment(intCmmtNo);
-
-		Board boardread = boardService.readboard(intBoardNo);
-		List<Comment> cmmtlist = boardService.selectcmmtlist(intBoardNo);
-		int cmmlistCount = cmmtlist.size();       
-
-		//vip 회원 구분	       
-       	String idG = boardread.getStrUserId();
-       	String grade = boardService.getUserGrade(idG); //id로 유저의 등급 찾기
-        boardread.setStrGrade(grade);
-        
-        
-		mv.addObject("board", boardread);
-		mv.addObject("commentlist", cmmtlist);
-		mv.addObject("cmmlistCount",cmmlistCount);//댓글수
-		mv.addObject("id", id);
-		mv.setViewName("/board/boardread");
+		int intBoardNo = boardService.selectBoardNo(intCmmtNo);	//댓글의 게시글번호 찾기	
+		
+		boardService.deleteComment(intCmmtNo);	//댓글 삭제
+			
+		mv.setViewName("redirect:/board/boardread?intBoardNo="+intBoardNo);
+		
 		return mv;
 	}
 	
@@ -572,14 +401,8 @@ public class BoardController {
 		
 		boardService.updateComment(comment);		//댓글 DB에 수정
 		
-		Comment commentread = boardService.selectComment(comment);
-		int intBoardNo = commentread.getIntBoardNo();
-		Board boardread = boardService.readboard(intBoardNo);
-		List<Comment> cmmtlist = boardService.selectcmmtlist(intBoardNo);
-
-		mv.addObject("board", boardread);
-		mv.addObject("commentlist", cmmtlist);
-
+		int intBoardNo = boardService.selectBoardNo(intCmmtNo);	//댓글의 게시글번호 찾기		
+		mv.setViewName("redirect:/board/boardread?intBoardNo="+intBoardNo);
 		
 		return mv;
 	}

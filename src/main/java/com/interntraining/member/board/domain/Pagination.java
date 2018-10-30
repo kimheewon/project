@@ -44,6 +44,8 @@ public class Pagination{
     private String keyField;
     
     private String keyWord;
+    
+    private int intBoardCateNo;		//게시판카테고리 번호
 
 	public int getPageSize() {
 		return pageSize;
@@ -156,6 +158,14 @@ public class Pagination{
 
 	public void setKeyWord(String keyWord) {
 		this.keyWord = keyWord;
+	}
+
+	public int getIntBoardCateNo() {
+		return intBoardCateNo;
+	}
+
+	public void setIntBoardCateNo(int intBoardCateNo) {
+		this.intBoardCateNo = intBoardCateNo;
 	}
 
 	public Pagination(int listCnt, int curPage) {

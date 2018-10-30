@@ -1,11 +1,13 @@
 package com.interntraining.member.login.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-
+import com.interntraining.admin.boardCategory.domain.BoardCategoryInfo;
 import com.interntraining.member.login.domain.User;
 import com.interntraining.member.user.domain.Member;
 
@@ -31,6 +33,11 @@ public class LoginDAO {
 	public void updateMember(User user) {
 		sqlSession.insert("sql.updateMember",user);
 		
+	}
+
+	//db에서 게시판 카테고리 항목 불러오기
+	public List<BoardCategoryInfo> boardCategoryList() {
+		return sqlSession.selectList("sql.boardCategoryList");
 	}
 
 	

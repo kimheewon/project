@@ -1,9 +1,6 @@
 package com.interntraining.member.board.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
 
+import com.interntraining.admin.boardCategory.domain.BoardCategoryInfo;
 import com.interntraining.member.board.dao.BoardDAO;
 import com.interntraining.member.board.domain.Board;
 import com.interntraining.member.board.domain.Comment;
@@ -35,8 +33,8 @@ public class BoardServiceImpl implements BoardService {
 	
 	//게시글 검색
 	@Override
-	public List<Board> searchboardlist(String keyField, String keyWord) {
-		return boardDAO.searchboardlist(keyField,keyWord);
+	public List<Board> searchboardlist(Board boardInfo) {
+		return boardDAO.searchboardlist(boardInfo);
 	}
 	
 	//게시글 검색 페이징
@@ -123,12 +121,36 @@ public class BoardServiceImpl implements BoardService {
 	public int totalComment(int intBoardNo) {
 		return boardDAO.totalComment(intBoardNo);
 	}
-
-
+	
 	//id로 유저의 등급 찾기
 	@Override
 	public String getUserGrade(String id) {
 		return boardDAO.getUserGrade(id);
+	}
+
+	//db에서 게시판 카테고리 항목 불러오기
+	@Override
+	public List<BoardCategoryInfo> boardCategoryList() {
+		return boardDAO.boardCategoryList();
+	}
+
+
+	//게시판 카테고리 번호 찾기
+	@Override
+	public int selectBoardCateNo(int intBoardNo) {
+		return boardDAO.selectBoardCateNo(intBoardNo);
+	}
+
+	//댓글의 게시글번호 찾기
+	@Override
+	public int selectBoardNo(int intCmmtNo) {
+		return boardDAO.selectBoardNo(intCmmtNo);
+	}
+
+	//카테고리 번호로 게시판명 찾기
+	@Override
+	public String selectBoardCateName(int intBoardCateNo) {
+		return boardDAO.selectBoardCateName(intBoardCateNo);
 	}
 
 
