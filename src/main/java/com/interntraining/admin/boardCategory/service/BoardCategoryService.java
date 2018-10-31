@@ -25,4 +25,7 @@ public interface BoardCategoryService {
 	//db에 게시판 명 수정
 	public void boardCategoryUpdate(BoardCategoryInfo board);
 
+	//게시판 카테고리 삭제(게시글, 댓글 모두 삭제)
+	public void boardCategoryDelete(int boardCateNo);
+
 }

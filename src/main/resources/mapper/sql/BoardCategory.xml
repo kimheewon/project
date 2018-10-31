@@ -38,7 +38,7 @@
      
      <!-- 게시판 중복인지 찾기 -->
      <select id="searchBoardCateName" resultType="BoardCategoryInfo">
-        SELECT  BoardCateName
+        SELECT  BoardCateName   AS strBoardCateName
         FROM    TBoardCategory
         WHERE   BoardCateName = #{boardName}
      </select>
@@ -46,8 +46,20 @@
      <!-- db에 게시판 명 수정 -->
      <update id="boardCategoryUpdate">
         UPDATE  TBoardCategory
-        SET     BoardCateName   = #{strBoardCateName}
-        WHERE   BoardCateNo     = #{intBoardCateNo}
-     
+        SET     BoardCateName       = #{strBoardCateName}
+               ,BoardCreateAdminNo  = #{intBoardCreateAdminNo}
+        WHERE   BoardCateNo         = #{intBoardCateNo}     
      </update>
+     
+     <!-- 게시판 카테고리 삭제(게시글, 댓글 모두 삭제) -->
+     <delete id="boardCategoryDelete">
+        DELETE FROM TBoardCategory
+        WHERE BoardCateNo = #{intBoardCateNo}
+        
+        DELETE FROM TBoard
+        WHERE BoardCateNo = #{intBoardCateNo}
+        
+        DELETE FROM TComment
+        WHERE BoardCateNo = #{intBoardCateNo}
+    </delete>
 </mapper>

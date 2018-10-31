@@ -127,14 +127,14 @@
 	
 	<!-- 게시글 번호를 통해 DB에서 찾아 게시글 읽기 -->
 	<select id="boardread" resultType="Board">
-		select	 BoardNo		AS intBoardNo
+		SELECT	 BoardNo		AS intBoardNo
 				,UserId			AS strUserId
 				,BoardTitle 	AS strBoardTitle
 				,BoardContent	AS strBoardContent
 				,BoardDate  	AS dateBoardDate
 				,BoardHit   	AS intHit
-		from   	 TBoard
-		where	 BoardNo = #{intBoardNo}
+		FROM   	 TBoard
+		WHERE	 BoardNo = #{intBoardNo}
 		
 
 	</select>
@@ -191,9 +191,12 @@
 	</select>
 	
 	<!-- 댓글 저장 -->
-	<insert id="insertcomment" >
-		INSERT INTO TComment(BoardNo, UserId, CmmtComment)
-		              VALUES(#{intBoardNo}, #{strUserId}, #{strCmmtComment})
+	<insert id="insertcomment">
+		INSERT INTO TComment(BoardNo, UserId, CmmtComment,BoardCateNo)
+		              VALUES(#{intBoardNo}, #{strUserId}, #{strCmmtComment}, (SELECT  BoardCateNo
+		                                                                      FROM    TBoard
+		                                                                      WHERE   BoardNo = #{intBoardNo} ))
+
 	</insert>
 	
 	<!-- 댓글 수정 -->

@@ -71,7 +71,7 @@
 				<td colspan="2"><textarea rows="10" cols="50" class="form-control" style="width: 100%;"  name="contents" id="ir1" required="required"  autofocus></textarea></td>
 			</tr>
 		</table>
-		<div class="container_b" style="  text-align: right;  margin-left: 79.2%;">	
+		<div class="container_b" style="text-align: right;  margin-left: 79.2%;">	
 			<button class="button" type="reset">다시작성</button>
 			<button class="button" name="writebtn" id="writebtn" style="width: 34%;"><img class="btn-img" src="/img/check.png" style=" width: 34%;">&nbsp;저장</button>			
 		</div>

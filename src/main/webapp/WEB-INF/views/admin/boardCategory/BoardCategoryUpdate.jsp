@@ -181,6 +181,10 @@
                     document.getElementById("boardName").focus();  
                     return false;
                 }
+	            if(val == 1){
+	            	alert("중복체를 해주세요.");
+	            	return false;
+	            }
 	            
 	        });     
 	    });

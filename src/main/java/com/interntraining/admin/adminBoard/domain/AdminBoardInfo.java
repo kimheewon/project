@@ -15,6 +15,11 @@ public class AdminBoardInfo {
 	private int inttotalComment;
 	private String strGrade;
 	private int intBoardCateNo;
+	private String strBoardCateNo;	//카테고리 번호(문자열)
+	private int intBoardNotice;		//공지여부
+	private int intAdmincheck;		//관리자 작성 여부
+	private int intAdminNo;			//관리자 번호
+	private String strAdminId;		//관리자 ID
 	
 	public int getIntBoardNo() {
 		return intBoardNo;
@@ -82,7 +87,37 @@ public class AdminBoardInfo {
 	public void setIntBoardCateNo(int intBoardCateNo) {
 		this.intBoardCateNo = intBoardCateNo;
 	}
-
+	public int getIntBoardNotice() {
+		return intBoardNotice;
+	}
+	public void setIntBoardNotice(int intBoardNotice) {
+		this.intBoardNotice = intBoardNotice;
+	}
+	public String getStrBoardCateNo() {
+		return strBoardCateNo;
+	}
+	public void setStrBoardCateNo(String strBoardCateNo) {
+		this.strBoardCateNo = strBoardCateNo;
+	}
+	public int getIntAdmincheck() {
+		return intAdmincheck;
+	}
+	public void setIntAdmincheck(int intAdmincheck) {
+		this.intAdmincheck = intAdmincheck;
+	}
+	public int getIntAdminNo() {
+		return intAdminNo;
+	}
+	public void setIntAdminNo(int intAdminNo) {
+		this.intAdminNo = intAdminNo;
+	}
+	public String getStrAdminId() {
+		return strAdminId;
+	}
+	public void setStrAdminId(String strAdminId) {
+		this.strAdminId = strAdminId;
+	}
+	
 	
 	
 }

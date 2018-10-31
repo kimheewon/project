@@ -29,6 +29,16 @@
 <!-- Custom Theme Style -->
 <link href="/build/css/custom.min.css" rel="stylesheet">
 
+<style>
+    #editBtn{
+        height: 35px;
+        min-width: 40px;
+        margin: 0 0 0 0;
+        padding-top: 0.6%;
+        float: right;
+    }
+
+</style>
 </head>
 
 <body class="nav-md">
@@ -41,16 +51,19 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                           <h3>게시판 관리 </h3>
+                            <h3 style="color: #605183;font-weight: bold;"></h3>
                         </div>
                     </div>
                     <div class="clearfix"></div>
-
+                    
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel" >
                                 <div class="x_title">
-                                    <h2 style="color: #18bc9c;font-weight: bold;">${boardName}</h2>                            
+                                    <h2 style="color: #605183;font-weight: bold;">${boardName}</h2>                                        
+                                        <a id="editBtn" href="/BoardCategory/BoardCategoryList" class="btn btn-app">
+                                            <i class="fa fa-list-ul" style="color: #7e498b;"></i>                                            
+                                        </a>                             
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content" style="font-size:15px">
@@ -77,21 +90,23 @@
                                                     <td style="text-align: center; color:#3b5976;">${status.count}</td>
                                                     <c:choose>
 									                    <c:when test="${board.inttotalComment eq 0}">
-									                    <td style="padding-left: 2%; color:#3b5976;"><a href="/board/boardreadHit?intBoardNo=${board.intBoardNo}">${board.strBoardTitle}</a>
-									                    <c:choose>
-									                       <c:when test="${board.intNewCheck eq 1}">
-									                           <img src="/img/new.png" alt="..." style="height: 20px;width: 20px;margin-left: 1%;margin-top: 0%;padding: 0% 0% 0% 0%;border: none;"class="img-circle profile_img">
-									                       </c:when>
-									                    </c:choose>
+									                    <td style="padding-left: 2%; color:#3b5976;">
+									                        <a href="/AdminBoard/AdminBoardRead?boardCateNo=${boardCateNo}&&BoardNo=${board.intBoardNo}">${board.strBoardTitle}</a>
+										                    <c:choose>
+										                       <c:when test="${board.intNewCheck eq 1}">
+										                           <img src="/img/new.png" alt="..." style="height: 20px;width: 20px;margin-left: 1%;margin-top: 0%;padding: 0% 0% 0% 0%;border: none;"class="img-circle profile_img">
+										                       </c:when>
+										                    </c:choose>
 									                    </td>
 										                </c:when>
 										                <c:otherwise>
-										                    <td style="padding-left: 2%; color:#3b5976;"><a href="/board/boardreadHit?intBoardNo=${board.intBoardNo}">${board.strBoardTitle}</a>&nbsp;&nbsp;[${board.inttotalComment}]
-	                                                        <c:choose>
-	                                                            <c:when test="${board.intNewCheck eq 1}">
-										                           <img src="/img/new.png" alt="..." style="height: 20px;width: 20px;margin-left: 1%;margin-top: 0%;padding: 0% 0% 0% 0%;border: none;">
-										                        </c:when>
-										                    </c:choose>
+										                    <td style="padding-left: 2%; color:#3b5976;">
+                                                                <a href="/AdminBoard/AdminBoardRead?boardCateNo=${boardCateNo}&&BoardNo=${board.intBoardNo}">${board.strBoardTitle}</a>&nbsp;&nbsp;[${board.inttotalComment}]
+		                                                        <c:choose>
+		                                                            <c:when test="${board.intNewCheck eq 1}">
+											                           <img src="/img/new.png" alt="..." style="height: 20px;width: 20px;margin-left: 1%;margin-top: 0%;padding: 0% 0% 0% 0%;border: none;">
+											                        </c:when>
+											                    </c:choose>
 										                    </td>
 										                </c:otherwise>
 									                </c:choose>
@@ -99,9 +114,12 @@
 									                    <c:when test="${board.strGrade eq '일반'}">
 									                        <td style="text-align: center; color:#3b5976;">${board.strUserId}</td>
 									                    </c:when>
-									                    <c:otherwise>
+									                    <c:when test="${board.strGrade eq 'VIP'}">									                    
 									                        <td style="text-align:center;color:#18bc9c;padding-bottom:0.4%;padding-top:0.4%;">${board.strUserId}
 									                        <img src="/img/crown.png" alt="..." style="height: 25px;margin-left:2%;margin-top: 0%;width: 25px;padding: 0% 0% 0% 0%;"class="img-circle profile_img"></td>
+									                    </c:when>
+									                    <c:otherwise>
+                                                            <td style="text-align: center; color:#800000;">${board.strUserId}(${board.strAdminId})</td>
 									                    </c:otherwise>
 									                </c:choose>                                                                         
                                                     <td style="text-align: center; color:#3b5976;">${board.strBoardDate}</td>
@@ -112,7 +130,10 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
+                                <a id="editBtn" href="/AdminBoard/AdminBoardEnrollForm?boardCateNo=${boardCateNo}" class="btn btn-app">
+                                            <i class="fa fa-edit" style="color: #7e498b;"></i>                                            
+                                </a>
+                            </div>                            
                         </div>
                     </div>
                 </div>

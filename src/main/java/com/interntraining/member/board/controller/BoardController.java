@@ -331,8 +331,6 @@ public class BoardController {
 		int intBoardCateNo = boardService.selectBoardCateNo(intBoardNo);
 		
 		boardService.deleteboard(intBoardNo);	//글 삭제
-
-		
 		
 		mv.setViewName("redirect:/board/boardlist?intBoardCateNo="+intBoardCateNo);
 		
@@ -353,7 +351,8 @@ public class BoardController {
 		comment.setIntBoardNo(intBoardNo);
 		comment.setStrUserId(id);
 		comment.setStrCmmtComment(content);
-		boardService.insertComment(comment);
+		
+		boardService.insertComment(comment);	//댓글 등록
 
 		mv.setViewName("redirect:/board/boardread?intBoardNo="+intBoardNo);
 		

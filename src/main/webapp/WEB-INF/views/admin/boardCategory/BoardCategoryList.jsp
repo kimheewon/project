@@ -76,12 +76,14 @@
 					                        <c:forEach var="boardCategory" items="${boardCategory}" varStatus="status">
                                                 <tr>
                                                     <td style="text-align: center; color:#3b5976;">${status.count}</td>                         
-                                                    <td style="text-align: center; color:#3b5976;">${boardCategory.strBoardCateName}</td>
+                                                    <td style="text-align: center; color:#3b5976;">
+                                                        <a href="/AdminBoard/AdminBoardList?boardCateNo=${boardCategory.intBoardCateNo}" style="color:#3b5976;">${boardCategory.strBoardCateName}</a>
+                                                    </td>
                                                     <td style="text-align: center; color:#3b5976;">${boardCategory.strBoardCreateAdminId}</td>
                                                     <td style="text-align: center; color:#3b5976;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardCategory.dateBoardDate}"/></td>
 					                                <td style="text-align: center; color:#3b5976;"><a href="/BoardCategory/BoardCategoryUpdateForm?intboardCategoryNo=${boardCategory.intBoardCateNo}" style="text-align: center; color:#3b5976;">수정하기</a>
 					                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <a href="/AdminBoard/AdminBoardList?boardCateNo=${boardCategory.intBoardCateNo}" style="color:#3b5976;">관리하기</a>
+                                                        <a onclick="checkDelete(${boardCategory.intBoardCateNo})"style="color:#3b5976;">삭제하기</a>
                                                     </td>
                                                 </tr>   
 					                        </c:forEach>
@@ -160,7 +162,15 @@
             
         });
 			
-	
+	//게시판 카테고리 삭제 확인
+	function checkDelete(intBoardCateNo){
+		if((confirm("정말 삭제하시겠습니까?") == true)){
+			location.href="/BoardCategory/BoardCategoryDelete?boardCateNo="+intBoardCateNo;
+		}
+		else{
+			return;
+		}
+	}
 	
 	</script>
 </body>

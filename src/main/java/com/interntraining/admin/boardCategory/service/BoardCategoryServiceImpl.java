@@ -60,6 +60,12 @@ public class BoardCategoryServiceImpl implements BoardCategoryService{
 		boardCategoryDAO.boardCategoryUpdate(board);
 	}
 
+	//게시판 카테고리 삭제(게시글, 댓글 모두 삭제)
+	@Override
+	public void boardCategoryDelete(int boardCateNo) {
+		boardCategoryDAO.boardCategoryDelete(boardCateNo);		
+	}
+
 	
 	
 }

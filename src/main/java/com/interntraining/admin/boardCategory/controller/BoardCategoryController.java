@@ -167,19 +167,36 @@ public class BoardCategoryController {
 		}		
 	}
 	
-	//게시판 카테고리 등록
+	//게시판 카테고리 수정
 	@RequestMapping(value="/BoardCategoryUpdate")
 	public ModelAndView BoardCategoryUpdate( HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 			
 		String boardName = request.getParameter("boardName");
-		int no = (Integer)session.getAttribute("AdminNo");		//게시판 카테고리 생성자의 id
+		int adminNo = (Integer)session.getAttribute("AdminNo");		//게시판 카테고리 수정자의의 id
+		String strNo = request.getParameter("no");
+		int no = Integer.parseInt(strNo);		//게시판 카테고리 번호
 		BoardCategoryInfo board = new BoardCategoryInfo();
-		board.setIntBoardCreateAdminNo(no);
+		
+		board.setIntBoardCreateAdminNo(adminNo);
 		board.setStrBoardCateName(boardName);
+		board.setIntBoardCateNo(no);
+		
 		boardCategoryService.boardCategoryUpdate(board);			//db에 게시판 명 수정
 			
 		mav.setViewName("redirect:/BoardCategory/BoardCategoryList");
 		return mav;
 	}
+	
+	//게시판 카테고리 삭제
+	@RequestMapping(value="/BoardCategoryDelete")
+	public ModelAndView BoardCategoryUpdate(int boardCateNo, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+	
+		boardCategoryService.boardCategoryDelete(boardCateNo);	//게시판 카테고리 삭제(게시글, 댓글 모두 삭제)
+		
+		mav.setViewName("redirect:/BoardCategory/BoardCategoryList");
+		return mav;
+	}
+	
 }

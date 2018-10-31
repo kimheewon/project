@@ -7,20 +7,30 @@
 
     <!-- 게시판 카테고리 모두 가져오기 -->
     <select id="selectAllBoard" resultType="AdminBoardInfo"> 
-        SELECT   A.BoardNo        AS intBoardNo
+       SELECT    A.BoardNo        AS intBoardNo
                 ,A.UserId         AS strUserId
                 ,A.BoardTitle     AS strBoardTitle
-                ,A.BoardContent   AS strBoardContent
                 ,A.BoardDate      AS dateBoardDate
                 ,A.BoardHit       AS intHit
                 ,A.BoardCateNo    AS intBoardCateNo
                 ,B.UserGrade      AS strGrade
+                ,A.AdminCheck
+                ,A.AdminNo        AS intAdminNo
                 ,(SELECT COUNT(*)
                   FROM TComment
                   WHERE BoardNo = A.BoardNo ) AS inttotalComment
-        FROM     TBoard A, TUser B
-        WHERE    A.BoardCateNo = #{boardCateNo} AND A.UserId =  B.UserId
-        ORDER BY A.BoardNo DESC
+        FROM    (SELECT   BoardNo        
+                         ,UserId         
+                         ,BoardTitle   
+	                     ,BoardDate     
+	                     ,BoardHit       
+	                     ,BoardCateNo
+	                     ,BoardNotice
+	                     ,AdminCheck
+	                     ,AdminNo                
+		        FROM     TBoard 
+		        WHERE    BoardCateNo = #{boardCateNo} ) AS A left outer join TUser b on A.UserId = b.UserId
+        ORDER BY A.BoardNo DESC 
     </select>
     
     <!-- 게시판명 불러오기 -->
@@ -30,4 +40,71 @@
         WHERE   BoardCateNo = #{boardCateNo}
     </select>
     
+    <!-- 게시글 저장 -->
+    <insert id="insertBoardInfo">
+        INSERT INTO TBoard(UserId, BoardTitle, BoardContent, BoardCateNo, AdminNo)
+                    VALUES(#{strUserId}, #{strBoardTitle}, #{strBoardContent}, #{intBoardCateNo},#{intAdminNo})        
+    </insert>
+    
+    <!-- 관리자 id 찾기 -->
+    <select id="selectAdminId" resultType="String">
+        SELECT  AdminId 
+        FROM    TAdmin
+        WHERE   AdminNo = #{intAdminNo}
+    </select>
+    
+    <!-- 게시글 정보 가져오기(제목, 작성자, adminId, 글내용) 조회수 증가-->
+    <select id="selectBoardInfo" resultType="AdminBoardInfo">
+        UPDATE   TBoard 
+        SET      BoardHit = BoardHit + 1
+        WHERE    BoardNo  = #{intBoardNo}
+       
+        SELECT   A.BoardNo        AS intBoardNo
+                ,A.UserId         AS strUserId
+                ,A.BoardTitle     AS strBoardTitle
+                ,A.BoardContent   AS strBoardContent
+                ,A.BoardDate      AS dateBoardDate
+                ,A.BoardHit       AS intHit
+                ,A.BoardCateNo    AS intBoardCateNo
+                ,B.UserGrade      AS strGrade
+                ,A.AdminCheck
+                ,A.AdminNo        AS intAdminNo
+                ,(SELECT COUNT(*)
+                  FROM TComment
+                  WHERE BoardNo = A.BoardNo ) AS inttotalComment
+        FROM    (SELECT   BoardNo        
+                         ,UserId         
+                         ,BoardTitle     
+                         ,BoardContent  
+                         ,BoardDate     
+                         ,BoardHit       
+                         ,BoardCateNo
+                         ,BoardNotice
+                         ,AdminCheck
+                         ,AdminNo                
+                FROM     TBoard 
+                WHERE    BoardNo = #{boardNo} ) AS A left outer join TUser b on A.UserId = b.UserId
+
+    </select>
+    
+    <!-- 댓글 내용 가져오기 -->
+    <select id="selectCommentList" resultType="Comment">
+        SELECT   CmmtNo         AS intCmmtNo
+                ,BoardNo        AS intBoardNo
+                ,UserId         AS strUserId
+                ,CmmtComment    AS strCmmtComment
+                ,CmmtDate       AS dateCmmtDate     
+        FROM     TComment
+        WHERE    BoardNo = #{boardNo}
+        ORDER BY CmmtNo DESC
+    </select>
+    
+    <!-- 글 삭제 -->
+    <delete id="deleteboard">
+        DELETE FROM TBoard
+        WHERE BoardNo   = #{boardNo} 
+        
+        DELETE FROM TComment
+        WHERE BoardNo   = #{boardNo} 
+    </delete>
 </mapper>
