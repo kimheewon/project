@@ -16,7 +16,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>게시글 일기</title>
+<title>게시글 수정</title>
 
     
 <!-- Datatables -->
@@ -83,33 +83,6 @@
         padding-top: 8%;
     
     }
-    #normalStyle{
-        width: 7%;
-        text-align: left;
-        padding-left: 3.1%;
-        font-weight: bold;
-        color: #4d4d4d;
-	    font-size: 15px;  
-	    padding-top: 1%;
-    }
-    #vipStyle{
-        width: 7%;
-        text-align: left;
-        padding-left: 3.1%;
-        font-weight: bold;
-        color: #18bc9c;  
-        font-size: 15px;  
-        padding-top: 1%;
-    }
-    #adminStyle{
-        width: 7%;
-        text-align: left;
-        padding-left: 3.1%;
-        font-weight: bold;
-        color: #800000;  
-        font-size: 15px;  
-        padding-top: 1%;
-    }
 </style>
 </head>
 
@@ -133,72 +106,38 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel" >
                                 <div class="x_title">
-                                    <h2 style="color: #605183;font-weight: bold;margin-left: 2%;">${boardName}</h2>
+                                    <h2 style="color: #605183;font-weight: bold;  margin-left: 2%;">${boardName}</h2> 
                                         <button id="editBtn" class="btn btn-app" type="button" onclick="location.href='/AdminBoard/AdminBoardList?boardCateNo=${boardCateNo}'"
                                                      data-placement="top" data-toggle="tooltip" data-original-title="${boardName} 목록">
-                                       
-                                            <i class="fa fa-list-ul" style="color: #7e498b;"></i></button>
-                                                                                           
+                                        <i class="fa fa-list-ul" style="color: #7e498b;"></i></button>                                                                  
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content" id="contentStyle">
-                                    <form method="POST" action="/board/boardchange?intBoardNo=${board.intBoardNo}">
-								        <div style="border:1px solid #c1c1c1; padding : 1.5%">
-								            <input type="hidden" id="bno" value="${board.intBoardNo}">
-								            <table class="" style="text-align: center;  ">
-								                <tr style=" border-bottom: 1px dashed  #c1c1c1;">
-								                    
-								                    <td style="width: 40%;font-weight: bold;font-size: 20px;color: #2c3e50;text-align: left;padding-left: 3%;    padding-bottom: 1%;">${board.strBoardTitle}</td>
-								                    <td style="width: 80%;  text-align: right;  font-size: 15px;  padding-right: 2%;    color: #7f7f7f; ">
-								                    <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${board.dateBoardDate}" /></td>
-								                </tr>
-								                <tr>
-								                    <c:choose>
-								                        <c:when test="${board.strGrade eq '일반'}">
-								                            <td id="normalStyle"><img class="btn-img" src="/img/lego.png" style=" width: 7%; ">&nbsp;&nbsp;&nbsp;${board.strUserId}</td>
-								                        </c:when>
-								                        <c:when test="${board.strGrade eq 'VIP'}">
-									                         <td id="vipStyle"><img class="btn-img" src="/img/vip.png" style=" width: 7%; ">&nbsp;&nbsp;&nbsp;${board.strUserId}</td>
-	                                                    </c:when>
-								                        <c:otherwise>
-								                             <td id="adminStyle"><img class="btn-img" src="/img/vip.png" style=" width: 7%; ">&nbsp;&nbsp;&nbsp;${board.strUserId}(${board.strAdminId})</td>
-								                        </c:otherwise>
-								                    </c:choose>
-								                    <td style="width:25%; text-align:right;padding-right: 2%; border-bottom:hidden;font-size: 14px;">조회수&nbsp;&nbsp;&nbsp;${board.intHit}</td>
-								                <tr height="250">                   
-								                    <td colspan="50" style="text-align: left; padding-left: 3%;  padding-bottom: 5%;  padding-top: 4%;">${board.strBoardContent}</td>
-								                </tr>
-								            </table>
-	                                    </div>
-								        <br>
-								            <button class="btn btn-app" type="button" onclick="location.href='/AdminBoard/AdminBoardUpdateForm?BoardNo=${board.intBoardNo}'"  style="margin-right: 0%;"
-                                                    id="editBtn" data-placement="top" data-toggle="tooltip" data-original-title="수정">
-                                                <i class="fa fa-wrench" style="color: #005e69;"></i></button>
-                                            <button class="btn btn-app" type="button" onclick="checkDelete(${board.intBoardNo},${board.intBoardCateNo})"
-                                                    id="editBtn" data-placement="top" data-toggle="tooltip" data-original-title="삭제" style="margin-right: 0.5%;">
-                                            
-                                                <i class="fa fa-trash-o" style="color: #a55663;"></i>
-                                            </button>
-	                                        
-								       
-							        </form>
-                                </div>
-                                <div class="x_content" id="contentStyle">
-							        <form>
-							            <a style="font-weight: bold; color: #2c3e50;font-size:15px">댓글&nbsp;&nbsp;${board.inttotalComment}</a> <br>
-							            <div class="container_c">
-							                <hr class="hr">
-							                <c:forEach var="comment" items="${commentlist}">
-							                    <a style="color: #2C3E50;font-size: 15px; font-weight: bold">${comment.strUserId}&nbsp;&nbsp;&nbsp;</a>
-							                    <a style="font-size: small; color: gray;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${comment.dateCmmtDate}" /></a>							                    
-							                    <div>
-							                        <p style="padding-left: 0.5%;padding-top: 0.5%;font-size: 17px;" class="cContentAll" id="cContentAll${comment.intCmmtNo}">${comment.strCmmtComment}</p>
-							                    </div>							                    
-							                    <hr class="hr">
-							                </c:forEach>							                
-							                <br>
-							            </div>
-							        </form>							                                  
+                                    <form action="/AdminBoard/AdminBoardEnroll?boardCateNo=${boardCateNo}" method="post" name="info">
+                                        
+		                                <div class="form-group">
+		                                    <label id="titleSytle" class="control-label col-md-3 col-sm-3 col-xs-12" for="id">제   목
+		                                    </label>
+					                        <div class="input-group" style="width:91.5%; padding-left:0.9rem">
+					                            <span class="input-group-btn">
+		                                            <input type="text" class="form-control" id="strBoardTitle" name="strBoardTitle" value="${board.strBoardTitle}">
+			                                    </span>
+		                                    </div>
+		                                    <hr style="border: 1px solid #dbdfe5;">
+		                                    <div >
+		                                       <textarea name="strBoardContent" id="strBoardContent" style="display:none;width: 100%;" ></textarea>
+		                                       </div>
+		                                    <br/>  
+		                                    <div class="ln_solid"></div>
+		                                    <div class="btn-group" style="float: right;">
+		                                       <button class="btn btn-app" type="button" onclick="location.href='/AdminBoard/AdminBoardList?boardCateNo=${boardCateNo}'"
+		                                            id="buttonStyle2" data-placement="top" data-toggle="tooltip" data-original-title="뒤로" style="margin-right: 0.5%;">
+	                                                <i class="fa fa-repeat" style="color: #005e69;"></i></button>
+					                            <button class="btn btn-app" type="button" id="buttonStyle"  name="buttonStyle" data-placement="top" data-toggle="tooltip" data-original-title="저장">
+					                                <i class="fa fa-save" style="color: #a55663;"></i></button>				                            
+	                                        </div>					               
+		                                </div>
+                                    </form>					                                
                                 </div>
                             </div>
                         </div>
@@ -265,17 +204,61 @@
         ga('create', 'UA-23581568-13', 'auto');
         ga('send', 'pageview'); 
     
-      //글 삭제 확인
-        function checkDelete(bno,categoryNo){
-            if((confirm("정말 삭제 하시겠습니까?") == true)){
-                location.href="/AdminBoard/AdminBoardDelete?BoardNo="+bno+"&&CategoryNo="+categoryNo;
-            }                
-            else{
-                return;
-            }
-        }
         
-   
+        //스마트에디터
+    var oEditors = [];
+
+     // Editor Setting
+     nhn.husky.EZCreator.createInIFrame({
+         oAppRef : oEditors,
+         elPlaceHolder : "strBoardContent", // 에디터를 적용할 textarea ID에 맞게 변경
+         sSkinURI : "/smarteditor/SmartEditor2Skin.html", // Editor HTML파일 위치로 변경
+         fCreator : "createSEditor2", // SE2BasicCreator.js 메소드명으로 변경하면 안된다.
+         htParams : { // 툴바 사용 여부 (true/false)
+             bUseToolbar : true, // 입력창 크기 조절바 사용 여부 (true/false)
+             bUseVerticalResizer : true, // 모드 탭(Editor|HTML|TEXT) 사용 여부 (true/false)
+             bUseModeChanger : true,// 전송버튼 클릭이벤트
+             fOnBeforeUnload : function(){
+                 
+             }
+         },
+         fOnAppLoad : function(){
+        	 oEditors.getById["strBoardContent"].exec("PASTE_HTML", ["${board.strBoardContent}"]);      
+         }
+     });
+
+     window.onload = function(){
+         var btn = document.getElementById("buttonStyle");
+         btn.onclick = function(){
+             submitContents(btn);    
+                 
+         }
+         
+     };
+     function submitContents(btn) {
+         // 에디터의 내용이 textarea에 적용
+         oEditors.getById["strBoardContent"].exec("UPDATE_CONTENTS_FIELD", []);
+       
+             var str = document.info;
+             var title = str.strBoardTitle;
+             var content = document.getElementById("strBoardContent");
+             
+             if(title.value == ""){
+                 alert("제목을 입력해 주세요");
+                 title.focus();
+                 return false;
+             }
+             if(content.value == ""){
+                 alert("내용을 입력해 주세요");
+                 return false;
+             }
+         
+         try{
+             
+             btn.form.submit();
+             
+         }catch(e){}
+     };
 
     </script>
 </body>

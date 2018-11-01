@@ -5,6 +5,12 @@
 <!-- 관리자 로그인  -->
 <mapper namespace="boardCategorySql">
 
+    <!--카테고리 명 찾기  -->
+    <select id="selectCategoryName" resultType="String">
+        SELECT  BoardCateName   AS strBoardCateName
+        FROM    TBoardCategory
+        WHERE   BoardCateNo = #{boardCateNo}
+    </select>
     <!-- 게시판 카테고리 모두 가져오기 -->
     <select id="selectAllBoardCategory" resultType="BoardCategoryInfo"> 
         SELECT   A.BoardCateNo      AS intBoardCateNo
@@ -12,7 +18,7 @@
                 ,B.AdminId          AS strBoardCreateAdminId
                 ,A.BoardDate        AS dateBoardDate
         FROM     TBoardCategory A, TAdmin B
-        WHERE    A.BoardCreateAdminNo = B.AdminNo
+        WHERE    A.BoardCreateAdminNo = B.AdminNo AND A.BoardParentCateNo = 0
     </select>
     
     <!-- 게시판명 중복 체크 -->
@@ -24,8 +30,8 @@
     
     <!-- 게시판 카테고리 저장 -->
     <insert id="boardCategoryInsert" >
-        INSERT INTO TBoardCategory(BoardCateName,BoardCreateAdminNo )
-                       VALUES(#{strBoardCateName}, #{intBoardCreateAdminNo})
+        INSERT INTO TBoardCategory(BoardCateName, BoardCreateAdminNo, BoardParentCateNo)
+                       VALUES(#{strBoardCateName}, #{intBoardCreateAdminNo}, #{intParentBoardCateNo})
      </insert>
      
      <!-- 카테고리 번호로 카테고리 명 찾기 -->
@@ -33,9 +39,18 @@
         SELECT   BoardCateNo     AS intBoardCateNo
                 ,BoardCateName   AS strBoardCateName
         FROM     TBoardCategory
-        WHERE    BoardCateNo = #{intboardCategoryNo}
+        WHERE    BoardCateNo = #{intboardCategoryNo} 
      </select>
      
+     <!-- Child 게시판 정보 찾기 -->
+     <select id="selectChildBoardCategoryInfo" resultType="BoardCategoryInfo">
+        SELECT   A.BoardCateNo       AS intBoardCateNo
+                ,A.BoardCateName     AS strBoardCateName
+                ,B.BoardCateName     AS strParentBoardCateName
+                ,A.BoardParentCateNo AS intParentBoardCateNo
+        FROM     TBoardCategory A, TBoardCategory B
+        WHERE    A.BoardCateNo = #{intboardCategoryNo} AND A.BoardParentCateNo = B.BoardCateNo
+     </select>
      <!-- 게시판 중복인지 찾기 -->
      <select id="searchBoardCateName" resultType="BoardCategoryInfo">
         SELECT  BoardCateName   AS strBoardCateName
@@ -55,11 +70,22 @@
      <delete id="boardCategoryDelete">
         DELETE FROM TBoardCategory
         WHERE BoardCateNo = #{intBoardCateNo}
-        
-        DELETE FROM TBoard
-        WHERE BoardCateNo = #{intBoardCateNo}
-        
-        DELETE FROM TComment
-        WHERE BoardCateNo = #{intBoardCateNo}
     </delete>
+    
+    <!-- Child 게시판 목록 -->
+    <select id="selectChildBoardCategory" resultType="BoardCategoryInfo">
+        SELECT   A.BoardCateNo      AS intBoardCateNo
+                ,A.BoardCateName    AS strBoardCateName
+                ,B.AdminId          AS strBoardCreateAdminId
+                ,A.BoardDate        AS dateBoardDate
+        FROM     TBoardCategory A, TAdmin B
+        WHERE    A.BoardCreateAdminNo = B.AdminNo AND A.BoardParentCateNo = #{boardCateNo}
+    </select>
+    
+    <!-- //부모 카테고리 번호 찾기 -->
+    <select id="searchParentBoardCateNo"  resultType="int">
+        SELECT   BoardParentCateNo
+        FROM     TBoardCategory
+        WHERE    BoardCateNo   = #{boardCateNo}
+    </select>
 </mapper>

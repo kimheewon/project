@@ -36,7 +36,16 @@
 <link href="/build/css/custom.min.css" rel="stylesheet">
 <script src="/js/jquery-1.12.3.min.js"></script>
 <script src="/js/jquery-ui.min.js"></script>
-    
+<style>
+   #editBtn{
+        height: 35px;
+        min-width: 40px;
+        margin: 0 0 0 0;
+        padding-top: 0.6%;
+        float: right;
+    }
+
+</style>
 </head>
 
 <body class="nav-md">
@@ -49,7 +58,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>게시판 카테고리 수정</h3>
+                            <h3></h3>
                         </div>
 	                    <div class="title_right">
 	                       <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -60,12 +69,16 @@
 		            <div class="row">              
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
-                                <div class="x_title" style="padding-left:90%;">
-		                            <h2><small style="  color: #2c3e50;  font-weight: bold;">*은 필수항목입니다.</small></h2>
-                                    <div class="clearfix"></div>
+                                <div class="x_title" >
+		                            <h2 style="color: #605183;font-weight: bold;">${board.strBoardCateName}</h2>
+                                    <button id="editBtn" class="btn btn-app" type="button" onclick="location.href='/BoardCategory/BoardCategoryList?boardCateNo=${board.intBoardCateNo}'"
+                                          data-placement="top" data-toggle="tooltip" data-original-title="${board.strParentBoardCateName} 목록">                                        
+                                        <i class="fa fa-list-ul" style="color: #7e498b;"></i> </button>                                      
+                                   <div class="clearfix"></div>
                                 </div>
-			                    <div class="x_content"><br/>
-                                    <form id="enrollInfo" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/BoardCategory/BoardCategoryUpdate" method="POST">
+			                    <div class="x_content">
+			                        <h2><small style="color: #2c3e50;  font-weight: bold;float: right">*은 필수항목입니다.</small></h2> <br/><br/>
+                                    <form id="enrollInfo" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/BoardCategory/ChildBoardCategoryUpdate?parentBoardCateNo=${board.intParentBoardCateNo}" method="POST">
                                         <input type="hidden" name="no" id="no" value="${board.intBoardCateNo}">
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id" style="font-size: 13px; color: #00003f;">게시판명 <span class="required">*</span></label>
@@ -77,7 +90,7 @@
 				                        <div class="ln_solid"></div>
 				                        <div class="form-group">
 				                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3" style="margin-left: 43%;">
-					                            <button class="btn btn-primary" type="button" onclick="location.href='/BoardCategory/BoardCategoryList'">취소</button>
+					                            <button class="btn btn-primary" type="button" onclick="location.href='/BoardCategory/ChildBoardList?boardCateNo=${board.intParentBoardCateNo}'">취소</button>
 					                            <button type="submit" class="btn btn-success" id="enroll">수정</button>
 				                            </div>
 				                        </div>

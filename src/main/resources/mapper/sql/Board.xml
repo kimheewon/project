@@ -107,4 +107,33 @@
         DELETE FROM TComment
         WHERE BoardNo   = #{boardNo} 
     </delete>
+    
+    <!-- 글번호로 게시글 내용 가져오기 -->
+    <select id="selectBoard" resultType="AdminBoardInfo">
+        SELECT   A.BoardNo        AS intBoardNo
+                ,A.UserId         AS strUserId
+                ,A.BoardTitle     AS strBoardTitle
+                ,A.BoardContent   AS strBoardContent
+                ,A.BoardDate      AS dateBoardDate
+                ,A.BoardHit       AS intHit
+                ,A.BoardCateNo    AS intBoardCateNo
+                ,B.UserGrade      AS strGrade
+                ,A.AdminCheck
+                ,A.AdminNo        AS intAdminNo
+                ,(SELECT COUNT(*)
+                  FROM TComment
+                  WHERE BoardNo = A.BoardNo ) AS inttotalComment
+        FROM    (SELECT   BoardNo        
+                         ,UserId         
+                         ,BoardTitle     
+                         ,BoardContent  
+                         ,BoardDate     
+                         ,BoardHit       
+                         ,BoardCateNo
+                         ,BoardNotice
+                         ,AdminCheck
+                         ,AdminNo                
+                FROM     TBoard 
+                WHERE    BoardNo = #{boardNo} ) AS A left outer join TUser b on A.UserId = b.UserId
+    </select>
 </mapper>

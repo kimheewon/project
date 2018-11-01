@@ -52,4 +52,9 @@ public class AdminBoardDAO {
 		sqlSession.delete("boardSql.deleteboard", boardNo);
 	}
 
+	//글번호로 게시글 내용 가져오기
+	public AdminBoardInfo selectBoard(int boardNo) {
+		return sqlSession.selectOne("boardSql.selectBoard", boardNo);
+	}
+
 }

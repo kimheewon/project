@@ -51,5 +51,26 @@ public class BoardCategoryDAO {
 	public void boardCategoryDelete(int boardCateNo) {
 		sqlSession.delete("boardCategorySql.boardCategoryDelete", boardCateNo);
 	}
+	
+	//카테고리 명 찾기
+	public String selectCategoryName(int boardCateNo) {
+		return sqlSession.selectOne("boardCategorySql.selectCategoryName", boardCateNo);
+	}
+
+	//Child 게시판  모두 가져오기
+	public List<BoardCategoryInfo> selectChildBoardCategory(int boardCateNo) {
+		return sqlSession.selectList("boardCategorySql.selectChildBoardCategory",boardCateNo);
+	}
+
+	//Child 게시판 정보 찾기
+	public BoardCategoryInfo selectChildBoardCategoryInfo(int intboardCategoryNo) {
+		return sqlSession.selectOne("boardCategorySql.selectChildBoardCategoryInfo", intboardCategoryNo);
+	}
+
+	//부모 카테고리 번호 찾기
+	public int searchParentBoardCateNo(int boardCateNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("boardCategorySql.searchParentBoardCateNo",boardCateNo);
+	}
 
 }

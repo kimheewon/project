@@ -66,4 +66,12 @@ public class AdminBoardServiceImpl implements AdminBoardService{
 		adminBoardDAO.deleteboard(boardNo);
 	}
 
+	//글번호로 게시글 내용 가져오기
+	@Override
+	public AdminBoardInfo selectBoard(int boardNo) {
+		return adminBoardDAO.selectBoard(boardNo);
+	}
+
+	
+
 }

@@ -35,7 +35,7 @@ public class AdminBoardController {
 
 	@Autowired
 	private AdminBoardService adminBoardService;
-	
+
 	//게시판 목록 페이지로 이동
 	@RequestMapping(value="/AdminBoardList")
 	public ModelAndView AdminBoardList(int boardCateNo, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
@@ -165,14 +165,26 @@ public class AdminBoardController {
 	//게시글 삭제
 	@RequestMapping("/AdminBoardDelete")
 	public ModelAndView boardDelete(HttpServletRequest request, HttpServletResponse response, HttpSession session,int BoardNo, int CategoryNo) throws Exception {		
-		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		
 		adminBoardService.deleteboard(BoardNo);	//글 삭제
 
-		mv.setViewName("redirect:/AdminBoard/AdminBoardList?boardCateNo="+CategoryNo);
+		mav.setViewName("redirect:/AdminBoard/AdminBoardList?boardCateNo="+CategoryNo);
 		
-		return mv;
+		return mav;
 	}
 	
+	//게시글 수정페이지로 이동
+	@RequestMapping("AdminBoardUpdateForm")
+	public ModelAndView AdminBoardUpdateForm(int BoardNo) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		
+		AdminBoardInfo board = adminBoardService.selectBoard(BoardNo);	//글번호로 게시글 내용 가져오기
+		
+		mav.addObject("board", board);
+		mav.setViewName("/admin/board/BoardUpdate");
+		
+		return mav;		
+	}
 
 }

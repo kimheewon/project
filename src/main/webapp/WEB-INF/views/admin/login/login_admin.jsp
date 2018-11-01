@@ -36,10 +36,10 @@
               <h1 style="color: #2c3e50; font-weight: bold;">관리자 로그인</h1>
               <br><br>
               <div>
-                <input type="text" name="AdminId" class="form-control" placeholder="Admin ID" required="required" style="font-size: 18px;padding: 18px;" autofocus="autofocus"/>
+                <input value="master" type="text" name="AdminId" class="form-control" placeholder="Admin ID" required="required" style="font-size: 18px;padding: 18px;" autofocus="autofocus"/>
               </div>
               <div>
-                <input type="password" name="Password" class="form-control" placeholder="Password" style="font-size:18px;padding: 18px;" required="required" />
+                <input value="qqqQQQ1!" type="password" name="Password" class="form-control" placeholder="Password" style="font-size:18px;padding: 18px;" required="required" />
               </div>
               <br>
               <br>

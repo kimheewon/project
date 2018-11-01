@@ -190,7 +190,7 @@ public class BoardCategoryController {
 	
 	//게시판 카테고리 삭제
 	@RequestMapping(value="/BoardCategoryDelete")
-	public ModelAndView BoardCategoryUpdate(int boardCateNo, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+	public ModelAndView BoardCategoryDelete(int boardCateNo, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 	
 		boardCategoryService.boardCategoryDelete(boardCateNo);	//게시판 카테고리 삭제(게시글, 댓글 모두 삭제)
@@ -199,4 +199,102 @@ public class BoardCategoryController {
 		return mav;
 	}
 	
+	//Child 게시판 목록 페이지로 이동	
+	@RequestMapping(value="/ChildBoardList")
+	public ModelAndView ChildBoardList(int boardCateNo, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+	
+		List<BoardCategoryInfo> BoardCategory = boardCategoryService.selectChildBoardCategory(boardCateNo);	//Child 게시판  모두 가져오기
+		String boardCategoryName = boardCategoryService.selectCategoryName(boardCateNo);//부모 게시판 이름
+		
+		mav.addObject("boardCategory",BoardCategory);
+		mav.addObject("boardCateName", boardCategoryName);
+		mav.addObject("boardCateNo", boardCateNo);
+		
+		mav.setViewName("/admin/boardCategory/ChildBoardCategoryList");
+		
+		return mav;
+	}
+	//Child 게시판 등록 페이지로 이동
+	@RequestMapping(value="/ChildBoardCategoryEnrollForm")
+	public ModelAndView ChildBoardCategoryEnrollForm(int boardCateNo, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		
+		String boardCateName = boardCategoryService.selectCategoryName(boardCateNo);	//카테고리 명 찾기		
+	
+		mav.addObject("boardCateNo", boardCateNo);	//부모 카테고리 번호
+		mav.addObject("boardCateName",boardCateName);	//부모 카테고리 명
+		mav.setViewName("/admin/boardCategory/ChildBoardEnroll");
+		
+		return mav;
+	}
+	
+	//Child 게시판 등록
+	@RequestMapping(value="/ChildBoardCategoryEnroll")
+	public ModelAndView ChildBoardCategoryEnroll(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		
+		String boardName = request.getParameter("boardName");
+		int no = (Integer)session.getAttribute("AdminNo");		//게시판 카테고리 생성자의 id
+		String parentBoardCateNo = request.getParameter("intParentBoardCateNo");	//부모카테고리 번호
+		int intparentBoardCateNo = Integer.parseInt(parentBoardCateNo);		//부모카테고리 번호
+		
+		BoardCategoryInfo board = new BoardCategoryInfo();
+		board.setIntBoardCreateAdminNo(no);
+		board.setStrBoardCateName(boardName);
+		board.setIntParentBoardCateNo(intparentBoardCateNo);
+		
+		boardCategoryService.boardCategoryInsert(board);			//child게시판 등록
+		mav.setViewName("redirect:/BoardCategory/ChildBoardList?boardCateNo="+intparentBoardCateNo);
+		return mav;
+	}
+	
+	//Child 게시판 수정 페이지로 이동
+	@RequestMapping(value="/ChildBoardCategoryUpdateForm")
+	public ModelAndView ChildBoardCategoryUpdateForm(int intboardCategoryNo, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		
+		BoardCategoryInfo board = boardCategoryService.selectChildBoardCategoryInfo(intboardCategoryNo);	//자식 게시판 정보 찾기
+			
+		mav.addObject("board", board);
+
+		mav.setViewName("/admin/boardCategory/ChildBoardCategoryUpdate");
+		return mav;
+	}	
+	
+	//Child 게시판 수정
+	@RequestMapping(value="/ChildBoardCategoryUpdate")
+	public ModelAndView ChildBoardCategoryUpdate(int parentBoardCateNo, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+				
+		String boardName = request.getParameter("boardName");
+		int adminNo = (Integer)session.getAttribute("AdminNo");		//게시판 카테고리 수정자의의 id
+		String strNo = request.getParameter("no");
+		int no = Integer.parseInt(strNo);		//게시판 카테고리 번호
+		BoardCategoryInfo board = new BoardCategoryInfo();
+			
+		board.setIntBoardCreateAdminNo(adminNo);
+		board.setStrBoardCateName(boardName);
+		board.setIntBoardCateNo(no);
+			
+		boardCategoryService.boardCategoryUpdate(board);			//db에 게시판 명 수정
+				
+		mav.setViewName("redirect:/BoardCategory/ChildBoardList?boardCateNo="+parentBoardCateNo);
+		return mav;
+	}
+	
+	//Child 게시판 삭제
+
+	//게시판 카테고리 삭제
+	@RequestMapping(value="/ChildBoardCategoryDelete")
+	public ModelAndView ChildBoardCategoryDelete(int boardCateNo, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+	
+		int parentBoardCateNo = boardCategoryService.searchParentBoardCateNo(boardCateNo);	//부모 카테고리 번호 찾기
+		boardCategoryService.boardCategoryDelete(boardCateNo);	//게시판 카테고리 삭제(게시글, 댓글 모두 삭제)
+		
+		mav.setViewName("redirect:/BoardCategory/ChildBoardList?boardCateNo="+parentBoardCateNo);
+
+		return mav;
+	}
 }

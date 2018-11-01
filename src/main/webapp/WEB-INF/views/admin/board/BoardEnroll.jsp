@@ -52,6 +52,7 @@
         margin: 0 0 0 0;
         padding-top: 0.6%;
         float: right;
+        margin-right: 5%;
     }
 
     #contentStyle{
@@ -106,9 +107,9 @@
                             <div class="x_panel" >
                                 <div class="x_title">
                                     <h2 style="color: #605183;font-weight: bold;  margin-left: 2%;">${boardName}</h2> 
-                                        <a id="editBtn" href="/AdminBoard/AdminBoardList?boardCateNo=${boardCateNo}" style="margin-right: 5%;" class="btn btn-app">
-                                            <i class="fa fa-list-ul" style="color: #7e498b;"></i>
-                                        </a>                           
+                                        <button id="editBtn" class="btn btn-app" type="button" onclick="location.href='/AdminBoard/AdminBoardList?boardCateNo=${boardCateNo}'"
+                                                     data-placement="top" data-toggle="tooltip" data-original-title="${boardName} 목록">
+                                        <i class="fa fa-list-ul" style="color: #7e498b;"></i></button>                                                                  
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content" id="contentStyle">
@@ -129,9 +130,10 @@
 		                                    <br/>  
 		                                    <div class="ln_solid"></div>
 		                                    <div class="btn-group" style="float: right;">
-		                                       <button class="btn btn-app" type="button" onclick="location.href='/AdminBoard/AdminBoardList?boardCateNo=${boardCateNo}'" id="buttonStyle2" data-placement="top" data-toggle="tooltip" data-original-title="돌아가기">
+		                                       <button class="btn btn-app" type="button" onclick="location.href='/AdminBoard/AdminBoardList?boardCateNo=${boardCateNo}'"
+		                                            id="buttonStyle2" data-placement="top" data-toggle="tooltip" data-original-title="뒤로" style="margin-right: 0.5%;">
 	                                                <i class="fa fa-repeat" style="color: #005e69;"></i></button>
-					                            <button class="btn btn-app" type="button" id="buttonStyle"  name="buttonStyle" data-placement="top" data-toggle="tooltip" data-original-title="저장하기">
+					                            <button class="btn btn-app" type="button" id="buttonStyle"  name="buttonStyle" data-placement="top" data-toggle="tooltip" data-original-title="저장">
 					                                <i class="fa fa-save" style="color: #a55663;"></i></button>				                            
 	                                        </div>					               
 		                                </div>

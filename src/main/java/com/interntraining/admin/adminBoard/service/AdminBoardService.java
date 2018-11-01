@@ -28,5 +28,9 @@ public interface AdminBoardService {
 	//글 삭제
 	public void deleteboard(int boardNo);
 
+	//글번호로 게시글 내용 가져오기
+	public AdminBoardInfo selectBoard(int boardNo);
+
+	
 
 }

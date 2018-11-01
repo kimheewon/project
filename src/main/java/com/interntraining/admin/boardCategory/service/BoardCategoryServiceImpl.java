@@ -66,6 +66,29 @@ public class BoardCategoryServiceImpl implements BoardCategoryService{
 		boardCategoryDAO.boardCategoryDelete(boardCateNo);		
 	}
 
-	
+	//카테고리 명 찾기
+	@Override
+	public String selectCategoryName(int boardCateNo) {
+		return boardCategoryDAO.selectCategoryName(boardCateNo);
+	}
+
+	//Child 게시판  모두 가져오기
+	@Override
+	public List<BoardCategoryInfo> selectChildBoardCategory(int boardCateNo) {
+		return boardCategoryDAO.selectChildBoardCategory(boardCateNo);
+	}
+
+	//Child 게시판 정보 찾기
+	@Override
+	public BoardCategoryInfo selectChildBoardCategoryInfo(int intboardCategoryNo) {
+		return boardCategoryDAO.selectChildBoardCategoryInfo(intboardCategoryNo);
+	}
+
+	//부모 카테고리 번호 찾기
+	@Override
+	public int searchParentBoardCateNo(int boardCateNo) {
+		// TODO Auto-generated method stub
+		return boardCategoryDAO.searchParentBoardCateNo(boardCateNo);
+	}
 	
 }

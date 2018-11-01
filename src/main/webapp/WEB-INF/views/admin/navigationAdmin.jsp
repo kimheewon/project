@@ -109,10 +109,10 @@
                   
                   <c:forEach var="item" items="${items}">
                     <c:if test="${4 eq item.intAuthItemNo}">
-	                  <li><a style=" font-size: 14px;"><i class="fa fa-desktop"></i> 게시판 <span class="fa fa-chevron-down"></span></a>
+	                  <li><a style=" font-size: 14px;"><i class="fa fa-desktop"></i> 게시판 카테고리<span class="fa fa-chevron-down"></span></a>
 	                    <ul class="nav child_menu">
-	                      <li><a href="/BoardCategory/BoardCategoryList">게시판 목록</a></li>
-	                      <li><a href="/BoardCategory/BoardCategoryEnrollForm">게시판 등록</a></li>                      
+	                      <li><a href="/BoardCategory/BoardCategoryList">게시판 카테고리 목록</a></li>
+	                      <li><a href="/BoardCategory/BoardCategoryEnrollForm">게시판 카테고리 등록</a></li>                      
 	                    </ul>
 	                  </li>
 	                  </c:if>
