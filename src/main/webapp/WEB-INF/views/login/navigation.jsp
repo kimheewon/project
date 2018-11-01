@@ -43,8 +43,22 @@
 
     }
 
+    
 </style>
+<script>
 
+$("#ChildMenu").hover(function(){
+	
+	<ul class="dropdown-menu" role="menu">
+    <li id="child">
+    </li>
+ 
+    </ul>
+	
+});
+
+
+</script>
 
 </head>
 
@@ -58,10 +72,25 @@
                     <li class="dropdown nav-item mx-0 mx-lg-1 ">
                         <a id="aa" class="dropdown-toggle nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger  " href="#" data-toggle="dropdown">°Ô½ÃÆÇ</a>
 	                    <ul class="dropdown-menu" role="menu">
-                            <c:forEach var="board" items="${boardCategory}" varStatus="status">
-					            <li style="margin-top: 7%;margin-bottom: 7%;margin-left: 3%;">
-					                <a class="nav-link2 py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="font-size:14px;text-decoration: none;" href="/board/boardlist?intBoardCateNo=${board.intBoardCateNo}">${board.strBoardCateName}</a>
-					            </li>
+                            <c:forEach var="board" items="${boardCategory}" varStatus="status">					            
+					            <c:if test="${board.intParentBoardCateNo eq 0}">
+						            <li style="margin-top: 7%;margin-bottom: 7%;margin-left: 3%;">
+						                <a id="ChildMenu" class="nav-link2 py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="font-size:14px;text-decoration: none;" >${board.strBoardCateName}</a>
+						            </li>
+						            <div class="dropdown-submenu">
+							            <ul >
+								            <c:set var="parentNo" value="${board.intBoardCateNo}" />
+								            <c:forEach var="childBoard" items="${boardCategory}" varStatus="status">
+		                                        <c:if test="${childBoard.intParentBoardCateNo eq parentNo}">
+		                                            <li style="margin-top: 7%;margin-bottom: 7%;margin-left: 3%;">
+		                                                <a class="nav-link2 py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="font-size:14px;text-decoration: none;"  href="/board/boardlist?intBoardCateNo=${childBoard.intBoardCateNo}">${childBoard.strBoardCateName}</a>
+		                                            </li>
+		                                        </c:if>										              
+								            </c:forEach>
+							            </ul>
+						            </div>
+					           </c:if>  
+					            
                             </c:forEach>
                         </ul>
                     </li> 

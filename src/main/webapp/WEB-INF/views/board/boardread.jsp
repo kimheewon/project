@@ -146,8 +146,7 @@
 							pattern="yyyy-MM-dd HH:mm" value="${comment.dateCmmtDate}" /></a>
 					<div style="text-align: right;" class="beforeUpd"
 						id="beforeUpd${comment.intCmmtNo}">
-						<c:if test="${id eq comment.strUserId}">
-							
+						<c:if test="${id eq comment.strUserId}">							
 							<span style="float: right; margin-right: 2%; font-weight: bold; color:#2c3e50"><a style="color:#2c3e50;"
 								href="javascript:updateComment(${comment.intCmmtNo});">수정</a></span>
 							<span style="float: right; margin-right: 1%; font-weight: bold; color:#2c3e50" ><a style="color:#2c3e50;"

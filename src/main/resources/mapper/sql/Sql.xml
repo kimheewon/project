@@ -241,8 +241,8 @@
 	<select id="boardCategoryList" resultType="BoardCategoryInfo">
 	   SELECT  BoardCateNo      AS intBoardCateNo    
               ,BoardCateName    AS strBoardCateName
+              ,BoardParentCateNo AS intParentBoardCateNo
 	   FROM    TBoardCategory
-	   WHERE   BoardParentCateNo = 0
 	</select>
 	
 	<!-- 게시판 카테고리 번호 찾기 -->
