@@ -31,35 +31,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<link type="text/css" rel="stylesheet" href="/css/navigationCss.css" />
 
 <style>
-    .session{
-		background : #18bc9c;
-		padding-top:calc(3rem + 55px);
-	  	font-size:16px;
-	  	line-height:1.6;
-	  	font-family: 'Lato';
-
-    }
-
-    
+#menuLink{
+    text-decoration: none !important;
+    display: block !important;
+    width: 130px !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    line-height: 2em !important;
+    font-family: "Trebuchet MS", Dotum !important;
+}
 </style>
-<script>
-
-$("#ChildMenu").hover(function(){
-	
-	<ul class="dropdown-menu" role="menu">
-    <li id="child">
-    </li>
- 
-    </ul>
-	
-});
-
-
-</script>
-
 </head>
 
 <body>
@@ -67,38 +51,37 @@ $("#ChildMenu").hover(function(){
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav"> 
         <div class="container">
             <a class="navbar-brand js-scroll-trigger" href="/login/home">PayLetter</a>
-	        <div class="collapse navbar-collapse " id="navbarResponsive">
+            <div class="collapse navbar-collapse " id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="dropdown nav-item mx-0 mx-lg-1 ">
-                        <a id="aa" class="dropdown-toggle nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger  " href="#" data-toggle="dropdown">게시판</a>
-	                    <ul class="dropdown-menu" role="menu">
-                            <c:forEach var="board" items="${boardCategory}" varStatus="status">					            
-					            <c:if test="${board.intParentBoardCateNo eq 0}">
-						            <li style="margin-top: 7%;margin-bottom: 7%;margin-left: 3%;">
-						                <a id="ChildMenu" class="nav-link2 py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="font-size:14px;text-decoration: none;" >${board.strBoardCateName}</a>
-						            </li>
-						            <div class="dropdown-submenu">
-							            <ul >
-								            <c:set var="parentNo" value="${board.intBoardCateNo}" />
-								            <c:forEach var="childBoard" items="${boardCategory}" varStatus="status">
-		                                        <c:if test="${childBoard.intParentBoardCateNo eq parentNo}">
-		                                            <li style="margin-top: 7%;margin-bottom: 7%;margin-left: 3%;">
-		                                                <a class="nav-link2 py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="font-size:14px;text-decoration: none;"  href="/board/boardlist?intBoardCateNo=${childBoard.intBoardCateNo}">${childBoard.strBoardCateName}</a>
-		                                            </li>
-		                                        </c:if>										              
-								            </c:forEach>
-							            </ul>
-						            </div>
-					           </c:if>  
-					            
+                    <li id="menuLi">
+                        <a id="menuLink" >게시판</a>
+                        <ul id="submenu" >
+                            <c:forEach var="board" items="${boardCategory}" varStatus="status">                             
+                                <c:if test="${board.intParentBoardCateNo eq 0}">
+                                    <li class='has-sub 'id="submenuLi">
+                                        <a id="submenuLink"  style="font-size:14px;text-decoration: none;" >${board.strBoardCateName}</a>                                                
+                                        <ul >
+                                            <c:set var="parentNo" value="${board.intBoardCateNo}" />
+                                            <c:forEach var="childBoard" items="${boardCategory}" varStatus="status">
+                                                <c:if test="${childBoard.intParentBoardCateNo eq parentNo}">
+                                                    <li>
+                                                        <a href="/board/boardlist?intBoardCateNo=${childBoard.intBoardCateNo}">${childBoard.strBoardCateName}</a>
+                                                    </li>
+                                                </c:if>                                                   
+                                            </c:forEach>
+                                        </ul>
+                                   </li>
+                               </c:if>                                  
                             </c:forEach>
                         </ul>
-                    </li> 
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/login/myPageForm">마이페이지</a>
                     </li>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/login/logout">로그아웃</a>
+                    <li>|</li>
+                    <li  id="menuLi" >
+                        <a id="menuLink"  href="/login/myPageForm">마이페이지</a>
+                    </li>
+                    <li>|</li>
+                    <li  id="menuLi" >
+                        <a id="menuLink"  href="/login/logout">로그아웃</a>
                     </li>
                 </ul>
             </div>
@@ -108,26 +91,26 @@ $("#ChildMenu").hover(function(){
     <header class="session text-white text-right">
         <div class="container">
             <%= session.getAttribute("id") %>님 <small>반갑습니다.</small>
-		</div>
-	</header>
-	
-	<!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
-	<div class="scroll-to-top d-lg-none position-fixed ">
-		<a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"> <i class="fa fa-chevron-up"></i></a>
-	</div>
-	<!-- Bootstrap core JavaScript -->
-	<script src="/vendor/jquery/jquery.min.js"></script>
-	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        </div>
+    </header>
+    
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-to-top d-lg-none position-fixed ">
+        <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"> <i class="fa fa-chevron-up"></i></a>
+    </div>
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-	<!-- Plugin JavaScript -->
-	<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-	<script src="/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <!-- Plugin JavaScript -->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
-	<!-- Contact Form JavaScript -->
-	<script src="/js/jqBootstrapValidation.js"></script>
-	<script src="/js/contact_me.js"></script>
+    <!-- Contact Form JavaScript -->
+    <script src="/js/jqBootstrapValidation.js"></script>
+    <script src="/js/contact_me.js"></script>
 
-	<!-- Custom scripts for this template -->
-	<script src="/js/freelancer.min.js"></script>
+    <!-- Custom scripts for this template -->
+    <script src="/js/freelancer.min.js"></script>
 </body>
 </html>

@@ -117,7 +117,17 @@
 	                  </li>
 	                  </c:if>
                   </c:forEach>
-          
+                  
+                  <c:forEach var="item" items="${items}">
+                    <c:if test="${5 eq item.intAuthItemNo}">
+                      <li><a style=" font-size: 14px;"><i class="fa fa-desktop"></i> 惑前 包府<span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="/BoardCategory/BoardCategoryList">惑前 格废</a></li>
+                          <li><a href="/Product/ProductEnrollForm">惑前 殿废</a></li>                      
+                        </ul>
+                      </li>
+                      </c:if>
+                  </c:forEach>  
            
                   
                 </ul>
