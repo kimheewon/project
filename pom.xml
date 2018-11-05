@@ -24,6 +24,22 @@
 		<java.version>1.8</java.version>
 	</properties>
 
+    <!-- 운영 환경 설정 -->
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <system.env>dev</system.env>
+            </properties>
+        </profile>
+        <profile>
+            <id>qa</id>
+            <properties>
+                <system.env>qa</system.env>
+            </properties>
+        </profile>
+    </profiles>
+
 	<dependencies>
 	  <!--Multipart File Up&Download -->
         <dependency>
