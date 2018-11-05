@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,6 +37,18 @@ public class ProductController {
 	public ModelAndView ProductList(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		
+		List<ProductInfo> product = productService.seletAllList();	//DB에서 모든 상품 리스트 가져오기
+		
+		for(int i=0; i<product.size(); i++) {
+			if(product.get(i).getIntUpdateAdminNo() != 0) {
+				int updateNo = product.get(i).getIntUpdateAdminNo();	//수정한 관리자 id
+				String updateName = productService.selectAdminName(updateNo);	//수정한 관리자 이름 가져오기
+				product.get(i).setStrUpdateAdminName(updateName);
+			}
+			
+			
+		}
+		mav.addObject("product", product);
 		mav.setViewName("/admin/product/ProductList");
 		
 		
@@ -66,6 +79,7 @@ public class ProductController {
 		
 		@SuppressWarnings("deprecation")
 		String path = request.getRealPath(fileUrl);		//저장될 위치	
+		//String path="/images";
 		String fileName = file.getOriginalFilename();	//업로드 파일 이름
 		File uploadFile = new File(path+"/"+fileName);	//복사될 위치
 		
@@ -81,4 +95,17 @@ public class ProductController {
 		
 		return mav;
 	}
+	
+	
+	//상품 삭제
+	@RequestMapping(value="/ProductDelete")
+	public ModelAndView productDelete(int itemNo,HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		
+		productService.deleteProduct(itemNo);	//상품 삭제
+		mav.setViewName("redirect:/Product/ProductList");				
+		return mav;
+	}
+	
+	//상품 수정
 }

@@ -24,7 +24,7 @@
         
         <package name="com.interntraining.admin.adminBoard.domain"/>
         <package name="com.interntraining.admin.product.domain"/>
-        
+        <package name="com.interntraining.member.itemShop.domain"/>
     </typeAliases>
 
 </configuration>

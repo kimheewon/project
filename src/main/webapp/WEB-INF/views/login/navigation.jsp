@@ -77,6 +77,10 @@
                     </li>
                     <li>|</li>
                     <li  id="menuLi" >
+                        <a id="menuLink"  href="/ItemShop/ItemShopList">아이템샵</a>
+                    </li>
+                    <li>|</li>
+                    <li  id="menuLi" >
                         <a id="menuLink"  href="/login/myPageForm">마이페이지</a>
                     </li>
                     <li>|</li>

@@ -2,8 +2,6 @@ package com.interntraining.member.board.service;
 
 import java.util.List;
 
-import org.springframework.web.servlet.ModelAndView;
-
 import com.interntraining.admin.boardCategory.domain.BoardCategoryInfo;
 import com.interntraining.member.board.domain.Board;
 import com.interntraining.member.board.domain.Comment;

@@ -35,7 +35,15 @@
     <!-- Custom Theme Style -->
     <link href="/build/css/custom.min.css" rel="stylesheet">
 
-    
+<style>
+    #editBtn{
+        height: 35px;
+        min-width: 40px;
+        margin: 0 0 0 0;
+        padding-top: 0.6%;
+    }
+
+</style>
   </head>
 
   <body class="nav-md">
@@ -78,9 +86,10 @@
                         <col width = "10%"/>
                         <col width = "*"/>
                         <col width = "10%"/>
+                        <col width = "10%"/>
+                        <col width = "10%"/>
                         <col width = "15%"/>
-                        <col width = "15%"/>
-                        <col width = "12%"/>                        
+                        <col width = "7%"/>                        
                     </colgroup>
                       <thead>
                         <tr>
@@ -90,19 +99,29 @@
                           <th style="text-align: center; padding-left: 2%; color:#00003f">캐시금액</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">등록자</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">최근 수정자</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">등록일시</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">작   업</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <c:forEach var="list" items="${adminList}" varStatus="status">
+                        <c:forEach var="list" items="${product}" varStatus="status">
 
                             <tr>
                                 <td style="text-align: center; color:#3b5976;">${status.count}</td>
-                                <td style="text-align: center; color:#3b5976;">${list.strAdminId}</td>
-                                <td style="text-align: center; color:#3b5976;">${list.strAdminGrade}</td>
+                                <td style="text-align: center; color:#3b5976;">${list.intItemNo}</td>
+                                <td style="text-align: center; color:#3b5976;">${list.strItemName}</td>
+                                <td style="text-align: center; color:#3b5976;">${list.intItemPrice}</td>
                                 <td style="text-align: center; color:#3b5976;">${list.strAdminName}</td>
-                                <td style="text-align: center; color:#3b5976;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.dateAdminDate}"/></td>
-                                <td style="text-align: center; color:#3b5976;"><a href="javascript:checkFunction(${list.intAdminNo});" style="color:#3b5976;">수정하기</a></td>
+                                <td style="text-align: center; color:#3b5976;">${list.strUpdateAdminName}</td>
+                                <td style="text-align: center; color:#3b5976;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.dateItemDate}"/></td>
+                                <td style="text-align: center; color:#3b5976;padding-top: 0.2%; padding-bottom: 0.2%;">
+                                    <button class="btn btn-app" type="button" onclick="location.href='/Product/ProductUpdateForm?itemNo=${list.intItemNo}'" 
+                                        style="padding-top: 5%;" id="editBtn" data-placement="top" data-toggle="tooltip" data-original-title="수정">
+                                        <i class="fa fa-wrench" style="color: #626200;"></i></button>
+                                    <button class="btn btn-app" type="button" onclick="checkDelete(${list.intItemNo})"
+                                        style="padding-top: 5%;" id="editBtn" data-placement="top" data-toggle="tooltip" data-original-title="삭제" style="margin-right: 0.5%;">                                                        
+                                        <i class="fa fa-trash-o" style="color: #a55663;"></i></button>
+                                </td>
                             </tr>   
                         </c:forEach>
                       </tbody>
@@ -175,7 +194,15 @@ ga('send', 'pageview');
         
     }
 
-
+  //상품 삭제 확인
+    function checkDelete(itemNo){
+        if((confirm("정말 삭제하시겠습니까?") == true)){
+            location.href="/Product/ProductDelete?itemNo="+itemNo;
+        }
+        else{
+            return;
+        }
+    };
  
 </script>
   </body>

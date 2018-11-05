@@ -9,7 +9,9 @@ public class ProductInfo {
 	private String 	intItemPrice;		//가격
 	private Date	dateItemDate;		//날짜
 	private int 	intAdminNo;			//관리자번호
+	private String 	strAdminName;		//관리자 이름
 	private int		intUpdateAdminNo;	//최근 수정한 관리자번호
+	private String 	strUpdateAdminName;	//최근 수정한 관리자이름
 	private String 	strfileName;     		//저장할 파일
     private String 	strfileOriName;  		//실제 파일
     private String 	strfileUrl;			//파일위치
@@ -69,6 +71,18 @@ public class ProductInfo {
 	}
 	public void setStrfileUrl(String strfileUrl) {
 		this.strfileUrl = strfileUrl;
+	}
+	public String getStrAdminName() {
+		return strAdminName;
+	}
+	public void setStrAdminName(String strAdminName) {
+		this.strAdminName = strAdminName;
+	}
+	public String getStrUpdateAdminName() {
+		return strUpdateAdminName;
+	}
+	public void setStrUpdateAdminName(String strUpdateAdminName) {
+		this.strUpdateAdminName = strUpdateAdminName;
 	}
 	
 	
