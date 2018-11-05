@@ -52,7 +52,7 @@
                     <table style="  border: 1px solid #cecece;">
 		                <tr style=" border: 1px solid #cecece">
 			                <td>
-			                     <img class="img-fluid" src="/uploadFiles/${items.strfileName}" alt=""></td>
+			                     <img class="img-fluid" src="C:\uploadFiles/${items.strfileName}" alt=""></td>
 			            </tr>
 			            <tr>
 		                    <td>${items.intItemNo}</td>

@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,6 +29,9 @@ import com.interntraining.admin.product.service.ProductService;
 @RequestMapping(value= "/Product")
 public class ProductController {
 
+	@Value("${img.upload.path}")
+	String strImgUploadUrl;
+	
 	@Autowired
 	private ProductService productService;
 	
@@ -75,23 +78,20 @@ public class ProductController {
 		productInfo.setIntAdminNo(adminNo);
 		
 		MultipartFile file = request.getFile("file");	//업로드 파라미터
-		String fileUrl ="/uploadFiles";	
 		
-		@SuppressWarnings("deprecation")
-		String path = request.getRealPath(fileUrl);		//저장될 위치	
-		//String path="/images";
 		String fileName = file.getOriginalFilename();	//업로드 파일 이름
-		File uploadFile = new File(path+"/"+fileName);	//복사될 위치
+		
+		String strfileUrl = strImgUploadUrl+"/"+fileName;
+		
+		File uploadFile = new File(strfileUrl);	//복사될 위치
 		
 		file.transferTo(uploadFile);	//업로드
 		
-		String aa = path+"/"+fileName;
 		productInfo.setStrfileName(fileName);
-		productInfo.setStrfileUrl(aa);
+		productInfo.setStrfileUrl(strfileUrl);
 	       		
         productService.insertProduct(productInfo);		//상품 DB에 저장
-		mav.setViewName("/admin/product/ProductEnroll");
-		
+		mav.setViewName("redirect:/Product/ProductList");
 		
 		return mav;
 	}

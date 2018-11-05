@@ -7,9 +7,9 @@
 
     <!-- 상품등록-->   
     <insert id="insertProduct">
-        INSERT INTO TItemInfoMgmt(ItemNo, ItemName, ItemPrice, AdminNo, FileName
+        INSERT INTO TItemInfoMgmt(ItemName, ItemPrice, AdminNo, FileName
                              ,FileUrl    )
-                           VALUES(#{intItemNo}, #{strItemName}, #{intItemPrice}, #{intAdminNo}, #{strfileName},
+                           VALUES( #{strItemName}, #{intItemPrice}, #{intAdminNo}, #{strfileName},
                          #{strfileUrl})
     </insert>
 
@@ -46,6 +46,7 @@
                ,ItemPrice     AS  intItemPrice
                ,FileName      AS  strfileName
         FROM    TItemInfoMgmt   
+        WHERE   ItemNo NOT IN(0)  
         ORDER BY ItemDate DESC
     </select>
 </mapper>
