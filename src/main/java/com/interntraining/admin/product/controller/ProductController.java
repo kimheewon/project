@@ -30,7 +30,10 @@ import com.interntraining.admin.product.service.ProductService;
 public class ProductController {
 
 	@Value("${img.upload.path}")
-	String strImgUploadUrl;
+	String strfileOriName;
+	
+	@Value("${img.upload.virtualpath}")
+	String strVirtalfileUrl;
 	
 	@Autowired
 	private ProductService productService;
@@ -81,15 +84,15 @@ public class ProductController {
 		
 		String fileName = file.getOriginalFilename();	//업로드 파일 이름
 		
-		String strfileUrl = strImgUploadUrl+"/"+fileName;
-		
-		File uploadFile = new File(strfileUrl);	//복사될 위치
+		String strOrifileUrl = strfileOriName+"/"+fileName;
+		String strVirfileUrl = strVirtalfileUrl+"/"+fileName;
+		File uploadFile = new File(strOrifileUrl);	//복사될 위치
 		
 		file.transferTo(uploadFile);	//업로드
 		
 		productInfo.setStrfileName(fileName);
-		productInfo.setStrfileUrl(strfileUrl);
-	       		
+		productInfo.setStrfileOriName(strOrifileUrl);
+	    productInfo.setStrfileUrl(strVirfileUrl); 		
         productService.insertProduct(productInfo);		//상품 DB에 저장
 		mav.setViewName("redirect:/Product/ProductList");
 		

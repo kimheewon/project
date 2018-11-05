@@ -13,23 +13,9 @@
 <meta charset="EUC-KR">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<link type="text/css" rel="stylesheet" href="/css/itemShopStyle.css" />
 
-<title>Board List</title>
-<style>
-    .container_t {
-    
-        padding-right: 15px;
-        padding-left: 15px;
-        margin-right: auto;
-        margin-left: auto;
-        width: 70%;
-        margin: 0 auto;     /* 가로로 중앙에 배치 */
-        padding-top: 3%;   /* 테두리와 내용 사이의 패딩 여백 */
-    }
-
-
-</style>
-
+<title>Item Shop List</title>
 <script src="/js/jquery-1.12.3.min.js"></script>
 <script src="/js/jquery-ui.min.js"></script>
 
@@ -38,7 +24,7 @@
 <body>
 
     
-<jsp:include page="../login/navigation.jsp" flush="true"/>
+<jsp:include page="../../login/navigation.jsp" flush="true"/>
 
 <div class="container_t">
        <h3 style="color:#2c3e50;margin-left: 1%;">아이템샵</h3>
@@ -52,19 +38,19 @@
                     <table style="  border: 1px solid #cecece;">
 		                <tr style=" border: 1px solid #cecece">
 			                <td>
-			                     <img class="img-fluid" src="C:\uploadFiles/${items.strfileName}" alt=""></td>
+			                     <img class="img-fluid" src="${items.strfileUrl}" style=" width: 300px; height: 200px;"></td>
 			            </tr>
 			            <tr>
-		                    <td>${items.intItemNo}</td>
+		                    <td id="noStyle">${items.intItemNo}</td>
 		                </tr>
 		                <tr>
-		                    <td style="text-align: center;">${items.strItemName}</td>
+		                    <td id="nameStyle">${items.strItemName}</td>
 		                </tr>
-		                <tr style="float: right;">
-		                    <td>${items.intItemPrice}</td>
+		                <tr>
+		                    <td id="priceStyle">${items.intItemPrice} 원</td>
 		                </tr>
-		                <tr  style="border: 1px solid #cecece;">
-		                    <td>구매하기</td>
+		                <tr style="border: 1px solid #cecece;">
+		                    <td><p id="pbtn"><button type="button" id="purchaseBtn" >구매하기</button></p></td>
 		 	            </tr>
                     </table>             
                 </div>
@@ -79,13 +65,12 @@
       
     </span>
     <br>
-        <div style='text-align: center; margin: 1px auto;margin-left: 20%;'>
+        <div style='text-align: center; margin: 1px auto;'>
              <form action="/board/boardlist?intBoardCateNo=${intBoardCateNo}" name="search" method="post">
             
              <select name="keyField" size="1" style="width:110px;height: 30px;">
-                    <option value="UserId" <c:if test="${'UserId'==keyField }"> selected</c:if>> 아이디 </option>
-                    <option value="BoardTitle" <c:if test="${'BoardTitle'==keyField }"> selected</c:if>> 제목 </option>
-                    <option value="BoardContent" <c:if test="${'BoardContent'==keyField }"> selected</c:if>> 내용 </option>
+                    <option value="UserId" <c:if test="${'UserId'==keyField }"> selected</c:if>> 상품번호 </option>
+                    <option value="BoardTitle" <c:if test="${'BoardTitle'==keyField }"> selected</c:if>> 상품명 </option>
                 </select>
                      <input type="text" size="40" name="keyWord" value="${keyWord}">
                      
@@ -107,7 +92,7 @@
                     <c:if test="${pagination.curPage ne 1}">
                         <li class="page-item"><a href="#" class="page-link" style="color:#2c3e50;" onClick="fn_paging('${pagination.prevPage }')">[이전]</a></li>
                     </c:if>
-                    <c:forEach var="pageNum" begin="${pagination.startPage }" end="${pagination.endPage }">
+                    <c:forEach var="pageNum" begin="${pagination.startPage}" end="${pagination.endPage}">
                         <c:choose>
                             <c:when test="${pageNum eq  pagination.curPage}">
                                 <li class="page-item"><span style="font-weight: bold;"><a href="#" class="page-link"  style="color:#2c3e50;" onClick="fn_paging('${pageNum }')">${pageNum }</a></span></li> 
@@ -133,7 +118,7 @@
 
 <br><br>
 </body>
-<jsp:include page="../bottom.jsp" flush="true"/>
+<jsp:include page="../../bottom.jsp" flush="true"/>
 <script type="text/javascript">
     function check() {
         if (document.search.keyWord.value == "") {
@@ -147,7 +132,7 @@
 
         var f = document.frm;
         f.method = "post"
-        f.action = "/board/boardlist?curPage="+curPage+"&&intBoardCateNo="+${intBoardCateNo};
+        f.action = "/ItemShop/ItemShopList?curPage="+curPage;
         f.submit();
         
        

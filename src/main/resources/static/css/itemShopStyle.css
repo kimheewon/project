@@ -1,0 +1,56 @@
+@charset "EUC-KR";
+
+@font-face{font-family:'Bareun'; src:url('/font/BareunDotumOTF1.otf')}
+@font-face{font-family:'candy'; src:url('/font/THE_candybar.ttf')}
+    .container_t {    
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+        width: 70%;
+        margin: 0 auto;     /* 가로로 중앙에 배치 */
+        padding-top: 3%;   /* 테두리와 내용 사이의 패딩 여백 */
+    }
+    #noStyle{
+           padding-top: 4%;
+    padding-left: 7%;
+    font-size: 15px;
+    color: #a7a7a7;
+    font-family: candy;
+    }
+    
+    #nameStyle{
+        font-family: TmonMonsori;
+    padding-left: 7%;
+    color: #1d4873;
+    font-size: 22px;
+    font-weight: bold;
+    }
+    
+    #priceStyle{
+        text-align: right;
+    font-family: candy;
+    font-weight: bold;
+    font-size: 23px;
+    padding-right: 7%;
+    color: #731d48;
+    padding-bottom: 2%;
+    }
+#purchaseBtn{
+	background: #ff8c00;
+    width: 100%;
+    border: 0px;
+    font-family: TmonMonsori;
+    padding: 1.5%;
+    font-weight: bold;
+    color: white;
+}
+#purchaseBtn:hover{
+    background: #898076;   
+    color: #ff8c00;
+}
+#pbtn{
+	text-align:center;
+	margin-bottom: 0rem;
+	
+}

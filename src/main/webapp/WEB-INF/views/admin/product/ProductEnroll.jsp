@@ -98,7 +98,7 @@
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 13px; color: #00003f;">이미지 업로드 <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <input type="file" id="file" name="file" class="form-control col-md-7 col-xs-12" required="required" 
-                                                    style="background-color: white;border: none;box-shadow: none;" data-width="700" data-height="700">
+                                                    style="background-color: white;border: none;box-shadow: none;" >
                                                 <div class="img_wrap">
                                                     <img id="img">
                                                 </div>
@@ -163,14 +163,16 @@ ga('send', 'pageview');
 
     $(document).ready(function () {
         var val = 1;
-        
+         
         //이미지 미리보기
         $("#file").on("change", handleImgFileSelect);
-        
+	       
+
         function handleImgFileSelect(e) {
             var files = e.target.files;
             var filesArr = Array.prototype.slice.call(files);
- 
+           
+            
             filesArr.forEach(function(f) {
                 if(!f.type.match("image.*")) {
                     alert("확장자는 이미지 확장자만 가능합니다.");
@@ -181,12 +183,13 @@ ga('send', 'pageview');
  
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    $("#img").attr("src", e.target.result);
+                	$img = $("#img").attr("src", e.target.result);                            //파일을 선택했을 경우 정보를 $img 객체에 저장  
+                    
                 }
                 reader.readAsDataURL(f);
             });
         }
-        
+       
         $("#adminIdCheck").on("click",function(){
             
             if(document.getElementById("admin_Id").value==""){
@@ -294,19 +297,19 @@ ga('send', 'pageview');
 	        var reader = new FileReader();
 	 
 	        reader.onload = function (e) {
-	            $('#image_section').attr('src', e.target.result);
+	            $('#img').attr('src', e.target.result);
 	        }
 	 
 	        reader.readAsDataURL(input.files[0]);
 	    }
 	}
-	 
+/*	 
 	$("#file").change(function(){
 	    readURL(this);
 	});
-
+*/
 	//이미지 크기
-/*	
+/*
 $(document).on('change', 'input[type=file]', function(){
     var $width = $(this).attr('data-width');
     var $height = $(this).attr('data-height');
@@ -319,30 +322,37 @@ $(document).on('change', 'input[type=file]', function(){
 	       reader.onload = function (e) {	
 	           $('body').append('<img src="" id="temp_img" style="display:none;" />');  //보이지 않는 임시 img 태그를 생성.	
 	           $img = $('#temp_img').attr('src', e.target.result);                          //파일을 선택했을 경우 정보를 $img 객체에 저장	
-	           if($img.width() != $width || $img.height() != $height){                  //가로 세로 사이즈 비교 후 반환	
+	           if($img.width() >= $width || $img.height() >= $height){                  //가로 세로 사이즈 비교 후 반환	
 	              alert('지정된 크기와 맞지 않습니다.('+$width + 'x'+ $height +')');	
 	              $target.val('');	
 	              $('#temp_img').remove(); //위에서 생성한 임시 img 태그 삭제	
 	              return false;
 	
 	           }
+	           else{
+	        	   readURL(this);
+	           }
 	
 	      };
 	
-	      reader.readAsDataURL($(this)[0].files[0]);  //파일을 img 태그에 보여줄 수 있도록 base64로 url을 생성합니다.	
+	     
 	} else {                                               //FileReader를 지원하지 않는 브라우저의 경우 IE 9 이하	
 	    $(this)[0].select();	
 	    var src = document.selection.createRange().text;	
 	    $('body').append('<img src="" id="temp_img" style="display:none;" />');	
 	    $img = $('#temp_img').attr('src', src);	
 	    $('#temp_img').remove();	
-	    if($img.width() != $width || $img.height() != $height){	
+	    if($img.width() >= $width || $img.height() >= $height){	
 	        alert('지정된 크기와 맞지 않습니다.('+$width + 'x'+ $height +')');	
 	        $(this).val('');	
 	        return false;	
 	    }
+	    else{
+            readURL(this);
+        }
 	
 	}
+	$('#temp_img').remove();
 });*/
 </script>
     

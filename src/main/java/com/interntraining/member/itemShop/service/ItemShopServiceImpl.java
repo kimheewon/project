@@ -10,7 +10,9 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
 
 import com.interntraining.admin.product.domain.ProductInfo;
+import com.interntraining.member.board.domain.Pagination;
 import com.interntraining.member.itemShop.dao.ItemShopDAO;
+import com.interntraining.member.itemShop.domain.PaginationItem;
 
 @Service()
 public class ItemShopServiceImpl implements ItemShopService{
@@ -26,6 +28,12 @@ public class ItemShopServiceImpl implements ItemShopService{
 	@Override
 	public List<ProductInfo> selectAllItemList() {
 		return itemShopDAO.selectAllItemList();
+	}
+
+	// 페이징 리스트
+	@Override
+	public List<ProductInfo> selectAllItem(PaginationItem pagination) {
+		return itemShopDAO.selectAllItem(pagination);
 	}
 }
 

@@ -8,9 +8,9 @@
     <!-- 상품등록-->   
     <insert id="insertProduct">
         INSERT INTO TItemInfoMgmt(ItemName, ItemPrice, AdminNo, FileName
-                             ,FileUrl    )
+                             ,FileUrl  ,FileOriName  )
                            VALUES( #{strItemName}, #{intItemPrice}, #{intAdminNo}, #{strfileName},
-                         #{strfileUrl})
+                         #{strfileUrl},#{strfileOriName})
     </insert>
 
     <!-- DB에서 모든 상품 리스트 가져오기 -->
@@ -44,9 +44,22 @@
         SELECT  ItemNo        AS  intItemNo
                ,ItemName      AS  strItemName
                ,ItemPrice     AS  intItemPrice
-               ,FileName      AS  strfileName
+               ,FileUrl       AS  strfileUrl
         FROM    TItemInfoMgmt   
         WHERE   ItemNo NOT IN(0)  
         ORDER BY ItemDate DESC
+    </select>
+    
+     <!-- 아이템 전체 리스트 -->
+    <select id="selectAllItem" resultType="ProductInfo">
+        SELECT TOP 12 resultTable.*
+        FROM   (SELECT TOP (12 * #{curPage}) ROW_NUMBER() OVER (ORDER BY ItemDate DESC)    AS rownumber
+                                                                           ,ItemNo        AS  intItemNo
+															               ,ItemName      AS  strItemName
+															               ,ItemPrice     AS  intItemPrice
+															               ,FileUrl       AS  strfileUrl
+        FROM    TItemInfoMgmt   
+        WHERE   ItemNo NOT IN(0)  ) AS resultTable
+        WHERE rownumber > (#{curPage} - 1) * 10
     </select>
 </mapper>

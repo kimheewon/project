@@ -41,6 +41,19 @@
     </profiles>
 
 	<dependencies>
+	<!-- HttpClient 라이브러리 설정 -->
+	<dependency>
+	  <groupId>org.apache.httpcomponents</groupId>
+	  <artifactId>httpclient</artifactId>
+	  <version>4.3.6</version>
+	</dependency>
+	<!-- HttpClient - Multipart를 위한 라이브러리 설정 -->
+	<dependency>
+	    <groupId>org.apache.httpcomponents</groupId>
+	    <artifactId>httpmime</artifactId>
+	    <version>4.3.6</version>
+	</dependency>
+
 	  <!--Multipart File Up&Download -->
         <dependency>
             <groupId>org.apache.commons</groupId>
