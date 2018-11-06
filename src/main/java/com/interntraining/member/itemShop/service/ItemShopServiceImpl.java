@@ -35,5 +35,17 @@ public class ItemShopServiceImpl implements ItemShopService{
 	public List<ProductInfo> selectAllItem(PaginationItem pagination) {
 		return itemShopDAO.selectAllItem(pagination);
 	}
+
+	//검색시 아이템 개수
+	@Override
+	public List<ProductInfo> countItemList(ProductInfo info) {
+		return itemShopDAO.countItemList(info);
+	}
+
+	//검색시 아이템 전체 목록 개수
+	@Override
+	public List<ProductInfo> selectAllItemSearch(Pagination pagination) {
+		return itemShopDAO.selectAllItemSearch(pagination);
+	}
 }
 

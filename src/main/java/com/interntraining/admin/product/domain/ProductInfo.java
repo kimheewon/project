@@ -8,14 +8,14 @@ public class ProductInfo {
 	private String 	strItemName;		//아이템명
 	private String 	intItemPrice;		//가격
 	private Date	dateItemDate;		//날짜
+	private Date	dateUpdateItemDate;		//날짜
 	private int 	intAdminNo;			//관리자번호
 	private String 	strAdminName;		//관리자 이름
-	private int		intUpdateAdminNo;	//최근 수정한 관리자번호
-	private String 	strUpdateAdminName;	//최근 수정한 관리자이름
 	private String 	strfileName;     		//저장할 파일
     private String 	strfileOriName;  		//실제 파일
     private String 	strfileUrl;			//파일위치
-
+    private String	keyField;
+    private String 	keyWord;
 
 	
 	public int getIntItemNo() {
@@ -48,12 +48,7 @@ public class ProductInfo {
 	public void setIntAdminNo(int intAdminNo) {
 		this.intAdminNo = intAdminNo;
 	}
-	public int getIntUpdateAdminNo() {
-		return intUpdateAdminNo;
-	}
-	public void setIntUpdateAdminNo(int intUpdateAdminNo) {
-		this.intUpdateAdminNo = intUpdateAdminNo;
-	}
+
 	public String getStrfileName() {
 		return strfileName;
 	}
@@ -78,12 +73,25 @@ public class ProductInfo {
 	public void setStrAdminName(String strAdminName) {
 		this.strAdminName = strAdminName;
 	}
-	public String getStrUpdateAdminName() {
-		return strUpdateAdminName;
+	public Date getDateUpdateItemDate() {
+		return dateUpdateItemDate;
 	}
-	public void setStrUpdateAdminName(String strUpdateAdminName) {
-		this.strUpdateAdminName = strUpdateAdminName;
+	public void setDateUpdateItemDate(Date dateUpdateItemDate) {
+		this.dateUpdateItemDate = dateUpdateItemDate;
 	}
+	public String getKeyField() {
+		return keyField;
+	}
+	public void setKeyField(String keyField) {
+		this.keyField = keyField;
+	}
+	public String getKeyWord() {
+		return keyWord;
+	}
+	public void setKeyWord(String keyWord) {
+		this.keyWord = keyWord;
+	}
+
 	
 	
 }

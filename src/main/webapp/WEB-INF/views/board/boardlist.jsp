@@ -49,62 +49,62 @@
 		</span>
 		<br><br>
     	<table class="table table-hover">
-    	<colgroup>
-    		<col width = "10%"/>
-    		<col width = "*"/>
-    		<col width = "18%"/>
-    		<col width = "15%"/>
-    		<col width = "10%"/>
-    	</colgroup>
-    	<thead>
-		<tr>
-			<th style="text-align: center;">#</th>
-			<th style="text-align: center;">제&nbsp;&nbsp;&nbsp;&nbsp;목</th>
-			<th style="text-align: center;">작성자</th>
-			<th style="text-align: center;">작성&nbsp;일시</th>
-			<th style="text-align: center;">조회수</th>
-		</tr>
-		</thead>
-		<c:forEach var="board" items="${boardlist}" varStatus="status">
-
+	    	<colgroup>
+	    		<col width = "10%"/>
+	    		<col width = "*"/>
+	    		<col width = "18%"/>
+	    		<col width = "15%"/>
+	    		<col width = "10%"/>
+	    	</colgroup>
+	    	<thead>
 			<tr>
-				<td style="text-align: center; color:#3b5976;">${board.intNum}</td>
-				<c:choose>
-					<c:when test="${board.inttotalComment eq 0}">
-					<td style="padding-left: 2%; color:#3b5976;"><a href="/board/boardreadHit?intBoardNo=${board.intBoardNo}">${board.strBoardTitle}</a>
+				<th style="text-align: center;">#</th>
+				<th style="text-align: center;">제&nbsp;&nbsp;&nbsp;&nbsp;목</th>
+				<th style="text-align: center;">작성자</th>
+				<th style="text-align: center;">작성&nbsp;일시</th>
+				<th style="text-align: center;">조회수</th>
+			</tr>
+			</thead>
+			<c:forEach var="board" items="${boardlist}" varStatus="status">
+	
+				<tr>
+					<td style="text-align: center; color:#3b5976;">${board.intNum}</td>
 					<c:choose>
-						<c:when test="${board.intNewCheck eq 1}">
-							<img src="/img/new.png" alt="..." style="height: 20px;"class="img-circle profile_img">
-						</c:when>
-					</c:choose>
-					</td>
-				</c:when>
-				<c:otherwise>
-					<td style="padding-left: 2%; color:#3b5976;"><a href="/board/boardreadHit?intBoardNo=${board.intBoardNo}">${board.strBoardTitle}</a>&nbsp;&nbsp;[${board.inttotalComment}]
-					<c:choose>
-						<c:when test="${board.intNewCheck eq 1}">
-							<img src="/img/new.png" alt="..." style="height: 20px;">
-						</c:when>
-					</c:choose>
-					</td>
-				</c:otherwise>
-				</c:choose>
-				
-				<c:choose>
-					<c:when test="${board.strGrade eq '일반'}">
-						<td style="text-align: center; color:#3b5976;">${board.strUserId}</td>
+						<c:when test="${board.inttotalComment eq 0}">
+						<td style="padding-left: 2%; color:#3b5976;"><a href="/board/boardreadHit?intBoardNo=${board.intBoardNo}">${board.strBoardTitle}</a>
+						<c:choose>
+							<c:when test="${board.intNewCheck eq 1}">
+								<img src="/img/new.png" alt="..." style="height: 20px;"class="img-circle profile_img">
+							</c:when>
+						</c:choose>
+						</td>
 					</c:when>
 					<c:otherwise>
-						<td style="text-align: center; color:#18bc9c;">${board.strUserId}
-						<img src="/img/crown.png" alt="..." style="height: 25px; padding-bottom: 1%;"class="img-circle profile_img"></td>
+						<td style="padding-left: 2%; color:#3b5976;"><a href="/board/boardreadHit?intBoardNo=${board.intBoardNo}">${board.strBoardTitle}</a>&nbsp;&nbsp;[${board.inttotalComment}]
+						<c:choose>
+							<c:when test="${board.intNewCheck eq 1}">
+								<img src="/img/new.png" alt="..." style="height: 20px;">
+							</c:when>
+						</c:choose>
+						</td>
 					</c:otherwise>
-				
-				</c:choose>
-				<td style="text-align: center; color:#3b5976;">${board.strBoardDate}</td>
-				<td style="text-align: center; color:#3b5976;"><span>${board.intHit}</span></td>
-				
-			</tr>	
-		</c:forEach>
+					</c:choose>
+					
+					<c:choose>
+						<c:when test="${board.strGrade eq '일반'}">
+							<td style="text-align: center; color:#3b5976;">${board.strUserId}</td>
+						</c:when>
+						<c:otherwise>
+							<td style="text-align: center; color:#18bc9c;">${board.strUserId}
+							<img src="/img/crown.png" alt="..." style="height: 25px; padding-bottom: 1%;"class="img-circle profile_img"></td>
+						</c:otherwise>
+					
+					</c:choose>
+					<td style="text-align: center; color:#3b5976;">${board.strBoardDate}</td>
+					<td style="text-align: center; color:#3b5976;"><span>${board.intHit}</span></td>
+					
+				</tr>	
+			</c:forEach>
 		</table>
 		<hr/>
 	</div>
@@ -119,12 +119,12 @@
 		<div style='text-align: center; margin: 1px auto;margin-left: 20%;'>
 			 <form action="/board/boardlist?intBoardCateNo=${intBoardCateNo}" name="search" method="post">
 			
-			 <select name="keyField" size="1" style="width:110px;height: 30px;">
+			 <select name="keyField" id="keyField" size="1" style="width:110px;height: 30px;">
 	                <option value="UserId" <c:if test="${'UserId'==keyField }"> selected</c:if>> 아이디 </option>
 	                <option value="BoardTitle" <c:if test="${'BoardTitle'==keyField }"> selected</c:if>> 제목 </option>
 	                <option value="BoardContent" <c:if test="${'BoardContent'==keyField }"> selected</c:if>> 내용 </option>
 	            </select>
-	                 <input type="text" size="40" name="keyWord" value="${keyWord}">
+	                 <input type="text" size="40" name="keyWord" id="keyWord" value="${keyWord}">
 	                 
 	                 <button class="btn" id="btn" onclick="check();" 
 	                 	style="background-color: #2c3e50;color:white;  border: 1px solid #2c3e50;padding: 3px; padding-left: 0; width:6%; font-family: 'Lato';    margin-bottom: 4px;" >
@@ -181,12 +181,21 @@
 	    document.search.submit();
 	}
 	function fn_paging(curPage) {
-
-        var f = document.frm;
-        f.method = "post"
-        f.action = "/board/boardlist?curPage="+curPage+"&&intBoardCateNo="+${intBoardCateNo};
-        f.submit();
+		var keyword = document.search.keyWord.value;
+        var keyfield = $("#keyField option:selected").val();
         
+        if(keyword == ""){
+	        var f = document.frm;
+	        f.method = "post"
+	        f.action = "/board/boardlist?curPage="+curPage+"&&intBoardCateNo="+${intBoardCateNo};
+	        f.submit();
+        }
+        else{
+             var f = document.frm;
+             f.method = "post"
+             f.action = "/board/boardlist?curPage="+curPage+"&&intBoardCateNo="+${intBoardCateNo}+"&&keyField="+keyfield+"&&keyWord="+keyword;
+             f.submit();   
+        }
        
     }
 

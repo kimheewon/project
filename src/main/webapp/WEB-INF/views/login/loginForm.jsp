@@ -44,7 +44,7 @@
 
 <body cellpadding="0" cellspacing="0" marginleft="0" margintop="0" width="100%" height="100%" align="center">
 
-	<div class="card align-middle" style="width: 20rem; border-radius: 20px;">
+	<div class="card align-middle" style="width: 20rem; border-radius: 20px;margin-top: 5%;">
 		<div class="card-title" style="margin-top: 30px;">
 			<h2 class="card-title text-center" style="color: #113366;">Payletter</h2>
 		</div>
@@ -55,8 +55,8 @@
 				<label for="inputPassword" class="sr-only">Password</label>
 				<input value="qqqQQQ1!" type="password" name="pw" class="form-control" placeholder="Password" required><br>
 				<br>
-				<button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">로 그 인</button>
-				<button id="btn-Yes" class="btn btn-lg btn-primary btn-block" onclick="location.href='/user/joinForm'">회원가입</button>	
+				<button id="btn-Yes" class="btn btn-lg btn-primary btn-block" style="font-weight: bold;" type="submit">로 그 인</button>
+				<button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="button" style="font-weight: bold;" onclick="location.href='/user/joinForm'">회원가입</button>	
 				<span style="float:right; font-weight:bold; "><a href='/login/adminLoginForm' style="color:#2c3e50">관리자 모드</a></span>
 			</form>
 				

@@ -27,5 +27,15 @@ public class ItemShopDAO {
 	public List<ProductInfo> selectAllItem(PaginationItem pagination) {
 		return sqlSession.selectList("productSql.selectAllItem",pagination);
 	}
+	
+	//검색시 아이템 개수
+	public List<ProductInfo> countItemList(ProductInfo info) {
+		return sqlSession.selectList("productSql.countItemList",info);
+	}
+
+	//검색시 아이템 전체 목록 개수
+	public List<ProductInfo> selectAllItemSearch(Pagination pagination) {
+		return sqlSession.selectList("productSql.selectAllItemSearch", pagination);
+	}
 }
 

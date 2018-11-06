@@ -47,7 +47,7 @@
 		                    <td id="nameStyle">${items.strItemName}</td>
 		                </tr>
 		                <tr>
-		                    <td id="priceStyle">${items.intItemPrice} 원</td>
+		                    <td id="priceStyle"><fmt:formatNumber value="${items.intItemPrice}" pattern="#,###" /> 원</td>
 		                </tr>
 		                <tr style="border: 1px solid #cecece;">
 		                    <td><p id="pbtn"><button type="button" id="purchaseBtn" >구매하기</button></p></td>
@@ -66,14 +66,13 @@
     </span>
     <br>
         <div style='text-align: center; margin: 1px auto;'>
-             <form action="/board/boardlist?intBoardCateNo=${intBoardCateNo}" name="search" method="post">
+             <form action="/ItemShop/ItemShopList" name="search" method="post">
             
-             <select name="keyField" size="1" style="width:110px;height: 30px;">
-                    <option value="UserId" <c:if test="${'UserId'==keyField }"> selected</c:if>> 상품번호 </option>
-                    <option value="BoardTitle" <c:if test="${'BoardTitle'==keyField }"> selected</c:if>> 상품명 </option>
+             <select name="keyField" id="keyField" size="1" style="width:110px;height: 30px;">
+                    <option value="ItemNo" <c:if test="${'ItemNo'==keyField }"> selected</c:if>> 상품번호 </option>
+                    <option value="ItemName" <c:if test="${'ItemName'==keyField }"> selected</c:if>> 상품명 </option>
                 </select>
-                     <input type="text" size="40" name="keyWord" value="${keyWord}">
-                     
+                     <input type="text" size="40" name="keyWord" id="keyWord" value="${keyWord}">                     
                      <button class="btn" id="btn" onclick="check();" 
                         style="background-color: #2c3e50;color:white;  border: 1px solid #2c3e50;padding: 3px; padding-left: 0; width:6%; font-family: 'Lato';    margin-bottom: 4px;" >
                      <img class="btn-img" src="/img/search.png" style=" width: 25%;font-weight:bold;margin-bottom: 4px;">&nbsp;검 색</button>
@@ -129,13 +128,21 @@
         document.search.submit();
     }
     function fn_paging(curPage) {
-
-        var f = document.frm;
-        f.method = "post"
-        f.action = "/ItemShop/ItemShopList?curPage="+curPage;
-        f.submit();
-        
-       
+    	var keyword = document.search.keyWord.value;
+    	var keyfield = $("#keyField option:selected").val();
+    	
+    	if(keyword == ""){
+	        var f = document.frm;
+	        f.method = "post"
+	        f.action = "/ItemShop/ItemShopList?curPage="+curPage;
+	        f.submit();        
+    	}
+    	else{
+    		 var f = document.frm;
+             f.method = "post"
+             f.action = "/ItemShop/ItemShopList?curPage="+curPage+"&&keyField="+keyfield+"&&keyWord="+keyword;
+             f.submit();   
+    	}
     }
 
 

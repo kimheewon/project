@@ -85,9 +85,9 @@
                         <col width = "6%"/>
                         <col width = "10%"/>
                         <col width = "*"/>
-                        <col width = "10%"/>
-                        <col width = "10%"/>
-                        <col width = "10%"/>
+                        <col width = "12%"/>
+                        <col width = "12%"/>
+                        <col width = "15%"/>
                         <col width = "15%"/>
                         <col width = "7%"/>                        
                     </colgroup>
@@ -97,9 +97,9 @@
                           <th style="text-align: center; padding-left: 2%; color:#00003f">상품번호</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">상품명</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">캐시금액</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">등록자</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">최근 수정자</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">최근 등록자</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">등록일시</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">수정일시</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">작   업</th>
                         </tr>
                       </thead>
@@ -110,10 +110,11 @@
                                 <td style="text-align: center; color:#3b5976;">${status.count}</td>
                                 <td style="text-align: center; color:#3b5976;">${list.intItemNo}</td>
                                 <td style="text-align: center; color:#3b5976;">${list.strItemName}</td>
-                                <td style="text-align: center; color:#3b5976;">${list.intItemPrice}</td>
+                                <td style="text-align: center; color:#3b5976;">
+                                    <fmt:formatNumber value="${list.intItemPrice}" pattern="#,###" />원</td>
                                 <td style="text-align: center; color:#3b5976;">${list.strAdminName}</td>
-                                <td style="text-align: center; color:#3b5976;">${list.strUpdateAdminName}</td>
                                 <td style="text-align: center; color:#3b5976;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.dateItemDate}"/></td>
+                                <td style="text-align: center; color:#3b5976;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.dateUpdateItemDate}"/></td>
                                 <td style="text-align: center; color:#3b5976;padding-top: 0.2%; padding-bottom: 0.2%;">
                                     <button class="btn btn-app" type="button" onclick="location.href='/Product/ProductUpdateForm?itemNo=${list.intItemNo}'" 
                                         style="padding-top: 5%;" id="editBtn" data-placement="top" data-toggle="tooltip" data-original-title="수정">

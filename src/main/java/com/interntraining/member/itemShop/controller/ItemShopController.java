@@ -48,6 +48,25 @@ public class ItemShopController {
 			mav.addObject("pagination", pagination);
 			mav.setViewName("/user/itemShop/ItemShopList");
 	        
+		}else {
+			ProductInfo info = new ProductInfo();
+			info.setKeyField(KeyField);
+			info.setKeyWord(KeyWord);
+			List<ProductInfo> itemsCount = itemShopService.countItemList(info);	//검색시 아이템 개수
+			int listCnt = itemsCount.size();
+					
+			Pagination pagination = new Pagination(listCnt, curPage);
+			pagination.setKeyField(KeyField);
+			pagination.setKeyWord(KeyWord);
+			pagination.setCurPage(curPage);
+			
+			List<ProductInfo> items = itemShopService.selectAllItemSearch(pagination);	//검색시 아이템 전체 목록 개수
+					
+			mav.addObject("keyWord", KeyWord);
+			mav.addObject("listCnt", listCnt);
+			mav.addObject("items", items);
+			mav.addObject("pagination", pagination);
+			mav.setViewName("/user/itemShop/ItemShopList");
 		}
 		
 		return mav;

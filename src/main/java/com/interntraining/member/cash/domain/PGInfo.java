@@ -1,5 +1,7 @@
 package com.interntraining.member.cash.domain;
 
+import java.math.BigInteger;
+
 public class PGInfo {
 
 	private String pgcode;
@@ -18,6 +20,10 @@ public class PGInfo {
 	private String return_url;
 	private String callback_url;
 	private String cancel_url;
+	private BigInteger token;
+	private String online_url;
+	private String mobile_url;
+	
 	public String getPgcode() {
 		return pgcode;
 	}
@@ -113,6 +119,25 @@ public class PGInfo {
 	}
 	public void setCancel_url(String cancel_url) {
 		this.cancel_url = cancel_url;
+	}
+	
+	public BigInteger getToken() {
+		return token;
+	}
+	public void setToken(BigInteger token) {
+		this.token = token;
+	}
+	public String getOnline_url() {
+		return online_url;
+	}
+	public void setOnline_url(String online_url) {
+		this.online_url = online_url;
+	}
+	public String getMobile_url() {
+		return mobile_url;
+	}
+	public void setMobile_url(String mobile_url) {
+		this.mobile_url = mobile_url;
 	}
 	
 	

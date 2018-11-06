@@ -12,5 +12,11 @@ public class CashDAO {
     @Qualifier("mainDBSqlSession")
 	private SqlSession sqlSession;
 
+	//결재번호
+	public int selectOrderNo() {
+		sqlSession.insert("cashSql.insertOrderNo");
+		return sqlSession.selectOne("cashSql");
+	}
+
 
 }

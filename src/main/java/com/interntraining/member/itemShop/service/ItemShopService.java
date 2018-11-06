@@ -14,5 +14,11 @@ public interface ItemShopService {
 	// 페이징 리스트
 	public List<ProductInfo> selectAllItem(PaginationItem pagination);
 
+	//검색시 아이템 개수
+	public List<ProductInfo> countItemList(ProductInfo info);
+
+	//검색시 아이템 전체 목록 개수
+	public List<ProductInfo> selectAllItemSearch(Pagination pagination);
+
 
 }

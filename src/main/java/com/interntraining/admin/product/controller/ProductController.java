@@ -44,16 +44,7 @@ public class ProductController {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		
 		List<ProductInfo> product = productService.seletAllList();	//DB에서 모든 상품 리스트 가져오기
-		
-		for(int i=0; i<product.size(); i++) {
-			if(product.get(i).getIntUpdateAdminNo() != 0) {
-				int updateNo = product.get(i).getIntUpdateAdminNo();	//수정한 관리자 id
-				String updateName = productService.selectAdminName(updateNo);	//수정한 관리자 이름 가져오기
-				product.get(i).setStrUpdateAdminName(updateName);
-			}
-			
-			
-		}
+				
 		mav.addObject("product", product);
 		mav.setViewName("/admin/product/ProductList");
 		

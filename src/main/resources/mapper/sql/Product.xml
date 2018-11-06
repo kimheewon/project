@@ -7,10 +7,8 @@
 
     <!-- 상품등록-->   
     <insert id="insertProduct">
-        INSERT INTO TItemInfoMgmt(ItemName, ItemPrice, AdminNo, FileName
-                             ,FileUrl  ,FileOriName  )
-                           VALUES( #{strItemName}, #{intItemPrice}, #{intAdminNo}, #{strfileName},
-                         #{strfileUrl},#{strfileOriName})
+        INSERT INTO TItemInfoMgmt(ItemName, ItemPrice, AdminNo, FileName, FileUrl  ,FileOriName  )
+                           VALUES( #{strItemName}, #{intItemPrice}, #{intAdminNo}, #{strfileName}, #{strfileUrl}, #{strfileOriName})
     </insert>
 
     <!-- DB에서 모든 상품 리스트 가져오기 -->
@@ -20,7 +18,7 @@
                ,ItemPrice     AS  intItemPrice
                ,ItemDate      AS  dateItemDate
                ,AdminName     AS  strAdminName
-               ,UpdateAdminNo AS  intUpdateAdminNo
+               ,UpdateItemDate AS  dateUpdateItemDateo
         FROM    TItemInfoMgmt   INNER JOIN   TAdmin
         ON TItemInfoMgmt.AdminNo = TAdmin.AdminNo
         ORDER BY ItemDate DESC
@@ -58,8 +56,33 @@
 															               ,ItemName      AS  strItemName
 															               ,ItemPrice     AS  intItemPrice
 															               ,FileUrl       AS  strfileUrl
+		        FROM    TItemInfoMgmt   
+		        WHERE   ItemNo NOT IN(0)  ) AS resultTable
+        WHERE rownumber > (#{curPage} - 1) * 10
+    </select>
+    
+    <!-- 검색시 아이템 개수 -->
+    <select id="countItemList" resultType="ProductInfo">
+        SELECT  ItemNo        AS  intItemNo
+               ,ItemName      AS  strItemName
+               ,ItemPrice     AS  intItemPrice
+               ,FileUrl       AS  strfileUrl
         FROM    TItemInfoMgmt   
-        WHERE   ItemNo NOT IN(0)  ) AS resultTable
+        WHERE   ItemNo NOT IN(0) AND ${keyField} LIKE '%${keyWord}%'
+    </select>
+    
+    <!-- 검색시 아이템 전체 목록 개수 -->
+    <select id="selectAllItemSearch" resultType="ProductInfo">
+        SELECT TOP 12 resultTable.*
+        FROM   (SELECT TOP (12 * #{curPage}) ROW_NUMBER() OVER (ORDER BY ItemDate DESC)    AS rownumber
+                                                                           ,ItemNo        AS  intItemNo
+                                                                           ,ItemName      AS  strItemName
+                                                                           ,ItemPrice     AS  intItemPrice
+                                                                           ,FileUrl       AS  strfileUrl
+		        FROM   (SELECT *  
+				        FROM TItemInfoMgmt
+				        WHERE ${keyField} LIKE '%${keyWord}%')  AS TSearch  
+		        WHERE   ItemNo NOT IN(0)  ) AS resultTable
         WHERE rownumber > (#{curPage} - 1) * 10
     </select>
 </mapper>
