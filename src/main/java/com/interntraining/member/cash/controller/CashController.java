@@ -4,7 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Map;
 import java.net.HttpURLConnection;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +26,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,6 +38,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.interntraining.member.cash.domain.PGInfo;
 import com.interntraining.member.cash.service.CashService;
+import com.interntraining.member.login.domain.User;
 
 
 @Controller
@@ -54,8 +61,7 @@ public class CashController {
 		return mav;
 	}
 	
-	//캐시 구매
-	
+	//캐시 구매	
 	@RequestMapping(value="/Purchase", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public ModelAndView purchase(@RequestParam("money") String money, @RequestParam("pgcode") String pgcode, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ClientProtocolException, IOException {
@@ -63,19 +69,77 @@ public class CashController {
 		
 		int amount = Integer.parseInt(money);
 		PGInfo sendObject = new PGInfo();
+		User user = (User) session.getAttribute("login");
+		String name = user.getStrUserName();	//이름		
+		String id = (String) session.getAttribute("id");	//id		
+		String lastOrderNo = purchaseCashService.selectOrderNo();	// 최근 결재번호
 		
-		String userName = (String) session.getAttribute("login.getStrUserName()");
-		String id = (String) session.getAttribute("id");	//id
-		//int OrderNo = purchaseCashService.selectOrderNo();	//결재번호
-	
-		sendObject.setUser_name(userName); //이름
+
+		sendObject.setOrder_no(lastOrderNo);//결제번호			
+		sendObject.setUser_name(name); //이름
 		sendObject.setUser_id(id); 		//id
 		sendObject.setAmount(amount);	//충전할 캐시
 		sendObject.setPgcode(pgcode);	//결제 종류(휴대폰/신용카드)
 		sendObject = purchaseCashService.purchase(sendObject);
 		
-		//휴대폰인지 신용카드인지 구별
-		mav.addObject("mobileUrl", sendObject.getOnline_url());		
+		
+		mav.addObject("onlineUrl", sendObject.getOnline_url());		
+		
+		return mav;
+	}
+	
+	//충전완료(return_url)
+	@RequestMapping(value="/Close", produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public ModelAndView close(PGInfo pgInfo, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ClientProtocolException, IOException {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		
+		
+		//DB에 결과값 저장
+		//System.out.println(pgInfo.getTid());
+		//System.out.println(pgInfo.getCard_info());
+		mav.setViewName("/user/cash/close");
+		return mav;
+	}
+	
+	//충전완료 페이지
+	@RequestMapping(value="/Success", produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public ModelAndView succes(PGInfo pgInfo, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ClientProtocolException, IOException {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+			
+		String id = (String) session.getAttribute("id");//아이디
+		//충전액
+		//보유캐시
+		
+		mav.addObject("id", id);
+		mav.setViewName("/user/cash/CashSuccess");
+		return mav;
+	}
+	
+	//충전완료(callback_url)
+	@RequestMapping(value="/PurchaseSave", produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public ModelAndView purchaseSave(@RequestBody PGInfo pgInfo, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ClientProtocolException, IOException {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+	
+		String order = pgInfo.getOrder_no();
+
+		//System.out.println(order);
+		BigInteger orderNo = new BigInteger(order);
+		pgInfo.setIntCashNo(orderNo);
+		pgInfo.setIntUserNo(2);	//회원 번호
+		pgInfo.setIntCashAmt(pgInfo.getAmount());//캐시
+		pgInfo.setStrPurchaseState("결제완료");//상태
+		pgInfo.setCode("0");//성공
+
+		
+		purchaseCashService.insertPgResult(pgInfo);	//DB에  결제 결과값 저장
+		
+		//System.out.println(pgInfo.getTid());
+		
+		mav.addObject("message","");
+		mav.addObject("code",0);
 		
 		return mav;
 	}

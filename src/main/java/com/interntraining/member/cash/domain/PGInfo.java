@@ -24,6 +24,24 @@ public class PGInfo {
 	private String online_url;
 	private String mobile_url;
 	
+	private String code;
+	private String message;
+	private String tid;
+	private String cid;
+	private String pay_info;
+	private String billkey;
+	private String domestic_flag;
+	private String transaction_date;
+	private int install_month;
+	private String card_info;
+	private String payhash;
+	
+	private BigInteger intCashNo;
+	private int intUserNo;
+	private int intCashAmt;	//현재 변환된 캐시
+	private int intRemainCashAmt;	//남은캐시
+	private String strPurchaseState;	//상태
+	
 	public String getPgcode() {
 		return pgcode;
 	}
@@ -139,6 +157,104 @@ public class PGInfo {
 	public void setMobile_url(String mobile_url) {
 		this.mobile_url = mobile_url;
 	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	public String getTid() {
+		return tid;
+	}
+	public void setTid(String tid) {
+		this.tid = tid;
+	}
+	public String getCid() {
+		return cid;
+	}
+	public void setCid(String cid) {
+		this.cid = cid;
+	}
+	public String getPay_info() {
+		return pay_info;
+	}
+	public void setPay_info(String pay_info) {
+		this.pay_info = pay_info;
+	}
+	public String getBillkey() {
+		return billkey;
+	}
+	public void setBillkey(String billkey) {
+		this.billkey = billkey;
+	}
+	public String getDomestic_flag() {
+		return domestic_flag;
+	}
+	public void setDomestic_flag(String domestic_flag) {
+		this.domestic_flag = domestic_flag;
+	}
+	public String getTransaction_date() {
+		return transaction_date;
+	}
+	public void setTransaction_date(String transaction_date) {
+		this.transaction_date = transaction_date;
+	}
+	public int getInstall_month() {
+		return install_month;
+	}
+	public void setInstall_month(int install_month) {
+		this.install_month = install_month;
+	}
+	public String getCard_info() {
+		return card_info;
+	}
+	public void setCard_info(String card_info) {
+		this.card_info = card_info;
+	}
+	public String getPayhash() {
+		return payhash;
+	}
+	public void setPayhash(String payhash) {
+		this.payhash = payhash;
+	}
+	public int getIntUserNo() {
+		return intUserNo;
+	}
+	public void setIntUserNo(int intUserNo) {
+		this.intUserNo = intUserNo;
+	}
+	public int getIntCashAmt() {
+		return intCashAmt;
+	}
+	public void setIntCashAmt(int intCashAmt) {
+		this.intCashAmt = intCashAmt;
+	}
+	public int getIntRemainCashAmt() {
+		return intRemainCashAmt;
+	}
+	public void setIntRemainCashAmt(int intRemainCashAmt) {
+		this.intRemainCashAmt = intRemainCashAmt;
+	}
+	public String getStrPurchaseState() {
+		return strPurchaseState;
+	}
+	public void setStrPurchaseState(String strPurchaseState) {
+		this.strPurchaseState = strPurchaseState;
+	}
+	public BigInteger getIntCashNo() {
+		return intCashNo;
+	}
+	public void setIntCashNo(BigInteger intCashNo) {
+		this.intCashNo = intCashNo;
+	}
+
+	
 	
 	
 }

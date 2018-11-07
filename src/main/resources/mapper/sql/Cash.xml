@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 관리자 로그인  -->
+<mapper namespace="cashSql">
+    
+    <insert id="insertOrderNo">
+        INSERT INTO TCreatePk
+        VALUES(#{intOrderNo})    
+    </insert>
+    
+    <!-- 최근 번호 가져오기 -->
+    <select id="selectOrderNo" resultType="BigInteger">
+        SELECT MAX(PkNo)
+        FROM TCreatePk
+    </select>
+    
+    <!-- DB에  결제 결과값 저장 -->
+    <insert id="insertPgResult">
+        INSERT INTO TCashMst (CashNo, UserNo, PayAmt, CashAmt, PurchaseState
+                             ,Tid, Code, Message, UserId, Cid
+                             ,Pgcode, TransactionDate, Card_info, Payhash)
+                       VALUES(#{intCashNo}, #{intUserNo}, #{amount}, #{intCashAmt}, #{strPurchaseState}
+                             ,#{tid}, #{code}, #{message}, #{user_id}, #{cid}
+                             ,#{code}, #{transaction_date}, #{card_info}, #{payhash})    
+    </insert>
+
+</mapper>

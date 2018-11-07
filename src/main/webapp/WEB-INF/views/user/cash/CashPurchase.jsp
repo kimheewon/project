@@ -140,8 +140,12 @@ $(document).ready(function() { // 해당 페이지 Loading 후,
 		               "pgcode":$(this).val()
 		           },	       
 		           success: function(responseData){//통신이 성공적으로 이루어 졌을때 받을 함수		        	 
-		               var url = responseData.mobileUrl;		           
-		               window.open(url, "결제", "width=500, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" ); 
+		               var url = responseData.onlineUrl;	
+		               //window.opener.location.reload();               
+
+		               window.open(url,"hiddenframe", "결제", "width=500, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" ); 
+		             //  window.opener.location.reload();    //부모창 reload
+				      // window.close(); 
 		           }
 		           
 	

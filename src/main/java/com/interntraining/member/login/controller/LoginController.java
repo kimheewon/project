@@ -75,6 +75,7 @@ public class LoginController {
 			user = loginService.selectOne(id);		//로그인 성공시 정보 담아놓음
 			session.setAttribute("login", user);	//세션에 login이란 이름으로 user 객체를 저장함
 			session.setAttribute("id", user.getStrUserid());
+			session.setAttribute("no", user.getIntUserNo());
 			
 			//게시판 카테고리 항목 불러오기
 	    	List<BoardCategoryInfo> boardCategory = loginService.boardCategoryList();
