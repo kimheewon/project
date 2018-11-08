@@ -8,13 +8,20 @@
     	
 	<!-- 로그인시 아이디 값으로  DB에 있는 정보 가져오기 -->	
 	<select id="selectOne"  resultType="User">
-		select   UserNo AS intUserNo
+		SELECT   UserNo   AS intUserNo
 		        ,UserName AS StrUserName
-				,UserId AS StrUserid
-		    	,UserPw AS StrUserPw 	
-		from TUser where UserId = #{id} 
+				,UserId   AS StrUserid
+		    	,UserPw   AS StrUserPw 	
+		FROM TUser
+		WHERE UserId = #{id} 
 	</select>
 	
+	<!-- 보유캐시 정보 -->
+	<select id="selectCashInfo" resultType="User">
+	   SELECT TotalCashAmt AS intTotalCashAmt
+	   FROM TUserCashMst
+	   WHERE UserNo = #{userNo}
+	</select>
 	<!--  -->
 	<select id="selectlist"  resultType="User">
 		select UserId AS StrUserid

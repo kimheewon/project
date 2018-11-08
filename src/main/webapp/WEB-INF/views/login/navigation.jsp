@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"  pageEncoding="EUC-KR"%>
 <%@ page import = "java.util.List" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import = "com.interntraining.admin.boardCategory.domain.*" %>
 <%  // 인증된 세션이 없는경우, 해당페이지를 볼 수 없게 함.
     if (session.getAttribute("id")  == null) {
@@ -107,8 +109,8 @@
     </nav>
     
     <header class="session text-white text-right">
-        <div class="container">
-            <%= session.getAttribute("id") %>님 <small>반갑습니다.</small>
+        <div class="container" style="font-size: 17px">
+            <%= session.getAttribute("id") %>님 <small>반갑습니다.&nbsp;&nbsp;(&nbsp;보유캐시&nbsp;:&nbsp;<fmt:formatNumber value='<%= session.getAttribute("cash") %>' pattern="#,###" />&nbsp;원&nbsp;)</small>
         </div>
     </header>
     

@@ -46,8 +46,8 @@
 
 <div class="container_t">
     <h3 style="color:#2c3e50;margin-left: 6%;">캐시 구매(결제 완료)</h3><br><br><br>
-        <p style="text-align: center;"><img style="width: 20%;" src="/img/piggy-bank.png"></p>
-        <br><p style="text-align: center;font-size: 30px; font-weight: bold; color: #2c3e50; font-family: TmonTium;">충전이 완료 되었습니다.</p>
+        <p style="text-align: center;"><img style="width: 10%;" src="/img/piggy-bank.png"></p>
+        <br><p style="text-align: center;font-size: 30px; font-weight: bold; color: #2c3e50; font-family: TmonTium;"><span style="color:#d11d53">충전</span>이 <span style="color:#d11d53">완료 </span>되었습니다.</p>
         <br><br>
         <form action="/Cash/Purchase" method="post">
             <table style="margin-bottom: 1rem;width: 60%;margin: auto;border: 1px solid #3a5269">
@@ -57,24 +57,30 @@
                 </colgroup>
                 <tr>
                    <td style="font-size: 21px;text-align: center;background-color: #3a5269; color: white;height: 55px;font-family: Bareun;">아이디</td>
-                   <td style="font-size: 21px;color: #3a5269;font-weight: bold; padding-left: 3%;">${id}</td>             
+                   <td style="font-size: 21px;color: #282a2d; padding-left: 3%;">${id}</td>             
                 </tr> 
                 <tr>
                    <td style="font-size: 21px;text-align: center;background-color: #3a5269; color: white;height: 55px;font-family: Bareun;border-top: 1px solid #e0e0e0;border-bottom: 1px solid #e0e0e0;">충전한 금액</td>
-                   <td style="font-size: 21px;color: #3a5269;font-weight: bold; padding-left: 3%;border-top: 1px solid #888888;border-bottom: 1px solid #888888;">5000 </td>    
+                   <td style="font-size: 21px;color: #d11d53;font-weight: bold; padding-left: 3%;border-top: 1px solid #888888;border-bottom: 1px solid #888888;"><fmt:formatNumber value="${result.intAmount}" pattern="#,###" />&nbsp;원</td>    
                 </tr>
                 <tr>
                    <td style="font-size: 21px;text-align: center;background-color: #3a5269; color: white;height: 55px;font-family: Bareun;">현재 보유 캐시</td>
-                   <td style="font-size: 21px;color: #3a5269;font-weight: bold; padding-left: 3%;">5000</td>
+                   <td style="font-size: 21px;color: #282a2d; padding-left: 3%;">
+                    <fmt:formatNumber value="${result.intTotalCashAmt}" pattern="#,###" />&nbsp;원</td>
               
                 </tr>            
             </table>
-            <br><br><br><br>
-           
-            <br><br><br>
-                 
+            <br><br><br><br>         
+          
         </form>
-        <br><br><br><br>
+        <div class="container_t" style="border: 1px solid #d11d53;padding-top: 1%;font-family: Bareun;">
+        <ul>
+            <li> 결제 후 바로 캐시로 적립됩니다.</li>
+            <li> 적립된 캐시는 <span style="color: #d11d53;">내 정보 > 캐시 내역</span>에서 확인할 수 있습니다.</li>
+        </ul>
+        </div>
+        <br><br><br>  
+        
 </div>        
 </body>
 <jsp:include page="../../bottom.jsp" flush="true"/>

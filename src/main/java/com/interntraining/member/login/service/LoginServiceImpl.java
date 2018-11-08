@@ -70,6 +70,12 @@ public class LoginServiceImpl implements LoginService {
 		return loginDAO.boardCategoryList();
 	}
 
+	//보유캐시 정보
+	@Override
+	public User selectCashInfo(int userNo) {
+		return loginDAO.selectCashInfo(userNo);
+	}
+
 	
 
 	

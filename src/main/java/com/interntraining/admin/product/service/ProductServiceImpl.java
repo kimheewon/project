@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.interntraining.admin.product.dao.ProductDAO;
 import com.interntraining.admin.product.domain.ProductInfo;
 
-@Service()
+@Service
 public class ProductServiceImpl implements ProductService{
 
 	@Resource(name = "ProductDAO")

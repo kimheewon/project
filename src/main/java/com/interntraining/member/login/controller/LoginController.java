@@ -43,8 +43,7 @@ public class LoginController {
 		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
 		
 
-		mv.setViewName("/login/home");
-		
+		mv.setViewName("/login/home");		
 		return mv;		
 	}
 	
@@ -77,9 +76,14 @@ public class LoginController {
 			session.setAttribute("id", user.getStrUserid());
 			session.setAttribute("no", user.getIntUserNo());
 			
+			int userNo = user.getIntUserNo();
+			user = loginService.selectCashInfo(userNo);	//보유캐시 정보
+			session.setAttribute("cash", user.getIntTotalCashAmt());
 			//게시판 카테고리 항목 불러오기
 	    	List<BoardCategoryInfo> boardCategory = loginService.boardCategoryList();
 	    	session.setAttribute("boardCategory", boardCategory);
+	    	
+	    	
 			mv.setViewName("/login/home");			//로그인 성공시 홈화면으로 이동			
 		}
 		else{//로그인 실패
@@ -120,7 +124,8 @@ public class LoginController {
         }
 
 		user.setStrUserPhone(phone);
-        
+
+		
 		mv.addObject("member", user);
 		mv.setViewName("/login/myPage");
 		return mv;		
@@ -133,6 +138,8 @@ public class LoginController {
 
 		String id = (String) session.getAttribute("id"); // 세션
 		User user = loginService.myPage(id);
+		
+
 		
 		mv.addObject("member", user);
 		mv.setViewName("/login/myPageUpdateForm");
@@ -165,7 +172,7 @@ public class LoginController {
 		user.setStrAdress2(address2);
 		
 		loginService.updateMember(user);		//회원정보 수정
-		
+				
 		mv.setViewName("redirect:/login/myPageForm");
 		
 		return mv;

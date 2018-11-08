@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.interntraining.admin.membership.dao.MembershipDAO;
 import com.interntraining.admin.membership.domain.MembershipInfo;
 
-@Service()
+@Service 
 public class MembershipServiceImpl implements MembershipService{
 
 	@Resource(name = "membershipDAO")

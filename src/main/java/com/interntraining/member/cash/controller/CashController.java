@@ -46,7 +46,7 @@ import com.interntraining.member.login.domain.User;
 public class CashController {
 
 	@Autowired
-	private CashService purchaseCashService;
+	private CashService cashService;
 	
 	//캐시 구매 페이지로 이동
 	@RequestMapping(value="/PurchaseForm")
@@ -72,7 +72,7 @@ public class CashController {
 		User user = (User) session.getAttribute("login");
 		String name = user.getStrUserName();	//이름		
 		String id = (String) session.getAttribute("id");	//id		
-		String lastOrderNo = purchaseCashService.selectOrderNo();	// 최근 결재번호
+		String lastOrderNo = cashService.selectOrderNo();	// 최근 결재번호
 		
 
 		sendObject.setOrder_no(lastOrderNo);//결제번호			
@@ -80,7 +80,7 @@ public class CashController {
 		sendObject.setUser_id(id); 		//id
 		sendObject.setAmount(amount);	//충전할 캐시
 		sendObject.setPgcode(pgcode);	//결제 종류(휴대폰/신용카드)
-		sendObject = purchaseCashService.purchase(sendObject);
+		sendObject = cashService.purchase(sendObject);
 		
 		
 		mav.addObject("onlineUrl", sendObject.getOnline_url());		
@@ -94,10 +94,12 @@ public class CashController {
 	public ModelAndView close(PGInfo pgInfo, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ClientProtocolException, IOException {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		
+		String orderNo = pgInfo.getOrder_no();
 		
 		//DB에 결과값 저장
 		//System.out.println(pgInfo.getTid());
 		//System.out.println(pgInfo.getCard_info());
+		mav.addObject("orderNo", orderNo);
 		mav.setViewName("/user/cash/close");
 		return mav;
 	}
@@ -105,14 +107,22 @@ public class CashController {
 	//충전완료 페이지
 	@RequestMapping(value="/Success", produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public ModelAndView succes(PGInfo pgInfo, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ClientProtocolException, IOException {
+	public ModelAndView succes(String orderNo,PGInfo pgInfo, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ClientProtocolException, IOException {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 			
 		String id = (String) session.getAttribute("id");//아이디
-		//충전액
-		//보유캐시
+		int userNo = cashService.selectUserId(id);	//회원 번호 찾기
+		User user = new User();
 		
-		mav.addObject("id", id);
+		
+		user.setIntUserNo(userNo);//회원번호
+		user.setStrOrderNo(orderNo);//주문번호
+		user = cashService.selectUserCashInfo(userNo,orderNo);	//회원의 현재 보유 캐시정보
+		session.setAttribute("cash", user.getIntTotalCashAmt());
+		
+		mav.addObject("id",id);
+		mav.addObject("result", user);
+	//	mav.addObject("cash",user.getIntTotalCashAmt());
 		mav.setViewName("/user/cash/CashSuccess");
 		return mav;
 	}
@@ -125,17 +135,20 @@ public class CashController {
 	
 		String order = pgInfo.getOrder_no();
 
+		String id = pgInfo.getUser_id();
+		int userNo = cashService.selectUserId(id);	//회원 번호 찾기
 		//System.out.println(order);
 		BigInteger orderNo = new BigInteger(order);
 		pgInfo.setIntCashNo(orderNo);
-		pgInfo.setIntUserNo(2);	//회원 번호
+		pgInfo.setIntUserNo(userNo);	//회원 번호
 		pgInfo.setIntCashAmt(pgInfo.getAmount());//캐시
 		pgInfo.setStrPurchaseState("결제완료");//상태
 		pgInfo.setCode("0");//성공
 
 		
-		purchaseCashService.insertPgResult(pgInfo);	//DB에  결제 결과값 저장
+		cashService.insertPgResult(pgInfo);	//DB에  결제 결과값 저장		
 		
+		cashService.updateUserCashMst(pgInfo);	//cash 충전(회원번호, 충전액)
 		//System.out.println(pgInfo.getTid());
 		
 		mav.addObject("message","");

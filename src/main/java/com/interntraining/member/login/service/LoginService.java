@@ -23,6 +23,9 @@ public interface LoginService {
 	//db에서 게시판 카테고리 항목 불러오기
 	public List<BoardCategoryInfo> boardCategoryList();
 
+	//보유캐시 정보
+	public User selectCashInfo(int userNo);
+
 	
 	
 }

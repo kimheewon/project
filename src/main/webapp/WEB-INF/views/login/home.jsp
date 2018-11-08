@@ -28,8 +28,10 @@
         <h1 class="text-uppercase mb-0">Welcome Home~!!</h1>
         <hr class="star-light">
         <h2 class="font-weight-light mb-0">This is Payletter Home Page.</h2>
+        <br><br><br>
       </div>
     </header>
+    
     <!-- Footer -->
   
  	<jsp:include page="../bottom.jsp" flush="true"/>

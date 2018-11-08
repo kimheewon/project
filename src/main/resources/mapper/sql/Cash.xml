@@ -26,4 +26,36 @@
                              ,#{code}, #{transaction_date}, #{card_info}, #{payhash})    
     </insert>
 
+    <!-- 회원 번호 찾기 -->
+    <select id="selectUserId" resultType="int">
+        SELECT   UserNo   
+        FROM TUser
+        WHERE UserId = #{id} 
+    </select>
+    
+    <!-- 유저의 기존 보유 캐시 정보 가져오기  -->
+    <select id="selectUserCashInfo" resultType="User">
+       SELECT TotalCashAmt    AS intTotalCashAmt
+             ,TotalInCashAmt  AS intTotalInCashAmt
+             ,TotalOutCashAmt AS intTotalOutCashAmt
+       FROM TUserCashMst
+       WHERE UserNo = #{userNo}
+    </select>
+    
+    <!-- Cash 충전 -->
+    <update id="updateUserCashMst">    
+		UPDATE TUserCashMst
+		SET    TotalInCashAmt = #{intTotalInCashAmt}
+		      ,TotalCashAmt = #{intTotalCashAmt}
+		WHERE  UserNo = #{intUserNo}
+    </update>
+    
+    <!--충전한 캐시정보 가져오기  -->
+    <select id="selectPgCashAmount" resultType="int">
+        SELECT CashAmt 
+        FROM TCashMst
+        WHERE CashNo = #{orderNo}        
+    </select>
+    
+    
 </mapper>

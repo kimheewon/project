@@ -3,31 +3,37 @@ package com.interntraining.member.login.domain;
 import java.util.Date;
 
 public class User {
-	private int intUserNo;
-	private String StrUserid;
+	private int    intUserNo;
+	private String strUserid;
 	private String StrUserPw;
 	private String StrUserName;
 	private String StrUserPhone;
 	private String StrUserEmail;
 	private String StrUserSex;	
 	private String StrUserBirth;
-	private Date DateUserDate;
+	private Date   DateUserDate;
 	private String StrUserGrade;
 	private String StrPostCode;
 	private String StrAdress;
 	private String StrAdress2;
-
+	private int	   intTotalCashAmt;
+	private int	   intTotalInCashAmt;
+	private int	   intTotalOutCashAmt;
+	private String strOrderNo;
+	private int    intAmount;
+	
 	public int getIntUserNo() {
 		return intUserNo;
 	}
 	public void setIntUserNo(int intUserNo) {
 		this.intUserNo = intUserNo;
 	}
+	
 	public String getStrUserid() {
-		return StrUserid;
+		return strUserid;
 	}
 	public void setStrUserid(String strUserid) {
-		StrUserid = strUserid;
+		this.strUserid = strUserid;
 	}
 	public String getStrUserPw() {
 		return StrUserPw;
@@ -94,6 +100,36 @@ public class User {
 	}
 	public void setStrAdress2(String strAdress2) {
 		StrAdress2 = strAdress2;
+	}
+	public int getIntTotalCashAmt() {
+		return intTotalCashAmt;
+	}
+	public void setIntTotalCashAmt(int intTotalCashAmt) {
+		this.intTotalCashAmt = intTotalCashAmt;
+	}
+	public int getIntTotalInCashAmt() {
+		return intTotalInCashAmt;
+	}
+	public void setIntTotalInCashAmt(int intTotalInCashAmt) {
+		this.intTotalInCashAmt = intTotalInCashAmt;
+	}
+	public int getIntTotalOutCashAmt() {
+		return intTotalOutCashAmt;
+	}
+	public void setIntTotalOutCashAmt(int intTotalOutCashAmt) {
+		this.intTotalOutCashAmt = intTotalOutCashAmt;
+	}
+	public String getStrOrderNo() {
+		return strOrderNo;
+	}
+	public void setStrOrderNo(String strOrderNo) {
+		this.strOrderNo = strOrderNo;
+	}
+	public int getIntAmount() {
+		return intAmount;
+	}
+	public void setIntAmount(int intAmount) {
+		this.intAmount = intAmount;
 	}
 
 	

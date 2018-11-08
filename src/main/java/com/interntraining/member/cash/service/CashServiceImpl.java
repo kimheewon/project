@@ -20,42 +20,43 @@ import org.springframework.web.client.RestTemplate;
 
 import com.interntraining.member.cash.dao.CashDAO;
 import com.interntraining.member.cash.domain.PGInfo;
+import com.interntraining.member.login.domain.User;
 
 
 @Service()
 public class CashServiceImpl implements CashService{
 
-	@Value("${service_name}")
+	@Value("${service.name}")
 	String service_name;
 	
-	@Value("${client_id}")
+	@Value("${client.id}")
 	String client_id;
 	
-	@Value("${product_name}")
+	@Value("${product.name}")
 	String product_name;
 	
-	@Value("${email_flag}")
+	@Value("${email.flag}")
 	String email_flag;
 	
-	@Value("${email_addr}")
+	@Value("${email.addr}")
 	String email_addr;
 	
-	@Value("${autopay_flag}")
+	@Value("${autopay.flag}")
 	String autopay_flag;
 	
-	@Value("${receipt_flag}")
+	@Value("${receipt.flag}")
 	String receipt_flag;
 	
-	@Value("${custom_parameter}")
+	@Value("${custom.parameter}")
 	String custom_parameter;
 	
-	@Value("${return_url}")
+	@Value("${return.url}")
 	String return_url;
 	
-	@Value("${callback_url}")
+	@Value("${callback.url}")
 	String callback_url;
 	
-	@Value("${cancel_url}")
+	@Value("${cancel.url}")
 	String cancel_url;
 	
 	@Resource(name = "cashDAO")
@@ -157,5 +158,39 @@ public class CashServiceImpl implements CashService{
 		HttpEntity<PGInfo> objPGInfo = new HttpEntity<PGInfo>(msg, headers);
 
 		restTemplate.postForObject(url, objPGInfo, PGInfo.class);*/
+	}
+
+	//Cash 충전
+	@Override
+	public void updateUserCashMst(PGInfo pgInfo) {
+		User user = new User();
+		user = cashDAO.selectUserCashInfo(pgInfo.getIntUserNo());	//유저의 기존 보유 캐시 정보 가져오기
+		
+		int cash = pgInfo.getIntCashAmt();
+		int totalInCash = user.getIntTotalInCashAmt() + cash;
+		int totalCash = user.getIntTotalCashAmt() + cash;
+		
+		User userNew = new User();
+		userNew.setIntUserNo(pgInfo.getIntUserNo());//no
+		userNew.setIntTotalInCashAmt(totalInCash);//in
+		userNew.setIntTotalCashAmt(totalCash);//total
+				
+		cashDAO.updateUserCashMst(userNew);		
+	}
+
+	//회원 번호 찾기
+	@Override
+	public int selectUserId(String id) {		
+		return cashDAO.selectUserId(id);
+	}
+
+	//회원의 현재 보유 캐시정보
+	@Override
+	public User selectUserCashInfo(int userNo, String orderNo) {
+		User user = new User();
+		user = cashDAO.selectUserCashInfo(userNo);	//totalAmt
+		int amount = cashDAO.selectPgCashAmount(orderNo);	//충전한 캐시정보 가져오기
+		user.setIntAmount(amount);
+		return user;
 	}
 }

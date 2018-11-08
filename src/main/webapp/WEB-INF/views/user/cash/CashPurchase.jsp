@@ -53,7 +53,7 @@
 		           <td style="font-size: 23px;text-align: center;background-color: #3a5269; color: white;height: 65px;">충전 금액</td>
 		           <td style="font-size: 21px;color: #3a5269;font-weight: bold; padding-left: 3%;">
 		              <input type="text" id="money" name="money" pattern="#,###" readonly style="border: 0px;background-color: #f0efef;text-align: center;">&nbsp;원
-		              <small style="padding-left: 3%;font-weight: bold;color: #5e646b;">(&nbsp;보유캐시&nbsp;:&nbsp;&nbsp;&nbsp;1000&nbsp;원&nbsp;)</small></td>                
+		              <small style="padding-left: 3%;font-weight: bold;color: #5e646b;">(&nbsp;보유캐시&nbsp;:&nbsp;&nbsp;&nbsp;<fmt:formatNumber value='<%= session.getAttribute("cash") %>' pattern="#,###" />&nbsp;원&nbsp;)</small></td>                
 		           </tr>        
             </table>
             <br><br><br><br>
