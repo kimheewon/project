@@ -16,14 +16,27 @@
         FROM TCreatePk
     </select>
     
+    <!-- 결제 요청 저장 -->
+    <insert id="insertCashRequest">
+        INSERT INTO TCashRequestMst (OrderNo, UserNo, PayAmt, UserId,  Pgcode)
+                       VALUES(#{intorderNo}, #{intUserNo}, #{amount}, #{user_id},#{pgcode})    
+    </insert>
+    
+    <!-- OrderNo 가져오기 -->
+    <select id="selectRequestOrderNo" resultType="int">
+        SELECT MAX(OrderNo)
+        FROM TCashRequestMst
+    </select>
+    
+    
     <!-- DB에  결제 결과값 저장 -->
     <insert id="insertPgResult">
         INSERT INTO TCashMst (CashNo, UserNo, PayAmt, CashAmt, PurchaseState
-                             ,Tid, Code, Message, UserId, Cid
+                             ,Tid, Code, Message, UserId, Cid, OrderNo
                              ,Pgcode, TransactionDate, Card_info, Payhash)
                        VALUES(#{intCashNo}, #{intUserNo}, #{amount}, #{intCashAmt}, #{strPurchaseState}
-                             ,#{tid}, #{code}, #{message}, #{user_id}, #{cid}
-                             ,#{code}, #{transaction_date}, #{card_info}, #{payhash})    
+                             ,#{tid}, #{code}, #{message}, #{user_id}, #{cid}, #{intorderNo}
+                             ,#{pgcode}, #{transaction_date}, #{card_info}, #{payhash})    
     </insert>
 
     <!-- 회원 번호 찾기 -->
@@ -54,8 +67,52 @@
     <select id="selectPgCashAmount" resultType="int">
         SELECT CashAmt 
         FROM TCashMst
-        WHERE CashNo = #{orderNo}        
+        WHERE OrderNo = #{orderNo}        
     </select>
     
+    <!-- 캐시 내역 가져오기 -->
+    <select id="selectCashList" resultType="PGInfo">
+        SELECT   CashNo             AS intCashNo
+                ,TransactionDate    AS transaction_date
+                ,PurchaseState      AS strPurchaseState
+                ,PayAmt             AS amount
+                ,CashAmt            AS intCashAmt
+                ,Pgcode             AS pgcode
+        FROM    TCashMst
+        WHERE   UserNo = #{userNo}
+        ORDER BY CashNo DESC
+    </select>
     
+    <!-- 캐시 내역 페이징처리 -->
+    <select id="selectCashPaging" resultType="PGInfo">
+        SELECT TOP 25 resultTable.*
+        FROM   (SELECT TOP (25 * #{curPage}) ROW_NUMBER() OVER (ORDER BY CashNo DESC)    AS rownumber
+                                                            ,CashNo             AS intCashNo
+											                ,TransactionDate    AS transaction_date
+											                ,PurchaseState      AS strPurchaseState
+											                ,PayAmt             AS amount
+											                ,CashAmt            AS intCashAmt
+											                ,Pgcode             AS pgcode
+				FROM TCashMst
+				WHERE UserNo = #{intUserNo} ) AS resultTable
+        WHERE rownumber > (#{curPage} - 1) * 25
+    </select>
+    
+    <!-- DB에서 결재 요청 정보 가져오기 -->
+    <select id="selectRequestInfo" resultType="PgRequest">
+        SELECT   OrderNo    AS intOrderNo
+                ,UserNo     AS user_no
+                ,PayAmt     AS amount
+                ,UserId     AS user_id
+                ,Pgcode     AS pgcode
+        FROM    TCashRequestMst
+        WHERE   OrderNo = #{orderNo}
+    </select>
+   
+   <!--  상태 update-->
+   <update id="updateState">
+        UPDATE TCashRequestMst
+        SET State = '결재 완료'
+        WHERE  OrderNo = #{orderNo}
+   </update>
 </mapper>

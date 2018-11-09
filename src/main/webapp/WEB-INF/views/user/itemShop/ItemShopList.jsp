@@ -27,9 +27,7 @@
 <jsp:include page="../../login/navigation.jsp" flush="true"/>
 
 <div class="container_t">
-       <h3 style="color:#2c3e50;margin-left: 1%;">아이템샵</h3>
-        
-       
+       <h3 style="color:#2c3e50;margin-left: 1%;">아이템샵</h3>    
         <br><br>
         
         <div class="row">
@@ -47,10 +45,10 @@
 		                    <td id="nameStyle">${items.strItemName}</td>
 		                </tr>
 		                <tr>
-		                    <td id="priceStyle"><fmt:formatNumber value="${items.intItemPrice}" pattern="#,###" /> 원</td>
+		                    <td id="priceStyle"><fmt:formatNumber value="${items.intItemPrice}" pattern="#,###" /> 코인</td>
 		                </tr>
 		                <tr style="border: 1px solid #cecece;">
-		                    <td><p id="pbtn"><button type="button" id="purchaseBtn" >구매하기</button></p></td>
+		                    <td><p id="pbtn"><button type="button" id="purchaseBtn" onclick="location.href='/ItemShop/ItemPurchaseForm?itemNo=${items.intItemNo}'">구매하기</button></p></td>
 		 	            </tr>
                     </table>             
                 </div>

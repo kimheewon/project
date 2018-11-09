@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>intern_training</name>
+	<name>intern_training_hwkim</name>
 	<description>Intern Training Project with Java</description>
 
 	<parent>
@@ -22,7 +22,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<maven.test.skip>true</maven.test.skip>
 	</properties>
 
     <!-- 운영 환경 설정 -->
@@ -30,13 +29,13 @@
         <profile>
             <id>dev</id>
             <properties>
-                <system.env>dev</system.env>
+                <system.env>dev</system.env> 
             </properties>
         </profile>
         <profile>
             <id>qa</id>
             <properties>
-                <system.env>qa</system.env>
+                <system.env>qa</system.env>                
             </properties>
         </profile>
     </profiles>
@@ -150,6 +149,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
 
 </project>

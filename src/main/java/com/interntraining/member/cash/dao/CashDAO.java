@@ -1,13 +1,17 @@
 package com.interntraining.member.cash.dao;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import com.interntraining.member.board.domain.Pagination;
 import com.interntraining.member.cash.domain.PGInfo;
+import com.interntraining.member.cash.domain.PaginationCash;
+import com.interntraining.member.cash.domain.PgRequest;
 import com.interntraining.member.login.domain.User;
 
 @Repository("cashDAO")
@@ -50,6 +54,36 @@ public class CashDAO {
 	//충전한 캐시정보 가져오기
 	public int selectPgCashAmount(String orderNo) {		
 		return sqlSession.selectOne("cashSql.selectPgCashAmount",orderNo);
+	}
+
+	//캐시 내역 가져오기
+	public List<PGInfo> selectCashList(int userNo) {
+		return sqlSession.selectList("cashSql.selectCashList",userNo);
+	}
+
+	//캐시 내역 페이징처리
+	public List<PGInfo> selectCashPaging(PaginationCash pagination) {
+		return sqlSession.selectList("cashSql.selectCashPaging",pagination);
+	}
+
+	//결제 요청 저장
+	public void insertCashRequest(PGInfo sendObject) {
+		sqlSession.insert("cashSql.insertCashRequest", sendObject);
+	}
+
+	//order번호 가져오기
+	public int selectRequestOrderNo() {
+		return sqlSession.selectOne("cashSql.selectRequestOrderNo");
+	}
+
+	//DB에서 요청 정보 가져오기
+	public PgRequest selectRequestInfo(int orderNo) {
+		return sqlSession.selectOne("cashSql.selectRequestInfo",orderNo);
+	}
+
+	//상태 update
+	public void updateState(int orderNo) {
+		sqlSession.update("cashSql.updateState",orderNo );
 	}
 
 

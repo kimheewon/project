@@ -92,7 +92,7 @@
                                 <a id="submenuLink" href="/Cash/PurchaseForm" style="font-size:14px;text-decoration: none;" >캐시 구매(PG)</a>      
                             </li>  
                             <li class='has-sub 'id="submenuLi">
-                                <a id="submenuLink" href="/login/myPageForm" style="font-size:14px;text-decoration: none;" >캐시 내역</a>      
+                                <a id="submenuLink" href="/Cash/CashList" style="font-size:14px;text-decoration: none;" >캐시 내역</a>      
                             </li>
                             <li class='has-sub 'id="submenuLi">
                                 <a id="submenuLink" href="/login/myPageForm" style="font-size:14px;text-decoration: none;" >아이템 구매 내역</a>      
@@ -110,7 +110,7 @@
     
     <header class="session text-white text-right">
         <div class="container" style="font-size: 17px">
-            <%= session.getAttribute("id") %>님 <small>반갑습니다.&nbsp;&nbsp;(&nbsp;보유캐시&nbsp;:&nbsp;<fmt:formatNumber value='<%= session.getAttribute("cash") %>' pattern="#,###" />&nbsp;원&nbsp;)</small>
+            <%= session.getAttribute("id") %>님 <small>반갑습니다.&nbsp;&nbsp;(&nbsp;보유캐시&nbsp;:&nbsp;<fmt:formatNumber value='<%= session.getAttribute("cash") %>' pattern="#,###" />&nbsp;코인&nbsp;)</small>
         </div>
     </header>
     

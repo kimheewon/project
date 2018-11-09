@@ -71,4 +71,13 @@ public class ItemShopController {
 		
 		return mav;
 	}
+	
+	//아이템 구매 페이지로 이동
+	@RequestMapping(value="/ItemPurchaseForm")
+	public ModelAndView ItemPurchaseForm(int itemNo,HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		
+		//아이템 번호로 아이템 정보 가져오기
+		return mav;
+		}
 }

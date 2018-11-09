@@ -20,8 +20,10 @@
 
 </head>
 <style>
-.container_t {
-    
+@font-face{font-family:'Bareun'; src:url('/font/BareunDotumOTF1.otf')}
+@font-face{font-family:'candy'; src:url('/font/THE_candybar.ttf')}
+@font-face{font-family:'TmonTium'; src:url('/font/TmonTium.ttf')}
+.container_t {    
         padding-right: 15px;
         padding-left: 15px;
         margin-right: auto;
@@ -35,6 +37,10 @@
     font-size: 18px;
     padding-left: 2%;
 }
+ th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+  }
 </style>
 <body>
 
@@ -43,133 +49,86 @@
 
 <div class="container_t">
     <h3 style="color:#2c3e50;margin-left: 6%;">캐시 내역</h3><br><br><br>
-        <form action="/Cash/Purchase" method="post">
-            <table style="margin-bottom: 1rem;width: 80%;margin: auto;border: 1px solid #3a5269">
-                <colgroup>
-                   <col width = "10%"/>
-                   <col width = "*"/>
-                   <col width = "10%"/>
-                   <col width = "10%"/> 
-                   <col width = "10%"/>
-                   <col width = "10%"/>                           
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th>일시</th>
-                        <th>번호</th>
-                        <th>내역</th>
-                        <th>금액</th>
-                        <th>상태</th>
-                        <th>결제수단</th>
-                    </tr>
-                </thead>
-                <tbody>
-	                <tr>
-	                   <td style="font-size: 23px;text-align: center;background-color: #3a5269; color: white;height: 65px;">충전 금액</td>
-	                   <td style="font-size: 21px;color: #3a5269;font-weight: bold; padding-left: 3%;">
-	                      <input type="text" id="money" name="money" pattern="#,###" readonly style="border: 0px;background-color: #f0efef;text-align: center;">&nbsp;원
-	                      <small style="padding-left: 3%;font-weight: bold;color: #5e646b;">(&nbsp;보유캐시&nbsp;:&nbsp;&nbsp;&nbsp;<fmt:formatNumber value='<%= session.getAttribute("cash") %>' pattern="#,###" />&nbsp;원&nbsp;)</small></td>                
-	                </tr>   
-                </tbody>     
-            </table>
-            <br><br><br><br>
-            <table style="margin-bottom: 1rem;width: 80%;margin: auto;">
-               <colgroup>
-                   <col width = "33%"/>
-                   <col width = "33%"/>
-                   <col width = "*"/>            
-                </colgroup>
-               <tr>
-                   <th colspan="3" style="border-bottom: 1px solid #8f959c;font-size: 20px;padding-bottom: 1%;">충전금액 선택</th>
-               </tr>
-               <tr>
-                   <td id="cashChoosStyle"><input type="radio" value="1000" name="cashChoose">&nbsp;&nbsp;1,000 원</td>
-                   <td id="cashChoosStyle"><input type="radio" value="5000" name="cashChoose">&nbsp;&nbsp;5,000 원</td>
-                   <td id="cashChoosStyle"><input type="radio" value="10000" name="cashChoose">&nbsp;&nbsp;1,0000 원</td>
-               </tr>
-               <tr>
-                   <td id="cashChoosStyle"><input type="radio" value="50000" name="cashChoose">&nbsp;&nbsp;50,000 원</td>
-                   <td id="cashChoosStyle"><input type="radio" value="100000" name="cashChoose">&nbsp;&nbsp;100,000 원</td>
-                   <td id="cashChoosStyle"><input type="radio" value="직접입력" name="cashChoose" >&nbsp;&nbsp;직접입력&nbsp;&nbsp;
-                        <input type="number" name="cashWrite" id="cashWrite" value=""style=" width: 40%;">&nbsp;&nbsp;원</td>
-               </tr>
-            </table>
-            <br><br><br><br>
-            <table style="margin-bottom: 1rem;width: 80%;margin: auto;">
-               <colgroup>
-                   <col width = "33%"/>
-                   <col width = "33%"/>
-                   <col width = "*"/>            
-               </colgroup>
-               <tr>
-                   <th colspan="3" style="border-bottom: 1px solid #8f959c;font-size: 20px;padding-bottom: 1%;">간편결제</th>
-               </tr>
-               <tr>
-                   <td id="cashChoosStyle"><input type="button" name="purchase" id="" value="네이버페이"></td>
-                   <td id="cashChoosStyle"><input type="button" name="purchase"  value="creditcard" alt="신용카드"></td>
-                   <td id="cashChoosStyle"><input type="button" name="purchase" value="mobile" alt="휴대폰"></td>
-               </tr>
-            </table>
-            <br><br><br>
+    <form action="/Cash/Purchase" method="post">
+        <table style="margin-bottom: 1rem;width:100%;margin: auto;">
+            <colgroup>
+                <col width = "5%"/>
+                <col width = "20%"/>
+                <col width = "*"/>
+                <col width = "15%"/>
+                <col width = "15%"/> 
+                <col width = "15%"/>
+                <col width = "15%"/>                           
+            </colgroup>
+            <thead style="text-align: center;font-size: 20px;background-color: #f2f2e8;color: #2c3e50;font-family: TmonTium;">
+                <tr>                        
+                    <th style="padding-bottom: 1%;padding-top: 1%;">#</th>
+                    <th style="padding-bottom: 1%;padding-top: 1%;">일&nbsp;&nbsp;시</th>
+                    <th style="padding-bottom: 1%;padding-top: 1%;">번&nbsp;&nbsp;호</th>
+                    <th style="padding-bottom: 1%;padding-top: 1%;">내&nbsp;&nbsp;역</th>
+                    <th style="padding-bottom: 1%;padding-top: 1%;">금&nbsp;&nbsp;액</th>
+                    <th style="padding-bottom: 1%;padding-top: 1%;">캐&nbsp;&nbsp;시</th>
+                    <th style="padding-bottom: 1%;padding-top: 1%;">결제수단</th>
+                </tr>
+            </thead>
+            <tbody style="text-align: center;font-size: 17px;font-family: Bareun;">
+                <c:forEach var="cash" items="${cashList}" varStatus="status">   
+		            <tr>   
+		                <td style="padding-top: 1%;padding-bottom: 1%;">${cash.intNum}</td>
+                        <td style="padding-top: 1%;padding-bottom: 1%;">${cash.transaction_date}</td>
+		                <td style="padding-top: 1%;padding-bottom: 1%;">${cash.intCashNo}</td>
+		                <td style="padding-top: 1%;padding-bottom: 1%;">${cash.strPurchaseState}</td>
+		                <td style="padding-top: 1%;padding-bottom: 1%;"><fmt:formatNumber value="${cash.amount}" pattern="#,###" />&nbsp;원</td>
+		                <td style="padding-top: 1%;padding-bottom: 1%;"><fmt:formatNumber value="${cash.intCashAmt}" pattern="#,###" />&nbsp;코인</td>
+		                <td style="padding-top: 1%;padding-bottom: 1%;">${cash.strPurchasekind}</td>	
+		            </tr>   
+	            </c:forEach>
+            </tbody>     
+        </table>
+        <br><br><br><br>
+        
                  
-        </form>
+    </form>
+        <!-- page -->
+    <form name="frm">
+        <div class="container_t">
+            <ul class="pagination justify-content-center">
+                <c:if test="${pagination.curRange ne 1 }">
+                    <li class="page-item"><a class="page-link" href="#" style="color:#2c3e50;" onClick="fn_paging(1)">[처음]</a></li>
+                </c:if>
+                <c:if test="${pagination.curPage ne 1}">
+                    <li class="page-item"><a href="#" class="page-link" style="color:#2c3e50;" onClick="fn_paging('${pagination.prevPage }')">[이전]</a></li>
+                </c:if>
+                <c:forEach var="pageNum" begin="${pagination.startPage}" end="${pagination.endPage}">
+                    <c:choose>
+                        <c:when test="${pageNum eq  pagination.curPage}">
+                            <li class="page-item"><span style="font-weight: bold;"><a href="#" class="page-link"  style="color:#2c3e50;" onClick="fn_paging('${pageNum }')">${pageNum }</a></span></li> 
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item"><a href="#" class="page-link" style="color:#2c3e50;" onClick="fn_paging('${pageNum }')">${pageNum }</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+                <c:if test="${pagination.curPage ne pagination.pageCnt and pagination.pageCnt > 0}">
+                    <li class="page-item"><a href="#" class="page-link"  style="color:#2c3e50;"onClick="fn_paging('${pagination.nextPage }')">[다음]</a></li> 
+                </c:if>
+                <c:if test="${pagination.curRange ne pagination.rangeCnt and pagination.rangeCnt > 0}">
+                    <li class="page-item"><a href="#" class="page-link" style="color:#2c3e50;" onClick="fn_paging('${pagination.pageCnt }')">[끝]</a></li>
+                </c:if>
+            </ul>
+         </div>
+    </form>        
         <br><br><br><br>
 </div>        
 </body>
 <jsp:include page="../../bottom.jsp" flush="true"/>
 <script type="text/javascript">
-$(document).ready(function() { // 해당 페이지 Loading 후, 
-    $("input[name=cashWrite]").attr("disabled",true); 
-
-    $("input[name=cashChoose]").click(function(){ // 라디오버튼 클릭 이벤트 
-        if($("input[name=cashChoose]:checked").val() == "직접입력"){ 
-            $("input[name=cashWrite]").attr("disabled",false); 
-            document.getElementById("money").value = "";
-            
-        } else { 
-            $("input[name=cashWrite]").attr("value",""); 
-            // 만약에 기존 textbox에 데이터가 입력된 상태에서 테스트1에 갔다가 다시 돌아왔을때를 위해 초기화 
-            $("input[name=cashWrite]").attr("disabled",true); 
-            // 테스트1 라디오를 클릭하면 비활성화 
-            document.getElementById("money").value = $("input[name=cashChoose]:radio:checked").val();
-        } 
-    });
-    
-       $("#cashWrite").change(function(){ // 라디오버튼 클릭 이벤트 
-            document.getElementById("money").value = document.getElementById("cashWrite").value;  
-            
-        });
-        
-       $("input[name=purchase]").on("click",function(){
-           if($("#money").val() == ""){
-               alert("충전할 금액을 선택하세요.");
-               return;
-           }
-           else{
-               $.ajax({   
-                   type:"POST",
-                   url:"/Cash/Purchase",   
-                   dataType:"json",// JSON/html
-                   async: false,
-                   data:{ 
-                       "money": $("#money").val(),
-                       "pgcode":$(this).val()
-                   },          
-                   success: function(responseData){//통신이 성공적으로 이루어 졌을때 받을 함수                     
-                       var url = responseData.onlineUrl;    
-                       //window.opener.location.reload();               
-
-                       window.open(url,"hiddenframe", "결제", "width=500, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" ); 
-                     //  window.opener.location.reload();    //부모창 reload
-                      // window.close(); 
-                   }
-                   
-    
-               }); //--ajax
-           }
-       });
-}); 
-
+function fn_paging(curPage) {
+    var f = document.frm;
+    f.method = "post"
+    f.action = "/Cash/CashList?curPage="+curPage;
+    f.submit();    
+}
        
 </script>
 </html>

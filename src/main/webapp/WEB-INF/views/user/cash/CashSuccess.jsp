@@ -66,7 +66,7 @@
                 <tr>
                    <td style="font-size: 21px;text-align: center;background-color: #3a5269; color: white;height: 55px;font-family: Bareun;">현재 보유 캐시</td>
                    <td style="font-size: 21px;color: #282a2d; padding-left: 3%;">
-                    <fmt:formatNumber value="${result.intTotalCashAmt}" pattern="#,###" />&nbsp;원</td>
+                    <fmt:formatNumber value="${result.intTotalCashAmt}" pattern="#,###" />&nbsp;코인</td>
               
                 </tr>            
             </table>
@@ -75,6 +75,7 @@
         </form>
         <div class="container_t" style="border: 1px solid #d11d53;padding-top: 1%;font-family: Bareun;">
         <ul>
+            <li> 캐시는 구매 후 <span style="color: #d11d53;">현금으로 환불이 되지 않습니다.</span></li>
             <li> 결제 후 바로 캐시로 적립됩니다.</li>
             <li> 적립된 캐시는 <span style="color: #d11d53;">내 정보 > 캐시 내역</span>에서 확인할 수 있습니다.</li>
         </ul>

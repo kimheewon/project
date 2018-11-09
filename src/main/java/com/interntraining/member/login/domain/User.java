@@ -1,5 +1,6 @@
 package com.interntraining.member.login.domain;
 
+import java.math.BigInteger;
 import java.util.Date;
 
 public class User {
@@ -21,6 +22,7 @@ public class User {
 	private int	   intTotalOutCashAmt;
 	private String strOrderNo;
 	private int    intAmount;
+	private BigInteger intcashNo;
 	
 	public int getIntUserNo() {
 		return intUserNo;
@@ -130,6 +132,12 @@ public class User {
 	}
 	public void setIntAmount(int intAmount) {
 		this.intAmount = intAmount;
+	}
+	public BigInteger getIntcashNo() {
+		return intcashNo;
+	}
+	public void setIntcashNo(BigInteger intcashNo) {
+		this.intcashNo = intcashNo;
 	}
 
 	

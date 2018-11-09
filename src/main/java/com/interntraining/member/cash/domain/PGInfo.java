@@ -41,6 +41,9 @@ public class PGInfo {
 	private int intCashAmt;	//현재 변환된 캐시
 	private int intRemainCashAmt;	//남은캐시
 	private String strPurchaseState;	//상태
+	private String strPurchasekind;	//결제 종류
+	private int intNum;
+	private int intorderNo;	//orderNo
 	
 	public String getPgcode() {
 		return pgcode;
@@ -252,6 +255,24 @@ public class PGInfo {
 	}
 	public void setIntCashNo(BigInteger intCashNo) {
 		this.intCashNo = intCashNo;
+	}
+	public String getStrPurchasekind() {
+		return strPurchasekind;
+	}
+	public void setStrPurchasekind(String strPurchasekind) {
+		this.strPurchasekind = strPurchasekind;
+	}
+	public int getIntNum() {
+		return intNum;
+	}
+	public void setIntNum(int intNum) {
+		this.intNum = intNum;
+	}
+	public int getIntorderNo() {
+		return intorderNo;
+	}
+	public void setIntorderNo(int intorderNo) {
+		this.intorderNo = intorderNo;
 	}
 
 	

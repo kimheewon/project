@@ -1,15 +1,15 @@
-package com.interntraining.member.board.domain;
+package com.interntraining.member.cash.domain;
 
 import java.util.List;
 
-public class Pagination{
+public class PaginationCash{
 	
 	private int intUserNo;
 	/** 한 페이지당 게시글 수 **/
-    private int pageSize = 10;
+    private int pageSize = 25;
     
     /** 한 블럭(range)당 페이지 수 **/
-    private int rangeSize = 10;
+    private int rangeSize = 25;
     
     /** 현재 페이지 **/
     private int curPage = 1;
@@ -177,7 +177,7 @@ public class Pagination{
 		this.intBoardCateNo = intBoardCateNo;
 	}
 
-	public Pagination(int listCnt, int curPage) {
+	public PaginationCash(int listCnt, int curPage) {
 			 /**
 	         * 페이징 처리 순서
 	         * 1. 총 페이지수

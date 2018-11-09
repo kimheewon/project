@@ -15,7 +15,7 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 	
 	  @Override
 	  public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		  registry.addResourceHandler("/virimg/**")
+		  registry.addResourceHandler("/virimg/01234/56789/**")
 	      .addResourceLocations("file:///"+strImgUploadUrl);
 	  }
 	
