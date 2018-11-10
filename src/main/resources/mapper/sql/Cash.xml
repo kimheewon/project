@@ -40,7 +40,7 @@
     </insert>
 
     <!-- 회원 번호 찾기 -->
-    <select id="selectUserId" resultType="int">
+    <select id="selectUserNo" resultType="int">
         SELECT   UserNo   
         FROM TUser
         WHERE UserId = #{id} 
@@ -115,4 +115,21 @@
         SET State = '결재 완료'
         WHERE  OrderNo = #{orderNo}
    </update>
+   
+    <!-- 회원 id 찾기 -->
+    <select id="selectUserId" resultType="String">
+        SELECT  UserId
+        FROM    TUser
+        WHERE   UserNo = #{userNo}
+    </select>
+    
+    <!-- 보낼 취소 정보 가져오기 -->
+    <select id="cashCancel" resultType="PgCancelInfo">
+        SELECT   Pgcode     AS pgcode
+				,UserId     AS user_id
+				,Tid        AS tid
+				,PayAmt     AS amount
+		FROM TCashMst
+		WHERE CashNo =  #{cashNo}
+    </select>
 </mapper>

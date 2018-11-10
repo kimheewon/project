@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.web.client.RestTemplate;
 
-import com.interntraining.member.board.domain.Pagination;
 import com.interntraining.member.cash.dao.CashDAO;
 import com.interntraining.member.cash.domain.PGInfo;
 import com.interntraining.member.cash.domain.PaginationCash;
@@ -194,8 +193,8 @@ public class CashServiceImpl implements CashService{
 
 	//회원 번호 찾기
 	@Override
-	public int selectUserId(String id) {		
-		return cashDAO.selectUserId(id);
+	public int selectUserNo(String id) {		
+		return cashDAO.selectUserNo(id);
 	}
 
 	//회원의 현재 보유 캐시정보
@@ -251,7 +250,7 @@ public class CashServiceImpl implements CashService{
 		int orderNo = Integer.parseInt(order);	//orderNo
 		
 		String id = pgInfo.getUser_id();
-		int userNo = cashDAO.selectUserId(id);	//회원 번호 찾기
+		int userNo = cashDAO.selectUserNo(id);	//회원 번호 찾기
 		
 		PgRequest requestInfo = new PgRequest();
 		

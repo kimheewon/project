@@ -37,7 +37,30 @@
     <link href="/build/css/custom.min.css" rel="stylesheet">
 <script src="/js/jquery-1.12.3.min.js"></script>
 <script src="/js/jquery-ui.min.js"></script>
-	
+<style>
+@font-face{font-family:'Bareun'; src:url('/font/BareunDotumOTF1.otf')}
+@font-face{font-family:'candy'; src:url('/font/THE_candybar.ttf')}
+@font-face{font-family:'TmonTium'; src:url('/font/TmonTium.ttf')}
+
+#btnTop{
+    background-color: white;
+    color: #2c3e50;
+    font-family: Bareun;
+    border: 1px solid #2c3e50;
+}
+
+#btnTop:hover{
+    background-color: #2c3e50;
+    color: white;
+    box-shadow: 0 2px #999;
+}
+#btnTop:active {
+    background-color: #2c3e50;
+    color: white;
+    box-shadow: 0 2px #666;
+    transform: translateY(4px);
+}
+</style>
   </head>
 
   <body class="nav-md">
@@ -66,7 +89,12 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2> <small></small></h2>                    
+                    <div style="float:right">
+	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href='/AdminCash/AdminCashList?userNo=${intUserNo}'">결제 내역</button>
+	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href=''">캐시 내역</button>
+	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href=''">캐시 지급</button>
+	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href=''">캐시 회수</button>     
+                    </div>
                     <div class="clearfix"></div>
                   </div>
                    <div class="x_content">
@@ -134,8 +162,8 @@
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3" style="margin-left: 43%;">
-                          <button class="btn btn-primary" type="button" onclick="location.href='/Membership/MembershipList'">취소</button>
-                          <button type="submit" class="btn btn-success" id="adminEnroll">수정</button>
+                          <button class="btn btn-primary" style="font-family: Bareun;" type="button" onclick="location.href='/Membership/MembershipList'">취소</button>
+                          <button type="submit" style="font-family: Bareun;" class="btn btn-success" id="adminEnroll">수정</button>
                         </div>
                       </div>
 

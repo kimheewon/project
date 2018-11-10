@@ -23,7 +23,7 @@ public interface CashService {
 	public void updateUserCashMst(PGInfo pgInfo);
 
 	//회원 번호 찾기
-	public int selectUserId(String id);
+	public int selectUserNo(String id);
 
 	//회원의 현재 보유 캐시정보
 	public User selectUserCashInfo(int userNo, String orderNo);

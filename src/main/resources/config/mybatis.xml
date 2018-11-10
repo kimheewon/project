@@ -26,6 +26,7 @@
         <package name="com.interntraining.admin.product.domain"/>
         <package name="com.interntraining.member.itemShop.domain"/>
         <package name="com.interntraining.member.cash.domain"/>
+        <package name="com.interntraining.admin.cash.domain"/>
     </typeAliases>
 
 </configuration>

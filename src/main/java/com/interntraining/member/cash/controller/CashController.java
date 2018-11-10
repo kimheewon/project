@@ -112,13 +112,12 @@ public class CashController {
 	}
 	
 	//충전완료 페이지
-	@RequestMapping(value="/Success", produces="application/json;charset=UTF-8")
-	@ResponseBody
-	public ModelAndView succes(String orderNo,PGInfo pgInfo, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ClientProtocolException, IOException {
+	@RequestMapping(value="/Success", produces="application/json;charset=UTF-8")	
+	public ModelAndView succes(String orderNo,HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ClientProtocolException, IOException {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 			
 		String id = (String) session.getAttribute("id");//아이디
-		int userNo = cashService.selectUserId(id);	//회원 번호 찾기
+		int userNo = cashService.selectUserNo(id);	//회원 번호 찾기
 		User user = new User();
 		
 		user.setIntUserNo(userNo);//회원번호		
@@ -149,7 +148,7 @@ public class CashController {
 			
 
 			String id = pgInfo.getUser_id();
-			int userNo = cashService.selectUserId(id);	//회원 번호 찾기
+			int userNo = cashService.selectUserNo(id);	//회원 번호 찾기
 			
 			BigInteger CashNo = cashService.selectOrderNo();	// 최근 결재번호
 			
@@ -211,6 +210,18 @@ public class CashController {
 		mav.addObject("listCnt", listCnt);
 		mav.addObject("pagination", pagination);
 		mav.setViewName("/user/cash/CashList");
+		return mav;
+	}
+	
+	//결제 취소
+	@RequestMapping(value="/Cancel")
+	@ResponseBody
+	public ModelAndView cancel(@RequestBody PGInfo pgInfo,HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		
+		String order = pgInfo.getOrder_no();
+		int orderNo = Integer.parseInt(order);
+		cashService.updateState(11);//TCashRequestMst에서 결제 처리 취소 update
 		return mav;
 	}
 }

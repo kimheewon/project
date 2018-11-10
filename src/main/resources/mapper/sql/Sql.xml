@@ -31,8 +31,9 @@
 	
 	<!-- 아이디 중복체크 -->	
 	<select id="selectId"  resultType="Member">
-		select   UserId AS StrUserid	
-		from TUser where UserId = #{id} 
+		SELECT   UserId AS StrUserid	
+		FROM TUser
+		WHERE UserId = #{id} 
 	</select>
 	
 	<!-- 회원가입 -->	

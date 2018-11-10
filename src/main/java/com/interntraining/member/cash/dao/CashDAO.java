@@ -37,8 +37,8 @@ public class CashDAO {
 	}
 
 	//회원 번호 찾기
-	public int selectUserId(String id) {
-		return sqlSession.selectOne("cashSql.selectUserId",id);
+	public int selectUserNo(String id) {
+		return sqlSession.selectOne("cashSql.selectUserNo",id);
 	}
 
 	//Cash 충전
