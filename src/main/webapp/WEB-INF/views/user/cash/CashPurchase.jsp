@@ -69,13 +69,13 @@
 	           <tr>
 	               <td id="cashChoosStyle"><input type="radio" value="1000" name="cashChoose">&nbsp;&nbsp;1,000 원</td>
 	               <td id="cashChoosStyle"><input type="radio" value="5000" name="cashChoose">&nbsp;&nbsp;5,000 원</td>
-	               <td id="cashChoosStyle"><input type="radio" value="10000" name="cashChoose">&nbsp;&nbsp;1,0000 원</td>
+	               <td id="cashChoosStyle"><input type="radio" value="10,000" name="cashChoose">&nbsp;&nbsp;1,0000 원</td>
 	           </tr>
 	           <tr>
-                   <td id="cashChoosStyle"><input type="radio" value="50000" name="cashChoose">&nbsp;&nbsp;50,000 원</td>
-                   <td id="cashChoosStyle"><input type="radio" value="100000" name="cashChoose">&nbsp;&nbsp;100,000 원</td>
+                   <td id="cashChoosStyle"><input type="radio" value="50,000" name="cashChoose">&nbsp;&nbsp;50,000 원</td>
+                   <td id="cashChoosStyle"><input type="radio" value="100,000" name="cashChoose">&nbsp;&nbsp;100,000 원</td>
                    <td id="cashChoosStyle"><input type="radio" value="직접입력" name="cashChoose" >&nbsp;&nbsp;직접입력&nbsp;&nbsp;
-                        <input type="number" name="cashWrite" id="cashWrite" value=""style=" width: 40%;">&nbsp;&nbsp;원</td>
+                        <input type="text" name="cashWrite" id="cashWrite" value="" onkeyup="inputNumberFormat(this)" style="width: 40%;text-align: right;">&nbsp;&nbsp;원</td>
                </tr>
 	        </table>
 	        <br><br><br><br>
@@ -154,6 +154,20 @@ $(document).ready(function() { // 해당 페이지 Loading 후,
 	   });
 }); 
 
+function inputNumberFormat(obj) {
+    obj.value = comma(uncomma(obj.value));
+}
+ 
+//콤마
+function comma(str) {
+    str = String(str);
+    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+}
+//콤마풀기
+function uncomma(str) {
+    str = String(str);
+    return str.replace(/[^\d]+/g, '');
+}
 	   
 </script>
 </html>

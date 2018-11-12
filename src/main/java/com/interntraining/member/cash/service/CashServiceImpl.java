@@ -57,10 +57,7 @@ public class CashServiceImpl implements CashService{
 	String return_url;
 	
 	@Value("${callback.url}")
-	String callback_url;
-	
-	@Value("${cancel.url}")
-	String cancel_url;
+	String callback_url;	
 	
 	@Value("${url}")
 	String url;
@@ -99,7 +96,6 @@ public class CashServiceImpl implements CashService{
 		sendObject.setCustom_parameter(custom_parameter);
 		sendObject.setReturn_url(return_url);
 		sendObject.setCallback_url(callback_url);
-		sendObject.setCancel_url(cancel_url);
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Host", "testpgapi.payletter.com");
@@ -229,11 +225,16 @@ public class CashServiceImpl implements CashService{
 		List<PGInfo> cash= cashDAO.selectCashPaging(pagination);
 		for(int i=0; i<cash.size(); i++) {
 			String kind = cash.get(i).getPgcode();
-			if(kind.equals("mobile")) {
-				cash.get(i).setStrPurchasekind("휴대폰");
+			if(kind == null) {
+				cash.get(i).setStrPurchasekind("");
 			}
-			else if(kind.equals("creditcard")){
-				cash.get(i).setStrPurchasekind("신용카드");
+			else{
+				if(kind.equals("mobile")) {
+					cash.get(i).setStrPurchasekind("휴대폰");
+				}
+				else if(kind.equals("creditcard")){
+					cash.get(i).setStrPurchasekind("신용카드");
+				}				
 			}
 		}
 		return cash;

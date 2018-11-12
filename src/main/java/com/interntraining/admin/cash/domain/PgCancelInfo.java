@@ -14,6 +14,9 @@ public class PgCancelInfo {
 	private String cancel_date;
 	private int	code;
 	private String message;
+	private BigInteger intCashNo;
+	private String strPurchaseStae;
+	private int intUserNo;
 	
 	public String getPgcode() {
 		return pgcode;
@@ -75,7 +78,23 @@ public class PgCancelInfo {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
-
-	
+	public BigInteger getIntCashNo() {
+		return intCashNo;
+	}
+	public void setIntCashNo(BigInteger intCashNo) {
+		this.intCashNo = intCashNo;
+	}
+	public String getStrPurchaseStae() {
+		return strPurchaseStae;
+	}
+	public void setStrPurchaseStae(String strPurchaseStae) {
+		this.strPurchaseStae = strPurchaseStae;
+	}
+	public int getIntUserNo() {
+		return intUserNo;
+	}
+	public void setIntUserNo(int intUserNo) {
+		this.intUserNo = intUserNo;
+	}
+		
 }

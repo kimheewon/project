@@ -73,7 +73,8 @@ public class CashController {
 	public ModelAndView purchase(@RequestParam("money") String money, @RequestParam("pgcode") String pgcode, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ClientProtocolException, IOException {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		
-		int amount = Integer.parseInt(money);
+		String strMoney = money.replaceAll(",", "");		
+		int amount = Integer.parseInt(strMoney);
 		PGInfo sendObject = new PGInfo();
 		User user = (User) session.getAttribute("login");
 		String name = user.getStrUserName();	//이름		
@@ -159,7 +160,7 @@ public class CashController {
 			pgInfo.setIntorderNo(orderNo);
 			pgInfo.setIntUserNo(userNo);	//회원 번호
 			pgInfo.setIntCashAmt(pgInfo.getAmount());//캐시		
-			pgInfo.setStrPurchaseState("결제완료");//상태
+			pgInfo.setStrPurchaseState("결제 완료");//상태
 			pgInfo.setCode("0");//성공
 			
 			cashService.insertPgResult(pgInfo);	//DB에  결제 결과값 저장		
@@ -172,8 +173,7 @@ public class CashController {
 		}
 		else {	//실패
 			mav.addObject("message","결제 정보가 다름");
-			mav.addObject("code",1);		
-			
+			mav.addObject("code",1);					
 		}
 		
 		
@@ -213,15 +213,6 @@ public class CashController {
 		return mav;
 	}
 	
-	//결제 취소
-	@RequestMapping(value="/Cancel")
-	@ResponseBody
-	public ModelAndView cancel(@RequestBody PGInfo pgInfo,HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
-		
-		String order = pgInfo.getOrder_no();
-		int orderNo = Integer.parseInt(order);
-		cashService.updateState(11);//TCashRequestMst에서 결제 처리 취소 update
-		return mav;
-	}
+	
+	
 }

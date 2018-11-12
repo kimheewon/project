@@ -28,6 +28,9 @@
 				,UserSex   		AS StrUserSex
 				,UserDate  		AS DateUserDate
 				,UserGrade 		AS StrUserGrade
+				,UserPostCode   AS StrPostCode
+                ,UserAdress     AS StrAdress
+                ,UserAdress2    AS StrAdress2
 		FROM   	 TUser			
 		WHERE	 UserNo = #{intUserNo} 
 	

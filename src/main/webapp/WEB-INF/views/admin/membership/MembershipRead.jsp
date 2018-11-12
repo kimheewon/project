@@ -92,7 +92,7 @@
                     <div style="float:right">
 	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href='/AdminCash/AdminCashList?userNo=${intUserNo}'">결제 내역</button>
 	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href=''">캐시 내역</button>
-	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href=''">캐시 지급</button>
+	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href='/AdminCash/AdminCashPaymentForm?userNo=${intUserNo}'">캐시 지급</button>
 	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href=''">캐시 회수</button>     
                     </div>
                     <div class="clearfix"></div>
@@ -158,11 +158,25 @@
                         <input id="grade" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;border: none; box-shadow: none;" type="text" name="grade" value="${member.strUserGrade} 회원">
                         </div>
                       </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 13px; color: #00003f;">주소</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">                                               
+                        <c:choose>
+                            <c:when test ="${! empty member.strPostCode}">
+                                <input id="adress" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;border: none; box-shadow: none;" type="text" name="adress" value="(${member.strPostCode}) ${member.strAdress} ${member.strAdress2}">
+                            </c:when>
+                            <c:otherwise>
+                                <input id="adress" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;border: none; box-shadow: none;" type="text" name="adress" value="">                                
+                            </c:otherwise>
+                        </c:choose>
+                        
+                        </div>
+                      </div>
                       
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3" style="margin-left: 43%;">
-                          <button class="btn btn-primary" style="font-family: Bareun;" type="button" onclick="location.href='/Membership/MembershipList'">취소</button>
+                          <button class="btn btn-primary" style="font-family: Bareun;" type="button" onclick="location.href='/Membership/MembershipList'">목록</button>
                           <button type="submit" style="font-family: Bareun;" class="btn btn-success" id="adminEnroll">수정</button>
                         </div>
                       </div>

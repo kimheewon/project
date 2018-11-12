@@ -33,8 +33,8 @@
         margin: 0 auto;     /* 가로로 중앙에 배치 */
         padding-top: 3%;   /* 테두리와 내용 사이의 패딩 여백 */
     }
-  #cashChoosStyle{  
-        padding-top: 1%;
+#cashChoosStyle{  
+    padding-top: 1%;
     font-size: 18px;
     padding-left: 2%;
 }

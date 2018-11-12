@@ -74,7 +74,8 @@
                         <td style="padding-top: 1%;padding-bottom: 1%;">${cash.transaction_date}</td>
 		                <td style="padding-top: 1%;padding-bottom: 1%;">${cash.intCashNo}</td>
 		                <td style="padding-top: 1%;padding-bottom: 1%;">${cash.strPurchaseState}</td>
-		                <td style="padding-top: 1%;padding-bottom: 1%;"><fmt:formatNumber value="${cash.amount}" pattern="#,###" />&nbsp;원</td>
+		                <td style="padding-top: 1%;padding-bottom: 1%;">
+		                  <c:if test="${cash.amount ne 0}"><fmt:formatNumber value="${cash.amount}" pattern="#,###" />&nbsp;원</c:if></td>
 		                <td style="padding-top: 1%;padding-bottom: 1%;"><fmt:formatNumber value="${cash.intCashAmt}" pattern="#,###" />&nbsp;코인</td>
 		                <td style="padding-top: 1%;padding-bottom: 1%;">${cash.strPurchasekind}</td>	
 		            </tr>   

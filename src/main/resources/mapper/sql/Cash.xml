@@ -112,7 +112,7 @@
    <!--  상태 update-->
    <update id="updateState">
         UPDATE TCashRequestMst
-        SET State = '결재 완료'
+        SET State = '결제 완료'
         WHERE  OrderNo = #{orderNo}
    </update>
    
@@ -130,6 +130,49 @@
 				,Tid        AS tid
 				,PayAmt     AS amount
 		FROM TCashMst
-		WHERE CashNo =  #{cashNo}
+		WHERE CashNo = #{cashNo}
     </select>
+    
+    <!-- DB에 결제 취소 내역 update -->
+    <update id="updateCancel">
+	    UPDATE  TCashMst
+	    SET     PurchaseState = #{strPurchaseStae} 
+	           ,CancelDate = #{cancel_date}
+	    WHERE   CashNo = #{intCashNo}
+    </update>
+    
+    <!-- 사용자 번호 가져오기 -->
+    <select id="selectCancelUserNo" resultType="int">
+	    SELECT  UserNo
+	    FROM    TCashMst
+	    WHERE   CashNo = #{cashNo}
+    </select>
+    
+    <!-- 사용자 캐시AMT update -->
+    <update id="updateCancelUserCashMst">
+        UPDATE TUserCashMst
+        SET    TotalOutCashAmt = #{intTotalOutCashAmt}
+              ,TotalCashAmt = #{intTotalCashAmt}
+        WHERE  UserNo = #{intUserNo}
+    </update>
+    
+     <!-- 사용자 번호 가져오기 -->
+    <select id="selectUserCashAmt" resultType="int">
+        SELECT  TotalCashAmt
+        FROM    TUserCashMst
+        WHERE   UserNo = #{userNo}
+    </select>
+    
+    <!-- 사유 테이블에 입력 -->
+    <insert id="insertMemo">
+        INSERT INTO TReasonMsgMst (UserNo, Type, Reason, No ,AdminNo)
+                       VALUES(#{intUserNo}, #{intType}, #{strMemo}, #{intNumber},#{intAdminNo})    
+    </insert>
+    
+     <!-- DB에  결제 결과값 저장 -->
+    <insert id="insertCashMstPayment">
+        INSERT INTO TCashMst (CashNo, UserNo, CashAmt, PurchaseState, TransactionDate)
+                       VALUES(#{intNumber}, #{intUserNo}, #{intAmount}, #{strState}, #{strDate})    
+    </insert>
+    
 </mapper>

@@ -256,7 +256,7 @@
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3" style="margin-left: 43%;">
-                          <button class="btn btn-primary" type="button" onclick="location.href='/Membership/MembershipList'">취소</button>
+                          <button class="btn btn-primary" type="button" onclick="location.href='/Membership/MembershipRead?intUserNo=${intUserNo}'">취소</button>
                           <button type="submit" class="btn btn-success" id="update">완료</button>
                         </div>
                       </div>
