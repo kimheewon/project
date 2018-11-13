@@ -80,7 +80,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2 style="font-family: Bareun;font-weight: bold;">캐시 내역 상세보기</h2>
+                    <h2 style="font-family: Bareun;font-weight: bold;">결제 내역 상세보기</h2>
                     <button class="btn btn-app" type="button" onclick="location.href='/Membership/MembershipRead?intUserNo=${userNo}'"
                                                                 id="editBtn" data-placement="top" data-toggle="tooltip" data-original-title="상세보기" style="margin-right: 0.5%;">                                                       
                         <i class="fa fa-newspaper-o" style="color: #a55663;"></i>
@@ -95,7 +95,7 @@
                         <col width = "15%"/>
                         <col width = "*"/>
                         <col width = "10%"/>
-                        <col width = "12%"/>
+                        <col width = "14%"/>
                         <col width = "12%"/>
                         <col width = "12%"/>
                         <col width = "12%"/>
@@ -105,7 +105,7 @@
                           <th style="text-align: center; padding-left: 1.5%; color:#00003f" class="sorting_desc">#</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">일&nbsp;&nbsp;시</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">번&nbsp;&nbsp;호</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">내&nbsp;&nbsp;역</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">상&nbsp;&nbsp;태</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">금&nbsp;&nbsp;액</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">캐&nbsp;&nbsp;시</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">결제&nbsp;수단</th>
@@ -120,7 +120,16 @@
                                 <td style="text-align: center; color:#3b5976;" class="sorting">${status.count}</td>         
                                 <td style="text-align: center; color:#3b5976;">${cash.transaction_date}</td>
                                 <td style="text-align: center; color:#3b5976;">${cash.intCashNo}</td>
-                                <td style="text-align: center; color:#3b5976;">${cash.strPurchaseState}</td>
+                                <td style="text-align: center; color:#3b5976;">
+	                                <c:choose>
+	                                   <c:when test="${cash.strReason ne '0'}">	                                       
+	                                      <span style="line-height: 22px;" data-toggle="tooltip" data-placement="bottom" data-original-title="${cash.strReason}">${cash.strPurchaseState}(${cash.strAdminId})</span>  
+	                                   </c:when>
+		                                <c:otherwise>
+		                                   ${cash.strPurchaseState}
+		                                </c:otherwise>
+	                                </c:choose>	                               
+                                </td>
                                 <td style="text-align: center; color:#3b5976;">
                                     <c:if test="${cash.amount ne 0}"><fmt:formatNumber value="${cash.amount}" pattern="#,###" />&nbsp;원</c:if></td>
                                 <td style="text-align: center; color:#3b5976;"><fmt:formatNumber value="${cash.intCashAmt}" pattern="#,###" />&nbsp;코인</td>
@@ -180,8 +189,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
 ga('create', 'UA-23581568-13', 'auto');
 ga('send', 'pageview');
-
-   
 
 
  

@@ -91,9 +91,9 @@
                   <div class="x_title">
                     <div style="float:right">
 	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href='/AdminCash/AdminCashList?userNo=${intUserNo}'">결제 내역</button>
-	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href=''">캐시 내역</button>
+	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href=''">캐시 사용 내역</button>
 	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href='/AdminCash/AdminCashPaymentForm?userNo=${intUserNo}'">캐시 지급</button>
-	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href=''">캐시 회수</button>     
+	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href='/AdminCash/AdminCashRecallForm?userNo=${intUserNo}'">캐시 회수</button>     
                     </div>
                     <div class="clearfix"></div>
                   </div>

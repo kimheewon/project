@@ -46,7 +46,7 @@
 
 <div class="container_t">
     <h3 style="color:#2c3e50;margin-left: 6%;">캐시 구매(결제 완료)</h3><br><br><br>
-        <p style="text-align: center;"><img style="width: 10%;" src="/img/piggy-bank.png"></p>
+        <p style="text-align: center;"><img style="width: 13%;" src="/img/piggy-bank3.png"></p>
         <br><p style="text-align: center;font-size: 30px; font-weight: bold; color: #2c3e50; font-family: TmonTium;"><span style="color:#d11d53">충전</span>이 <span style="color:#d11d53">완료 </span>되었습니다.</p>
         <br><br>
         <form action="/Cash/Purchase" method="post">
@@ -78,6 +78,7 @@
             <li> 캐시는 구매 후 <span style="color: #d11d53;">현금으로 환불이 되지 않습니다.</span></li>
             <li> 결제 후 바로 캐시로 적립됩니다.</li>
             <li> 적립된 캐시는 <span style="color: #d11d53;">내 정보 > 캐시 내역</span>에서 확인할 수 있습니다.</li>
+            <li> 문의전화 : 010-3337-5421 (오전 9시 ~ 오후 6시. 주말 및 공휴일 제외)</li>
         </ul>
         </div>
         <br><br><br>  
@@ -86,54 +87,6 @@
 </body>
 <jsp:include page="../../bottom.jsp" flush="true"/>
 <script type="text/javascript">
-$(document).ready(function() { // 해당 페이지 Loading 후, 
-    $("input[name=cashWrite]").attr("disabled",true); 
-
-    $("input[name=cashChoose]").click(function(){ // 라디오버튼 클릭 이벤트 
-        if($("input[name=cashChoose]:checked").val() == "직접입력"){ 
-            $("input[name=cashWrite]").attr("disabled",false); 
-            document.getElementById("money").value = "";
-            
-        } else { 
-            $("input[name=cashWrite]").attr("value",""); 
-            // 만약에 기존 textbox에 데이터가 입력된 상태에서 테스트1에 갔다가 다시 돌아왔을때를 위해 초기화 
-            $("input[name=cashWrite]").attr("disabled",true); 
-            // 테스트1 라디오를 클릭하면 비활성화 
-            document.getElementById("money").value = $("input[name=cashChoose]:radio:checked").val();
-        } 
-    });
-    
-       $("#cashWrite").change(function(){ // 라디오버튼 클릭 이벤트 
-            document.getElementById("money").value = document.getElementById("cashWrite").value;  
-            
-        });
-        
-       $("input[name=purchase]").on("click",function(){
-           if($("#money").val() == ""){
-               alert("충전할 금액을 선택하세요.");
-               return;
-           }
-           else{
-               $.ajax({   
-                   type:"POST",
-                   url:"/Cash/Purchase",   
-                   dataType:"json",// JSON/html
-                   async: false,
-                   data:{ 
-                       "money": $("#money").val(),
-                       "pgcode":$(this).val()
-                   },          
-                   success: function(responseData){//통신이 성공적으로 이루어 졌을때 받을 함수                     
-                       var url = responseData.onlineUrl;                   
-                       window.open(url, "결제", "width=500, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" ); 
-                   }
-                   
-    
-               }); //--ajax
-           }
-       });
-}); 
-
        
 </script>
 </html>

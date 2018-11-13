@@ -13,7 +13,7 @@
 <meta charset="EUC-KR">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <title>Cash Purchase</title>
 <script src="/js/jquery-1.12.3.min.js"></script>
 <script src="/js/jquery-ui.min.js"></script>
@@ -61,7 +61,7 @@
                     <th style="padding-bottom: 1%;padding-top: 1%;">#</th>
                     <th style="padding-bottom: 1%;padding-top: 1%;">일&nbsp;&nbsp;시</th>
                     <th style="padding-bottom: 1%;padding-top: 1%;">번&nbsp;&nbsp;호</th>
-                    <th style="padding-bottom: 1%;padding-top: 1%;">내&nbsp;&nbsp;역</th>
+                    <th style="padding-bottom: 1%;padding-top: 1%;">상&nbsp;&nbsp;태</th>
                     <th style="padding-bottom: 1%;padding-top: 1%;">금&nbsp;&nbsp;액</th>
                     <th style="padding-bottom: 1%;padding-top: 1%;">캐&nbsp;&nbsp;시</th>
                     <th style="padding-bottom: 1%;padding-top: 1%;">결제수단</th>
@@ -73,9 +73,19 @@
 		                <td style="padding-top: 1%;padding-bottom: 1%;">${cash.intNum}</td>
                         <td style="padding-top: 1%;padding-bottom: 1%;">${cash.transaction_date}</td>
 		                <td style="padding-top: 1%;padding-bottom: 1%;">${cash.intCashNo}</td>
-		                <td style="padding-top: 1%;padding-bottom: 1%;">${cash.strPurchaseState}</td>
 		                <td style="padding-top: 1%;padding-bottom: 1%;">
-		                  <c:if test="${cash.amount ne 0}"><fmt:formatNumber value="${cash.amount}" pattern="#,###" />&nbsp;원</c:if></td>
+		                    <c:choose>
+	                            <c:when test="${cash.strReason ne '0'}">                                        
+	                                <span data-toggle="tooltip" data-placement="bottom" data-original-title="${cash.strReason}">${cash.strPurchaseState}</span> 
+	                            </c:when>
+	                            <c:otherwise>
+	                                ${cash.strPurchaseState}
+	                            </c:otherwise>
+                            </c:choose> 
+		                </td>
+		                <td style="padding-top: 1%;padding-bottom: 1%;">
+		                  <c:if test="${cash.amount ne 0}"><fmt:formatNumber value="${cash.amount}" pattern="#,###" />&nbsp;원</c:if>
+		                </td>
 		                <td style="padding-top: 1%;padding-bottom: 1%;"><fmt:formatNumber value="${cash.intCashAmt}" pattern="#,###" />&nbsp;코인</td>
 		                <td style="padding-top: 1%;padding-bottom: 1%;">${cash.strPurchasekind}</td>	
 		            </tr>   
@@ -119,6 +129,9 @@
 </div>        
 </body>
 <jsp:include page="../../bottom.jsp" flush="true"/>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 function fn_paging(curPage) {
     var f = document.frm;
@@ -126,6 +139,8 @@ function fn_paging(curPage) {
     f.action = "/Cash/CashList?curPage="+curPage;
     f.submit();    
 }
-       
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
 </script>
 </html>

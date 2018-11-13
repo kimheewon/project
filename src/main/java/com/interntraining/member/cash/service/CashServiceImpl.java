@@ -227,13 +227,16 @@ public class CashServiceImpl implements CashService{
 			String kind = cash.get(i).getPgcode();
 			if(kind == null) {
 				cash.get(i).setStrPurchasekind("");
+				cash.get(i).setAmount(0);
 			}
 			else{
 				if(kind.equals("mobile")) {
 					cash.get(i).setStrPurchasekind("휴대폰");
+					cash.get(i).setStrReason("0");
 				}
 				else if(kind.equals("creditcard")){
 					cash.get(i).setStrPurchasekind("신용카드");
+					cash.get(i).setStrReason("0");
 				}				
 			}
 		}

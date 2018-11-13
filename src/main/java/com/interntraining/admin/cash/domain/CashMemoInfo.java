@@ -14,6 +14,12 @@ public class CashMemoInfo {
 	private String strDate; 	//날짜
 	private String strCash;
 	private int intAdminNo;
+	private String strUserId;
+	
+	private int intItemNo;
+	private int intItemCount;
+	private int intTotalPrice;
+
 	
 	public int getIntUserNo() {
 		return intUserNo;
@@ -71,6 +77,30 @@ public class CashMemoInfo {
 	}
 	public void setIntAdminNo(int intAdminNo) {
 		this.intAdminNo = intAdminNo;
+	}
+	public String getStrUserId() {
+		return strUserId;
+	}
+	public void setStrUserId(String strUserId) {
+		this.strUserId = strUserId;
+	}
+	public int getIntItemNo() {
+		return intItemNo;
+	}
+	public void setIntItemNo(int intItemNo) {
+		this.intItemNo = intItemNo;
+	}
+	public int getIntItemCount() {
+		return intItemCount;
+	}
+	public void setIntItemCount(int intItemCount) {
+		this.intItemCount = intItemCount;
+	}
+	public int getIntTotalPrice() {
+		return intTotalPrice;
+	}
+	public void setIntTotalPrice(int intTotalPrice) {
+		this.intTotalPrice = intTotalPrice;
 	}
 	
 	

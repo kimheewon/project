@@ -44,6 +44,9 @@ public class PGInfo {
 	private String strPurchasekind;	//결제 종류
 	private int intNum;
 	private int intorderNo;	//orderNo
+	private String strReason;
+	private String strAdminId;
+	private int intAdminNo;
 	
 	public String getPgcode() {
 		return pgcode;
@@ -274,7 +277,25 @@ public class PGInfo {
 	public void setIntorderNo(int intorderNo) {
 		this.intorderNo = intorderNo;
 	}
-
+	public String getStrReason() {
+		return strReason;
+	}
+	public void setStrReason(String strReason) {
+		this.strReason = strReason;
+	}
+	public String getStrAdminId() {
+		return strAdminId;
+	}
+	public void setStrAdminId(String strAdminId) {
+		this.strAdminId = strAdminId;
+	}
+	public int getIntAdminNo() {
+		return intAdminNo;
+	}
+	public void setIntAdminNo(int intAdminNo) {
+		this.intAdminNo = intAdminNo;
+	}
+	
 	
 	
 	

@@ -49,34 +49,6 @@
     padding-bottom: 1.5%;
 }
     
-.sorting{
-    vertical-align: middle !important;
-    text-align: center !important;
-    color: #3b5976 !important;
-    font-size: 14.5pt !important;
-    font-weight: bold !important;
-    height: 35px !important;
-   } 
-
-#btnStyle{
-    background-color: white;
-    color: #2c3e50;
-    font-family: Bareun;
-    border: 1px solid #2c3e50;
-}
-
-#btnStyle:hover{
-    background-color: #2c3e50;
-    color: white;
-    box-shadow: 0 2px #999;
-}
-#btnStyle:active {
-    background-color: #2c3e50;
-    color: white;
-    box-shadow: 0 2px #666;
-    transform: translateY(4px);
-}
-
 </style>
 </head>
 
@@ -90,7 +62,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3 style="font-family: Bareun;color: #605183;font-weight: bold;">${id}&nbsp;&nbsp;회원님의,</h3>
+                <h3 style="font-family: Bareun;color: #605183;font-weight: bold;"></h3>
               </div>
 
               <div class="title_right">
@@ -108,51 +80,70 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2 style="font-family: Bareun;font-weight: bold;">캐시 지급</h2>
-                    <button class="btn btn-app" type="button" onclick="location.href='/Membership/MembershipRead?intUserNo=${userNo}'"
-                                                                id="editBtn" data-placement="top" data-toggle="tooltip" data-original-title="상세보기" style="margin-right: 0.5%;">                                                       
-                        <i class="fa fa-newspaper-o" style="color: #a55663;"></i>
-                    </button>
+                    <h2 style="font-family: Bareun;font-weight: bold;">결제 내역 상세보기</h2>
+                    
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content" style="font-size:18px;margin-top: 6%; margin-bottom: 6%;"> 
-                    <p style="text-align: center;"><img style="width: 13%;" src="/img/piggy-bank2.png"></p>                   
-                    <br><br><br>
-                    <form action="/AdminCash/AdminCashPayment" method="POST" name="info">
-                        <input type="hidden" value="${userNo}" id="intUserNo" name="intUserNo">
-                        <input type="hidden" value="${id}" id="strUserId" name="strUserId">                         
-	                    <table id="datatable" class="table table-bordered" id="AdminList" style="font-family: Bareun; width: 55%;margin-left: auto;margin-right: auto;">
-		                    <colgroup>
-		                        <col width = "25%"/>
-		                        <col width = "*"/>                        
-		                    </colgroup>
-		                    <tbody>
-		                        <tr>
-		                            <td style="text-align: center; color:#3b5976;" class="sorting">보유 캐시액 *</td>         
-		                            <td style="padding-left: 3%; font-size: 15pt; color:#3b5976;vertical-align: middle;"><fmt:formatNumber value="${cash}" pattern="#,###" />&nbsp;&nbsp;코인</td>
-		                        </tr>
-		                        <tr>
-	                                <td style="text-align: center; color:#3b5976;" class="sorting">지급 캐시액 *</td>         
-	                                <td style="font-size: 15pt;color:#3b5976;vertical-align: middle;">
-									    <p style="padding-left: 3%;margin-bottom: 0px;">
-									        <input id="intAmount" class="form-control col-md-7 col-xs-12" style="background-color: white;width:50%;text-align: right;
-									            font-size: 20px; color: #d11d53;" type="text" onkeyup="inputNumberFormat(this)"  name="strCash" id="strCash" >&nbsp;&nbsp;코인</p></td>
-	                            </tr>
-	                            <tr>
-	                                <td style="text-align: center; color:#3b5976;" class="sorting">사&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;유 *</td>         
-	                                <td style="text-align: center; vertical-align:middle;color:#3b5976;">
-		                                <p style="padding-left: 3%;padding-right: 3%;margin-bottom: 0px;">
-		                                    <input id="strMemo" class="form-control col-md-7 col-xs-12" style="background-color: white;font-size: 18px;" type="text" name="strMemo" maxlength="44" placeholder="최대 44자까지 작성 가능합니다."> 
-		                                </p>
-	                                </td>
-	                            </tr>
-		                    </tbody>
-	                    </table>
-                        <br><br><br>
-	                    <p style="text-align: center">
-	                        <button class="btn btn-primary" style="font-family: Bareun;" type="submit" id="btnStyle" >지급하기</button>
-	                    </p>
-                    </form>
+                  <div class="x_content" style="font-size:15px">
+                    
+                    <table id="datatable" class="table table-striped table-bordered" id="AdminList" style="font-family: Bareun;">
+                    <colgroup>
+                        <col width = "6%"/>
+                        <col width = "12%"/>
+                        <col width = "17%"/>                        
+                        <col width = "*"/>
+                        <col width = "15%"/>
+                        <col width = "10%"/>
+                        <col width = "10%"/>
+                        <col width = "9%"/>
+                        <col width = "8%"/>
+                    </colgroup>
+                      <thead>
+                        <tr>
+                          <th style="text-align: center; padding-left: 1.5%; color:#00003f" class="sorting_desc">#</th>                         
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">아&nbsp;이&nbsp;디</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">일&nbsp;&nbsp;시</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">번&nbsp;&nbsp;호</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">상&nbsp;&nbsp;태</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">금&nbsp;&nbsp;액</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">캐&nbsp;&nbsp;시</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">결제&nbsp;수단</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">결제&nbsp;취소</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      
+                        <c:forEach var="cash" items="${cash}" varStatus="status">
+
+                            <tr>
+                                <td style="text-align: center; color:#3b5976;" class="sorting">${status.count}</td> 
+                                <td style="text-align: center; color:#3b5976;">${cash.user_id}</td>        
+                                <td style="text-align: center; color:#3b5976;">${cash.transaction_date}</td>
+                                <td style="text-align: center; color:#3b5976;">${cash.intCashNo}</td>
+                                <td style="text-align: center; color:#3b5976;">
+	                                <c:choose>
+	                                   <c:when test="${cash.strReason ne '0'}">	                                       
+	                                      <span style="line-height: 22px;" data-toggle="tooltip" data-placement="bottom" data-original-title="${cash.strReason}">${cash.strPurchaseState}(${cash.strAdminId})</span> 
+	                                   </c:when>
+		                                <c:otherwise>
+		                                   ${cash.strPurchaseState}
+		                                </c:otherwise>
+	                                </c:choose>	                               
+                                </td>
+                                <td style="text-align: center; color:#3b5976;">
+                                    <c:if test="${cash.amount ne 0}"><fmt:formatNumber value="${cash.amount}" pattern="#,###" />&nbsp;원</c:if></td>
+                                <td style="text-align: center; color:#3b5976;"><fmt:formatNumber value="${cash.intCashAmt}" pattern="#,###" />&nbsp;코인</td>
+                                <td style="text-align: center; color:#3b5976;">${cash.strPurchasekind}</td>
+                                <td style="text-align: center; color:#3b5976;padding-top: 0.5%;padding-bottom: 0.5%;">
+                                    <c:if test="${cash.strPurchaseState eq '결제 완료'}">
+                                             <button class="btn btn-primary" style="font-family: Bareun;margin-bottom: 0px;background-color: white;color:#2c3e50;padding-top: 0.7%;padding-bottom: 0.7%;" type="button"
+                                    onclick="location.href='/AdminCash/CashAllCancel?cashNo=${cash.intCashNo}'">취소</button>
+                                    </c:if>
+                                </td>   
+                            </tr>   
+                        </c:forEach>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
@@ -198,21 +189,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
 ga('create', 'UA-23581568-13', 'auto');
 ga('send', 'pageview');
-
-function inputNumberFormat(obj) {
-    obj.value = comma(uncomma(obj.value));
-}
- 
-//콤마
-function comma(str) {
-    str = String(str);
-    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-}
-//콤마풀기
-function uncomma(str) {
-    str = String(str);
-    return str.replace(/[^\d]+/g, '');
-}
 
 
  

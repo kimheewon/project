@@ -33,10 +33,10 @@
     <insert id="insertPgResult">
         INSERT INTO TCashMst (CashNo, UserNo, PayAmt, CashAmt, PurchaseState
                              ,Tid, Code, Message, UserId, Cid, OrderNo
-                             ,Pgcode, TransactionDate, Card_info, Payhash)
+                             ,Pgcode, TransactionDate, Card_info, Payhash, RemainCashAmt)
                        VALUES(#{intCashNo}, #{intUserNo}, #{amount}, #{intCashAmt}, #{strPurchaseState}
                              ,#{tid}, #{code}, #{message}, #{user_id}, #{cid}, #{intorderNo}
-                             ,#{pgcode}, #{transaction_date}, #{card_info}, #{payhash})    
+                             ,#{pgcode}, #{transaction_date}, #{card_info}, #{payhash}, #{intCashAmt})    
     </insert>
 
     <!-- 회원 번호 찾기 -->
@@ -72,14 +72,34 @@
     
     <!-- 캐시 내역 가져오기 -->
     <select id="selectCashList" resultType="PGInfo">
-        SELECT   CashNo             AS intCashNo
-                ,TransactionDate    AS transaction_date
-                ,PurchaseState      AS strPurchaseState
-                ,PayAmt             AS amount
-                ,CashAmt            AS intCashAmt
-                ,Pgcode             AS pgcode
-        FROM    TCashMst
-        WHERE   UserNo = #{userNo}
+        SELECT   c.CashNo             AS intCashNo
+                ,c.TransactionDate    AS transaction_date
+                ,c.PurchaseState      AS strPurchaseState
+                ,c.PayAmt             AS amount
+                ,c.CashAmt            AS intCashAmt
+                ,c.Pgcode             AS pgcode
+                ,r.Reason             AS strReason
+                ,r.AdminNo            AS intAdminNo
+        FROM    TCashMst c LEFT JOIN TReasonMsgMst r
+        ON      c.CashNo = r.No
+        WHERE   c.UserNo = #{userNo}
+        ORDER BY CashNo DESC
+    </select>
+    
+    <!-- 전체 결제 내역 가져오기 -->
+    <select id="selectAllCashList" resultType="PGInfo">
+        SELECT   c.CashNo             AS intCashNo
+                ,c.TransactionDate    AS transaction_date
+                ,c.PurchaseState      AS strPurchaseState
+                ,c.PayAmt             AS amount
+                ,c.CashAmt            AS intCashAmt
+                ,c.Pgcode             AS pgcode
+                ,r.Reason             AS strReason
+                ,c.UserNo             AS intUserNo
+                ,c.UserId             AS user_id
+                ,r.AdminNo            AS intAdminNo
+        FROM    TCashMst c LEFT JOIN TReasonMsgMst r
+        ON      c.CashNo = r.No
         ORDER BY CashNo DESC
     </select>
     
@@ -87,14 +107,16 @@
     <select id="selectCashPaging" resultType="PGInfo">
         SELECT TOP 25 resultTable.*
         FROM   (SELECT TOP (25 * #{curPage}) ROW_NUMBER() OVER (ORDER BY CashNo DESC)    AS rownumber
-                                                            ,CashNo             AS intCashNo
-											                ,TransactionDate    AS transaction_date
-											                ,PurchaseState      AS strPurchaseState
-											                ,PayAmt             AS amount
-											                ,CashAmt            AS intCashAmt
-											                ,Pgcode             AS pgcode
-				FROM TCashMst
-				WHERE UserNo = #{intUserNo} ) AS resultTable
+                                                            ,c.CashNo             AS intCashNo
+                                                            ,c.TransactionDate    AS transaction_date
+                                                            ,c.PurchaseState      AS strPurchaseState
+                                                            ,c.PayAmt             AS amount
+                                                            ,c.CashAmt            AS intCashAmt
+                                                            ,c.Pgcode             AS pgcode
+                                                            ,r.Reason             AS strReason
+                FROM TCashMst c left join TReasonMsgMst r
+                on c.CashNo = r.No
+                WHERE c.UserNo = #{intUserNo} ) AS resultTable
         WHERE rownumber > (#{curPage} - 1) * 25
     </select>
     
@@ -156,7 +178,7 @@
         WHERE  UserNo = #{intUserNo}
     </update>
     
-     <!-- 사용자 번호 가져오기 -->
+     <!-- 사용자 현재 보유 캐시 가져오기 -->
     <select id="selectUserCashAmt" resultType="int">
         SELECT  TotalCashAmt
         FROM    TUserCashMst
@@ -166,13 +188,34 @@
     <!-- 사유 테이블에 입력 -->
     <insert id="insertMemo">
         INSERT INTO TReasonMsgMst (UserNo, Type, Reason, No ,AdminNo)
-                       VALUES(#{intUserNo}, #{intType}, #{strMemo}, #{intNumber},#{intAdminNo})    
+                       VALUES(#{intUserNo}, #{intType}, #{strMemo}, #{intNumber}, #{intAdminNo})    
     </insert>
     
      <!-- DB에  결제 결과값 저장 -->
     <insert id="insertCashMstPayment">
-        INSERT INTO TCashMst (CashNo, UserNo, CashAmt, PurchaseState, TransactionDate)
-                       VALUES(#{intNumber}, #{intUserNo}, #{intAmount}, #{strState}, #{strDate})    
+        INSERT INTO TCashMst (CashNo, UserNo, CashAmt, PurchaseState, TransactionDate
+                             ,UserId, RemainCashAmt)
+                       VALUES(#{intNumber}, #{intUserNo}, #{intAmount}, #{strState}, #{strDate}
+                             ,#{strUserId}, #{intAmount})    
     </insert>
+    
+    <!-- 관리자 아이디 -->
+    <select id="selectAdminId" resultType="String">        
+        SELECT AdminId
+        FROM TAdmin
+        WHERE AdminNo = #{intAdminNo}
+    </select>
+    
+    <!-- 회원 목록 가져오기 -->
+    <select id="selectCashMember" resultType="User">
+    SELECT   u.UserNo            AS intUserNo
+            ,u.UserId            AS strUserid
+			,c.TotalInCashAmt    AS intTotalInCashAmt
+			,c.TotalOutCashAmt   AS intTotalOutCashAmt
+			,c.TotalCashAmt      AS intTotalCashAmt
+			,u.UserGrade         AS strUserGrade
+	FROM TUserCashMst c LEFT JOIN TUser u
+	ON c.UserNo = u.UserNo
+    </select>
     
 </mapper>

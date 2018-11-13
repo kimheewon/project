@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import com.interntraining.admin.cash.domain.CashInfo;
 import com.interntraining.admin.cash.domain.CashMemoInfo;
 import com.interntraining.admin.cash.domain.PgCancelInfo;
 import com.interntraining.member.cash.domain.PGInfo;
@@ -80,4 +81,45 @@ public class AdminCashDAO {
 		sqlSession.insert("cashSql.insertCashMstPayment", memo);
 	}
 
+	//cash 충전(회원번호, 충전액)
+	public void updateUserCashMst(User userNew) {
+		sqlSession.update("cashSql.updateUserCashMst", userNew);		
+	}
+
+	//전체 결제 내역 가져오기
+	public List<PGInfo> selectAllCashList() {
+		return sqlSession.selectList("cashSql.selectAllCashList");
+	}
+
+	//관리자 아이디
+	public String selectAdminId(int intAdminNo) {
+		return sqlSession.selectOne("cashSql.selectAdminId", intAdminNo);
+	}
+
+	//회원 목록 가져오기
+	public List<User> selectCashMember() {
+		return sqlSession.selectList("cashSql.selectCashMember");
+	}
+
+	//캐시 회수 번호 가져오기
+	public int selectRecallItemNo(String recallItemName) {
+		return sqlSession.selectOne("itemSql.selectRecallItemNo",recallItemName);
+	}
+
+	//아이템 구매 테이블 insert
+	public void insertItemPurchaseRecall(CashMemoInfo memo) {
+		sqlSession.insert("itemSql.insertItemPurchaseRecall", memo);
+	}
+
+	//remaincash가 있는 리스트 가져오기
+	public List<CashInfo> selectCashAllList(int userNo) {
+		return sqlSession.selectList("itemSql.selectCashAllList",userNo);
+	}
+
+	//구매 매핑테이블에 insert
+	public void insertRecallMapping(List<CashInfo> mapping) {
+		sqlSession.insert("itemSql.insertRecallMapping", mapping);
+	}
+
+	
 }

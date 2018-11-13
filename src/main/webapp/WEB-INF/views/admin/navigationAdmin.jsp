@@ -128,7 +128,18 @@
                       </li>
                       </c:if>
                   </c:forEach>  
-           
+                  
+                  <c:forEach var="item" items="${items}">
+                    <c:if test="${6 eq item.intAuthItemNo}">
+                      <li><a style=" font-size: 14px;"><i class="fa fa-desktop"></i> 결제 내역 관리<span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="/AdminCash/AdminCashAllList">결재 목록</a></li>
+                          <li><a href="/AdminCash/AdminCashAllList">캐시 사용 목록</a></li>
+                          <li><a href="/AdminCash/AdminCashMember">캐시 지급/회수</a></li>                       
+                        </ul>
+                      </li>
+                      </c:if>
+                  </c:forEach>  
                   
                 </ul>
               </div>
