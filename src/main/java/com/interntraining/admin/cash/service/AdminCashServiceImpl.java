@@ -4,8 +4,10 @@ import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -89,10 +91,6 @@ public class AdminCashServiceImpl implements AdminCashService {
 		cancelInfo.setClient_id(client_id);
 		cancelInfo.setIp_addr(ip_addr);
 		
-		//cancelInfo.setPgcode("creditcard");
-		//cancelInfo.setUser_id("lion1234");	//사용자 id
-		//cancelInfo.setTid("ttestintern-201811107195589");
-		//cancelInfo.setAmount(1000);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Host", "testpgapi.payletter.com");
 		headers.add("Authorization", "PLKEY NUQyQ0RGNTBEODQ5NTg4OTc1MEQyNTdCRjY5NTRFNjg=");
@@ -299,42 +297,72 @@ public class AdminCashServiceImpl implements AdminCashService {
 	@Override
 	public void insertRecallMapping(CashMemoInfo memo) {
 		List<CashInfo> list = adminCashDAO.selectCashAllList(memo.getIntUserNo());	//remaincash가 있는 리스트 가져오기
-		List<CashInfo> mapping = new ArrayList<CashInfo>();
-		CashInfo info = new CashInfo();
+		//List<CashInfo> mapping = new ArrayList<CashInfo>();			
+		//Map<String, Object> param = new HashMap<String, Object>();
+		CashInfo map = new CashInfo();
 		int cash = memo.getIntAmount();	//차감할 캐시
 		int sum = 0;
 		int remain = 0;
 
 		
 		for(int i=0; i<list.size(); i++) {
-			sum = + list.get(i).getIntRemainCash();	
-			info.setIntUserNo(memo.getIntUserNo());
-			info.setIntPurchaseNo(memo.getIntNumber());			
+		//for(int i=list.size()-1; i>-1; i--) {
+			sum = sum + list.get(i).getIntRemainCash();	
+			map.setIntUserNo(memo.getIntUserNo());
+			map.setIntPurchaseNo(memo.getIntNumber());			
 			if(sum < cash) {
 				BigInteger cashNo = list.get(i).getIntCashNo();
-				info.setIntCashNo(cashNo);				
+				map.setIntCashNo(cashNo);				
 				remain=0;
-				info.setIntRemainCash(remain);
-				mapping.add(info);
+				map.setIntRemainCash(remain);
+				adminCashDAO.insertEachRecallMapping(map);
+				adminCashDAO.updateCashRemain(map);		//남은돈 update
+				//mapping.add(info);
 			}
 			else if(sum == cash){
 				BigInteger cashNo = list.get(i).getIntCashNo();
-				info.setIntCashNo(cashNo);	
+				map.setIntCashNo(cashNo);	
 				remain=0;
-				info.setIntRemainCash(remain);
-				mapping.add(info);
+				map.setIntRemainCash(remain);
+				adminCashDAO.insertEachRecallMapping(map);
+				adminCashDAO.updateCashRemain(map);		//남은돈 update
+				//mapping.add(info);
+				//param.put("mapping", info);
 				break;
 			}else {
 				BigInteger cashNo = list.get(i).getIntCashNo();
-				info.setIntCashNo(cashNo);	
+				map.setIntCashNo(cashNo);	
 				remain = sum - cash;
-				info.setIntRemainCash(remain);
-				mapping.add(info);
+				map.setIntRemainCash(remain);
+				adminCashDAO.insertEachRecallMapping(map);
+				adminCashDAO.updateCashRemain(map);		//남은돈 update
+				//mapping.add(info);
+				//param.put("mapping", info);
 				break;
 			}
 		}
 		
-		adminCashDAO.insertRecallMapping(mapping);
+		//param.put("list", mapping);
+		//adminCashDAO.insertRecallMapping(mapping);
+		
+	}
+
+	//회원 계좌 정보 update
+	@Override
+	public void updateUserCashOutMst(CashMemoInfo memo) {
+		User user = new User();
+		user = adminCashDAO.selectUserCashInfo(memo.getIntUserNo());	//유저의 기존 보유 캐시 정보 가져오기
+	
+		int cash = memo.getIntAmount();	//충전금액
+		int totalInCash = user.getIntTotalOutCashAmt() + cash;
+		int totalCash = user.getIntTotalCashAmt() - cash;
+		
+		User userNew = new User();
+		userNew.setIntUserNo(memo.getIntUserNo());//no
+		userNew.setIntTotalOutCashAmt(totalInCash);//out
+		userNew.setIntTotalCashAmt(totalCash);//total
+				
+		adminCashDAO.updateUserCashOutMst(userNew);		//cash 회수(회원번호, 충전액)
 		
 	}
 	

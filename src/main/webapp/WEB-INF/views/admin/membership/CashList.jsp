@@ -15,7 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>회원 목록 리스트</title>
+    <title>상세보기 - 결제 내역</title>
 
      <!-- Bootstrap -->
     <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -136,8 +136,10 @@
                                 <td style="text-align: center; color:#3b5976;">${cash.strPurchasekind}</td>
                                 <td style="text-align: center; color:#3b5976;padding-top: 0.5%;padding-bottom: 0.5%;">
                                     <c:if test="${cash.strPurchaseState eq '결제 완료'}">
+                                        <c:if test="${cash.intCashAmt eq cash.intRemainCashAmt}">
                                              <button class="btn btn-primary" style="font-family: Bareun;margin-bottom: 0px;background-color: white;color:#2c3e50;padding-top: 0.7%;padding-bottom: 0.7%;" type="button"
                                     onclick="location.href='/AdminCash/CashCancel?cashNo=${cash.intCashNo}'">취소</button>
+                                        </c:if>
                                     </c:if>
                                 </td>   
                             </tr>   

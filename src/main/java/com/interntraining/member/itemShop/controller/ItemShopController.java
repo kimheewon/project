@@ -15,6 +15,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.interntraining.admin.product.domain.ProductInfo;
 import com.interntraining.member.board.domain.Pagination;
+import com.interntraining.member.itemShop.domain.ItemShopInfo;
 import com.interntraining.member.itemShop.domain.PaginationItem;
 import com.interntraining.member.itemShop.service.ItemShopService;
 
@@ -77,7 +78,10 @@ public class ItemShopController {
 	public ModelAndView ItemPurchaseForm(int itemNo,HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		
-		//아이템 번호로 아이템 정보 가져오기
+		ItemShopInfo item = itemShopService.selectItemInfo(itemNo);		//아이템 번호로 아이템 정보 가져오기
+		//회원목록에서 배송지 정보 가져오기
+		mav.addObject("item", item);
+		mav.setViewName("/user/itemShop/ItemPurchase");
 		return mav;
 		}
 }

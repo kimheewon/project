@@ -116,7 +116,7 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content" style="font-size:18px;margin-top: 6%; margin-bottom: 6%;"> 
-                    <p style="text-align: center;"><img style="width: 13%;" src="/img/trash.png"></p>                   
+                    <p style="text-align: center;"><img style="width: 13%;" src="/img/trash1.png"></p>                   
                     <br><br><br>
                     <form action="/AdminCash/AdminCashRecall" method="POST" name="info">
                         <input type="hidden" value="${userNo}" id="intUserNo" name="intUserNo">

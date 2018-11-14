@@ -1,0 +1,182 @@
+@charset "EUC-KR";
+@font-face{font-family:'Bareun'; src:url('/font/BareunDotumOTF1.otf')}
+@font-face{font-family:'candy'; src:url('/font/THE_candybar.ttf')}
+.container_t {    
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 70%;
+    margin: 0 auto;     /* 가로로 중앙에 배치 */
+    padding-top: 3%;   /* 테두리와 내용 사이의 패딩 여백 */
+}
+
+#itemTable{
+	margin-bottom: 1rem;
+    width: 90%;
+    margin: auto;
+    border: 1px solid #88887e;
+    text-align: center;
+    font-family: Bareun;
+    font-size: 14pt;
+}
+
+#itemTable thead tr th{
+	font-size: 14pt;
+    background-color: #dedec4;
+    color: #2c3e50;
+    height: 50px;
+   /* border:1px solid #d3d3cf; */
+}
+
+#pItemNoStyle{
+	margin-bottom: 0;
+    text-align: left;
+    color: gray;
+    font-size: 14pt;
+}
+
+#pItemNameStyle{
+	margin-bottom: 0;
+    text-align: left;
+    color: #2c3e50;
+    font-weight: bold;
+    font-size: 15pt;
+	
+}
+
+#priceStyle{
+	border-bottom: 1px solid #aeaea7;
+    font-size: 14pt;
+    
+}
+
+#price{
+	width: 50%;
+    text-align: center;
+    border: 0px;
+    
+	}
+
+#totalPrice{
+	width: 30%;
+    text-align: center;
+    border: 0px;
+    font-weight: bold;
+    color: #b13862;
+}
+
+#deliverTable{
+    margin-bottom: 1rem;
+    width: 90%;
+    margin: auto;
+    border: 1px solid #88887e;
+    font-family: Bareun;
+    font-size: 13pt;
+}
+/* Custom labels: the container */
+.checkcontainer {
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 17px;
+    -webkit-user-select: none; /* Chrome, Opera, Safari */
+    -moz-user-select: none; /* Firefox 2+ */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none; /* Standard syntax */
+}
+
+/* Hide the browser's default checkbox */
+.checkcontainer input {
+    position: absolute;
+      opacity: 0;
+cursor: pointer;}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.checkcontainer:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkcontainer input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.checkcontainer input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkcontainer .checkmark:after {
+    left: 10px;
+    top: 6px;
+    width: 7px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/* Create a custom radio button */
+.radiobtn{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.checkcontainer:hover input ~ .radiobtn{
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.checkcontainer input:checked ~ .radiobtn{
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.radiobtn:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.checkcontainer input:checked ~ .radiobtn:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.checkcontainer .radiobtn:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}

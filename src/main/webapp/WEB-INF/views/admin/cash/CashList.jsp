@@ -136,8 +136,10 @@
                                 <td style="text-align: center; color:#3b5976;">${cash.strPurchasekind}</td>
                                 <td style="text-align: center; color:#3b5976;padding-top: 0.5%;padding-bottom: 0.5%;">
                                     <c:if test="${cash.strPurchaseState eq '결제 완료'}">
+                                         <c:if test="${cash.intCashAmt eq cash.intRemainCashAmt}">
                                              <button class="btn btn-primary" style="font-family: Bareun;margin-bottom: 0px;background-color: white;color:#2c3e50;padding-top: 0.7%;padding-bottom: 0.7%;" type="button"
                                     onclick="location.href='/AdminCash/CashAllCancel?cashNo=${cash.intCashNo}'">취소</button>
+                                        </c:if>
                                     </c:if>
                                 </td>   
                             </tr>   

@@ -77,6 +77,7 @@
                 ,c.PurchaseState      AS strPurchaseState
                 ,c.PayAmt             AS amount
                 ,c.CashAmt            AS intCashAmt
+                ,c.RemainCashAmt      AS intRemainCashAmt
                 ,c.Pgcode             AS pgcode
                 ,r.Reason             AS strReason
                 ,r.AdminNo            AS intAdminNo
@@ -93,6 +94,7 @@
                 ,c.PurchaseState      AS strPurchaseState
                 ,c.PayAmt             AS amount
                 ,c.CashAmt            AS intCashAmt
+                ,c.RemainCashAmt      AS intRemainCashAmt
                 ,c.Pgcode             AS pgcode
                 ,r.Reason             AS strReason
                 ,c.UserNo             AS intUserNo
@@ -217,5 +219,13 @@
 	FROM TUserCashMst c LEFT JOIN TUser u
 	ON c.UserNo = u.UserNo
     </select>
+    
+     <!-- Cash 회수 -->
+    <update id="updateUserCashOutMst">    
+        UPDATE TUserCashMst
+        SET    TotalOutCashAmt = #{intTotalOutCashAmt}
+              ,TotalCashAmt = #{intTotalCashAmt}
+        WHERE  UserNo = #{intUserNo}
+    </update>
     
 </mapper>

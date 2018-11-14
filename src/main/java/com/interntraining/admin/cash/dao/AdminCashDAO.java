@@ -2,6 +2,7 @@ package com.interntraining.admin.cash.dao;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,10 +116,24 @@ public class AdminCashDAO {
 	public List<CashInfo> selectCashAllList(int userNo) {
 		return sqlSession.selectList("itemSql.selectCashAllList",userNo);
 	}
-
+/*
 	//구매 매핑테이블에 insert
 	public void insertRecallMapping(List<CashInfo> mapping) {
 		sqlSession.insert("itemSql.insertRecallMapping", mapping);
+	}
+*/
+	public void insertEachRecallMapping(CashInfo map) {
+		sqlSession.insert("itemSql.insertRecallMapping", map);		
+	}
+
+	//남은돈 update
+	public void updateCashRemain(CashInfo map) {
+		sqlSession.update("itemSql.updateCashRemain", map);
+	}
+
+	//cash 회수(회원번호, 충전액)
+	public void updateUserCashOutMst(User userNew) {
+		sqlSession.update("cashSql.updateUserCashOutMst", userNew);		
 	}
 
 	

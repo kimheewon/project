@@ -91,7 +91,8 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 13px; color: #00003f;">캐시금액 <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="number" id="intItemPrice" name="intItemPrice"class="form-control col-md-7 col-xs-12" required="required" >
+                                                <input type="text" id="strPrice" name="strPrice" class="form-control col-md-7 col-xs-12" required="required" onkeyup="inputNumberFormat(this)">
+                                             
                                             </div>                                           
                                         </div>
                                         <div class="form-group">
@@ -289,7 +290,21 @@ ga('send', 'pageview');
         });     
     });
 
-    
+    function inputNumberFormat(obj) {
+        obj.value = comma(uncomma(obj.value));
+    }
+     
+    //콤마
+    function comma(str) {
+        str = String(str);
+        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+    }
+    //콤마풀기
+    function uncomma(str) {
+        str = String(str);
+        return str.replace(/[^\d]+/g, '');
+    }
+ 
     //이미지 미리보기
     function readURL(input) {
  

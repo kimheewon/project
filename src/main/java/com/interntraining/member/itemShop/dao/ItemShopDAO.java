@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.interntraining.admin.product.domain.ProductInfo;
 import com.interntraining.member.board.domain.Pagination;
+import com.interntraining.member.itemShop.domain.ItemShopInfo;
 import com.interntraining.member.itemShop.domain.PaginationItem;
 
 @Repository("itemShopDAO")
@@ -36,6 +37,11 @@ public class ItemShopDAO {
 	//검색시 아이템 전체 목록 개수
 	public List<ProductInfo> selectAllItemSearch(Pagination pagination) {
 		return sqlSession.selectList("productSql.selectAllItemSearch", pagination);
+	}
+
+	//아이템 번호로 아이템 정보 가져오기
+	public ItemShopInfo selectItemInfo(int itemNo) {
+		return sqlSession.selectOne("productSql.selectItemInfo", itemNo);
 	}
 }
 

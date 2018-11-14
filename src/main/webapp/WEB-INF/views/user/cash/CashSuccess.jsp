@@ -66,8 +66,7 @@
                 <tr>
                    <td style="font-size: 21px;text-align: center;background-color: #3a5269; color: white;height: 55px;font-family: Bareun;">현재 보유 캐시</td>
                    <td style="font-size: 21px;color: #282a2d; padding-left: 3%;">
-                    <fmt:formatNumber value="${result.intTotalCashAmt}" pattern="#,###" />&nbsp;코인</td>
-              
+                    <fmt:formatNumber value="${result.intTotalCashAmt}" pattern="#,###" />&nbsp;코인</td>              
                 </tr>            
             </table>
             <br><br><br><br>         

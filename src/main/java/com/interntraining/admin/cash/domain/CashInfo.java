@@ -10,7 +10,6 @@ public class CashInfo {
 	private int intRemainCash;
 	private BigInteger intPurchaseNo;
 	
-	
 	public int getIntUserNo() {
 		return intUserNo;
 	}

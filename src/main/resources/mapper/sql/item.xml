@@ -24,16 +24,24 @@
     <!-- remaincash가 있는 리스트 가져오기 -->
     <select id="selectCashAllList" resultType="CashInfo">
         SELECT CashNo           AS intCashNo
-             , RemainCashAmt    AS intRemainCash
+              ,RemainCashAmt    AS intRemainCash
 		FROM TCashMst
 		WHERE UserNo = #{userNo} AND RemainCashAmt NOT IN(0)
     </select>
     
     <!-- 구매 매핑테이블에 insert -->
-    <insert id="insertRecallMapping" parameterType="CashInfo">
-     <foreach collection="list" item="mapping" >
+    <insert id="insertRecallMapping">
         INSERT INTO TCashUsedDtl(UserNo, CashNo, PurchaseNo, RemainCashAmt)
-                          VALUES(#{mapping.intUserNo}, #{mapping.intCashNo}, #{mapping.intPurchaseNo}, #{mapping.intRemainCash})
-     </foreach>
+        VALUES (#{intUserNo}, #{intCashNo}, #{intPurchaseNo}, #{intRemainCash})
+                   
     </insert>
+    
+    <!-- 남은돈 update -->
+    <update id="updateCashRemain">
+	    UPDATE TCashMst
+		SET RemainCashAmt = #{intRemainCash}
+		WHERE UserNo = #{intUserNo} AND CashNo = #{intCashNo}
+    
+    </update>
+    
 </mapper>

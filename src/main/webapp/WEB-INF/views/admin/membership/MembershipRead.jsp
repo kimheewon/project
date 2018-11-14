@@ -168,11 +168,15 @@
                             <c:otherwise>
                                 <input id="adress" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;border: none; box-shadow: none;" type="text" name="adress" value="">                                
                             </c:otherwise>
-                        </c:choose>
-                        
+                        </c:choose>                        
                         </div>
                       </div>
-                      
+                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 13px; color: #d11d53;">보유 캐시</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12" style="padding-top: 8px;padding-left: 20px;color: #d11d53;font-weight: bold;">                                               
+                        <fmt:formatNumber value="${member.intTotalCashAmt}" pattern="#,###" />&nbsp;코인                        
+                        </div>
+                      </div>
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3" style="margin-left: 43%;">

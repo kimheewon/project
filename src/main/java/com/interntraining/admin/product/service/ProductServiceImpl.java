@@ -25,6 +25,10 @@ public class ProductServiceImpl implements ProductService{
 	//상품 DB에 저장
 	@Override
 	public void insertProduct(ProductInfo productInfo) {
+		String price = productInfo.getStrPrice();
+		String strPrice = price.replaceAll(",", "");	
+		int intPrice = Integer.parseInt(strPrice);
+		productInfo.setIntItemPrice(intPrice);			
 		productDAO.insertProduct(productInfo);		
 	}
 

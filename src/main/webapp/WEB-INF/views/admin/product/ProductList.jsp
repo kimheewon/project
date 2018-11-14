@@ -112,7 +112,7 @@
                                 <td style="text-align: center; color:#3b5976;">${list.strItemName}</td>
                                 <td style="text-align: center; color:#3b5976;">
                                     <fmt:formatNumber value="${list.intItemPrice}" pattern="#,###" />원</td>
-                                <td style="text-align: center; color:#3b5976;">${list.strAdminName}</td>
+                                <td style="text-align: center; color:#3b5976;">${list.strAdminId}</td>
                                 <td style="text-align: center; color:#3b5976;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.dateItemDate}"/></td>
                                 <td style="text-align: center; color:#3b5976;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.dateUpdateItemDate}"/></td>
                                 <td style="text-align: center; color:#3b5976;padding-top: 0.2%; padding-bottom: 0.2%;">

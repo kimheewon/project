@@ -7,32 +7,36 @@
 
 	<!-- 회원 목록 가져오기 -->
 	<select id="selectAll" resultType="MembershipInfo">
-        SELECT	 UserNo	        AS intUserNo      
-				,UserId	        AS StrUserId      
-				,UserName       AS StrUserName
-				,UserPhone      AS StrUserPhone
-				,UserDate       AS DateUserDate
-				,UserGrade      AS StrUserGrade
-		FROM   	 TUser
-		ORDER BY UserNo DESC				
+        SELECT   u.UserNo           AS intUserNo      
+                ,u.UserId           AS StrUserId      
+                ,u.UserName       AS StrUserName
+                ,u.UserPhone      AS StrUserPhone
+                ,u.UserDate       AS DateUserDate
+                ,u.UserGrade      AS StrUserGrade
+                ,c.TotalCashAmt   AS intTotalCashAmt
+        FROM     TUser u LEFT JOIN TUserCashMst c
+        ON u.UserNo = c.UserNo
+        ORDER BY u.UserNo DESC  			
 	
 	</select>
 
 	<!-- 회원 정보 가져오기 -->
 	<select id="selectMember" resultType="MembershipInfo">
-		SELECT	 UserId			AS StrUserid
-				,UserPw 		AS StrUserPw
-				,UserName		AS StrUserName
-				,UserPhone 	 	AS StrUserPhone
-				,UserEmail   	AS StrUserEmail
-				,UserSex   		AS StrUserSex
-				,UserDate  		AS DateUserDate
-				,UserGrade 		AS StrUserGrade
-				,UserPostCode   AS StrPostCode
-                ,UserAdress     AS StrAdress
-                ,UserAdress2    AS StrAdress2
-		FROM   	 TUser			
-		WHERE	 UserNo = #{intUserNo} 
+		SELECT	 u.UserId		AS StrUserid
+				,u.UserPw 		AS StrUserPw
+				,u.UserName		AS StrUserName
+				,u.UserPhone 	AS StrUserPhone
+				,u.UserEmail   	AS StrUserEmail
+				,u.UserSex   	AS StrUserSex
+				,u.UserDate  	AS DateUserDate
+				,u.UserGrade 	AS StrUserGrade
+				,u.UserPostCode AS StrPostCode
+                ,u.UserAdress   AS StrAdress
+                ,u.UserAdress2  AS StrAdress2
+                ,c.TotalCashAmt   AS intTotalCashAmt
+		FROM   	 TUser u LEFT JOIN TUserCashMst c	
+		ON u.UserNo = c.UserNo	
+		WHERE	 u.UserNo = #{intUserNo} 
 	
 	</select>
 	

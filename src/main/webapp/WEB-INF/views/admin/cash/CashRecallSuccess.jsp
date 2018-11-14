@@ -15,7 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>회원 목록 리스트</title>
+    <title>캐시 회수 완료</title>
 
      <!-- Bootstrap -->
     <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -35,25 +35,62 @@
     <!-- Custom Theme Style -->
     <link href="/build/css/custom.min.css" rel="stylesheet">
 
-	<style>
-	th {
-    text-align: center;
-    }
-	
-	</style>
-  </head>
+<style>
+@font-face{font-family:'Bareun'; src:url('/font/BareunDotumOTF1.otf')}
+@font-face{font-family:'candy'; src:url('/font/THE_candybar.ttf')}
+@font-face{font-family:'TmonTium'; src:url('/font/TmonTium.ttf')}
+
+#editBtn{
+    height: 25px;
+    min-width: 40px;
+    margin: 0 0 0 0;
+    float: right;
+    padding-top: 0.5%;
+    padding-bottom: 1.5%;
+}
+    
+.sorting{
+    vertical-align: middle !important;
+    text-align: center !important;
+    color: #3b5976 !important;
+    font-size: 14.5pt !important;
+    font-weight: bold !important;
+    height: 35px !important;
+   } 
+
+#btnStyle{
+    background-color: white;
+    color: #2c3e50;
+    font-family: Bareun;
+    border: 1px solid #2c3e50;
+}
+
+#btnStyle:hover{
+    background-color: #2c3e50;
+    color: white;
+    box-shadow: 0 2px #999;
+}
+#btnStyle:active {
+    background-color: #2c3e50;
+    color: white;
+    box-shadow: 0 2px #666;
+    transform: translateY(4px);
+}
+
+</style>
+</head>
 
   <body class="nav-md">
      <div class="container body">
       <div class="main_container">
-		<jsp:include page="../navigationAdmin.jsp" flush="true"/>
+        <jsp:include page="../navigationAdmin.jsp" flush="true"/>
 
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>회원 관리</h3>
+                <h3 style="font-family: Bareun;color: #605183;font-weight: bold;">${id}&nbsp;&nbsp;회원님의,</h3>
               </div>
 
               <div class="title_right">
@@ -71,54 +108,42 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>목록</h2>
-                    
+                    <h2 style="font-family: Bareun;font-weight: bold;">캐시 회수 완료</h2>
+                    <button class="btn btn-app" type="button" onclick="location.href='/Membership/MembershipRead?intUserNo=${userNo}'"
+                                                                id="editBtn" data-placement="top" data-toggle="tooltip" data-original-title="상세보기" style="margin-right: 0.5%;">                                                       
+                        <i class="fa fa-newspaper-o" style="color: #a55663;"></i>
+                    </button>
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content" style="font-size:15px">
-                    
-                    <table id="datatable" class="table table-striped table-bordered" id="AdminList">
-                    <colgroup>
-			    		<col width = "6%"/>
-			    		<col width = "*"/>
-			    		<col width = "9%"/>
-			    		<col width = "15%"/>
-			    		<col width = "15%"/>
-			    		<col width = "10%"/>
-			    		<col width = "10%"/>
-			    		<col width = "20%"/>
-			    	</colgroup>
-                      <thead>
-                        <tr>
-                          <th style="text-align: center; padding-left: 1.5%; color:#00003f" class="sorting_desc">#</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">아이디</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">이   름</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">전화번호</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">가입 일시</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">등   급</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">보유캐시</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">작   업</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      
-                        <c:forEach var="userList" items="${userList}" varStatus="status">
-
-							<tr>
-								<td style="text-align: center; color:#3b5976;" class="sorting">${status.count}</td>			
-								<td style="padding-left: 2%; color:#3b5976;">${userList.strUserId}</td>
-								<td style="text-align: center; color:#3b5976;">${userList.strUserName}</td>
-								<td style="text-align: center; color:#3b5976;">${userList.strUserPhone}</td>
-								<td style="text-align: center; color:#3b5976;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${userList.dateUserDate}"/></td>
-								<td style="text-align: center; color:#3b5976;">${userList.strUserGrade} 회원</td>
-								<td style="text-align: center; color:#3b5976;"><fmt:formatNumber value="${userList.intTotalCashAmt}" pattern="#,###" />&nbsp;코인</td>
-								<td style="text-align: center; color:#3b5976; "><a href="/Membership/MembershipRead?intUserNo=${userList.intUserNo}" style="color:#3b5976;">상세보기</a>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<a href="/Membership/MembershipUpdateForm?intUserNo=${userList.intUserNo}" style="color:#3b5976;">수정하기</a></td>
-							</tr>	
-						</c:forEach>
-                      </tbody>
+                  <div class="x_content" style="font-size:18px;margin-top: 6%; margin-bottom: 6%;"> 
+                    <p style="text-align: center;"><img style="width: 13%;" src="/img/garbage.png"></p>                   
+                    <br><br><br>
+                    <input type="hidden" value="${userNo}" id="intUserNo" name="intUserNo">
+                    <input type="hidden" value="${id}" id="strUserId" name="strUserId">                         
+                    <table id="datatable" class="table table-bordered" id="AdminList" style="font-family: Bareun; width: 55%;margin-left: auto;margin-right: auto;">
+                        <colgroup>
+                            <col width = "25%"/>
+                            <col width = "*"/>                        
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center; color:#3b5976;" class="sorting">회수한 캐시</td>         
+                                <td style="padding-left: 3%;font-size: 15pt;font-weight:bold;color:#d11d53;vertical-align: middle;">${memo.intAmount}&nbsp;코인</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; color:#3b5976;" class="sorting">보유&nbsp;&nbsp;&nbsp;&nbsp;캐시</td>         
+                                <td style="padding-left: 3%;font-size: 15pt;color:#3b5976;vertical-align: middle;">${totalCash}&nbsp;코인</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; color:#3b5976;" class="sorting">사&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;유</td>         
+                                <td style="padding-left: 3%;font-size: 15pt;vertical-align:middle;color:#3b5976;">${memo.strMemo}</td>
+                            </tr>
+                        </tbody>
                     </table>
+                    <br><br><br>
+                    <p style="text-align: center">
+                        <button class="btn btn-primary" style="font-family: Bareun;" type="button" id="btnStyle" onclick="location.href='/AdminCash/AdminCashMember'">목록으로</button>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -165,29 +190,20 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', 'UA-23581568-13', 'auto');
 ga('send', 'pageview');
 
-	function checkFunction(no){
-		 $.ajax({   
-				type:"POST",
-				url:"/Administrator/checkItemCount",   
-				dataType:"html",// JSON/html
-				async: false,
-	          	data:{ 
-	                "no": no
-	            },
-			
-	            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-	            	
-	            	if(data==1){					//마스터
-	            		location.href="/Administrator/UpdateFrom?intAdminNo="+no;
-	             		
-	             	}
-	             	else{							//그 이외
-	             		alert("수정할 권한이 없습니다.");	
-	             	}
-	            }
-			}); //--ajax
-		
-	}
+function inputNumberFormat(obj) {
+    obj.value = comma(uncomma(obj.value));
+}
+ 
+//콤마
+function comma(str) {
+    str = String(str);
+    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+}
+//콤마풀기
+function uncomma(str) {
+    str = String(str);
+    return str.replace(/[^\d]+/g, '');
+}
 
 
  

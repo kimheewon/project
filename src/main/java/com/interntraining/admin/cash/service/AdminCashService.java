@@ -58,4 +58,7 @@ public interface AdminCashService {
 	//구매 매핑테이블에 insert
 	public void insertRecallMapping(CashMemoInfo memo);
 
+	//회원 계좌 정보 update
+	public void updateUserCashOutMst(CashMemoInfo memo);
+
 }

@@ -150,7 +150,7 @@ public class AdminCashController {
 		}		
 			
 		mav.addObject("userNo", userNo);
-		mav.setViewName("redirect:/AdminCash/AdminAllCashList");
+		mav.setViewName("redirect:/AdminCash/AdminCashAllList");
 		return mav;
 	}
 	
@@ -196,7 +196,14 @@ public class AdminCashController {
 		
 		admincashService.cashRecall(memo);	//캐시 회수(아이템 구매 테이블과 회수,지급 테이블에 insert)
 		admincashService.insertRecallMapping(memo);	//구매 매핑테이블에 insert
-		//회원 계좌 정보 update
+		admincashService.updateUserCashOutMst(memo); //회원 계좌 정보 update
+		
+		int totalCash = admincashService.selectTotalCash(memo.getIntUserNo());	//현재 보유 캐시 정보 가져오기
+		
+		mav.addObject("id", memo.getStrUserId());
+		mav.addObject("totalCash", totalCash);
+		mav.addObject("memo", memo);
+		mav.setViewName("admin/cash/CashRecallSuccess");
 		return mav;
 	}
 		

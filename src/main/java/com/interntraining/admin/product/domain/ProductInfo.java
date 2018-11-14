@@ -6,7 +6,7 @@ public class ProductInfo {
 	
 	private int 	intItemNo;			//상품번호
 	private String 	strItemName;		//아이템명
-	private String 	intItemPrice;		//가격
+	private String 	strPrice;		//가격
 	private Date	dateItemDate;		//날짜
 	private Date	dateUpdateItemDate;		//날짜
 	private int 	intAdminNo;			//관리자번호
@@ -16,7 +16,9 @@ public class ProductInfo {
     private String 	strfileUrl;			//파일위치
     private String	keyField;
     private String 	keyWord;
-
+    private int 	intDeliveryPrice;
+    private int 	intItemPrice;
+	private String 	strAdminId;
 	
 	public int getIntItemNo() {
 		return intItemNo;
@@ -30,12 +32,19 @@ public class ProductInfo {
 	public void setStrItemName(String strItemName) {
 		this.strItemName = strItemName;
 	}
-	public String getIntItemPrice() {
+		
+	public String getStrPrice() {
+		return strPrice;
+	}
+	public void setStrPrice(String strPrice) {
+		this.strPrice = strPrice;
+	}
+	public int getIntItemPrice() {
 		return intItemPrice;
 	}
-	public void setIntItemPrice(String intItemPrice) {
+	public void setIntItemPrice(int intItemPrice) {
 		this.intItemPrice = intItemPrice;
-	}	
+	}
 	public Date getDateItemDate() {
 		return dateItemDate;
 	}
@@ -90,6 +99,18 @@ public class ProductInfo {
 	}
 	public void setKeyWord(String keyWord) {
 		this.keyWord = keyWord;
+	}
+	public int getIntDeliveryPrice() {
+		return intDeliveryPrice;
+	}
+	public void setIntDeliveryPrice(int intDeliveryPrice) {
+		this.intDeliveryPrice = intDeliveryPrice;
+	}
+	public String getStrAdminId() {
+		return strAdminId;
+	}
+	public void setStrAdminId(String strAdminId) {
+		this.strAdminId = strAdminId;
 	}
 
 	

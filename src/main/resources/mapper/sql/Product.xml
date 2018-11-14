@@ -7,7 +7,7 @@
 
     <!-- 상품등록-->   
     <insert id="insertProduct">
-        INSERT INTO TItemInfoMgmt(ItemName, ItemPrice, AdminNo, FileName, FileUrl  ,FileOriName  )
+        INSERT INTO TItemInfoMgmt(ItemName, ItemPrice, AdminNo, FileName, FileUrl  ,FileOriName)
                            VALUES( #{strItemName}, #{intItemPrice}, #{intAdminNo}, #{strfileName}, #{strfileUrl}, #{strfileOriName})
     </insert>
 
@@ -17,7 +17,7 @@
                ,ItemName      AS  strItemName
                ,ItemPrice     AS  intItemPrice
                ,ItemDate      AS  dateItemDate
-               ,AdminName     AS  strAdminName
+               ,AdminId       AS  strAdminId
                ,UpdateItemDate AS  dateUpdateItemDateo
         FROM    TItemInfoMgmt   INNER JOIN   TAdmin
         ON TItemInfoMgmt.AdminNo = TAdmin.AdminNo
@@ -84,5 +84,15 @@
 				        WHERE ${keyField} LIKE '%${keyWord}%')  AS TSearch  
 		        WHERE   ItemNo NOT IN(0)  ) AS resultTable
         WHERE rownumber > (#{curPage} - 1) * 10
+    </select>
+    
+     <!-- 검색시 아이템 개수 -->
+    <select id="selectItemInfo" resultType="ItemShopInfo">
+        SELECT  ItemNo        AS  intItemNo
+               ,ItemName      AS  strItemName
+               ,ItemPrice     AS  intItemPrice
+               ,FileUrl       AS  strfileUrl
+        FROM    TItemInfoMgmt   
+        WHERE   ItemNo = #{itemNo}
     </select>
 </mapper>
