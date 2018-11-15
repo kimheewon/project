@@ -95,4 +95,16 @@
         FROM    TItemInfoMgmt   
         WHERE   ItemNo = #{itemNo}
     </select>
+    
+    <!-- 회원 정보 불러오기 -->
+    <select id="selectMemberInfo" resultType="User">
+        SELECT   UserNo       AS intUserNo
+		        ,UserName     AS strUserName
+		        ,UserPhone    AS strUserPhone
+		        ,UserPostCode AS strPostCode
+		        ,UserAdress   AS strAdress
+		        ,UserAdress2  AS strAdress2
+		FROM TUser
+		WHERE UserNo = 2
+    </select>
 </mapper>

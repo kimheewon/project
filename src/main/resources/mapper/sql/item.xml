@@ -15,7 +15,7 @@
     <!-- 아이템 구매 테이블 insert -->
     <insert id="insertItemPurchaseRecall">
         INSERT INTO TItemPurchaseMst( PurchaseNo, ItemNo, UserNo, ItemPrice, ItemCount
-                                    , TotalItemPrice, AdminNo)
+                                     ,TotalItemPrice, AdminNo)
                               VALUES( #{intNumber}, #{intItemNo}, #{intUserNo}, #{intAmount}, #{intItemCount} 
                                      ,#{intTotalPrice}, #{intAdminNo})
                     
@@ -44,4 +44,42 @@
     
     </update>
     
+    <!-- 아이템구매(아이템 구매 테이블에 insert) -->
+    <insert id="insertItemPurchase">
+        INSERT INTO TItemPurchaseMst(PurchaseNo, ItemNo, UserNo, ItemPrice, ItemCount
+                                    ,TotalItemPrice, DeliveryPrice)
+                              VALUES(#{intNumber}, #{itemNo}, #{intUserNo}, #{intItemPrice}, #{itemCount}
+                                    ,#{intItemTotalPrice}, #{intDeliveryPrice} )
+    </insert>
+    
+    <!-- 배송정보 insert -->
+    <insert id="insertDeliveryInfo">
+    INSERT INTO TDeliveryInfoMst(PurchaseNo, UserNo, UserPhone, UserPostCode, UserAdress
+                                ,UserAdress2, RequestMsg,UserName)
+                          VALUES(#{intNumber}, #{intUserNo}, #{strTel}, #{strPostcode}, #{strAddress}
+                                ,#{strAddress2}, #{strDeliverMsg}, #{strName})
+    </insert>
+    
+    <!-- 구매한 아이템 정보 가져오기 -->
+    <select id="selectPurchaseItem" resultType="ItemShopInfo">
+        SELECT   ItemNo           AS intItemNo
+		        ,ItemPrice        AS intItemPrice
+		        ,ItemCount        AS itemCount
+		        ,TotalItemPrice   AS intItemTotalPrice
+		        ,DeliveryPrice    AS intDeliveryPrice
+		FROM  TItemPurchaseMst
+		WHERE PurchaseNo = #{purchaseNo}
+    </select>
+    
+    <!-- 배송정보 가져오기 -->
+    <select id="selectDeliveryInfo" resultType="ItemShopInfo">
+        SELECT   UserName       AS strName
+                ,UserPhone      AS strTel
+		        ,UserPostCode   AS strPostcode
+		        ,UserAdress     AS strAddress
+		        ,UserAdress2    AS strAddress2
+		        ,RequestMsg     AS strDeliverMsg
+		FROM TDeliveryInfoMst
+		WHERE PurchaseNo = #{purchaseNo}
+    </select>
 </mapper>

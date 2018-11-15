@@ -1,4 +1,5 @@
 @charset "EUC-KR";
+@font-face{font-family:'TmonTium'; src:url('/font/TmonTium.ttf')}
 @font-face{font-family:'Bareun'; src:url('/font/BareunDotumOTF1.otf')}
 @font-face{font-family:'candy'; src:url('/font/THE_candybar.ttf')}
 .container_t {    
@@ -53,14 +54,14 @@
 
 #price{
 	width: 50%;
-    text-align: center;
+    text-align: right;
     border: 0px;
     
 	}
 
 #totalPrice{
 	width: 30%;
-    text-align: center;
+    text-align: right;
     border: 0px;
     font-weight: bold;
     color: #b13862;
@@ -72,8 +73,9 @@
     margin: auto;
     border: 1px solid #88887e;
     font-family: Bareun;
-    font-size: 13pt;
+    font-size: 12pt;
 }
+
 /* Custom labels: the container */
 .checkcontainer {
     position: relative;

@@ -1,5 +1,6 @@
 package com.interntraining.member.itemShop.controller;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
@@ -18,6 +20,7 @@ import com.interntraining.member.board.domain.Pagination;
 import com.interntraining.member.itemShop.domain.ItemShopInfo;
 import com.interntraining.member.itemShop.domain.PaginationItem;
 import com.interntraining.member.itemShop.service.ItemShopService;
+import com.interntraining.member.login.domain.User;
 
 @Controller
 @RequestMapping(value= "/ItemShop")
@@ -83,5 +86,70 @@ public class ItemShopController {
 		mav.addObject("item", item);
 		mav.setViewName("/user/itemShop/ItemPurchase");
 		return mav;
+	}
+	
+	//회원정보 불러오기
+	@RequestMapping(value="/MemberInfo")
+	public ModelAndView memberInfo(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		
+		int userNo = (int) session.getAttribute("no");
+		
+		User user = itemShopService.selectMemberInfo(userNo);	//회원 정보 불러오기
+		
+		mav.addObject("user",user);
+		return mav;
+	}
+	
+	//아이템 구매 페이지로 이동
+	@RequestMapping(value="/ItemPurchase",method = RequestMethod.POST)
+	public ModelAndView ItemPurchase(ItemShopInfo item, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		
+		int userNo = (int) session.getAttribute("no");
+		item.setIntUserNo(userNo);
+		
+		item = itemShopService.replace(item); 	//가격들 int로 변환
+		int nowTotalCash = itemShopService.selectTotalCash(item.getIntUserNo());	//현재 보유 캐시 정보 가져오기
+		
+		if(item.getIntItemTotalPrice() <= nowTotalCash) {
+			
+			BigInteger number = itemShopService.selectOrderNo();		//아이템 구매 번호 생성
+			item.setIntNumber(number);  //아이템 구매 번호
+			
+			itemShopService.insertItemPurchase(item);	//아이템구매(아이템 구매 테이블에 insert)
+			itemShopService.insertItemPurchaseMapping(item);	//구매 매핑테이블에 insert
+			
+			itemShopService.updateUserCashOutMst(item); //회원 계좌 정보 update
+			itemShopService.insertDeliveryInfo(item);	//배송정보 insert
+			
+			int totalCash = itemShopService.selectTotalCash(item.getIntUserNo());	//현재 보유 캐시 정보 가져오기
+			session.setAttribute("cash", totalCash);
+			
+			mav.addObject("PurchaseNo", item.getIntNumber());
+			mav.setViewName("redirect:/ItemShop/ItemPurchaseResult");
 		}
+		else {	//돈없으면 충전페이지로
+			mav.setViewName("user/itemShop/ItemPurchaseFail");
+		}
+		
+		return mav;
+	}
+	
+	//아이템 구매 결과 페이지로 이동
+	@RequestMapping(value="/ItemPurchaseResult")
+	public ModelAndView itemPurchaseResult(BigInteger PurchaseNo, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		
+		ItemShopInfo item = itemShopService.selectPurchaseItem(PurchaseNo);		//구매한 아이템 정보 가져오기
+		ItemShopInfo itemInfo = itemShopService.selectItemInfo(item.getIntItemNo());
+		ItemShopInfo deliver = itemShopService.selectDeliveryInfo(PurchaseNo);		//배송정보 가져오기
+		
+		mav.addObject("PurchaseNo", PurchaseNo);
+		mav.addObject("item", item);
+		mav.addObject("itemInfo", itemInfo);
+		mav.addObject("deliver", deliver);
+		mav.setViewName("/user/itemShop/ItemPurchaseResult");
+		return mav;
+	}
 }

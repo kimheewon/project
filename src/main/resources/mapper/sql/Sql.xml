@@ -71,7 +71,7 @@
 				,UserPostCode = #{StrPostCode}
                 ,UserAdress   = #{StrAdress}
                 ,UserAdress2  = #{StrAdress2}
-		where	 UserId 	= #{StrUserid} 
+		where	 UserId 	= #{strUserid} 
 	</select>	
 	
 	<!-- 게시판 목록에 뿌려주기 -->
