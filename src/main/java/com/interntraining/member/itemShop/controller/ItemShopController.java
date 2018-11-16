@@ -17,10 +17,13 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.interntraining.admin.product.domain.ProductInfo;
 import com.interntraining.member.board.domain.Pagination;
+import com.interntraining.member.cash.domain.PaginationCash;
 import com.interntraining.member.itemShop.domain.ItemShopInfo;
 import com.interntraining.member.itemShop.domain.PaginationItem;
 import com.interntraining.member.itemShop.service.ItemShopService;
 import com.interntraining.member.login.domain.User;
+
+import ch.qos.logback.classic.sift.MDCBasedDiscriminator;
 
 @Controller
 @RequestMapping(value= "/ItemShop")
@@ -101,7 +104,7 @@ public class ItemShopController {
 		return mav;
 	}
 	
-	//아이템 구매 페이지로 이동
+	//아이템 구매
 	@RequestMapping(value="/ItemPurchase",method = RequestMethod.POST)
 	public ModelAndView ItemPurchase(ItemShopInfo item, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
@@ -150,6 +153,76 @@ public class ItemShopController {
 		mav.addObject("itemInfo", itemInfo);
 		mav.addObject("deliver", deliver);
 		mav.setViewName("/user/itemShop/ItemPurchaseResult");
+		return mav;
+	}
+
+	//아이템 구매 내역 리스트 페이지로 이동
+	@RequestMapping(value="/ItemPurchaseList")
+	public ModelAndView itemPurchaseList(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			@RequestParam(required=false) Integer nowPage,@RequestParam(required=false)Integer nowBlock, @RequestParam(defaultValue="1") int curPage) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		
+		int userNo = (int) session.getAttribute("no");
+		
+		List<ItemShopInfo> itemList = itemShopService.selectAllPurchaseList(userNo);	//아이템 구매 리스트
+		
+		int listCnt = itemList.size();		
+		PaginationCash pagination = new PaginationCash(listCnt, curPage);		
+		pagination.setIntUserNo(userNo);
+		pagination.setPageSize(25);
+		pagination.setRangeSize(25);
+		
+		/* List */
+        List<ItemShopInfo> item = itemShopService.selectPurchasePaging(pagination);		//아이템 구매 리스트 페이징 처리
+		
+        //글 시퀀스 번호
+        int c = listCnt - (curPage-1)*25;
+        for(int i=0; i<item.size(); i++) {
+        	item.get(i).setIntNum(c--);	        
+        }
+        
+        mav.addObject("item", item);
+		mav.addObject("listCnt", listCnt);
+		mav.addObject("pagination", pagination);
+		mav.setViewName("/user/itemShop/ItemPurchaseList");
+		return mav;
+	}	
+	
+	//아이템 구매 취소 페이지로 이동
+	@RequestMapping(value="ItemPurchaseCancelForm")
+	public ModelAndView itemPurchaseCancelForm(BigInteger PurchaseNo, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		
+		ItemShopInfo item = itemShopService.selectPurchaseItem(PurchaseNo);		//구매한 아이템 정보 가져오기
+		ItemShopInfo itemInfo = itemShopService.selectItemInfo(item.getIntItemNo());
+		ItemShopInfo deliver = itemShopService.selectDeliveryInfo(PurchaseNo);		//배송정보 가져오기
+		
+		mav.addObject("PurchaseNo", PurchaseNo);
+		mav.addObject("item", item);
+		mav.addObject("itemInfo", itemInfo);
+		mav.addObject("deliver", deliver);
+		mav.setViewName("/user/itemShop/ItemPurchaseCancel");
+		return mav;
+	}
+	
+	//아이템 구매 취소
+	@RequestMapping(value="ItemPurchaseCancel",method = RequestMethod.POST)
+	public ModelAndView itemPurchaseCancel(ItemShopInfo item, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+	
+		int userNo = (int) session.getAttribute("no");
+		item.setIntUserNo(userNo);		
+		
+		itemShopService.selectPurchaseCancelMap(item);	//매핑테이블 아이템 구매 취소
+		
+		itemShopService.updateItemPurchaseCancel(item.getIntNumber());		//아이템 구매 테이블 구매 취소 update
+		
+		itemShopService.deleteDeliver(item.getIntNumber());		//배송 테이블 삭제
+		
+		itemShopService.updateUserCashInOutMst(item);		//사용자 계좌 캐시 update
+		
+		int totalCash = itemShopService.selectTotalCash(item.getIntUserNo());	//현재 보유 캐시 정보 가져오기
+		session.setAttribute("cash", totalCash);
 		return mav;
 	}
 }

@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 
-<title>아이템 구매 결과</title>
+<title>아이템 구매 취소</title>
 <script src="/js/jquery-1.12.3.min.js"></script>
 <script src="/js/jquery-ui.min.js"></script>
 <link type="text/css" rel="stylesheet" href="/css/itemPurchaseStyle.css" />
@@ -54,8 +54,10 @@ input[type="number"]::-webkit-inner-spin-button {
 
 <div class="container_t">
     <h3 style="color:#2c3e50;margin-left: 6%;"></h3><br><br><br>
-        <form action="/ItemShop/ItemPurchaseList" method="post">
-            <p style="text-align: center;font-size: 36pt;font-weight: bold;font-family: Bareun;color: #2c3e50;margin-bottom: 10%;">아이템 <span style="color: #d11d53;">구매가 완료</span> 되었습니다.</p>
+        <form action="/ItemShop/ItemPurchaseCancel" method="post">
+            <input type="hidden" name="intNumber" value="${PurchaseNo}">
+            <input type="hidden" name="intItemTotalPrice" value="${item.intItemTotalPrice}">
+            <p style="text-align: center;font-size: 36pt;font-weight: bold;font-family: Bareun;color: #2c3e50;margin-bottom: 10%;">아이템 <span style="color: #d11d53;">구매를 취소</span> 하겠습니까?</p>
             <table id="itemTable" >
                 <colgroup>
                    <col width = "*%"/>
@@ -136,7 +138,7 @@ input[type="number"]::-webkit-inner-spin-button {
             </table>
             <br><br><br><br>
             <div style="text-align: center;">
-                <button id="shopBtn" type="submit">아이템 구매 리스트</button>
+                <button id="shopBtn" type="submit">취소하기</button>
             </div>
             <br><br><br>
                  
@@ -150,9 +152,9 @@ input[type="number"]::-webkit-inner-spin-button {
 <script type="text/javascript">
 
     $(document).ready(function(){
-    	var tel = $('#strTel').val();
-    	tel = hypen(tel);
-    	$('#strTel').val(tel);
+        var tel = $('#strTel').val();
+        tel = hypen(tel);
+        $('#strTel').val(tel);
     
     });
     

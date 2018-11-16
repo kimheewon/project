@@ -21,6 +21,8 @@
                ,UpdateItemDate AS  dateUpdateItemDateo
         FROM    TItemInfoMgmt   INNER JOIN   TAdmin
         ON TItemInfoMgmt.AdminNo = TAdmin.AdminNo
+        WHERE UseFlag NOT IN(0) 
+        
         ORDER BY ItemDate DESC
     </select>
     
@@ -32,10 +34,11 @@
     </select>
 
     <!-- 상품삭제-->
-    <delete id="deleteProduct">
-        DELETE FROM TItemInfoMgmt
-        WHERE ItemNo = #{itemNo}
-    </delete>
+    <update id="deleteProduct">
+	    UPDATE TItemInfoMgmt
+		SET     UseFlag = 0
+		WHERE ItemNo = #{itemNo}
+	</update>
     
     <!-- 아이템 전체 리스트 -->
     <select id="selectAllItemList" resultType="ProductInfo">
@@ -44,7 +47,7 @@
                ,ItemPrice     AS  intItemPrice
                ,FileUrl       AS  strfileUrl
         FROM    TItemInfoMgmt   
-        WHERE   ItemNo NOT IN(0)  
+        WHERE   ItemNo NOT IN(0) AND UseFlag NOT IN(0) 
         ORDER BY ItemDate DESC
     </select>
     
@@ -57,7 +60,7 @@
 															               ,ItemPrice     AS  intItemPrice
 															               ,FileUrl       AS  strfileUrl
 		        FROM    TItemInfoMgmt   
-		        WHERE   ItemNo NOT IN(0)  ) AS resultTable
+		        WHERE   ItemNo NOT IN(0) AND UseFlag NOT IN(0) ) AS resultTable
         WHERE rownumber > (#{curPage} - 1) * 10
     </select>
     
@@ -68,7 +71,7 @@
                ,ItemPrice     AS  intItemPrice
                ,FileUrl       AS  strfileUrl
         FROM    TItemInfoMgmt   
-        WHERE   ItemNo NOT IN(0) AND ${keyField} LIKE '%${keyWord}%'
+        WHERE   ItemNo NOT IN(0) AND UseFlag NOT IN(0) AND ${keyField} LIKE '%${keyWord}%'
     </select>
     
     <!-- 검색시 아이템 전체 목록 개수 -->
@@ -82,7 +85,7 @@
 		        FROM   (SELECT *  
 				        FROM TItemInfoMgmt
 				        WHERE ${keyField} LIKE '%${keyWord}%')  AS TSearch  
-		        WHERE   ItemNo NOT IN(0)  ) AS resultTable
+		        WHERE   ItemNo NOT IN(0) AND UseFlag NOT IN(0) ) AS resultTable
         WHERE rownumber > (#{curPage} - 1) * 10
     </select>
     
@@ -105,6 +108,6 @@
 		        ,UserAdress   AS strAdress
 		        ,UserAdress2  AS strAdress2
 		FROM TUser
-		WHERE UserNo = 2
+		WHERE UserNo = #{userNo}
     </select>
 </mapper>

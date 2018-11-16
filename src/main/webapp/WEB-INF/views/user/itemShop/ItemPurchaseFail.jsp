@@ -53,12 +53,12 @@ input[type="number"]::-webkit-inner-spin-button {
 <jsp:include page="../../login/navigation.jsp" flush="true"/>
 
 <div class="container_t">
-    <h3 style="color:#2c3e50;margin-left: 6%;"></h3><br>
-        <form action="/ItemShop/" method="post">
-            <p style="text-align: center;font-size: 36pt;font-weight: bold;font-family: Bareun;color: #2c3e50;">아이템 <span style="color: #d11d53;">구매가 실패</span> 하였습니다.</p>
-            <p style="text-align: center;font-size: 28pt;font-weight: bold;font-family: Bareun;color: #d11d53;">잔액이 부족합니다.</p>
+    <h3 style="color:#2c3e50;margin-left: 6%;"></h3><br><br><br>
+        <form action="/Cash/PurchaseForm" method="post">
+            <p style="text-align: center;font-size: 30pt;font-weight: bold;font-family: Bareun;color: #2c3e50;">아이템 <span style="color: #d11d53;">구매가 실패</span> 하였습니다.</p>
+            <p style="text-align: center;font-size: 25pt;font-weight: bold;font-family: Bareun;color: #d11d53;">잔액이 부족합니다.</p>
             <p style="text-align: center;font-size: 20pt;font-weight: bold;font-family: Bareun;color: #2c3e50;margin-bottom: 6%;">코인을 <span style="color: #d11d53;">충전</span> 해주세요.</p>
-            <p style="text-align: center;"><img src="/img/crying.png" style="width: 26%;"><p>
+            <p style="text-align: center;"><img src="/img/crying.png" style="width: 20%;"><p>
             <br><br><br><br>
             <div style="text-align: center;">
                 <button id="shopBtn" type="submit">충전하기</button>

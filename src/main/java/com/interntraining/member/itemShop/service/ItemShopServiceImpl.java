@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.interntraining.admin.cash.domain.CashInfo;
 import com.interntraining.admin.product.domain.ProductInfo;
 import com.interntraining.member.board.domain.Pagination;
+import com.interntraining.member.cash.domain.PaginationCash;
 import com.interntraining.member.itemShop.dao.ItemShopDAO;
 import com.interntraining.member.itemShop.domain.ItemShopInfo;
 import com.interntraining.member.itemShop.domain.PaginationItem;
@@ -163,12 +164,12 @@ public class ItemShopServiceImpl implements ItemShopService{
 		user = itemShopDAO.selectUserCashInfo(item.getIntUserNo());	//유저의 기존 보유 캐시 정보 가져오기
 	
 		int cash = item.getIntItemTotalPrice();	//차감 코인
-		int totalInCash = user.getIntTotalOutCashAmt() + cash;
+		int totalOutCash = user.getIntTotalOutCashAmt() + cash;
 		int totalCash = user.getIntTotalCashAmt() - cash;
 		
 		User userNew = new User();
 		userNew.setIntUserNo(item.getIntUserNo());//no
-		userNew.setIntTotalOutCashAmt(totalInCash);//out
+		userNew.setIntTotalOutCashAmt(totalOutCash);//out
 		userNew.setIntTotalCashAmt(totalCash);//total
 				
 		itemShopDAO.updateUserCashOutMst(userNew);		//cash 회수(회원번호, 충전액)
@@ -229,6 +230,102 @@ public class ItemShopServiceImpl implements ItemShopService{
 	public ItemShopInfo selectDeliveryInfo(BigInteger purchaseNo) {
 		
 		return itemShopDAO.selectDeliveryInfo(purchaseNo);
+	}
+
+	//아이템 구매 리스트
+	@Override
+	public List<ItemShopInfo> selectAllPurchaseList(int userNo) {
+		return itemShopDAO.selectAllPurchaseList(userNo);
+	}
+
+	//아이템 구매 리스트 페이징 처리
+	@Override
+	public List<ItemShopInfo> selectPurchasePaging(PaginationCash pagination) {
+		List<ItemShopInfo> item = itemShopDAO.selectPurchasePaging(pagination);
+		
+		for(int i=0; i<item.size();i++) {
+			int no = item.get(i).getIntItemNo();
+			String name = itemShopDAO.selectItemName(no);	//아이템 명 찾기
+			item.get(i).setStrItemName(name);
+		}
+		return item;
+	}
+
+	//매핑테이블 아이템 구매 취소
+	@Override
+	public void selectPurchaseCancelMap(ItemShopInfo item) {
+		
+		int sum = 0;
+		int price = item.getIntItemTotalPrice();
+		int oriCash = 0;
+		int usedCash = 0;
+		
+		BigInteger cashNo;
+		BigInteger purchaseNo = item.getIntNumber();
+		
+		ItemShopInfo update = new ItemShopInfo();
+		
+		List<ItemShopInfo> mapping = itemShopDAO.selectPurchaseCancelMap(purchaseNo);
+		
+		for(int i=0; i<mapping.size(); i++) {
+			oriCash = mapping.get(i).getIntCash();	//처음 충전한 캐시
+			usedCash = oriCash - mapping.get(i).getIntRemainCash();	//사용된 캐시
+			sum = sum + usedCash;
+			cashNo = mapping.get(i).getIntNumber();
+			
+			if(sum > price) {
+				update.setIntRemainCash(sum-price);
+				update.setIntNumber(cashNo);
+				itemShopDAO.updateRemainCash(update);	//remainCash 업데이트
+				break;
+			}
+			else if(sum == price) {
+				update.setIntRemainCash(usedCash);
+				update.setIntNumber(cashNo);
+				itemShopDAO.updateRemainCash(update);	//remainCash 업데이트
+				break;
+			}
+			else {
+				update.setIntRemainCash(usedCash);
+				update.setIntNumber(cashNo);
+				itemShopDAO.updateRemainCash(update);	//remainCash 업데이트
+			}
+		}
+		
+		itemShopDAO.deleteMapping(purchaseNo);	//매핑테이블 삭제		
+	}
+
+	//아이템 구매 테이블 구매 취소 update
+	@Override
+	public void updateItemPurchaseCancel(BigInteger bigInteger) {
+		itemShopDAO.updateItemPurchaseCancel(bigInteger);
+		
+	}
+
+	//배송 테이블 삭제
+	@Override
+	public void deleteDeliver(BigInteger intNumber) {
+		itemShopDAO.deleteDeliver(intNumber);
+	}
+
+	//사용자 계좌 캐시 update
+	@Override
+	public void updateUserCashInOutMst(ItemShopInfo item) {
+				
+		User user = new User();
+		user = itemShopDAO.selectUserCashInfo(item.getIntUserNo());	//유저의 기존 보유 캐시 정보 가져오기
+	
+		int cash = item.getIntItemTotalPrice();	//차감 코인
+	
+		int totalOutCash = user.getIntTotalOutCashAmt() - cash;
+		int totalCash = user.getIntTotalCashAmt() + cash;
+		
+		User userNew = new User();
+		userNew.setIntUserNo(item.getIntUserNo());//no
+		userNew.setIntTotalOutCashAmt(totalOutCash);//out
+		userNew.setIntTotalCashAmt(totalCash);//total
+				
+		itemShopDAO.updateUserCashOutMst(userNew);		//아이템 구매 취소
 	}
 
 	

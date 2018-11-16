@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.interntraining.admin.cash.domain.CashInfo;
 import com.interntraining.admin.product.domain.ProductInfo;
 import com.interntraining.member.board.domain.Pagination;
+import com.interntraining.member.cash.domain.PaginationCash;
 import com.interntraining.member.itemShop.domain.ItemShopInfo;
 import com.interntraining.member.itemShop.domain.PaginationItem;
 import com.interntraining.member.login.domain.User;
@@ -110,5 +111,47 @@ public class ItemShopDAO {
 	public ItemShopInfo selectDeliveryInfo(BigInteger purchaseNo) {
 		return sqlSession.selectOne("itemSql.selectDeliveryInfo", purchaseNo);
 	}
+
+	//아이템 구매 리스트
+	public List<ItemShopInfo> selectAllPurchaseList(int userNo) {
+		return sqlSession.selectList("itemSql.selectAllPurchaseList", userNo);
+	}
+
+	//아이템 구매 리스트 페이징 처리
+	public List<ItemShopInfo> selectPurchasePaging(PaginationCash pagination) {
+		return sqlSession.selectList("itemSql.selectPurchasePaging",pagination);
+	}
+
+	//아이템 명 찾기
+	public String selectItemName(int no) {
+		return sqlSession.selectOne("itemSql.selectItemName", no);
+	}
+
+	//매핑테이블에서 취소할 항목 가져오기
+	public List<ItemShopInfo> selectPurchaseCancelMap(BigInteger purchaseNo) {
+		return sqlSession.selectList("itemSql.selectPurchaseCancelMap", purchaseNo);
+	}
+
+	//remainCash 업데이트
+	public void updateRemainCash(ItemShopInfo update) {
+		sqlSession.update("itemSql.updateRemainCash", update);
+	}
+
+	//매핑테이블 삭제
+	public void deleteMapping(BigInteger purchaseNo) {
+		sqlSession.delete("itemSql.deleteMapping",purchaseNo);
+	}
+
+	//아이템 구매 테이블 구매 취소 update
+	public void updateItemPurchaseCancel(BigInteger purchaseNo) {
+		sqlSession.update("itemSql.updateItemPurchaseCancel",purchaseNo);
+	}
+
+	//배송 테이블 삭제
+	public void deleteDeliver(BigInteger purchaseNo) {
+		sqlSession.delete("itemSql.deleteDeliver",purchaseNo);
+	}
+
+
 }
 

@@ -95,7 +95,7 @@
                                 <a id="submenuLink" href="/Cash/CashList" style="font-size:14px;text-decoration: none;" >캐시 내역</a>      
                             </li>
                             <li class='has-sub 'id="submenuLi">
-                                <a id="submenuLink" href="/login/myPageForm" style="font-size:14px;text-decoration: none;" >아이템 구매 내역</a>      
+                                <a id="submenuLink" href="/ItemShop/ItemPurchaseList" style="font-size:14px;text-decoration: none;" >아이템 구매 내역</a>      
                             </li>                                                
                          </ul>                                            
                     </li>

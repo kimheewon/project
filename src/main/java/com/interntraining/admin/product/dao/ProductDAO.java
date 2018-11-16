@@ -33,6 +33,6 @@ public class ProductDAO {
 
 	//상품 삭제
 	public void deleteProduct(int itemNo) {
-		sqlSession.delete("productSql.deleteProduct", itemNo);
+		sqlSession.update("productSql.deleteProduct", itemNo);
 	}
 }

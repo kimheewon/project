@@ -26,7 +26,39 @@ public class ItemShopInfo {
 	private BigInteger intNumber;
 	private int 	intItemTotalPrice;
 	private int 	intMiddlePrice;
+	private String 	strPurchaseDate;
 	
+	private String 	strReason;
+	private int 	intNum;
+	private int 	intRemainCash;
+	private int 	intCash;
+	private int 	intFlag;
+	
+	
+	public int getIntFlag() {
+		return intFlag;
+	}
+	public void setIntFlag(int intFlag) {
+		this.intFlag = intFlag;
+	}
+	public int getIntCash() {
+		return intCash;
+	}
+	public void setIntCash(int intCash) {
+		this.intCash = intCash;
+	}
+	public int getIntRemainCash() {
+		return intRemainCash;
+	}
+	public void setIntRemainCash(int intRemainCash) {
+		this.intRemainCash = intRemainCash;
+	}
+	public int getIntNum() {
+		return intNum;
+	}
+	public void setIntNum(int intNum) {
+		this.intNum = intNum;
+	}
 	public int getIntItemNo() {
 		return intItemNo;
 	}
@@ -143,6 +175,18 @@ public class ItemShopInfo {
 	}
 	public void setIntItemTotalPrice(int intItemTotalPrice) {
 		this.intItemTotalPrice = intItemTotalPrice;
+	}
+	public String getStrPurchaseDate() {
+		return strPurchaseDate;
+	}
+	public void setStrPurchaseDate(String strPurchaseDate) {
+		this.strPurchaseDate = strPurchaseDate;
+	}
+	public String getStrReason() {
+		return strReason;
+	}
+	public void setStrReason(String strReason) {
+		this.strReason = strReason;
 	}
     
     

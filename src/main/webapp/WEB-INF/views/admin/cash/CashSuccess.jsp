@@ -128,11 +128,13 @@
                         <tbody>
                             <tr>
                                 <td style="text-align: center; color:#3b5976;" class="sorting">지급한 캐시</td>         
-                                <td style="padding-left: 3%;font-size: 15pt;font-weight:bold;color:#d11d53;vertical-align: middle;">${memo.intAmount}&nbsp;코인</td>
+                                <td style="padding-left: 3%;font-size: 15pt;font-weight:bold;color:#d11d53;vertical-align: middle;">
+                                    <fmt:formatNumber value="${memo.intAmount}" pattern="#,###" />&nbsp;코인</td>
                             </tr>
                             <tr>
                                 <td style="text-align: center; color:#3b5976;" class="sorting">보유&nbsp;&nbsp;&nbsp;&nbsp;캐시</td>         
-                                <td style="padding-left: 3%;font-size: 15pt;color:#3b5976;vertical-align: middle;">${totalCash}&nbsp;코인</td>
+                                <td style="padding-left: 3%;font-size: 15pt;color:#3b5976;vertical-align: middle;">
+                                    <fmt:formatNumber value="${totalCash}" pattern="#,###" />&nbsp;코인</td>
                             </tr>
                             <tr>
                                 <td style="text-align: center; color:#3b5976;" class="sorting">사&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;유</td>         

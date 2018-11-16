@@ -32,7 +32,7 @@
     <!-- 구매 매핑테이블에 insert -->
     <insert id="insertRecallMapping">
         INSERT INTO TCashUsedDtl(UserNo, CashNo, PurchaseNo, RemainCashAmt)
-        VALUES (#{intUserNo}, #{intCashNo}, #{intPurchaseNo}, #{intRemainCash})
+                         VALUES (#{intUserNo}, #{intCashNo}, #{intPurchaseNo}, #{intRemainCash})
                    
     </insert>
     
@@ -82,4 +82,75 @@
 		FROM TDeliveryInfoMst
 		WHERE PurchaseNo = #{purchaseNo}
     </select>
+    
+    <!-- 아이템 구매 리스트 -->
+    <select id="selectAllPurchaseList" resultType="ItemShopInfo">
+	    SELECT  PurchaseNo     AS intNumber
+	           ,ItemNo         AS intItemNo
+	           ,PurchaseDate   AS strPurchaseDate
+	           ,TotalItemPrice AS intItemTotalPrice
+		FROM TItemPurchaseMst
+		WHERE UserNo = #{userNo}
+    </select>
+    
+    <!-- 아이템 구매 내역 페이징처리 -->
+    <select id="selectPurchasePaging" resultType="ItemShopInfo">
+        SELECT TOP 25 resultTable.*
+        FROM   (SELECT TOP (25 * #{curPage}) ROW_NUMBER() OVER (ORDER BY PurchaseNo DESC)   AS rownumber
+                                                            ,c.PurchaseNo                   AS intNumber
+                                                            ,c.ItemNo                       AS intItemNo
+                                                            ,c.PurchaseDate                 AS strPurchaseDate
+                                                            ,c.TotalItemPrice               AS intItemTotalPrice
+                                                            ,r.Reason                       AS strReason
+                                                            ,c.Flag                         AS intFlag
+                FROM TItemPurchaseMst c left join TReasonMsgMst r
+                on c.PurchaseNo = r.No
+                WHERE c.UserNo = #{intUserNo} ) AS resultTable
+        WHERE rownumber > (#{curPage} - 1) * 25
+    </select>
+    
+    <!-- 아이템 명 찾기 -->
+    <select id="selectItemName" resultType="String">
+        SELECT ItemName
+        FROM TItemInfoMgmt
+        WHERE ItemNo = #{no}
+    </select>
+    
+    <!-- 매핑테이블에서 취소할 항목 가져오기 -->
+    <select id="selectPurchaseCancelMap" resultType="ItemShopInfo">
+		SELECT m.CashNo         AS intNumber
+		      ,m.RemainCashAmt  AS intRemainCash
+		      ,c.CashAmt        AS intCash
+		FROM  TCashUsedDtl m LEFT JOIN TCashMst c
+		ON    m.CashNo = c.CashNo
+		WHERE m.PurchaseNo =  #{purchaseNo}    
+    </select>
+    
+    <!-- remainCash 업데이트 -->
+    <update id="updateRemainCash">
+	    UPDATE TCashMst
+		SET RemainCashAmt = RemainCashAmt + #{intRemainCash}
+		WHERE CashNo = #{intNumber}
+    </update>
+    
+    <!-- 매핑테이블 삭제 -->
+    <delete id="deleteMapping">
+	    DELETE TCashUsedDtl
+        WHERE PurchaseNo = #{purchaseNo}
+    </delete>
+    
+    <!-- 아이템 구매 테이블 구매 취소 update -->
+    <update id="updateItemPurchaseCancel">
+        UPDATE TItemPurchaseMst
+        SET    Flag = 0
+        WHERE PurchaseNo = #{purchaseNo}
+    </update>
+    
+    <!-- 배송 테이블 삭제 -->
+    <delete id="deleteDeliver">
+        DELETE TDeliveryInfoMst
+        WHERE PurchaseNo = #{purchaseNo}
+    </delete>
+    
+ 
 </mapper>

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.interntraining.admin.product.domain.ProductInfo;
 import com.interntraining.member.board.domain.Pagination;
+import com.interntraining.member.cash.domain.PaginationCash;
 import com.interntraining.member.itemShop.domain.ItemShopInfo;
 import com.interntraining.member.itemShop.domain.PaginationItem;
 import com.interntraining.member.login.domain.User;
@@ -55,6 +56,24 @@ public interface ItemShopService {
 
 	//베송정보 가져오기
 	public ItemShopInfo selectDeliveryInfo(BigInteger purchaseNo);
+
+	//아이템 구매 리스트
+	public List<ItemShopInfo> selectAllPurchaseList(int userNo);
+
+	//아이템 구매 리스트 페이징 처리
+	public List<ItemShopInfo> selectPurchasePaging(PaginationCash pagination);
+
+	//매핑테이블 아이템 구매 취소
+	public void selectPurchaseCancelMap(ItemShopInfo item);
+
+	//아이템 구매 테이블 구매 취소 update
+	public void updateItemPurchaseCancel(BigInteger bigInteger);
+
+	//배송 테이블 삭제
+	public void deleteDeliver(BigInteger intNumber);
+
+	//사용자 계좌 캐시 update
+	public void updateUserCashInOutMst(ItemShopInfo item);
 
 
 }
