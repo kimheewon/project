@@ -228,7 +228,6 @@ public class ItemShopServiceImpl implements ItemShopService{
 	//배송정보 가져오기
 	@Override
 	public ItemShopInfo selectDeliveryInfo(BigInteger purchaseNo) {
-		
 		return itemShopDAO.selectDeliveryInfo(purchaseNo);
 	}
 

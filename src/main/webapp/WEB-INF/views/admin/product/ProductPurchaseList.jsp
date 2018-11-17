@@ -15,7 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>상품 목록 리스트</title>
+    <title>상품 구매 리스트</title>
 
      <!-- Bootstrap -->
     <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -42,7 +42,56 @@
         margin: 0 0 0 0;
         padding-top: 0.6%;
     }
-
+#shopBtn{
+    background-color: #b13862;
+    width: 27%;
+    height: 21pt;
+    font-size: 11pt;
+    border-radius: 3pt;
+    border: none;
+    color: white;
+    font-family: Bareun;
+    margin-right: 7%;
+}
+#shopBtn:hover{
+    background: #772642;
+    color: white;
+    box-shadow: 0 2px #999;
+    font-weight: bold;
+    border: 2px solid #3d1322;
+}
+#shopBtn:active {
+    background-color: #772642;
+    color: white;
+    box-shadow: 0 2px #666;
+    transform: translateY(4px);
+}
+#cancelBtn{
+    background-color: white;
+    width: 27%;
+    height: 21pt;
+    font-size: 11pt;
+    border-radius: 3pt;
+    border: none;
+    color: #2c3e50;
+    font-family: Bareun;
+    border: 1px solid #2c3e50;
+}
+#cancelBtn:hover{
+    background: #f1f4f7;
+    color: black;
+    box-shadow: 0 2px #999;
+    border: 2px solid #3a3e42;
+    font-weight: bold;
+}
+#cancelBtn:active {
+    background: #f1f4f7;
+    color: black;
+    box-shadow: 0 2px #666;
+    border: 2px solid #3a3e42;
+    font-weight: bold;
+    transform: translateY(4px);
+}
 </style>
   </head>
 
@@ -56,7 +105,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>상품 관리</h3>
+                <h3>상품 구매 내역</h3>
               </div>
 
               <div class="title_right">
@@ -82,27 +131,21 @@
                     
                     <table id="datatable" class="table table-striped table-bordered" id="AdminList">
                     <colgroup>
-                        <col width = "6%"/>
                         <col width = "8%"/>
-                        <col width = "12%"/>
-                        <col width = "*"/>
-                        <col width = "12%"/>
-                        <col width = "12%"/>
-                        <col width = "15%"/>
-                        <col width = "15%"/>
-                        <col width = "7%"/>                        
+		                <col width = "15%"/>
+		                <col width = "*"/>
+		                <col width = "15%"/>
+		                <col width = "20%"/> 
+		                <col width = "20%"/>                        
                     </colgroup>
                       <thead>
                         <tr>
                           <th style="text-align: center; padding-left: 1.5%; color:#00003f" class="sorting_desc">#</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">상품번호</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">상  품</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">상품명</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">캐시금액</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">최근 등록자</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">등록일시</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">수정일시</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">작   업</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">구매번호</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">상    품</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">캐    시</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">거래일시</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -110,21 +153,38 @@
 
                             <tr>
                                 <td style="text-align: center; color:#3b5976;vertical-align: middle;">${status.count}</td>
-                                <td style="text-align: center; color:#3b5976;vertical-align: middle;">${list.intItemNo}</td>
-                                <td style="text-align: center; color:#3b5976;vertical-align: middle;"><img id="preview" src="${list.strfileUrl}" style="width: 100px;height: 100px;"></td>
-                                <td style="text-align: center; color:#3b5976;vertical-align: middle;">${list.strItemName}</td>
-                                <td style="text-align: center; color:#3b5976;vertical-align: middle;"><fmt:formatNumber value="${list.intItemPrice}" pattern="#,###" />원</td>
-                                <td style="text-align: center; color:#3b5976;vertical-align: middle;">${list.strAdminId}</td>
-                                <td style="text-align: center; color:#3b5976;vertical-align: middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.dateItemDate}"/></td>
-                                <td style="text-align: center; color:#3b5976;vertical-align: middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.dateUpdateItemDate}"/></td>
-                                <td style="text-align: center; color:#3b5976;padding-top: 0.2%; padding-bottom: 0.2%;vertical-align: middle;">
-                                    <button class="btn btn-app" type="button" onclick="location.href='/Product/ProductUpdateForm?itemNo=${list.intItemNo}'" 
-                                        style="padding-top: 5%;" id="editBtn" data-placement="top" data-toggle="tooltip" data-original-title="수정">
-                                        <i class="fa fa-wrench" style="color: #626200;"></i></button>
-                                    <button class="btn btn-app" type="button" onclick="checkDelete(${list.intItemNo})"
-                                        style="padding-top: 5%;" id="editBtn" data-placement="top" data-toggle="tooltip" data-original-title="삭제" style="margin-right: 0.5%;">                                                        
-                                        <i class="fa fa-trash-o" style="color: #a55663;"></i></button>
+                                <td style="text-align: center; color:#3b5976;vertical-align: middle;">${list.intNumber}</td>
+                                <td style="text-align: center; color:#3b5976;vertical-align: middle;">
+	                                <c:choose>
+			                              <c:when test="${list.strItemName eq '캐시 회수'}">
+			                                 <span data-toggle="tooltip" data-placement="bottom" data-original-title="${list.strReason}">${list.strItemName}</span>
+			                              </c:when>
+			                              <c:otherwise>
+			                                  <c:choose>
+			                                      <c:when test="${list.intFlag ne 0}">
+			                                          <a href="/Product/PurchaseView?PurchaseNo=${list.intNumber}" style="color: #b13862;;font-weight: bold;">
+			                                            <span style="color:#5a5a5a;font-weight: normal;">${list.intItemNo}&nbsp;&nbsp;</span>${list.strItemName}</a>
+			                                      </c:when>
+			                                      <c:otherwise>
+			                                          <span style="font-weight: normal;font-style: italic;text-decoration: line-through;"><span style="color:#5a5a5a;font-weight: normal;">${list.intItemNo}</span>&nbsp;&nbsp;${item.strItemName}</span>
+			                                      </c:otherwise>
+			                                  </c:choose>
+			                              </c:otherwise>
+			                          </c:choose>
                                 </td>
+                                <td style="text-align: center; color:#3b5976;vertical-align: middle;"><fmt:formatNumber value="${list.intItemTotalPrice}" pattern="#,###" />&nbsp;코인</td>
+                                <td style="text-align: center; color:#3b5976;vertical-align: middle;">${list.strPurchaseDate}</td>
+                                <td style="text-align: center; color:#3b5976;vertical-align: middle;">
+	                                <c:if test="${list.strItemName ne '캐시 회수'}">
+		                              <c:choose>
+		                                  <c:when test="${list.intFlag ne 0}">
+		                                      <button id="shopBtn" type="button">배송 추적</button>
+		                                  </c:when>
+		                                  <c:otherwise>구매 취소</c:otherwise>
+		                              </c:choose>
+	                               </c:if>
+                                </td>
+                                
                             </tr>   
                         </c:forEach>
                       </tbody>

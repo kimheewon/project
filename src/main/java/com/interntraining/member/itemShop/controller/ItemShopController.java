@@ -223,6 +223,8 @@ public class ItemShopController {
 		
 		int totalCash = itemShopService.selectTotalCash(item.getIntUserNo());	//현재 보유 캐시 정보 가져오기
 		session.setAttribute("cash", totalCash);
+		
+		mav.setViewName("/user/itemShop/ItemPurchaseCancelResult");
 		return mav;
 	}
 }

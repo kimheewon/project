@@ -123,7 +123,8 @@
                       <li><a style=" font-size: 14px;"><i class="fa fa-desktop"></i> 상품 관리<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                           <li><a href="/Product/ProductList">상품 목록</a></li>
-                          <li><a href="/Product/ProductEnrollForm">상품 등록</a></li>                      
+                          <li><a href="/Product/ProductEnrollForm">상품 등록</a></li>                           
+                          <li><a href="/Product/PurchaseList">아이템 구매 목록</a></li>                        
                         </ul>
                       </li>
                       </c:if>
@@ -135,7 +136,8 @@
                         <ul class="nav child_menu">
                           <li><a href="/AdminCash/AdminCashAllList">결재 목록</a></li>
                           <li><a href="/AdminCash/AdminCashAllList">캐시 사용 목록</a></li>
-                          <li><a href="/AdminCash/AdminCashMember">캐시 지급/회수</a></li>                       
+                          <li><a href="/AdminCash/AdminCashMember">캐시 지급/회수</a></li>
+                                                 
                         </ul>
                       </li>
                       </c:if>

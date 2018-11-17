@@ -18,11 +18,11 @@
                ,ItemPrice     AS  intItemPrice
                ,ItemDate      AS  dateItemDate
                ,AdminId       AS  strAdminId
-               ,UpdateItemDate AS  dateUpdateItemDateo
+               ,UpdateItemDate AS dateUpdateItemDate
+               ,FileUrl       AS  strfileUrl
         FROM    TItemInfoMgmt   INNER JOIN   TAdmin
         ON TItemInfoMgmt.AdminNo = TAdmin.AdminNo
-        WHERE UseFlag NOT IN(0) 
-        
+        WHERE UseFlag NOT IN(0)         
         ORDER BY ItemDate DESC
     </select>
     
@@ -110,4 +110,57 @@
 		FROM TUser
 		WHERE UserNo = #{userNo}
     </select>
+    
+    <!-- 상품 불러오기 -->
+    <select id="selectProduct" resultType="ProductInfo">
+        SELECT  ItemNo     AS intItemNo
+		        ,ItemPrice  AS intItemPrice
+		        ,ItemName   AS strItemName
+		        ,FileOriName AS strfileOriName
+		        ,FileUrl    AS strfileUrl
+		FROM TItemInfoMgmt
+		WHERE ItemNo = #{itemNo}
+    </select>
+    
+    <!-- 상품 DB에 저장(이미지변경) -->
+    <update id="updateProductImg">
+        UPDATE TItemInfoMgmt
+		SET  ItemName     = #{strItemName} 
+		    ,ItemPrice    = #{intItemPrice}
+		    ,FileName     = #{strfileName}
+		    ,FileOriName  = #{strfileOriName}
+		    ,FileUrl      = #{strfileUrl}
+		    ,AdminNo      = #{intAdminNo}
+		WHERE ItemNo = #{intItemNo}
+    </update>
+    
+    <!-- 상품 DB에 저장(이미지변경) -->
+    <update id="updateProduct">
+        UPDATE TItemInfoMgmt
+        SET  ItemName     = #{strItemName} 
+            ,ItemPrice    = #{intItemPrice}
+            ,AdminNo      = #{intAdminNo}
+            ,UpdateItemDate = Getdate()
+        WHERE ItemNo = #{intItemNo}
+    </update>
+    
+   <!-- 상품 구매 리스트 불러오기 -->
+   <select id="selectProductList" resultType="ItemShopInfo">
+        SELECT   a.PurchaseNo       AS intNumber
+                ,a.ItemNo           AS intItemNo
+                ,b.ItemName         AS strItemName
+                ,a.TotalItemPrice   AS intItemTotalPrice
+                ,a.PurchaseDate     AS strPurchaseDate
+                ,a.Flag             AS intFlag
+        FROM TItemPurchaseMst a LEFT JOIN TItemInfoMgmt b
+        ON a.ItemNo = b.ItemNo
+   </select>
+   
+   <!-- 회수 사유 찾기 -->
+   <select id="selectReason" resultType="String">
+        SELECT Reason
+        FROM TReasonMsgMst
+        WHERE No = #{no}
+   </select>
+       
 </mapper>

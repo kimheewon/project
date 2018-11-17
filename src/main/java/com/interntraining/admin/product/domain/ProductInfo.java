@@ -2,6 +2,8 @@ package com.interntraining.admin.product.domain;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ProductInfo {
 	
 	private int 	intItemNo;			//상품번호
@@ -20,6 +22,15 @@ public class ProductInfo {
     private int 	intItemPrice;
 	private String 	strAdminId;
 	
+	private MultipartFile 	file;
+	
+	
+	public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
 	public int getIntItemNo() {
 		return intItemNo;
 	}

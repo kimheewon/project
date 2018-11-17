@@ -132,7 +132,8 @@
                                             <span style="color:#5a5a5a;font-weight: normal;">${item.intItemNo}&nbsp;&nbsp;</span>${item.strItemName}</a>
 		                              </c:when>
 		                              <c:otherwise>
-		                                  <span style="font-weight: normal;font-style: italic;text-decoration: line-through;"><span style="color:#5a5a5a;font-weight: normal;">${item.intItemNo}</span>&nbsp;&nbsp;${item.strItemName}</span>
+		                                  <span style="font-weight: normal;font-style: italic;text-decoration: line-through;">
+		                                  <span style="color:#5a5a5a;font-weight: normal;">${item.intItemNo}</span>&nbsp;&nbsp;${item.strItemName}</span>
 		                              </c:otherwise>
 		                          </c:choose>
 		                      </c:otherwise>
