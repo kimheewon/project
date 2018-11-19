@@ -1,6 +1,7 @@
 package com.interntraining.member.itemShop.controller;
 
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,8 +23,6 @@ import com.interntraining.member.itemShop.domain.ItemShopInfo;
 import com.interntraining.member.itemShop.domain.PaginationItem;
 import com.interntraining.member.itemShop.service.ItemShopService;
 import com.interntraining.member.login.domain.User;
-
-import ch.qos.logback.classic.sift.MDCBasedDiscriminator;
 
 @Controller
 @RequestMapping(value= "/ItemShop")
@@ -158,32 +157,68 @@ public class ItemShopController {
 
 	//아이템 구매 내역 리스트 페이지로 이동
 	@RequestMapping(value="/ItemPurchaseList")
-	public ModelAndView itemPurchaseList(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+	public ModelAndView itemPurchaseList(@RequestParam(required=false) String searchStartDate, @RequestParam(required=false) String searchEndDate, HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			@RequestParam(required=false) Integer nowPage,@RequestParam(required=false)Integer nowBlock, @RequestParam(defaultValue="1") int curPage) {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		
 		int userNo = (int) session.getAttribute("no");
-		
-		List<ItemShopInfo> itemList = itemShopService.selectAllPurchaseList(userNo);	//아이템 구매 리스트
-		
-		int listCnt = itemList.size();		
-		PaginationCash pagination = new PaginationCash(listCnt, curPage);		
-		pagination.setIntUserNo(userNo);
-		pagination.setPageSize(25);
-		pagination.setRangeSize(25);
-		
-		/* List */
-        List<ItemShopInfo> item = itemShopService.selectPurchasePaging(pagination);		//아이템 구매 리스트 페이징 처리
-		
-        //글 시퀀스 번호
-        int c = listCnt - (curPage-1)*25;
-        for(int i=0; i<item.size(); i++) {
-        	item.get(i).setIntNum(c--);	        
-        }
+
+		if(searchStartDate == null && searchEndDate == null) {	//날짜 검색 없음
+			List<ItemShopInfo> itemList = itemShopService.selectAllPurchaseList(userNo);	//아이템 구매 리스트
+			
+			int listCnt = itemList.size();		
+			PaginationCash pagination = new PaginationCash(listCnt, curPage);		
+			pagination.setIntUserNo(userNo);
+			pagination.setPageSize(25);
+			pagination.setRangeSize(25);
+			
+			/* List */
+	        List<ItemShopInfo> item = itemShopService.selectPurchasePaging(pagination);		//아이템 구매 리스트 페이징 처리
+			
+	        //글 시퀀스 번호
+	        int c = listCnt - (curPage-1)*25;
+	        for(int i=0; i<item.size(); i++) {
+	        	item.get(i).setIntNum(c--);	        
+	        }
         
-        mav.addObject("item", item);
-		mav.addObject("listCnt", listCnt);
-		mav.addObject("pagination", pagination);
+	        mav.addObject("item", item);
+			mav.addObject("listCnt", listCnt);
+			mav.addObject("pagination", pagination);
+			
+		}
+		else {	//날짜 검색
+			
+			ItemShopInfo info = new ItemShopInfo();
+			info.setIntUserNo(userNo);
+			info.setSearchStartDate(searchStartDate);
+			info.setSearchEndDate(searchEndDate);
+			
+			List<ItemShopInfo> itemList = itemShopService.searchAllPurchaseList(info);	//아이템 구매 리스트(날짜검색)
+			
+			int listCnt = itemList.size();		
+			PaginationCash pagination = new PaginationCash(listCnt, curPage);		
+			pagination.setIntUserNo(userNo);
+			pagination.setPageSize(25);
+			pagination.setRangeSize(25);
+			pagination.setSearchStartDate(searchStartDate);
+			pagination.setSearchEndDate(searchEndDate);
+			
+			/* List */
+	        List<ItemShopInfo> item = itemShopService.searchAllPurchasePaging(pagination);		//아이템 구매 리스트 페이징 처리(날짜검색)
+			
+	        //글 시퀀스 번호
+	        int c = listCnt - (curPage-1)*25;
+	        for(int i=0; i<item.size(); i++) {
+	        	item.get(i).setIntNum(c--);	        
+	        }
+        
+	        mav.addObject("item", item);
+			mav.addObject("listCnt", listCnt);
+			mav.addObject("pagination", pagination);
+			mav.addObject("searchStartDate", searchStartDate);
+			mav.addObject("searchEndDate", searchEndDate);
+			
+		}
 		mav.setViewName("/user/itemShop/ItemPurchaseList");
 		return mav;
 	}	

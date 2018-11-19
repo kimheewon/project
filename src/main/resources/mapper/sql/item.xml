@@ -93,19 +93,45 @@
 		WHERE UserNo = #{userNo}
     </select>
     
+    <!--아이템 구매 리스트(날짜검색)트 -->
+    <select id="searchAllPurchaseList" resultType="ItemShopInfo"> 
+        SELECT  PurchaseNo     AS intNumber
+               ,ItemNo         AS intItemNo
+               ,PurchaseDate   AS strPurchaseDate
+               ,TotalItemPrice AS intItemTotalPrice
+        FROM TItemPurchaseMst
+        WHERE UserNo = #{intUserNo} AND PurchaseDate >= #{searchStartDate} AND PurchaseDate <![CDATA[ <= ]]> #{searchEndDate}
+    </select>
+    
     <!-- 아이템 구매 내역 페이징처리 -->
     <select id="selectPurchasePaging" resultType="ItemShopInfo">
         SELECT TOP 25 resultTable.*
         FROM   (SELECT TOP (25 * #{curPage}) ROW_NUMBER() OVER (ORDER BY PurchaseNo DESC)   AS rownumber
                                                             ,c.PurchaseNo                   AS intNumber
                                                             ,c.ItemNo                       AS intItemNo
-                                                            ,c.PurchaseDate                 AS strPurchaseDate
+                                                            ,c.PurchaseDate                 AS datePurchaseDate
                                                             ,c.TotalItemPrice               AS intItemTotalPrice
                                                             ,r.Reason                       AS strReason
                                                             ,c.Flag                         AS intFlag
                 FROM TItemPurchaseMst c left join TReasonMsgMst r
                 on c.PurchaseNo = r.No
                 WHERE c.UserNo = #{intUserNo} ) AS resultTable
+        WHERE rownumber > (#{curPage} - 1) * 25
+    </select>
+    
+     <!-- 아이템 구매 리스트 페이징 처리(날짜검색) -->
+    <select id="searchAllPurchasePaging" resultType="ItemShopInfo">
+        SELECT TOP 25 resultTable.*
+        FROM   (SELECT TOP (25 * #{curPage}) ROW_NUMBER() OVER (ORDER BY PurchaseNo DESC)   AS rownumber
+                                                            ,c.PurchaseNo                   AS intNumber
+                                                            ,c.ItemNo                       AS intItemNo
+                                                            ,c.PurchaseDate                 AS datePurchaseDate
+                                                            ,c.TotalItemPrice               AS intItemTotalPrice
+                                                            ,r.Reason                       AS strReason
+                                                            ,c.Flag                         AS intFlag
+                FROM TItemPurchaseMst c left join TReasonMsgMst r
+                on c.PurchaseNo = r.No
+                WHERE c.UserNo = #{intUserNo} AND PurchaseDate >= #{searchStartDate} AND PurchaseDate <![CDATA[ <= ]]> #{searchEndDate}) AS resultTable
         WHERE rownumber > (#{curPage} - 1) * 25
     </select>
     

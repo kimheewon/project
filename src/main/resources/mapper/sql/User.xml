@@ -4,9 +4,13 @@
 <!-- ##################################################
      # ■ 샘플 Mapper ■ ymkang ■ 2018. 09. 03.
      ################################################### -->
-<mapper namespace="sql">
+<mapper namespace="userSql">
 
-
-
+    <!-- 회원 이름 찾기 -->
+    <select id="selectUserName" resultType="String">
+        SELECT UserName
+        FROM TUser
+        WHERE UserNo = #{userNo}
+    </select>
 
 </mapper>

@@ -152,6 +152,16 @@ public class ItemShopDAO {
 		sqlSession.delete("itemSql.deleteDeliver",purchaseNo);
 	}
 
+	//아이템 구매 리스트(날짜검색)
+	public List<ItemShopInfo> searchAllPurchaseList(ItemShopInfo info) {
+		return sqlSession.selectList("itemSql.searchAllPurchaseList", info);
+	}
+
+	//아이템 구매 리스트 페이징 처리(날짜검색)
+	public List<ItemShopInfo> searchAllPurchasePaging(PaginationCash pagination) {
+		return sqlSession.selectList("itemSql.searchAllPurchasePaging",pagination);
+	}
+
 
 }
 

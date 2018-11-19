@@ -7,6 +7,7 @@ import com.interntraining.member.board.domain.Pagination;
 import com.interntraining.member.cash.domain.PGInfo;
 import com.interntraining.member.cash.domain.PaginationCash;
 import com.interntraining.member.cash.domain.PgRequest;
+import com.interntraining.member.itemShop.domain.ItemShopInfo;
 import com.interntraining.member.login.domain.User;
 
 public interface CashService {
@@ -40,6 +41,12 @@ public interface CashService {
 
 	//상태 update
 	public void updateState(int orderNo);
+
+	//캐시 내역 가져오기(날짜검색)
+	public List<PGInfo> searchCashList(ItemShopInfo info);
+
+	//캐시 내역 페이징처리(날짜검색)
+	public List<PGInfo> searchCashPaging(PaginationCash pagination);
 
 
 }

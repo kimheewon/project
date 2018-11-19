@@ -43,32 +43,8 @@
         padding-top: 0.6%;
     }
 #shopBtn{
-    background-color: #b13862;
-    width: 27%;
-    height: 21pt;
-    font-size: 11pt;
-    border-radius: 3pt;
-    border: none;
-    color: white;
-    font-family: Bareun;
-    margin-right: 7%;
-}
-#shopBtn:hover{
-    background: #772642;
-    color: white;
-    box-shadow: 0 2px #999;
-    font-weight: bold;
-    border: 2px solid #3d1322;
-}
-#shopBtn:active {
-    background-color: #772642;
-    color: white;
-    box-shadow: 0 2px #666;
-    transform: translateY(4px);
-}
-#cancelBtn{
     background-color: white;
-    width: 27%;
+    width: 65%;
     height: 21pt;
     font-size: 11pt;
     border-radius: 3pt;
@@ -77,14 +53,14 @@
     font-family: Bareun;
     border: 1px solid #2c3e50;
 }
-#cancelBtn:hover{
+#shopBtn:hover{
     background: #f1f4f7;
     color: black;
     box-shadow: 0 2px #999;
     border: 2px solid #3a3e42;
     font-weight: bold;
 }
-#cancelBtn:active {
+#shopBtn:active {
     background: #f1f4f7;
     color: black;
     box-shadow: 0 2px #666;
@@ -92,6 +68,7 @@
     font-weight: bold;
     transform: translateY(4px);
 }
+
 </style>
   </head>
 
@@ -134,9 +111,10 @@
                         <col width = "8%"/>
 		                <col width = "15%"/>
 		                <col width = "*"/>
-		                <col width = "15%"/>
+		                <col width = "12%"/>
+		                <col width = "12%"/>
 		                <col width = "20%"/> 
-		                <col width = "20%"/>                        
+		                <col width = "10%"/>                        
                     </colgroup>
                       <thead>
                         <tr>
@@ -144,6 +122,7 @@
                           <th style="text-align: center; padding-left: 2%; color:#00003f">구매번호</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">상    품</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">캐    시</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">구매 회원</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">거래일시</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f"></th>
                         </tr>
@@ -173,7 +152,8 @@
 			                          </c:choose>
                                 </td>
                                 <td style="text-align: center; color:#3b5976;vertical-align: middle;"><fmt:formatNumber value="${list.intItemTotalPrice}" pattern="#,###" />&nbsp;코인</td>
-                                <td style="text-align: center; color:#3b5976;vertical-align: middle;">${list.strPurchaseDate}</td>
+                                <td style="text-align: center; color:#3b5976;vertical-align: middle;">${list.strUserName}</td>
+                                <td style="text-align: center; color:#3b5976;vertical-align: middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.datePurchaseDate}"/></td>
                                 <td style="text-align: center; color:#3b5976;vertical-align: middle;">
 	                                <c:if test="${list.strItemName ne '캐시 회수'}">
 		                              <c:choose>

@@ -1,6 +1,7 @@
 package com.interntraining.member.itemShop.domain;
 
 import java.math.BigInteger;
+import java.util.Date;
 
 public class ItemShopInfo {
 
@@ -34,7 +35,38 @@ public class ItemShopInfo {
 	private int 	intCash;
 	private int 	intFlag;
 	
+	private String 	strUserName;
+	private Date 	datePurchaseDate;
+	private String	searchEndDate;
+	private String 	searchStartDate;
 	
+	
+	
+	
+	public String getSearchEndDate() {
+		return searchEndDate;
+	}
+	public void setSearchEndDate(String searchEndDate) {
+		this.searchEndDate = searchEndDate;
+	}
+	public String getSearchStartDate() {
+		return searchStartDate;
+	}
+	public void setSearchStartDate(String searchStartDate) {
+		this.searchStartDate = searchStartDate;
+	}
+	public Date getDatePurchaseDate() {
+		return datePurchaseDate;
+	}
+	public void setDatePurchaseDate(Date datePurchaseDate) {
+		this.datePurchaseDate = datePurchaseDate;
+	}
+	public String getStrUserName() {
+		return strUserName;
+	}
+	public void setStrUserName(String strUserName) {
+		this.strUserName = strUserName;
+	}
 	public int getIntFlag() {
 		return intFlag;
 	}

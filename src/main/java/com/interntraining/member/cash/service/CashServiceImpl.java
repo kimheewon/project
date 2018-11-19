@@ -23,6 +23,7 @@ import com.interntraining.member.cash.dao.CashDAO;
 import com.interntraining.member.cash.domain.PGInfo;
 import com.interntraining.member.cash.domain.PaginationCash;
 import com.interntraining.member.cash.domain.PgRequest;
+import com.interntraining.member.itemShop.domain.ItemShopInfo;
 import com.interntraining.member.login.domain.User;
 
 
@@ -290,6 +291,36 @@ public class CashServiceImpl implements CashService{
 	@Override
 	public void updateState(int orderNo) {
 		cashDAO.updateState(orderNo);
+	}
+
+	//캐시 내역 가져오기(날짜검색)
+	@Override
+	public List<PGInfo> searchCashList(ItemShopInfo info) {
+		return cashDAO.searchCashList(info);
+	}
+
+	//캐시 내역 페이징처리(날짜검색)
+	@Override
+	public List<PGInfo> searchCashPaging(PaginationCash pagination) {
+		List<PGInfo> cash= cashDAO.searchCashPaging(pagination);
+		for(int i=0; i<cash.size(); i++) {
+			String kind = cash.get(i).getPgcode();
+			if(kind == null) {
+				cash.get(i).setStrPurchasekind("");
+				cash.get(i).setAmount(0);
+			}
+			else{
+				if(kind.equals("mobile")) {
+					cash.get(i).setStrPurchasekind("휴대폰");
+					cash.get(i).setStrReason("0");
+				}
+				else if(kind.equals("creditcard")){
+					cash.get(i).setStrPurchasekind("신용카드");
+					cash.get(i).setStrReason("0");
+				}				
+			}
+		}
+		return cash;
 	}
 
 

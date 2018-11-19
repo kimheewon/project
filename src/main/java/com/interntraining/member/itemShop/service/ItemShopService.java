@@ -75,5 +75,11 @@ public interface ItemShopService {
 	//사용자 계좌 캐시 update
 	public void updateUserCashInOutMst(ItemShopInfo item);
 
+	//아이템 구매 리스트(날짜검색)
+	public List<ItemShopInfo> searchAllPurchaseList(ItemShopInfo info);
+
+	//아이템 구매 리스트 페이징 처리(날짜검색)
+	public List<ItemShopInfo> searchAllPurchasePaging(PaginationCash pagination);
+
 
 }

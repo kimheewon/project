@@ -43,54 +43,36 @@
         padding-top: 0.6%;
     }
 #shopBtn{
-    background-color: #b13862;
-    width: 27%;
-    height: 21pt;
-    font-size: 11pt;
+    background-color: #2c3e50;
+    width: 39%;
+    height: 26pt;
+    font-size: 12pt;
     border-radius: 3pt;
     border: none;
     color: white;
     font-family: Bareun;
-    margin-right: 7%;
-}
-#shopBtn:hover{
-    background: #772642;
-    color: white;
-    box-shadow: 0 2px #999;
     font-weight: bold;
-    border: 2px solid #3d1322;
-}
-#shopBtn:active {
-    background-color: #772642;
-    color: white;
-    box-shadow: 0 2px #666;
-    transform: translateY(4px);
-}
-#cancelBtn{
-    background-color: white;
-    width: 27%;
-    height: 21pt;
-    font-size: 11pt;
-    border-radius: 3pt;
-    border: none;
-    color: #2c3e50;
-    font-family: Bareun;
     border: 1px solid #2c3e50;
 }
-#cancelBtn:hover{
+
+#shopBtn:hover{
     background: #f1f4f7;
     color: black;
     box-shadow: 0 2px #999;
     border: 2px solid #3a3e42;
     font-weight: bold;
 }
-#cancelBtn:active {
+#shopBtn:active {
     background: #f1f4f7;
     color: black;
     box-shadow: 0 2px #666;
     border: 2px solid #3a3e42;
     font-weight: bold;
     transform: translateY(4px);
+}
+
+#itemTable thead tr th{
+    background-color: #f2f2f2 !important;
 }
 </style>
   </head>
@@ -141,10 +123,10 @@
                     </colgroup>
                       <thead>
                     <tr>
-                        <th colspan="2" style="border-right:1px solid #88887e;border-bottom:1px solid #88887e;text-align: center;">아이템</th>
-                        <th style="border-right:1px solid #88887e;border-bottom:1px solid #88887e;text-align: center;">소계</th>
-                        <th style="border-right:1px solid #88887e;border-bottom:1px solid #88887e;text-align: center;">수량</th>
-                        <th style="border-bottom:1px solid #88887e;text-align: center;">합계</th>
+                        <th colspan="2" style="border-right:1px solid #88887e;border-bottom:2px solid #88887e;text-align: center;">아이템</th>
+                        <th style="border-right:1px solid #88887e;border-bottom:2px solid #88887e;text-align: center;">소계</th>
+                        <th style="border-right:1px solid #88887e;border-bottom:2px solid #88887e;text-align: center;">수량</th>
+                        <th style="border-bottom:2px solid #88887e;text-align: center;">합계</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -209,9 +191,9 @@
                    <td style="padding-left: 2%;border-bottom: 1px solid #aeaea7;">${deliver.strDeliverMsg}</td>
                </tr>                        
             </table>
-            <br><br><br><br>
+            <br><br><br><br><br><br>
             <div style="text-align: center;">
-                <button id="shopBtn" type="submit">아이템 구매 리스트</button>
+                <button id="shopBtn" type="button" onclick="location.href='/Product/PurchaseList'">아이템 구매 리스트</button>
             </div>
             <br><br><br>
 

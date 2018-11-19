@@ -45,6 +45,7 @@ import com.interntraining.member.cash.domain.PGInfo;
 import com.interntraining.member.cash.domain.PaginationCash;
 import com.interntraining.member.cash.domain.PgRequest;
 import com.interntraining.member.cash.service.CashService;
+import com.interntraining.member.itemShop.domain.ItemShopInfo;
 import com.interntraining.member.login.domain.User;
 
 
@@ -183,32 +184,68 @@ public class CashController {
 	
 	//캐시 내역 페이지로 이동
 	@RequestMapping(value="/CashList")
-	public ModelAndView cashList(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+	public ModelAndView cashList(@RequestParam(required=false) String searchStartDate, @RequestParam(required=false) String searchEndDate,HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			@RequestParam(required=false) Integer nowPage,@RequestParam(required=false)Integer nowBlock, @RequestParam(defaultValue="1") int curPage) {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		
 		int userNo = (int) session.getAttribute("no");	//회원 번호
-		List<PGInfo> cash = cashService.selectCashList(userNo);	//캐시 내역 가져오기
 		
-		int listCnt = cash.size();		
-		PaginationCash pagination = new PaginationCash(listCnt, curPage);		
-		pagination.setIntUserNo(userNo);
-		pagination.setPageSize(25);
-		pagination.setRangeSize(25);
-		
-		/* List */
-        List<PGInfo> cashList = cashService.selectCashPaging(pagination);	//캐시 내역 페이징처리
-        
-        //글 시퀀스 번호
-        int c = listCnt - (curPage-1)*25;
-        for(int i=0; i<cashList.size(); i++) {
-        	cashList.get(i).setIntNum(c--);	        
-        }
-        
-        
-		mav.addObject("cashList", cashList);
-		mav.addObject("listCnt", listCnt);
-		mav.addObject("pagination", pagination);
+		if(searchStartDate == null && searchEndDate == null) {	//날짜 검색 없음
+			List<PGInfo> cash = cashService.selectCashList(userNo);	//캐시 내역 가져오기
+			
+			int listCnt = cash.size();		
+			PaginationCash pagination = new PaginationCash(listCnt, curPage);		
+			pagination.setIntUserNo(userNo);
+			pagination.setPageSize(25);
+			pagination.setRangeSize(25);
+			
+			/* List */
+	        List<PGInfo> cashList = cashService.selectCashPaging(pagination);	//캐시 내역 페이징처리
+	        
+	        //글 시퀀스 번호
+	        int c = listCnt - (curPage-1)*25;
+	        for(int i=0; i<cashList.size(); i++) {
+	        	cashList.get(i).setIntNum(c--);	        
+	        }
+	        
+	        
+			mav.addObject("cashList", cashList);
+			mav.addObject("listCnt", listCnt);
+			mav.addObject("pagination", pagination);
+		}
+		else {	//날짜 검색		
+
+			ItemShopInfo info = new ItemShopInfo();
+			info.setIntUserNo(userNo);
+			info.setSearchStartDate(searchStartDate);
+			info.setSearchEndDate(searchEndDate);
+			
+			List<PGInfo> cash = cashService.searchCashList(info);	//캐시 내역 가져오기(날짜검색)
+			
+			int listCnt = cash.size();		
+			PaginationCash pagination = new PaginationCash(listCnt, curPage);		
+			pagination.setIntUserNo(userNo);
+			pagination.setPageSize(25);
+			pagination.setRangeSize(25);
+			pagination.setSearchStartDate(searchStartDate);
+			pagination.setSearchEndDate(searchEndDate);
+			
+			/* List */
+	        List<PGInfo> cashList = cashService.searchCashPaging(pagination);	//캐시 내역 페이징처리(날짜검색)
+	        
+	        //글 시퀀스 번호
+	        int c = listCnt - (curPage-1)*25;
+	        for(int i=0; i<cashList.size(); i++) {
+	        	cashList.get(i).setIntNum(c--);	        
+	        }
+	        
+	        
+			mav.addObject("cashList", cashList);
+			mav.addObject("listCnt", listCnt);
+			mav.addObject("pagination", pagination);
+			mav.addObject("searchStartDate", searchStartDate);
+			mav.addObject("searchEndDate", searchEndDate);
+		}
 		mav.setViewName("/user/cash/CashList");
 		return mav;
 	}

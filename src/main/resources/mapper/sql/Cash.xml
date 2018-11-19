@@ -87,6 +87,24 @@
         ORDER BY CashNo DESC
     </select>
     
+     <!-- 캐시 내역 가져오기(날짜검색) -->
+    <select id="searchCashList" resultType="PGInfo">
+        SELECT   c.CashNo             AS intCashNo
+                ,c.TransactionDate    AS transaction_date
+                ,c.PurchaseState      AS strPurchaseState
+                ,c.PayAmt             AS amount
+                ,c.CashAmt            AS intCashAmt
+                ,c.RemainCashAmt      AS intRemainCashAmt
+                ,c.Pgcode             AS pgcode
+                ,r.Reason             AS strReason
+                ,r.AdminNo            AS intAdminNo
+        FROM    TCashMst c LEFT JOIN TReasonMsgMst r
+        ON      c.CashNo = r.No
+        WHERE   c.UserNo = #{intUserNo} AND c.TransactionDate >= #{searchStartDate} AND c.TransactionDate <![CDATA[ <= ]]> #{searchEndDate}
+        ORDER BY CashNo DESC
+    </select>
+    
+    
     <!-- 전체 결제 내역 가져오기 -->
     <select id="selectAllCashList" resultType="PGInfo">
         SELECT   c.CashNo             AS intCashNo
@@ -119,6 +137,23 @@
                 FROM TCashMst c left join TReasonMsgMst r
                 on c.CashNo = r.No
                 WHERE c.UserNo = #{intUserNo} ) AS resultTable
+        WHERE rownumber > (#{curPage} - 1) * 25
+    </select>
+    
+     <!-- 캐시 내역 페이징처리(날짜검색) -->
+    <select id="searchCashPaging" resultType="PGInfo">
+        SELECT TOP 25 resultTable.*
+        FROM   (SELECT TOP (25 * #{curPage}) ROW_NUMBER() OVER (ORDER BY CashNo DESC)    AS rownumber
+                                                            ,c.CashNo             AS intCashNo
+                                                            ,c.TransactionDate    AS transaction_date
+                                                            ,c.PurchaseState      AS strPurchaseState
+                                                            ,c.PayAmt             AS amount
+                                                            ,c.CashAmt            AS intCashAmt
+                                                            ,c.Pgcode             AS pgcode
+                                                            ,r.Reason             AS strReason
+                FROM TCashMst c left join TReasonMsgMst r
+                on c.CashNo = r.No
+                WHERE c.UserNo = #{intUserNo} AND c.TransactionDate >= #{searchStartDate} AND c.TransactionDate <![CDATA[ <= ]]> #{searchEndDate} ) AS resultTable
         WHERE rownumber > (#{curPage} - 1) * 25
     </select>
     

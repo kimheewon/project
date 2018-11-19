@@ -77,4 +77,9 @@ public class ProductDAO {
 	public String selectReason(BigInteger no) {
 		return sqlSession.selectOne("productSql.selectReason", no);
 	}
+
+	//회원 이름 찾기
+	public String selectUserName(int userNo) {
+		return sqlSession.selectOne("userSql.selectUserName", userNo);
+	}
 }

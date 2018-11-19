@@ -150,10 +150,12 @@
                 ,a.ItemNo           AS intItemNo
                 ,b.ItemName         AS strItemName
                 ,a.TotalItemPrice   AS intItemTotalPrice
-                ,a.PurchaseDate     AS strPurchaseDate
+                ,a.PurchaseDate     AS datePurchaseDate
                 ,a.Flag             AS intFlag
+                ,a.UserNo           AS intUserNo
         FROM TItemPurchaseMst a LEFT JOIN TItemInfoMgmt b
         ON a.ItemNo = b.ItemNo
+        ORDER BY a.PurchaseNo DESC
    </select>
    
    <!-- 회수 사유 찾기 -->
@@ -163,4 +165,5 @@
         WHERE No = #{no}
    </select>
        
+   
 </mapper>

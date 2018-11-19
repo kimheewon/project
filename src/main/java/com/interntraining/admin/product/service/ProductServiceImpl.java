@@ -85,7 +85,11 @@ public class ProductServiceImpl implements ProductService{
 		for(int i=0; i<item.size();i++) {
 			BigInteger no = item.get(i).getIntNumber();
 			String reason = productDAO.selectReason(no);	//회수 사유 찾기
-			item.get(i).setStrReason(reason);;
+			item.get(i).setStrReason(reason);
+			
+			int userNo = item.get(i).getIntUserNo();		//회원 이름 찾기
+			String name = productDAO.selectUserName(userNo);
+			item.get(i).setStrUserName(name);
 		}
 		return item;
 		

@@ -46,7 +46,24 @@ public class PaginationCash{
     private String keyWord;
     
     private int intBoardCateNo;		//게시판카테고리 번호
-
+	private String	searchEndDate;
+	private String 	searchStartDate;
+	
+	
+	
+	
+	public String getSearchEndDate() {
+		return searchEndDate;
+	}
+	public void setSearchEndDate(String searchEndDate) {
+		this.searchEndDate = searchEndDate;
+	}
+	public String getSearchStartDate() {
+		return searchStartDate;
+	}
+	public void setSearchStartDate(String searchStartDate) {
+		this.searchStartDate = searchStartDate;
+	}
     
 	public int getIntUserNo() {
 		return intUserNo;

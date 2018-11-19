@@ -327,6 +327,25 @@ public class ItemShopServiceImpl implements ItemShopService{
 		itemShopDAO.updateUserCashOutMst(userNew);		//아이템 구매 취소
 	}
 
+	//아이템 구매 리스트(날짜검색)
+	@Override
+	public List<ItemShopInfo> searchAllPurchaseList(ItemShopInfo info) {
+		return itemShopDAO.searchAllPurchaseList(info);
+	}
+
+	//아이템 구매 리스트 페이징 처리(날짜검색)
+	@Override
+	public List<ItemShopInfo> searchAllPurchasePaging(PaginationCash pagination) {
+		List<ItemShopInfo> item = itemShopDAO.searchAllPurchasePaging(pagination);
+		
+		for(int i=0; i<item.size();i++) {
+			int no = item.get(i).getIntItemNo();
+			String name = itemShopDAO.selectItemName(no);	//아이템 명 찾기
+			item.get(i).setStrItemName(name);
+		}
+		return item;
+	}
+
 	
 }
 
