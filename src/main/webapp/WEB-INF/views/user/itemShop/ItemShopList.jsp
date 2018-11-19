@@ -26,7 +26,7 @@
     
 <jsp:include page="../../login/navigation.jsp" flush="true"/>
 
-<div class="container_t">
+<div class="container_t" style="height: 1330px;">
        <h3 style="color:#2c3e50;margin-left: 1%;">아이템샵</h3>    
         <br><br>
         

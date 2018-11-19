@@ -20,8 +20,11 @@
 
 </head>
 <style>
+@font-face{font-family:'Bareun'; src:url('/font/BareunDotumOTF1.otf')}
+@font-face{font-family:'candy'; src:url('/font/THE_candybar.ttf')}
+@font-face{font-family:'TmonTium'; src:url('/font/TmonTium.ttf')}
 .container_t {
-    
+        font-family: Bareun;
         padding-right: 15px;
         padding-left: 15px;
         margin-right: auto;
@@ -30,10 +33,58 @@
         margin: 0 auto;     /* 가로로 중앙에 배치 */
         padding-top: 3%;   /* 테두리와 내용 사이의 패딩 여백 */
     }
-  #cashChoosStyle{  
+ #cashChoosStyle{  
         padding-top: 1%;
     font-size: 18px;
     padding-left: 2%;
+        font-family: Bareun;
+}
+#credit{
+    cursor: pointer;
+    /* border: none; */
+    /* width: 50%; */
+    width: 15%;
+    height: 50pt;
+    font-weight: bold;
+    background-color: #ececec;
+    border: 2px solid lightgray;
+    color: #343434;
+    margin-right: 3%;
+}
+#credit:hover{
+    cursor: pointer;
+    /* border: none; */
+    /* width: 50%; */
+    width: 15%;
+    height: 50pt;
+    font-weight: bold;
+    background-color: #767676;
+    border: 2px solid lightgray;
+    color: white;
+    margin-right: 3%;
+}
+#mobile{
+    cursor: pointer;
+    /* border: none; */
+    /* width: 50%; */
+    width: 15%;
+    height: 50pt;
+    font-weight: bold;
+    background-color: #ececec;
+    border: 2px solid lightgray;
+    color: #343434;
+}
+#mobile:hover{
+    cursor: pointer;
+    /* border: none; */
+    /* width: 50%; */
+    width: 15%;
+    height: 50pt;
+    font-weight: bold;
+    background-color: #767676;
+    border: 2px solid lightgray;
+    color: white;
+    
 }
 </style>
 <body>
@@ -42,7 +93,7 @@
 <jsp:include page="../../login/navigation.jsp" flush="true"/>
 
 <div class="container_t">
-    <h3 style="color:#2c3e50;margin-left: 6%;">캐시 구매</h3><br><br><br>
+    <h3 style="color:#2c3e50;margin-left: 6%;">캐시 구매</h3><br><br>
         <form action="/Cash/Purchase" method="post">
             <table style="margin-bottom: 1rem;width: 80%;margin: auto;border: 1px solid #3a5269">
                 <colgroup>
@@ -56,7 +107,7 @@
 		              <small style="padding-left: 3%;font-weight: bold;color: #5e646b;">(&nbsp;보유캐시&nbsp;:&nbsp;&nbsp;&nbsp;<fmt:formatNumber value='<%= session.getAttribute("cash") %>' pattern="#,###" />&nbsp;코인&nbsp;)</small></td>                
 		           </tr>        
             </table>
-            <br><br><br><br>
+            <br><br>
 	        <table style="margin-bottom: 1rem;width: 80%;margin: auto;">
 	           <colgroup>
                    <col width = "33%"/>
@@ -78,26 +129,29 @@
                         <input type="text" name="cashWrite" id="cashWrite" value="" onkeyup="inputNumberFormat(this)" style="width: 40%;text-align: right;">&nbsp;&nbsp;원</td>
                </tr>
 	        </table>
-	        <br><br><br><br>
+	        <br><br>
             <table style="margin-bottom: 1rem;width: 80%;margin: auto;">
-               <colgroup>
-                   <col width = "33%"/>
-                   <col width = "33%"/>
-                   <col width = "*"/>            
-               </colgroup>
+               
                <tr>
                    <th colspan="3" style="border-bottom: 1px solid #8f959c;font-size: 20px;padding-bottom: 1%;">간편결제</th>
                </tr>
                <tr>
-                   <td id="cashChoosStyle"><input type="button" name="purchase" id="" value="네이버페이"></td>
-                   <td id="cashChoosStyle"><input type="button" name="purchase"  value="creditcard" alt="신용카드"></td>
-                   <td id="cashChoosStyle"><input type="button" name="purchase" value="mobile" alt="휴대폰"></td>
+                   <td id="cashChoosStyle"><input type="button" name="purchase" id="credit" value="creditcard" alt="신용카드" >
+                   <input type="button" id="mobile" name="purchase" value="mobile" alt="휴대폰"></td>
                </tr>
             </table>
             <br><br><br>
+            <div class="container_t" style="border: 1px solid #2c3e50; padding-top: 1%; font-family: Bareun;width: 80%;">
+		        <ul>
+		            <li> 캐시는 구매 후 <span style="color: #d11d53;">현금으로 환불이 되지 않습니다.</span></li>
+		            <li> 결제 후 바로 캐시로 적립됩니다.</li>
+		            <li> 적립된 캐시는 <span style="color: #d11d53;">내 정보 > 캐시 내역</span>에서 확인할 수 있습니다.</li>
+		            <li> 문의전화 : 010-3337-5421 (오전 9시 ~ 오후 6시. 주말 및 공휴일 제외)</li>
+		        </ul>
+	        </div>
                  
         </form>
-        <br><br><br><br>
+        <br><br>
 </div>        
 </body>
 <jsp:include page="../../bottom.jsp" flush="true"/>
@@ -109,6 +163,7 @@ $(document).ready(function() { // 해당 페이지 Loading 후,
 		if($("input[name=cashChoose]:checked").val() == "직접입력"){ 
 		    $("input[name=cashWrite]").attr("disabled",false); 
 		    document.getElementById("money").value = "";
+		    document.getElementById("money").value = document.getElementById("cashWrite").value; 
 		    
 		} else { 
 			$("input[name=cashWrite]").attr("value",""); 

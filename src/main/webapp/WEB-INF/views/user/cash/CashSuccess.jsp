@@ -45,7 +45,7 @@
 <jsp:include page="../../login/navigation.jsp" flush="true"/>
 
 <div class="container_t">
-    <h3 style="color:#2c3e50;margin-left: 6%;">캐시 구매(결제 완료)</h3><br><br><br>
+    <h3 style="color:#2c3e50;margin-left: 6%;">캐시 구매(결제 완료)</h3><br>
         <p style="text-align: center;"><img style="width: 13%;" src="/img/piggy-bank3.png"></p>
         <br><p style="text-align: center;font-size: 30px; font-weight: bold; color: #2c3e50; font-family: TmonTium;"><span style="color:#d11d53">충전</span>이 <span style="color:#d11d53">완료 </span>되었습니다.</p>
         <br><br>
@@ -69,7 +69,7 @@
                     <fmt:formatNumber value="${result.intTotalCashAmt}" pattern="#,###" />&nbsp;코인</td>              
                 </tr>            
             </table>
-            <br><br><br><br>         
+            <br><br>  
           
         </form>
         <div class="container_t" style="border: 1px solid #d11d53;padding-top: 1%;font-family: Bareun;">

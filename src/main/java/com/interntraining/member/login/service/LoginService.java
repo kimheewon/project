@@ -26,6 +26,9 @@ public interface LoginService {
 	//보유캐시 정보
 	public User selectCashInfo(int userNo);
 
+	//비밀번호 확인
+	public int passwordCheck(User user);
+
 	
 	
 }

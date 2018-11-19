@@ -47,7 +47,8 @@ public class UserController {
 		int check = 0;
 		if(userid != null) {
 			check = 1;	//DB에 id 있음
-		}				
+		}	
+		
 		return check;	
     }
 

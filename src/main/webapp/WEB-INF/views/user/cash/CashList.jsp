@@ -91,6 +91,10 @@
     width: 125px;
     color: white;
     }
+    
+    #cursor{
+    cursor: pointer;
+    }
 </style>
 <body>
 
@@ -197,35 +201,37 @@
             <thead style="text-align: center;font-size: 20px;background-color: #f2f2e8;color: #2c3e50;font-family: TmonTium;">
                 <tr>                        
                     <th style="padding-bottom: 1%;padding-top: 1%;">#</th>
-                    <th style="padding-bottom: 1%;padding-top: 1%;">일&nbsp;&nbsp;시</th>
-                    <th style="padding-bottom: 1%;padding-top: 1%;">번&nbsp;&nbsp;호</th>
-                    <th style="padding-bottom: 1%;padding-top: 1%;">상&nbsp;&nbsp;태</th>
+                   
+                    <th style="padding-bottom: 1%;padding-top: 1%;">번&nbsp;&nbsp;호</th>                    
                     <th style="padding-bottom: 1%;padding-top: 1%;">금&nbsp;&nbsp;액</th>
-                    <th style="padding-bottom: 1%;padding-top: 1%;">캐&nbsp;&nbsp;시</th>
+                    <th style="padding-bottom: 1%;padding-top: 1%;">캐&nbsp;&nbsp;시</th>                    
                     <th style="padding-bottom: 1%;padding-top: 1%;">결제수단</th>
+                    <th style="padding-bottom: 1%;padding-top: 1%;">상&nbsp;&nbsp;태</th>
+                    <th style="padding-bottom: 1%;padding-top: 1%;">일&nbsp;&nbsp;시</th>
                 </tr>
             </thead>
             <tbody style="text-align: center;font-size: 17px;font-family: Bareun;">
                 <c:forEach var="cash" items="${cashList}" varStatus="status">   
 		            <tr>   
 		                <td style="padding-top: 1%;padding-bottom: 1%;">${cash.intNum}</td>
-                        <td style="padding-top: 1%;padding-bottom: 1%;">${cash.transaction_date}</td>
 		                <td style="padding-top: 1%;padding-bottom: 1%;">${cash.intCashNo}</td>
-		                <td style="padding-top: 1%;padding-bottom: 1%;">
-		                    <c:choose>
-	                            <c:when test="${cash.strReason ne '0'}">                                        
-	                                <span data-toggle="tooltip" data-placement="bottom" data-original-title="${cash.strReason}">${cash.strPurchaseState}</span> 
-	                            </c:when>
-	                            <c:otherwise>
-	                                ${cash.strPurchaseState}
-	                            </c:otherwise>
-                            </c:choose> 
-		                </td>
+		                
 		                <td style="padding-top: 1%;padding-bottom: 1%;">
 		                  <c:if test="${cash.amount ne 0}"><fmt:formatNumber value="${cash.amount}" pattern="#,###" />&nbsp;원</c:if>
 		                </td>
 		                <td style="padding-top: 1%;padding-bottom: 1%;"><fmt:formatNumber value="${cash.intCashAmt}" pattern="#,###" />&nbsp;코인</td>
 		                <td style="padding-top: 1%;padding-bottom: 1%;">${cash.strPurchasekind}</td>	
+		                <td style="padding-top: 1%;padding-bottom: 1%;">
+                            <c:choose>
+                                <c:when test="${cash.strReason ne '0'}">                                        
+                                    <span id="cursor" data-toggle="tooltip" data-placement="bottom" data-original-title="${cash.strReason}">${cash.strPurchaseState}</span> 
+                                </c:when>
+                                <c:otherwise>
+                                    ${cash.strPurchaseState}
+                                </c:otherwise>
+                            </c:choose> 
+                        </td>
+                        <td style="padding-top: 1%;padding-bottom: 1%;">${cash.transaction_date}</td>
 		            </tr>   
 	            </c:forEach>
             </tbody>     
@@ -270,6 +276,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <!-- datepicker 한국어로 -->
@@ -278,7 +285,9 @@
 <script>                
 
 $(document).ready(function() {
-    //datepicker 한국어로 사용하기 위한 언어설정
+    
+	 $('[data-toggle="tooltip"]').tooltip();
+	//datepicker 한국어로 사용하기 위한 언어설정
     $.datepicker.setDefaults($.datepicker.regional['ko']);     
         
     // Datepicker            
@@ -380,11 +389,7 @@ $(document).ready(function() {
 
         }
 
-            
-</script>
-        
 
-<script type="text/javascript">
 function fn_paging(curPage) {
     var f = document.frm;
     var start = document.getElementById("searchStartDate").value;
@@ -398,8 +403,6 @@ function fn_paging(curPage) {
     }
     f.submit();    
 }
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
+
 </script>
 </html>

@@ -76,6 +76,18 @@ public class LoginServiceImpl implements LoginService {
 		return loginDAO.selectCashInfo(userNo);
 	}
 
+	//비밀번호 확인
+	@Override
+	public int passwordCheck(User user) {
+		
+		int check = 0;
+		String userId = loginDAO.passwordCheck(user);
+		if(userId != null) {
+			check=1;
+		}
+		return check;
+	}
+
 	
 
 	

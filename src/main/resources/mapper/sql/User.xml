@@ -13,4 +13,10 @@
         WHERE UserNo = #{userNo}
     </select>
 
+    <!-- 비밀번호 확인 -->
+    <select id="passwordCheck" resultType="String">
+        SELECT UserId
+        FROM TUser
+        WHERE UserNo = #{intUserNo} AND UserPw = #{StrUserPw}
+    </select>
 </mapper>

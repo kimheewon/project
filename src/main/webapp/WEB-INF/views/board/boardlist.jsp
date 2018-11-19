@@ -40,7 +40,7 @@
 	
 <jsp:include page="../login/navigation.jsp" flush="true"/>
 
-    <div class="container_t">
+    <div class="container_t" style="height: 750px;">
     
   		<h3 style="color:#2c3e50;margin-left: 1%;">${strBoardCateName}</h3>
   		
@@ -61,12 +61,20 @@
 				<th style="text-align: center;">#</th>
 				<th style="text-align: center;">제&nbsp;&nbsp;&nbsp;&nbsp;목</th>
 				<th style="text-align: center;">작성자</th>
-				<th style="text-align: center;">작성&nbsp;일시</th>
+				<th style="text-align: center;">작성일</th>
 				<th style="text-align: center;">조회수</th>
 			</tr>
 			</thead>
+			
+		
+		   <c:if test="${boardlist eq ''}">
+             <tr>
+                <td colspan="5" style="color: #5a5a5a; font-size: 15pt;text-align: center;">게시글이 없습니다.</td>
+             </tr>
+            </c:if>
+
 			<c:forEach var="board" items="${boardlist}" varStatus="status">
-	
+	              
 				<tr>
 					<td style="text-align: center; color:#3b5976;">${board.intNum}</td>
 					<c:choose>

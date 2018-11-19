@@ -24,7 +24,15 @@ public class MembershipInfo {
 	private String strOrderNo;
 	private int    intAmount;
 	private BigInteger intcashNo;
+	private Date	datePurchaseDate;
 	
+	
+	public Date getDatePurchaseDate() {
+		return datePurchaseDate;
+	}
+	public void setDatePurchaseDate(Date datePurchaseDate) {
+		this.datePurchaseDate = datePurchaseDate;
+	}
 	public int getIntUserNo() {
 		return intUserNo;
 	}

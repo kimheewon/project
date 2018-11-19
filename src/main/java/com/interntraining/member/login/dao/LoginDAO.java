@@ -45,6 +45,11 @@ public class LoginDAO {
 		return sqlSession.selectOne("sql.selectCashInfo",userNo);
 	}
 
+	//비밀번호 확인
+	public String passwordCheck(User user) {
+		return sqlSession.selectOne("userSql.passwordCheck",user);
+	}
+
 	
 
 }

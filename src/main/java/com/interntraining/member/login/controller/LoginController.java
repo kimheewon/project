@@ -12,12 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.interntraining.admin.boardCategory.domain.BoardCategoryInfo;
 import com.interntraining.member.login.domain.User;
 import com.interntraining.member.login.service.LoginService;
+import com.interntraining.member.user.domain.Member;
 /*
  * 로그인 관리
  * 	- 로그인
@@ -178,7 +180,33 @@ public class LoginController {
 		return mv;
 	}
 	
+	//비밀번호 확인 페이지로 이동
+	@RequestMapping(value="/passwordCheckForm")
+	public ModelAndView passwordCheckForm(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 	
+		mav.setViewName("/login/passwordCheck");
+		return mav;
+		
+	}
 	
+	//비밀번호 확인
+	@RequestMapping(value="/passwordCheck",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public int passwordCheck(String password, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+		
+		int check = 0;	//실패
+	
+		int userNo = (int)session.getAttribute("no");
+		
+		User user = new User();
+		user.setIntUserNo(userNo);
+		user.setStrUserPw(password);
+		
+		check = loginService.passwordCheck(user);
+		
+		return check;
+		
+	}
 	
 }

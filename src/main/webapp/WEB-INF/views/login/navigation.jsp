@@ -85,16 +85,16 @@
                     <li  id="menuLi" >
                         <a id="menuLink"  >마이페이지</a>
                         <ul id="submenu" >
-                            <li class='has-sub 'id="submenuLi">
-                                <a id="submenuLink" href="/login/myPageForm" style="font-size:14px;text-decoration: none;" >내 정보</a>      
+                            <li class='has-sub2'id="submenuLi">
+                                <a id="submenuLink" href="/login/passwordCheckForm" style="font-size:14px;text-decoration: none;" >내 정보</a>      
                             </li>
-                            <li class='has-sub 'id="submenuLi">
+                            <li class='has-sub2' id="submenuLi">
                                 <a id="submenuLink" href="/Cash/PurchaseForm" style="font-size:14px;text-decoration: none;" >캐시 충전(PG)</a>      
                             </li>  
-                            <li class='has-sub 'id="submenuLi">
+                            <li class='has-sub2' id="submenuLi">
                                 <a id="submenuLink" href="/Cash/CashList" style="font-size:14px;text-decoration: none;" >캐시 충전 내역</a>      
                             </li>
-                            <li class='has-sub 'id="submenuLi">
+                            <li class='has-sub2' id="submenuLi">
                                 <a id="submenuLink" href="/ItemShop/ItemPurchaseList" style="font-size:14px;text-decoration: none;" >아이템 구매 내역</a>      
                             </li>                                                
                          </ul>                                            
