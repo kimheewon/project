@@ -145,10 +145,10 @@ input[type="number"]::-webkit-inner-spin-button {
                 </tr>
                 <tr>
                    <td style="padding-left: 2%;border-right: 1px solid #aeaea7;border-bottom: 1px solid #aeaea7;font-size: 12pt;height: 50px;">운송장번호</td>
-                   <td style="padding-left: 2%;border-bottom: 1px solid #aeaea7;color: gray;font-style: italic;">
+                   <td style="padding-left: 2%;border-bottom: 1px solid #aeaea7;">
                          <c:choose>
                             <c:when test="${empty deliver.intInvoiceNumber}">
-                                                상품 준비중...
+                                <span style="color: gray;font-style: italic;">상품 준비중...</span>
                             </c:when>
                             <c:otherwise>
                                 ( ${deliver.strCompanyName} )  ${deliver.intInvoiceNumber}

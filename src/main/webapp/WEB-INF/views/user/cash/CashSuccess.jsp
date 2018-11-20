@@ -48,7 +48,7 @@
     <h3 style="color:#2c3e50;margin-left: 6%;">캐시 구매(결제 완료)</h3><br>
         <p style="text-align: center;"><img style="width: 13%;" src="/img/piggy-bank3.png"></p>
         <br><p style="text-align: center;font-size: 30px; font-weight: bold; color: #2c3e50; font-family: TmonTium;"><span style="color:#d11d53">충전</span>이 <span style="color:#d11d53">완료 </span>되었습니다.</p>
-        <br><br>
+        <br>
         <form action="/Cash/Purchase" method="post">
             <table style="margin-bottom: 1rem;width: 60%;margin: auto;border: 1px solid #3a5269">
                 <colgroup>
@@ -80,7 +80,7 @@
             <li> 문의전화 : 010-3337-5421 (오전 9시 ~ 오후 6시. 주말 및 공휴일 제외)</li>
         </ul>
         </div>
-        <br><br><br>  
+        <br>
         
 </div>        
 </body>

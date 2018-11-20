@@ -105,7 +105,7 @@
                ,PurchaseDate   AS strPurchaseDate
                ,TotalItemPrice AS intItemTotalPrice
         FROM TItemPurchaseMst
-        WHERE UserNo = #{intUserNo} AND PurchaseDate >= #{searchStartDate} AND PurchaseDate <![CDATA[ <= ]]> #{searchEndDate}
+        WHERE UserNo = #{intUserNo} AND CONVERT(NVARCHAR(11),PurchaseDate,121) BETWEEN #{searchStartDate} AND #{searchEndDate}
     </select>
     
     <!-- 아이템 구매 내역 페이징처리 -->
@@ -136,7 +136,7 @@
                                                             ,c.Flag                         AS intFlag
                 FROM TItemPurchaseMst c left join TReasonMsgMst r
                 on c.PurchaseNo = r.No
-                WHERE c.UserNo = #{intUserNo} AND PurchaseDate >= #{searchStartDate} AND PurchaseDate <![CDATA[ <= ]]> #{searchEndDate}) AS resultTable
+                WHERE c.UserNo = #{intUserNo} AND CONVERT(NVARCHAR(11),PurchaseDate,121) BETWEEN #{searchStartDate} AND #{searchEndDate}) AS resultTable
         WHERE rownumber > (#{curPage} - 1) * 25
     </select>
     

@@ -46,6 +46,13 @@ input[type="number"]::-webkit-inner-spin-button {
     box-shadow: 0 2px #666;
     transform: translateY(4px);
 }
+input[type="text"]:enabled {
+    background: white !important;;
+}
+
+input[type="text"]:disabled {
+    background: #dddddd !important;;
+}
 </style>
 <body>
 
@@ -143,18 +150,21 @@ input[type="number"]::-webkit-inner-spin-button {
                         <input id="strTel" name="strTel" type="text" style="padding-left: 2%;width: 23%;border-radius: 8px;background-color: white;border: 1px solid gray;height: 31px;font-size: 14pt;" maxlength="17" onkeyup="autoHypenPhone(this)"></td>
                 </tr>
                 <tr>
-                   <td rowspan="3" style="padding-left: 2%;border-right: 1px solid #aeaea7;border-bottom: 1px solid #aeaea7;font-size: 12pt;height: 50px;">주소</td>
-                   <td style="padding-left: 1%;height: 40px;"><input type="text" value="우편번호" readonly="readonly" style="width: 13%;border: none;color: #5d5d5d;font-size: 12pt;">
+                   <td rowspan="3" style="padding-left: 2%;height: 124px;border-right: 1px solid #aeaea7;border-bottom: 1px solid #aeaea7;font-size: 12pt;height: 50px;">주소</td>
+                   <td style="padding-left: 1%;height: 40px;padding-top: 10px;">
+                    <input type="text" value="우편번호" readonly="readonly" style="width: 13%;border: none;color: #5d5d5d;font-size: 12pt; ">
                     <input id="strPostcode" name="strPostcode" type="text" style="padding-left: 2%;font-size: 14pt;letter-spacing: 1pt;border-radius: 8px;width: 15%;background-color: white;border: 1px solid gray;height: 31px;" readonly="readonly">
                     <input type="button" style="border-radius: 8px;width: 11%;background-color: #2c3e50;border: 1px solid #2c3e50;color:white;height: 31px;" value="주소 검색" onclick="execDaumPostcode()"></td>
                </tr>
                <tr>
-                   <td style="padding-left: 1%;height: 40px;"><input type="text" value="도로명주소" readonly="readonly" style="width: 13%;border: none;color: #5d5d5d;font-size: 12pt;">
+                   <td style="padding-left: 1%;height: 40px;">
+                    <input type="text" value="도로명주소" readonly="readonly" style="width: 13%;border: none;color: #5d5d5d;font-size: 12pt;">
                     <input id="strAddress" name="strAddress" type="text" style="padding-left: 2%;font-size: 13pt;border-radius: 8px;width: 80%;background-color: white;border: 1px solid gray;height: 31px;" readonly="readonly"></td>
                </tr>
                <tr>
-                   <td style="padding-left: 1%;border-bottom: 1px solid #aeaea7;height: 40px;"><input type="text" value="상세주소" readonly="readonly" style="width: 13%;border: none;color: #5d5d5d;font-size: 12pt;">
-                    <input type="text" id="strAddress2" name="strAddress2" style="padding-left: 2%;font-size: 13pt;border-radius: 8px;width: 80%;background-color: white;border: 1px solid gray;height: 31px;"></td>
+                   <td style="padding-left: 1%;border-bottom: 1px solid #aeaea7;height: 40px;padding-bottom: 10px;">
+                   <input type="text" value="상세주소" readonly="readonly" style="width: 13%;border: none;color: #5d5d5d;font-size: 12pt;">
+                   <input type="text"id="strAddress2" disabled="disabled" name="strAddress2" style="padding-left: 2%;font-size: 13pt;border-radius: 8px;width: 80%;background-color: white;border: 1px solid gray;height: 31px;"></td>
                </tr>
                <tr>
                    <td style="padding-left: 2%;border-right: 1px solid #aeaea7;border-bottom: 1px solid #aeaea7;font-size: 12pt;height: 50px;">배송시 요청사항</td>
@@ -176,6 +186,50 @@ input[type="number"]::-webkit-inner-spin-button {
  <!-- 우편번호 -->
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
+
+//빈값 확인
+$("#shopBtn").on("click",function(){
+	var name = document.getElementById("strName");
+	var phone = document.getElementById("strTel");
+	var postcode = document.getElementById("strPostcode");
+	var address2 = document.getElementById("strAddress2");
+	
+	if(name.value == ""){
+		alert("이름을 입력하세요.");
+		name.focus();
+		return false;	
+	}
+	if(phone.value == ""){
+        alert("전화번호를 입력하세요.");
+        phone.focus();
+        return false;   
+    }
+	else if(phone.value != ""){
+		var number = phone.value;
+		var str = number.replace(/\ - /g,'');
+		var phoneNumberRegex = /^[0-9]{3}[0-9]{4}[0-9]{4}$/;       
+        
+        if(!phoneNumberRegex.test(str)) {
+            alert("전화번호가 잘못된 형식입니다.");
+            phone.value="";
+            phone.focus();
+            return false; 
+        }
+	}
+	if(address2.value == ""){
+        alert("주소를 입력하세요.");
+        address2.focus();
+        return false;   
+    }
+	if(postcode.value == ""){
+        alert("우편번호를 입력하세요.");
+        postcode.focus();
+        return false;   
+    }
+	
+	
+	
+});
 function execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -211,6 +265,7 @@ function execDaumPostcode() {
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('strPostcode').value = data.zonecode; //5자리 새우편번호 사용
             document.getElementById('strAddress').value = fullAddr;
+            $('#strAddress2').attr('disabled', false);
 
             // 커서를 상세주소 필드로 이동한다.
             document.getElementById('strAddress2').focus();
@@ -292,6 +347,7 @@ function hypen(str){
                    if(info.strPostCode != null){
                 	   $('#strPostcode').val(info.strPostCode);
                        $('#strAddress').val(info.strAdress);
+                       $('#strAddress2').attr('disabled', false);
                        $('#strAddress2').val(info.strAdress2);
                    }
 

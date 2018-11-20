@@ -135,14 +135,14 @@
                                     <td style="text-align: center; color:#3b5976;" class="sorting">회수 캐시액 *</td>         
                                     <td style="font-size: 15pt;color:#3b5976;vertical-align: middle;">
                                         <p style="padding-left: 3%;margin-bottom: 0px;">
-                                            <input id="intAmount" class="form-control col-md-7 col-xs-12" style="background-color: white;width:50%;text-align: right;
+                                            <input id="intAmount" required="required" class="form-control col-md-7 col-xs-12" style="background-color: white;width:50%;text-align: right;
                                                 font-size: 20px; color: #d11d53;" type="text" onkeyup="inputNumberFormat(this)"  name="strCash" id="strCash" >&nbsp;&nbsp;코인</p></td>
                                 </tr>
                                 <tr>
                                     <td style="text-align: center; color:#3b5976;" class="sorting">사&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;유 *</td>         
                                     <td style="text-align: center; vertical-align:middle;color:#3b5976;">
                                         <p style="padding-left: 3%;padding-right: 3%;margin-bottom: 0px;">
-                                            <input id="strMemo" class="form-control col-md-7 col-xs-12" style="background-color: white;font-size: 18px;" type="text" name="strMemo" maxlength="44" placeholder="최대 44자까지 작성 가능합니다."> 
+                                            <input id="strMemo" required="required" class="form-control col-md-7 col-xs-12" style="background-color: white;font-size: 18px;" type="text" name="strMemo" maxlength="44" placeholder="최대 44자까지 작성 가능합니다."> 
                                         </p>
                                     </td>
                                 </tr>
