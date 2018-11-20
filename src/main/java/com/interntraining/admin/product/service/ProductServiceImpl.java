@@ -86,10 +86,10 @@ public class ProductServiceImpl implements ProductService{
 			BigInteger no = item.get(i).getIntNumber();
 			String reason = productDAO.selectReason(no);	//회수 사유 찾기
 			item.get(i).setStrReason(reason);
-			
+			/*
 			int userNo = item.get(i).getIntUserNo();		//회원 이름 찾기
 			String name = productDAO.selectUserName(userNo);
-			item.get(i).setStrUserName(name);
+			item.get(i).setStrUserName(name);*/
 		}
 		return item;
 		
@@ -128,6 +128,32 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public ItemShopInfo selectDeliveryInfo(BigInteger purchaseNo) {
 		return productDAO.selectDeliveryInfo(purchaseNo);
+	}
+
+	//택배회사 정보 가져오기
+	@Override
+	public List<ItemShopInfo> selectCompany() {
+		return productDAO.selectCompany();
+	}
+
+	//송장번호 insert
+	@Override
+	public void insertDeliveryInvoice(ItemShopInfo item) {
+		productDAO.insertDeliveryInvoice(item);	//송장번호 insert
+		item.setIntFlag(2);
+		productDAO.updateProductFlag(item);	//배송상태 update
+	}
+
+	//택배회사 url 찾기
+	@Override
+	public String selectCompanyUrl(int code) {
+		return productDAO.selectCompanyUrl(code);
+	}
+
+	//invoice와 code 찾기
+	@Override
+	public ItemShopInfo selectInvoice(BigInteger purchaseNo) {
+		return productDAO.selectInvoice(purchaseNo);
 	}
 	
 }

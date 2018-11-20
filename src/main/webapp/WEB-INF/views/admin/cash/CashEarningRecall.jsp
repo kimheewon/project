@@ -62,7 +62,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3 style="font-family: Bareun;color: #605183;font-weight: bold;">회원들의,</h3>
+                <h3 style="font-family: Bareun;color: #605183;font-weight: bold;"></h3>
               </div>
 
               <div class="title_right">
@@ -102,7 +102,7 @@
                           <th style="text-align: center; padding-left: 2%; color:#00003f">아&nbsp;이&nbsp;디</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">총 적립 캐시</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">총 사용 캐시</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">보유 캐시</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">보유&nbsp;&nbsp;캐시</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">등&nbsp;&nbsp;급</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">작&nbsp;&nbsp;업</th>
                         </tr>
@@ -114,9 +114,9 @@
                             <tr>
                                 <td style="text-align: center; color:#3b5976;" class="sorting">${status.count}</td> 
                                 <td style="text-align: center; color:#3b5976;">${member.strUserid}</td>        
-                                <td style="text-align: center; color:#3b5976;"><fmt:formatNumber value="${member.intTotalInCashAmt}" pattern="#,###" />&nbsp;코인</td>
-                                <td style="text-align: center; color:#3b5976;"><fmt:formatNumber value="${member.intTotalOutCashAmt}" pattern="#,###" />&nbsp;코인</td>
-                                <td style="text-align: center; color:#3b5976;"><fmt:formatNumber value="${member.intTotalCashAmt}" pattern="#,###" />&nbsp;코인</td>
+                                <td style="text-align: right;color: #3b5976;padding-right: 4.5%;"><fmt:formatNumber value="${member.intTotalInCashAmt}" pattern="#,###" />&nbsp;코인</td>
+                                <td style="text-align: right;color: #3b5976;padding-right: 4.5%;"><fmt:formatNumber value="${member.intTotalOutCashAmt}" pattern="#,###" />&nbsp;코인</td>
+                                <td style="text-align: right;color: #3b5976;padding-right: 7%;"><fmt:formatNumber value="${member.intTotalCashAmt}" pattern="#,###" />&nbsp;코인</td>
                                 <td style="text-align: center; color:#3b5976;">${member.strUserGrade}&nbsp;회원</td>
                                 <td style="text-align: center; color:#3b5976;padding-top: 0.5%;padding-bottom: 0.5%;">
                                    <button class="btn btn-primary" style="font-family: Bareun;margin-bottom: 0px;background-color: white; color: #d11d53;border-color: #d11d53;padding-top: 0.7%;padding-bottom: 0.7%;" type="button"

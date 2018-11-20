@@ -39,10 +39,45 @@ public class ItemShopInfo {
 	private Date 	datePurchaseDate;
 	private String	searchEndDate;
 	private String 	searchStartDate;
+	private String	strUserId;
+	
+	private BigInteger intInvoiceNumber;
+	private int 	intCompanyCode;
+	private String 	strCompanyName;
+	private String 	strCompanyUrl;
 	
 	
 	
-	
+	public String getStrCompanyName() {
+		return strCompanyName;
+	}
+	public void setStrCompanyName(String strCompanyName) {
+		this.strCompanyName = strCompanyName;
+	}
+	public String getStrCompanyUrl() {
+		return strCompanyUrl;
+	}
+	public void setStrCompanyUrl(String strCompanyUrl) {
+		this.strCompanyUrl = strCompanyUrl;
+	}
+	public BigInteger getIntInvoiceNumber() {
+		return intInvoiceNumber;
+	}
+	public void setIntInvoiceNumber(BigInteger intInvoiceNumber) {
+		this.intInvoiceNumber = intInvoiceNumber;
+	}
+	public int getIntCompanyCode() {
+		return intCompanyCode;
+	}
+	public void setIntCompanyCode(int intCompanyCode) {
+		this.intCompanyCode = intCompanyCode;
+	}
+	public String getStrUserId() {
+		return strUserId;
+	}
+	public void setStrUserId(String strUserId) {
+		this.strUserId = strUserId;
+	}
 	public String getSearchEndDate() {
 		return searchEndDate;
 	}

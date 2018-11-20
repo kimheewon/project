@@ -40,4 +40,16 @@ public interface ProductService {
 	//배송정보 가져오기
 	public ItemShopInfo selectDeliveryInfo(BigInteger purchaseNo);
 
+	//택배회사 정보 가져오기
+	public List<ItemShopInfo> selectCompany();
+
+	//송장번호 insert
+	public void insertDeliveryInvoice(ItemShopInfo item);
+
+	//택배회사 url 찾기
+	public String selectCompanyUrl(int code);
+
+	//invoice와 code 찾기
+	public ItemShopInfo selectInvoice(BigInteger purchaseNo);
+
 }

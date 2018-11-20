@@ -155,10 +155,11 @@
             <div class="row">              
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
-                   <div class="x_title" style="    padding-left: 90%;">
-                    <h2><small style="  color: #2c3e50;  font-weight: bold;">*은 필수항목입니다.</small></h2>                
-                    <div class="clearfix"></div>
-                  </div>
+                   <div class="x_title">
+                     <h2 style="width: 100%;font-weight: bold;font-family: Bareun;">회원 정보 수정
+                     <small style="color: #2c3e50;font-weight: bold;float: right;">*은 필수항목입니다.</small></h2>                   
+                     <div class="clearfix"></div>
+                   </div>
                    <div class="x_content">
                     <br />
                     <form id="updateInfo" name="updateInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Membership/MembershipUpdate?intUserNo=${intUserNo}" method="POST">

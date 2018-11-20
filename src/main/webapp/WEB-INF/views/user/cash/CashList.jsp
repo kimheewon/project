@@ -95,6 +95,39 @@
     #cursor{
     cursor: pointer;
     }
+    
+[data-tooltip-text]:hover {
+    position: relative;
+}
+
+[data-tooltip-text]:hover:after {
+    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.8);
+
+    -webkit-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
+    -moz-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
+    box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    color: #FFFFFF;
+    font-size: 12px;
+    content: attr(data-tooltip-text);
+
+  margin-bottom: 10px;
+    top: 130%;
+    left: 0;    
+    padding: 7px 12px;
+    position: absolute;
+    width: auto;
+  /*  min-width: 100px;*/
+    max-width: 300px;
+    word-wrap: break-word;
+
+    z-index: 9999;
+}
 </style>
 <body>
 
@@ -224,7 +257,7 @@
 		                <td style="padding-top: 1%;padding-bottom: 1%;">
                             <c:choose>
                                 <c:when test="${cash.strReason ne '0'}">                                        
-                                    <span id="cursor" data-toggle="tooltip" data-placement="bottom" data-original-title="${cash.strReason}">${cash.strPurchaseState}</span> 
+                                    <span id="cursor" data-tooltip-text="${cash.strReason}">${cash.strPurchaseState}</span> 
                                 </c:when>
                                 <c:otherwise>
                                     ${cash.strPurchaseState}
@@ -286,7 +319,7 @@
 
 $(document).ready(function() {
     
-	 $('[data-toggle="tooltip"]').tooltip();
+	
 	//datepicker 한국어로 사용하기 위한 언어설정
     $.datepicker.setDefaults($.datepicker.regional['ko']);     
         

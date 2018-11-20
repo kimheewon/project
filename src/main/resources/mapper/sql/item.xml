@@ -73,14 +73,19 @@
     
     <!-- 배송정보 가져오기 -->
     <select id="selectDeliveryInfo" resultType="ItemShopInfo">
-        SELECT   UserName       AS strName
-                ,UserPhone      AS strTel
-		        ,UserPostCode   AS strPostcode
-		        ,UserAdress     AS strAddress
-		        ,UserAdress2    AS strAddress2
-		        ,RequestMsg     AS strDeliverMsg
-		FROM TDeliveryInfoMst
-		WHERE PurchaseNo = #{purchaseNo}
+       SELECT    d.UserName       AS strName
+                ,d.UserPhone      AS strTel
+                ,d.UserPostCode   AS strPostcode
+                ,d.UserAdress     AS strAddress
+                ,d.UserAdress2    AS strAddress2
+                ,d.RequestMsg     AS strDeliverMsg
+                ,d.InvoiceNumber  AS intInvoiceNumber
+                ,d.CompanyCode    AS intCompanyCode
+                ,c.CompanyName    AS strCompanyName
+                ,c.CompanyUrl     AS strCompanyUrl
+        FROM TDeliveryInfoMst d LEFT JOIN TDliveryCompany c
+        ON d.CompanyCode = c.Code
+        WHERE PurchaseNo = #{purchaseNo}
     </select>
     
     <!-- 아이템 구매 리스트 -->
@@ -178,5 +183,11 @@
         WHERE PurchaseNo = #{purchaseNo}
     </delete>
     
- 
+    <!-- 택배회사 정보 가져오기 -->
+    <select id="selectCompany" resultType="ItemShopInfo">
+        SELECT   Code           AS intCompanyCode
+                ,CompanyName    AS strCompanyName
+                ,CompanyUrl     AS strCompanyUrl
+        FROM TDliveryCompany
+    </select>
 </mapper>

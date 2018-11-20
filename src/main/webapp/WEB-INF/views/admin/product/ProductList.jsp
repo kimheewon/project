@@ -56,7 +56,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>상품 관리</h3>
+                <h3></h3>
               </div>
 
               <div class="title_right">
@@ -74,7 +74,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>목록</h2>
+                    <h2 style="font-family: Bareun;font-weight: bold;">상품 목록</h2>
                     
                     <div class="clearfix"></div>
                   </div>
@@ -113,7 +113,7 @@
                                 <td style="text-align: center; color:#3b5976;vertical-align: middle;">${list.intItemNo}</td>
                                 <td style="text-align: center; color:#3b5976;vertical-align: middle;"><img id="preview" src="${list.strfileUrl}" style="width: 100px;height: 100px;"></td>
                                 <td style="text-align: center; color:#3b5976;vertical-align: middle;">${list.strItemName}</td>
-                                <td style="text-align: center; color:#3b5976;vertical-align: middle;"><fmt:formatNumber value="${list.intItemPrice}" pattern="#,###" />원</td>
+                                <td style="text-align: right; padding-right: 3%;color:#3b5976;vertical-align: middle;"><fmt:formatNumber value="${list.intItemPrice}" pattern="#,###" />원</td>
                                 <td style="text-align: center; color:#3b5976;vertical-align: middle;">${list.strAdminId}</td>
                                 <td style="text-align: center; color:#3b5976;vertical-align: middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.dateItemDate}"/></td>
                                 <td style="text-align: center; color:#3b5976;vertical-align: middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.dateUpdateItemDate}"/></td>

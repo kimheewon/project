@@ -73,7 +73,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>회원정보 상세보기</h3>
+                <h3></h3>
               </div>
 
               <div class="title_right">
@@ -89,6 +89,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
+                  <h2 style="font-family: Bareun;font-weight: bold;">회원정보 상세보기</h2>           
                     <div style="float:right">
 	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href='/AdminCash/AdminCashList?userNo=${intUserNo}'">결제 내역</button>
 	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href=''">캐시 사용 내역</button>

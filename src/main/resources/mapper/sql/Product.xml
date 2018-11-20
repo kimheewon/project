@@ -152,9 +152,10 @@
                 ,a.TotalItemPrice   AS intItemTotalPrice
                 ,a.PurchaseDate     AS datePurchaseDate
                 ,a.Flag             AS intFlag
-                ,a.UserNo           AS intUserNo
-        FROM TItemPurchaseMst a LEFT JOIN TItemInfoMgmt b
-        ON a.ItemNo = b.ItemNo
+                ,c.UserId           AS strUserId
+                ,c.UserName         AS strUserName
+        FROM TItemPurchaseMst a, TItemInfoMgmt b, Tuser c
+        WHERE a.ItemNo = b.ItemNo AND a.UserNo = c.UserNo 
         ORDER BY a.PurchaseNo DESC
    </select>
    
@@ -165,5 +166,33 @@
         WHERE No = #{no}
    </select>
        
+   <!-- 송장번호 insert -->
+   <update id="insertDeliveryInvoice">
+        UPDATE TDeliveryInfoMst
+		SET InvoiceNumber = #{intInvoiceNumber}
+		    ,CompanyCode = #{intCompanyCode}
+		WHERE PurchaseNo = #{intNumber}   
+   </update>
    
+   <!-- 배송상태 update -->
+   <update id="updateProductFlag">
+	    UPDATE TItemPurchaseMst
+		SET Flag = #{intFlag}
+        WHERE PurchaseNo = #{intNumber}  
+   </update>
+   
+   <!-- 택배회사 url 찾기 -->
+   <select id="selectCompanyUrl" resultType="String">
+	    SELECT CompanyUrl
+		FROM TDliveryCompany
+		WHERE Code = #{code}
+   </select>
+   
+   <!-- invoice와 code 찾기 -->
+   <select id="selectInvoice" resultType="ItemShopInfo">
+        SELECT InvoiceNumber AS intInvoiceNumber
+		      ,CompanyCode   AS intCompanyCode
+		FROM TDeliveryInfoMst
+		WHERE PurchaseNo = #{purchaseNo}
+   </select>
 </mapper>

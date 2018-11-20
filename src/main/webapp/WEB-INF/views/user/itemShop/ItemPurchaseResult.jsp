@@ -46,6 +46,35 @@ input[type="number"]::-webkit-inner-spin-button {
     box-shadow: 0 2px #666;
     transform: translateY(4px);
 }
+
+#deliverBtn{
+    margin-left: 2%;
+    background-color: white;
+    width: 70px;
+    height: 21pt;
+    font-size: 11pt;
+    border-radius: 3pt;
+    border: none;
+    color: #772642;
+    font-family: Bareun;
+    border: 2px solid #772642;
+
+}
+#deliverBtn:hover{
+    background: #f5e3e9;
+    color: #3c1321;
+    box-shadow: 0 2px #999;
+    border: 2px solid #772642;
+    font-weight: bold;
+}
+#deliverBtn:active {
+    background: #f5e3e9;
+    color: #3c1321;
+    box-shadow: 0 2px #666;
+    border: 2px solid #772642;
+    font-weight: bold;
+    transform: translateY(4px);
+}
 </style>
 <body>
 
@@ -103,19 +132,31 @@ input[type="number"]::-webkit-inner-spin-button {
             <br><br><br><br>
             <p style="width:90%; margin-bottom: 0px;font-size: 20px;font-weight: bold;margin: auto;">배송지 정보</p>
             <hr style="width:90%">
+            <input type="hidden" value="${deliver.intCompanyCode}" id="companyCode">
+            <input type="hidden" value="${deliver.intInvoiceNumber}" id="invoiceNumber">
             <table id="deliverTable">
                 <colgroup>
                    <col width = "15%"/>
                    <col width = "*"/>            
-                </colgroup>
-               
+                </colgroup>               
                 <tr>
                    <td style="padding-left: 2%;border-right: 1px solid #aeaea7;border-bottom: 1px solid #aeaea7;font-size: 12pt;height: 50px;">구매번호</td>
                    <td style="padding-left: 2%;border-bottom: 1px solid #aeaea7;">${PurchaseNo}</td>
                 </tr>
                 <tr>
                    <td style="padding-left: 2%;border-right: 1px solid #aeaea7;border-bottom: 1px solid #aeaea7;font-size: 12pt;height: 50px;">운송장번호</td>
-                   <td style="padding-left: 2%;border-bottom: 1px solid #aeaea7;">${PurchaseNo}</td>
+                   <td style="padding-left: 2%;border-bottom: 1px solid #aeaea7;color: gray;font-style: italic;">
+                         <c:choose>
+                            <c:when test="${empty deliver.intInvoiceNumber}">
+                                                상품 준비중...
+                            </c:when>
+                            <c:otherwise>
+                                ( ${deliver.strCompanyName} )  ${deliver.intInvoiceNumber}
+		                        <input type="button" id="deliverBtn" value="배송추적" onclick="deliver()">
+                            </c:otherwise>
+                         </c:choose>
+                   
+                   </td>
                 </tr>
                 <tr>
                    <td style="padding-left: 2%;border-right: 1px solid #aeaea7;border-bottom: 1px solid #aeaea7;font-size: 12pt;height: 50px;">받으실 분</td>
@@ -148,6 +189,27 @@ input[type="number"]::-webkit-inner-spin-button {
  <!-- 우편번호 -->
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
+//배송추적
+function deliver(){
+    var invoice = document.getElementById("invoiceNumber").value;
+    var code = document.getElementById("companyCode").value;
+    
+    $.ajax({   
+        type:"POST",
+        url:"/Product/deliveryTrack",   
+        dataType:"html",// JSON/html
+        async: false,
+        data:{ 
+            "code": code
+        },
+    
+        success: function(url){//통신이 성공적으로 이루어 졌을때 받을 함수                   
+              window.open(url+invoice,"hiddenframe", "배송조회", "width=500, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" ); 
+              
+        }
+    }); //--ajax   
+    
+}
 
     $(document).ready(function(){
     	var tel = $('#strTel').val();

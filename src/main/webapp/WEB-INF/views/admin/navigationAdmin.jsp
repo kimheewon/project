@@ -41,7 +41,14 @@
     <link href="/build/css/custom.min.css" rel="stylesheet">
   </head>
 
+<style>
 
+@font-face{font-family:'Bareun'; src:url('/font/BareunDotumOTF1.otf')}
+@font-face{font-family:'candy'; src:url('/font/THE_candybar.ttf')}
+@font-face{font-family:'TmonTium'; src:url('/font/TmonTium.ttf')}
+
+
+</style>
  <body>
 
         <div class="col-md-3 left_col">
@@ -87,7 +94,7 @@
                   
                   <c:forEach var="item" items="${items}">
                   	<c:if test="${2 eq item.intAuthItemNo}">
-                  <li><a style=" font-size: 14px;"><i class="fa fa-desktop"></i> 관리자 <span class="fa fa-chevron-down"></span></a>
+                  <li><a style=" font-size: 14px;"><i class="fa fa-users"></i> 관리자 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="/Administrator/AdministratorList">관리자 목록</a></li>
                       <li><a href="/Administrator/AdministratorEnrollForm">관리자 등록</a></li>                      
@@ -101,7 +108,8 @@
                   <li><a style=" font-size: 14px;"><i class="fa fa-sitemap"></i> 회  원 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="/Membership/MembershipList">회원 목록</a></li>
-                      <li><a href="/Membership/MembershipEnrollForm">회원 등록</a></li>                      
+                      <li><a href="/Membership/MembershipEnrollForm">회원 등록</a></li>
+                      <li><a href="/AdminCash/AdminCashMember">캐시 지급/회수</a></li>                     
                     </ul>
                   </li>
                   </c:if>
@@ -120,11 +128,10 @@
                   
                   <c:forEach var="item" items="${items}">
                     <c:if test="${5 eq item.intAuthItemNo}">
-                      <li><a style=" font-size: 14px;"><i class="fa fa-desktop"></i> 상품 관리<span class="fa fa-chevron-down"></span></a>
+                      <li><a style=" font-size: 14px;"><i class="fa fa-tasks"></i> 상품 관리<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                           <li><a href="/Product/ProductList">상품 목록</a></li>
-                          <li><a href="/Product/ProductEnrollForm">상품 등록</a></li>                           
-                          <li><a href="/Product/PurchaseList">아이템 구매 목록</a></li>                        
+                          <li><a href="/Product/ProductEnrollForm">상품 등록</a></li>  
                         </ul>
                       </li>
                       </c:if>
@@ -132,12 +139,10 @@
                   
                   <c:forEach var="item" items="${items}">
                     <c:if test="${6 eq item.intAuthItemNo}">
-                      <li><a style=" font-size: 14px;"><i class="fa fa-desktop"></i> 결제 내역 관리<span class="fa fa-chevron-down"></span></a>
+                      <li><a style=" font-size: 14px;"><i class="fa fa-reorder"></i> 구매 내역 관리<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                          <li><a href="/AdminCash/AdminCashAllList">결재 목록</a></li>
-                          <li><a href="/AdminCash/AdminCashAllList">캐시 사용 목록</a></li>
-                          <li><a href="/AdminCash/AdminCashMember">캐시 지급/회수</a></li>
-                                                 
+                          <li><a href="/AdminCash/AdminCashAllList">캐시 충전 내역</a></li>
+                         <li><a href="/Product/PurchaseList">아이템 구매 내역</a></li>  
                         </ul>
                       </li>
                       </c:if>

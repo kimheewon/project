@@ -114,11 +114,7 @@ input[type="number"]::-webkit-inner-spin-button {
                 <tr>
                    <td style="padding-left: 2%;border-right: 1px solid #aeaea7;border-bottom: 1px solid #aeaea7;font-size: 12pt;height: 50px;">구매번호</td>
                    <td style="padding-left: 2%;border-bottom: 1px solid #aeaea7;">${PurchaseNo}</td>
-                </tr>
-                <tr>
-                   <td style="padding-left: 2%;border-right: 1px solid #aeaea7;border-bottom: 1px solid #aeaea7;font-size: 12pt;height: 50px;">운송장번호</td>
-                   <td style="padding-left: 2%;border-bottom: 1px solid #aeaea7;">${PurchaseNo}</td>
-                </tr>
+                </tr>                
                 <tr>
                    <td style="padding-left: 2%;border-right: 1px solid #aeaea7;border-bottom: 1px solid #aeaea7;font-size: 12pt;height: 50px;">받으실 분</td>
                    <td style="padding-left: 2%;border-bottom: 1px solid #aeaea7;">${deliver.strName}</td>

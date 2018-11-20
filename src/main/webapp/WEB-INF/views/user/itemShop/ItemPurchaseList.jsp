@@ -18,10 +18,46 @@
 <script src="/js/jquery-1.12.3.min.js"></script>
 <script src="/js/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
+
 </head>
 
 <style>    
-        
+   #cursor{
+    cursor: pointer;
+    }
+    
+[data-tooltip-text]:hover {
+    position: relative;
+}
+
+[data-tooltip-text]:hover:after {
+    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.8);
+
+    -webkit-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
+    -moz-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
+    box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    color: #FFFFFF;
+    font-size: 12px;
+    content: attr(data-tooltip-text);
+
+  margin-bottom: 10px;
+    top: 130%;
+    left: 0;    
+    padding: 7px 12px;
+    position: absolute;
+    width: auto;
+  /*  min-width: 100px;*/
+    max-width: 300px;
+    word-wrap: break-word;
+
+    z-index: 9999;
+}        
             /* Default */
     input[type=text],input[type=password]{font-family:"Malgun Gothic","맑은 고딕",Dotum,"돋움",Arial,sans-serif}
     *{margin:0;padding:0;font-family:"Malgun Gothic","맑은 고딕",Dotum,"돋움",Arial,sans-serif}
@@ -112,7 +148,6 @@
     border: none;
     color: white;
     font-family: Bareun;
-    margin-right: 4%;
 }
 #shopBtn:hover{
     background: #772642;
@@ -276,10 +311,10 @@
 		            <tr>   
 		                <td style="padding-top: 1%;padding-bottom: 1%;">${item.intNum}</td>
 		                <td style="padding-top: 1%;padding-bottom: 1%;">${item.intNumber}</td>
-		                <td style="padding-top: 1%;padding-bottom: 1%;color: #3e0321;font-weight: bold;">
+		                <td style="padding-top: 1%;padding-bottom: 1%;color: #3e0321;font-weight: bold;text-align: left;padding-left: 4%;">
 		                  <c:choose>
 		                      <c:when test="${item.strItemName eq '캐시 회수'}">
-		                         <span data-toggle="tooltip" data-placement="bottom" data-original-title="${item.strReason}">${item.strItemName}</span>
+		                         <span id="cursor" data-tooltip-text="${item.strReason}">${item.strItemName}</span>
 		                      </c:when>
 		                      <c:otherwise>
 		                          <c:choose>
@@ -298,13 +333,18 @@
 		                </td>
 		                <td style="padding-top: 1%;padding-bottom: 1%;"><fmt:formatNumber value="${item.intItemTotalPrice}" pattern="#,###" />&nbsp;코인</td>
                         <td style="padding-top: 1%;padding-bottom: 1%;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${item.datePurchaseDate}" /></td>
-		                <td style="padding-top: 1%;padding-bottom: 1%;">
+		                <td style="padding-top: 1%;padding-bottom: 1%;font-weight: bold;">
 		                  <c:if test="${item.strItemName ne '캐시 회수'}">
 		                      <c:choose>
-			                      <c:when test="${item.intFlag ne 0}">
-			                          <button id="shopBtn" type="button">배송 추적</button>
-			                          <button id="cancelBtn" type="button" onclick="location.href='/ItemShop/ItemPurchaseCancelForm?PurchaseNo=${item.intNumber}'">구매 취소</button>
+			                      <c:when test="${item.intFlag eq 1}">
+			                          <span style="font-family: Bareun;color: rebeccapurple;font-weight: bold;">상품 준비중  (  			                          
+			                             <button id="cancelBtn" type="button" onclick="location.href='/ItemShop/ItemPurchaseCancelForm?PurchaseNo=${item.intNumber}'">구매 취소 </button> )
+			                          </span>
 			                      </c:when>
+			                      <c:when test="${item.intFlag eq 2}">
+                                       <button id="shopBtn" type="button" onclick="deliver(${item.intNumber})">배송 추적</button>
+                                     
+                                  </c:when>
 			                      <c:otherwise>구매 취소</c:otherwise>
 			                  </c:choose>
 		                  </c:if>
@@ -359,6 +399,28 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
     
 <script>                
+
+//배송추적
+function deliver(purchaseNo){
+   
+    $.ajax({   
+        type:"POST",
+        url:"/Product/listDeliveryTrack",   
+        dataType:"html",// JSON/html
+        async: false,
+        data:{ 
+            "purchaseNo": purchaseNo
+        },
+    
+        success: function(invoice){//통신이 성공적으로 이루어 졌을때 받을 함수                   
+              window.open(invoice,"hiddenframe", "배송조회", "width=500, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" ); 
+              
+        }
+    }); //--ajax
+    
+    
+}
+
 
 $(document).ready(function() {
 	//datepicker 한국어로 사용하기 위한 언어설정
@@ -481,9 +543,7 @@ function fn_paging(curPage) {
     }
     f.submit();    
 }
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
+
 
 
 </script>

@@ -82,7 +82,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>상품 구매 내역</h3>
+                <h3></h3>
               </div>
 
               <div class="title_right">
@@ -100,7 +100,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>목록</h2>
+                    <h2 style="font-family: Bareun;font-weight: bold;">캐시 충전 내역</h2>
                     
                     <div class="clearfix"></div>
                   </div>
@@ -108,22 +108,25 @@
                     
                     <table id="datatable" class="table table-striped table-bordered" id="AdminList">
                     <colgroup>
-                        <col width = "8%"/>
-		                <col width = "15%"/>
+                        <col width = "6%"/>
+                        <col width = "12%"/>
+                        <col width = "10%"/>
+                        <col width = "10%"/>		                
 		                <col width = "*"/>
-		                <col width = "12%"/>
-		                <col width = "12%"/>
-		                <col width = "20%"/> 
+		                <col width = "12%"/>		                
+		                <col width = "15%"/> 
 		                <col width = "10%"/>                        
                     </colgroup>
                       <thead>
                         <tr>
                           <th style="text-align: center; padding-left: 1.5%; color:#00003f" class="sorting_desc">#</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">구매번호</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">상    품</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">캐    시</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">구매 회원</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">거래일시</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">구매&nbsp;번호</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">아 이 디</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">이&nbsp;&nbsp;&nbsp;름</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">상&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;품</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">캐&nbsp;&nbsp;&nbsp;시</th>
+                          
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">거래&nbsp;일시</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f"></th>
                         </tr>
                       </thead>
@@ -133,7 +136,9 @@
                             <tr>
                                 <td style="text-align: center; color:#3b5976;vertical-align: middle;">${status.count}</td>
                                 <td style="text-align: center; color:#3b5976;vertical-align: middle;">${list.intNumber}</td>
-                                <td style="text-align: center; color:#3b5976;vertical-align: middle;">
+                                <td style="text-align: center; color:#3b5976;vertical-align: middle;">${list.strUserId}</td>
+                                <td style="text-align: center; color:#3b5976;vertical-align: middle;">${list.strUserName}</td>
+                                <td style="text-align: left;padding-left: 2%; color:#3b5976;vertical-align: middle;">
 	                                <c:choose>
 			                              <c:when test="${list.strItemName eq '캐시 회수'}">
 			                                 <span data-toggle="tooltip" data-placement="bottom" data-original-title="${list.strReason}">${list.strItemName}</span>
@@ -151,15 +156,18 @@
 			                              </c:otherwise>
 			                          </c:choose>
                                 </td>
-                                <td style="text-align: center; color:#3b5976;vertical-align: middle;"><fmt:formatNumber value="${list.intItemTotalPrice}" pattern="#,###" />&nbsp;코인</td>
-                                <td style="text-align: center; color:#3b5976;vertical-align: middle;">${list.strUserName}</td>
+                                <td style="text-align: right; padding-right:3%; color:#3b5976;vertical-align: middle;"><fmt:formatNumber value="${list.intItemTotalPrice}" pattern="#,###" />&nbsp;코인</td>
+                                
                                 <td style="text-align: center; color:#3b5976;vertical-align: middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.datePurchaseDate}"/></td>
                                 <td style="text-align: center; color:#3b5976;vertical-align: middle;">
 	                                <c:if test="${list.strItemName ne '캐시 회수'}">
 		                              <c:choose>
-		                                  <c:when test="${list.intFlag ne 0}">
-		                                      <button id="shopBtn" type="button">배송 추적</button>
+		                                  <c:when test="${list.intFlag eq 1}">
+		                                      <span style="font-family: Bareun;color: rebeccapurple;font-weight: bold;">상품 준비중</span>
 		                                  </c:when>
+		                                  <c:when test="${list.intFlag eq 2}">
+                                              <button id="shopBtn" type="button" onclick="deliver(${list.intNumber})">배송 추적</button>
+                                          </c:when>
 		                                  <c:otherwise>구매 취소</c:otherwise>
 		                              </c:choose>
 	                               </c:if>
@@ -214,6 +222,29 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
 ga('create', 'UA-23581568-13', 'auto');
 ga('send', 'pageview');
+
+//배송추적
+function deliver(purchaseNo){
+    //var invoice = document.getElementById("invoiceNumber").value;
+    //var code = document.getElementById("companyCode").value;
+    
+    $.ajax({   
+        type:"POST",
+        url:"/Product/listDeliveryTrack",   
+        dataType:"html",// JSON/html
+        async: false,
+        data:{ 
+            "purchaseNo": purchaseNo
+        },
+    
+        success: function(invoice){//통신이 성공적으로 이루어 졌을때 받을 함수                   
+              window.open(invoice,"hiddenframe", "배송조회", "width=500, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" ); 
+              
+        }
+    }); //--ajax
+    
+    
+}
 
     function checkFunction(no){
          $.ajax({   

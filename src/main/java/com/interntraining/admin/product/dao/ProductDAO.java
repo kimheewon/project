@@ -82,4 +82,29 @@ public class ProductDAO {
 	public String selectUserName(int userNo) {
 		return sqlSession.selectOne("userSql.selectUserName", userNo);
 	}
+
+	//택배회사 정보 가져오기
+	public List<ItemShopInfo> selectCompany() {
+		return sqlSession.selectList("itemSql.selectCompany");
+	}
+
+	//송장번호 insert
+	public void insertDeliveryInvoice(ItemShopInfo item) {
+		sqlSession.update("productSql.insertDeliveryInvoice", item);
+	}
+
+	//배송상태 update
+	public void updateProductFlag(ItemShopInfo item) {
+		sqlSession.update("productSql.updateProductFlag", item);
+	}
+
+	//택배회사 url 찾기
+	public String selectCompanyUrl(int code) {
+		return sqlSession.selectOne("productSql.selectCompanyUrl", code);
+	}
+
+	//invoice와 code 찾기
+	public ItemShopInfo selectInvoice(BigInteger purchaseNo) {
+		return sqlSession.selectOne("productSql.selectInvoice", purchaseNo);
+	}
 }

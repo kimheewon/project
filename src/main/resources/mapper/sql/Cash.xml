@@ -245,14 +245,15 @@
     
     <!-- 회원 목록 가져오기 -->
     <select id="selectCashMember" resultType="User">
-    SELECT   u.UserNo            AS intUserNo
-            ,u.UserId            AS strUserid
-			,c.TotalInCashAmt    AS intTotalInCashAmt
-			,c.TotalOutCashAmt   AS intTotalOutCashAmt
-			,c.TotalCashAmt      AS intTotalCashAmt
-			,u.UserGrade         AS strUserGrade
-	FROM TUserCashMst c LEFT JOIN TUser u
-	ON c.UserNo = u.UserNo
+	    SELECT   u.UserNo            AS intUserNo
+	            ,u.UserId            AS strUserid
+				,c.TotalInCashAmt    AS intTotalInCashAmt
+				,c.TotalOutCashAmt   AS intTotalOutCashAmt
+				,c.TotalCashAmt      AS intTotalCashAmt
+				,u.UserGrade         AS strUserGrade
+		FROM TUserCashMst c LEFT JOIN TUser u
+		ON c.UserNo = u.UserNo
+	    ORDER BY u.UserDate DESC
     </select>
     
      <!-- Cash 회수 -->

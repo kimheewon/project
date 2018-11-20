@@ -13,7 +13,7 @@
 }
 
 #itemTable{
-	margin-bottom: 1rem;
+    margin-bottom: 1rem;
     width: 90%;
     margin: auto;
     border: 1px solid #88887e;
@@ -23,7 +23,7 @@
 }
 
 #itemTable thead tr th{
-	font-size: 14pt;
+    font-size: 14pt;
     background-color: #dedec4;
     color: #2c3e50;
     height: 50px;
@@ -31,36 +31,36 @@
 }
 
 #pItemNoStyle{
-	margin-bottom: 0;
+    margin-bottom: 0;
     text-align: left;
     color: gray;
     font-size: 14pt;
 }
 
 #pItemNameStyle{
-	margin-bottom: 0;
+    margin-bottom: 0;
     text-align: left;
     color: #2c3e50;
     font-weight: bold;
     font-size: 15pt;
-	
+    
 }
 
 #priceStyle{
-	border-bottom: 1px solid #aeaea7;
+    border-bottom: 1px solid #aeaea7;
     font-size: 14pt;
     
 }
 
 #price{
-	width: 50%;
+    width: 50%;
     text-align: right;
     border: 0px;
     
-	}
+    }
 
 #totalPrice{
-	width: 30%;
+    width: 30%;
     text-align: right;
     border: 0px;
     font-weight: bold;

@@ -74,6 +74,38 @@
 #itemTable thead tr th{
     background-color: #f2f2f2 !important;
 }
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+#deliverBtn{
+   background-color: white;
+    width: 70px;
+    height: 21pt;
+    font-size: 11pt;
+    border-radius: 3pt;
+    border: none;
+    color: #2c3e50;
+    font-family: Bareun;
+    border: 2px solid #56799c;
+    margin-left: 1.5%;
+}
+#deliverBtn:hover{
+    background: #f1f4f7;
+    color: black;
+    box-shadow: 0 2px #999;
+    border: 2px solid #3a3e42;
+    font-weight: bold;
+}
+#deliverBtn:active {
+    background: #f1f4f7;
+    color: black;
+    box-shadow: 0 2px #666;
+    border: 2px solid #3a3e42;
+    font-weight: bold;
+    transform: translateY(4px);
+}
 </style>
   </head>
 <link type="text/css" rel="stylesheet" href="/css/itemPurchaseStyle.css" />
@@ -87,7 +119,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>상품 구매 내역 상세보기</h3>
+                <h3></h3>
               </div>
 
               <div class="title_right">
@@ -105,7 +137,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>목록</h2>
+                      <h2 style="font-family: Bareun;font-weight: bold;">상품 구매 내역 상세보기</h2>
                     
                     <div class="clearfix"></div>
                   </div>
@@ -160,6 +192,9 @@
              <br><br><br><br>
             <p style="width:90%; margin-bottom: 0px;font-size: 20px;font-weight: bold;margin: auto;">배송지 정보</p>
             <hr style="width:90%">
+            <input type="hidden" value="${PurchaseNo}" id="purchaseNo">
+            <input type="hidden" value="${deliver.intCompanyCode}" id="companyCode">
+            <input type="hidden" value="${deliver.intInvoiceNumber}" id="invoiceNumber">
             <table id="deliverTable">
                 <colgroup>
                    <col width = "15%"/>
@@ -172,7 +207,26 @@
                 </tr>
                 <tr>
                    <td style="padding-left: 2%;border-right: 1px solid #aeaea7;border-bottom: 1px solid #aeaea7;font-size: 12pt;height: 50px;">운송장번호</td>
-                   <td style="padding-left: 2%;border-bottom: 1px solid #aeaea7;">${PurchaseNo}</td>
+                   <td style="padding-left: 2%;border-bottom: 1px solid #aeaea7;vertical-align: middle;">
+                        <c:choose>
+                            <c:when test="${empty deliver.intInvoiceNumber}">
+                                <select id="companyChoice" style="height: 30px;margin-right: 1%;border-radius: 4pt;width: 150px;border: 1px solid;">
+                                    <option value="0">===택배회사===</option>
+                                    <c:forEach var="company" items="${company}">
+                                         <option value="${company.intCompanyCode}">${company.strCompanyName}</option>
+                                    </c:forEach>
+                               </select> 
+                                <input type="number" id="invoice" placeholder="송장번호를 입력하세요" style="width: 600px;height: 30px;padding-left: 2%;margin-right: 1%;border-radius: 4pt;border: 1px solid;">
+                                <button onclick="inputInvoice()" data-placement="bottom" data-toggle="tooltip" data-original-title="입력" style="width: 53px;height: 31px;margin-bottom: 0;border: 2px solid #8e688e;padding-bottom: 0;border-radius: 4pt;background-color: #fff6ff;">
+                                    <img class="btn-img" src="/img/delivery-truck.png" style="width: 40px;height: 25px;"></button>
+                            </c:when>
+                            <c:otherwise>
+                                ( ${deliver.strCompanyName} )  ${deliver.intInvoiceNumber}
+                                <input type="button" id="deliverBtn" value="배송추적" onclick="deliver()">
+                            </c:otherwise>
+                        </c:choose>
+                   
+                   </td>
                 </tr>
                 <tr>
                    <td style="padding-left: 2%;border-right: 1px solid #aeaea7;border-bottom: 1px solid #aeaea7;font-size: 12pt;height: 50px;">받으실 분</td>
@@ -244,6 +298,65 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', 'UA-23581568-13', 'auto');
 ga('send', 'pageview');
 
+//배송추적
+function deliver(){
+	var invoice = document.getElementById("invoiceNumber").value;
+	var code = document.getElementById("companyCode").value;
+	
+	$.ajax({   
+        type:"POST",
+        url:"/Product/deliveryTrack",   
+        dataType:"html",// JSON/html
+        async: false,
+        data:{ 
+            "code": code
+        },
+    
+        success: function(url){//통신이 성공적으로 이루어 졌을때 받을 함수                   
+        	  window.open(url+invoice,"hiddenframe", "배송조회", "width=500, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" ); 
+              
+        }
+    }); //--ajax
+	
+	
+}
+//송장입력
+function inputInvoice(){
+	var invoice = document.getElementById("invoice").value;
+	var code = $("#companyChoice option:selected").val();
+	var purchaseNo = document.getElementById("purchaseNo").value;
+	
+	if(invoice == ''){
+		alert("송장번호를 입력해주세요.");
+		document.getElementById("invoice").focus();
+		return false;
+	}
+	else if(code == 0){
+		alert("택배회사를 선택해주세요.");
+		return false;
+	}
+	else{
+		$.ajax({   
+	        type:"POST",
+	        url:"/Product/deliveryCompany",   
+	        dataType:"html",// JSON/html
+	        async: false,
+	        data:{ 
+	            "invoice": invoice,
+	            "code": code,
+	            "purchaseNo": purchaseNo
+	        },
+	    
+	        success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수                   
+	          location.href=""
+	        }
+	    }); //--ajax
+		
+	}
+	
+	
+	
+}
     function checkFunction(no){
          $.ajax({   
                 type:"POST",

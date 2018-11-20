@@ -49,7 +49,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>게시판 카테고리 수정</h3>
+                            <h3></h3>
                         </div>
 	                    <div class="title_right">
 	                       <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -60,8 +60,9 @@
 		            <div class="row">              
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
-                                <div class="x_title" style="padding-left:90%;">
-		                            <h2><small style="  color: #2c3e50;  font-weight: bold;">*은 필수항목입니다.</small></h2>
+                                <div class="x_title">
+                                    <h2 style="width: 100%;font-weight: bold;font-family: Bareun;">게시판 카테고리 수정
+                                    <small style="color: #2c3e50;font-weight: bold;float: right;">*은 필수항목입니다.</small></h2>                   
                                     <div class="clearfix"></div>
                                 </div>
 			                    <div class="x_content"><br/>

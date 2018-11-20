@@ -80,8 +80,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2 style="font-family: Bareun;font-weight: bold;">결제 내역 상세보기</h2>
-                    
+                    <h2 style="font-family: Bareun;font-weight: bold;">캐시 충전 내역</h2>                    
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content" style="font-size:15px">
@@ -130,9 +129,9 @@
 		                                </c:otherwise>
 	                                </c:choose>	                               
                                 </td>
-                                <td style="text-align: center; color:#3b5976;">
+                                <td style="text-align: right;color: #3b5976;padding-right: 2.5%;">
                                     <c:if test="${cash.amount ne 0}"><fmt:formatNumber value="${cash.amount}" pattern="#,###" />&nbsp;원</c:if></td>
-                                <td style="text-align: center; color:#3b5976;"><fmt:formatNumber value="${cash.intCashAmt}" pattern="#,###" />&nbsp;코인</td>
+                                <td style="text-align: right;color: #3b5976;padding-right: 2.5%;"><fmt:formatNumber value="${cash.intCashAmt}" pattern="#,###" />&nbsp;코인</td>
                                 <td style="text-align: center; color:#3b5976;">${cash.strPurchasekind}</td>
                                 <td style="text-align: center; color:#3b5976;padding-top: 0.5%;padding-bottom: 0.5%;">
                                     <c:if test="${cash.strPurchaseState eq '결제 완료'}">

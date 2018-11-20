@@ -2,6 +2,7 @@ package com.interntraining.admin.product.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,8 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -167,13 +170,51 @@ public class ProductController {
 		ItemShopInfo item = productService.selectPurchaseItem(PurchaseNo);		//구매한 아이템 정보 가져오기
 		ItemShopInfo itemInfo = productService.selectItemInfo(item.getIntItemNo());
 		ItemShopInfo deliver = productService.selectDeliveryInfo(PurchaseNo);		//배송정보 가져오기
+		List<ItemShopInfo> company = productService.selectCompany();		//택배회사 정보 가져오기
 		
 		mav.addObject("PurchaseNo", PurchaseNo);
 		mav.addObject("item", item);
 		mav.addObject("itemInfo", itemInfo);
 		mav.addObject("deliver", deliver);
+		mav.addObject("company", company);
 
 		mav.setViewName("/admin/product/ProductPurchaseView");
 		return mav;
+	}
+	
+	//송장번호 입력
+	@RequestMapping(value="deliveryCompany")
+	public ModelAndView deliveryCompany(BigInteger invoice, int code, BigInteger purchaseNo) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		
+		ItemShopInfo item = new ItemShopInfo();
+		item.setIntInvoiceNumber(invoice);
+		item.setIntCompanyCode(code);
+		item.setIntNumber(purchaseNo);
+		
+		productService.insertDeliveryInvoice(item);		//송장번호 insert
+		
+		mav.addObject("PurchaseNo", purchaseNo);		
+		mav.setViewName("redirect:/Product/PurchaseView");
+		return mav;				
+	}
+	
+	//배송 추적
+	@RequestMapping(value="deliveryTrack", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public String deliveryTrack(int code) {			
+		String url = productService.selectCompanyUrl(code);	//택배회사 url 찾기		
+		return url;		
+	}
+	
+	//리스트에서 배송 추적
+	@RequestMapping(value="listDeliveryTrack", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public  String listDeliveryTrack(BigInteger purchaseNo) {	
+		
+		ItemShopInfo info = productService.selectInvoice(purchaseNo);	//invoice와 code 찾기
+		String url = productService.selectCompanyUrl(info.getIntCompanyCode());	//택배회사 url 찾기
+		String invoice = url+info.getIntInvoiceNumber();
+		return invoice;		
 	}
 }
