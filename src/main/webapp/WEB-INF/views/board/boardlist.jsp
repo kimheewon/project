@@ -67,7 +67,7 @@
 			</thead>
 			
 		
-		   <c:if test="${boardlist eq ''}">
+		   <c:if test="${empty boardlist}">
              <tr>
                 <td colspan="5" style="color: #5a5a5a; font-size: 15pt;text-align: center;">게시글이 없습니다.</td>
              </tr>
@@ -120,7 +120,7 @@
 	
 	<span style="float:right; font-weight:bold; width:5.5%;margin-right: 18%;">
 	<button class="btn" id="btn" onclick="location.href='/board/boardwrite?intBoardCateNo=${intBoardCateNo}'" style="background-color: white;color:#2c3e50; 
-		border: 1px solid #2c3e50;padding: 3px; padding-left: 0;" >
+		border: 1px solid #2c3e50;padding: 3px; padding-left: 0;width: 100px;" >
 	<img class="btn-img" src="/img/pen.png" style=" width: 30%;">&nbsp;글쓰기</button> 		
 	</span>
 	<br>
@@ -135,8 +135,8 @@
 	                 <input type="text" size="40" name="keyWord" id="keyWord" value="${keyWord}">
 	                 
 	                 <button class="btn" id="btn" onclick="check();" 
-	                 	style="background-color: #2c3e50;color:white;  border: 1px solid #2c3e50;padding: 3px; padding-left: 0; width:6%; font-family: 'Lato';    margin-bottom: 4px;" >
-	                 <img class="btn-img" src="/img/search.png" style=" width: 25%;font-weight:bold;margin-bottom: 4px;">&nbsp;검 색</button>
+	                 	style="background-color: #2c3e50;color:white;  border: 1px solid #2c3e50;padding: 3px; padding-left: 0; width: 88px; font-family: 'Lato';    margin-bottom: 4px;" >
+	                 <img class="btn-img" src="/img/search.png" style="width: 20px;font-weight:bold;margin-bottom: 4px;">&nbsp;검 색</button>
 	                 <input type="hidden" name="page" value="0">
 	    
 	   		</form>    	

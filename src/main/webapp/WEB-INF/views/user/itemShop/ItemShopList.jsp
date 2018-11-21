@@ -22,15 +22,23 @@
 </head>
 
 <body>
-
-    
-<jsp:include page="../../login/navigation.jsp" flush="true"/>
-
-<div class="container_t" style="height: 1330px;">
-       <h3 style="color:#2c3e50;margin-left: 1%;">아이템샵</h3>    
-        <br><br>
+    <jsp:include page="../../login/navigation.jsp" flush="true"/>
+    <div class="container_t" style="min-height: 592px;">
+    <h3 style="color:#2c3e50;margin-left: 1%;">아이템샵</h3>    
+    <br><br>
         
-        <div class="row">
+    <div class="row">            
+    <c:if test="${empty items}">
+               <div style="text-align: center;margin: auto;font-size: 16pt;font-family: Bareun;word-spacing: 2px;letter-spacing: 1px;color: #4d4b51;">
+                       <img src="/img/search2.png" style="margin-bottom: 9%;width: 200px;">
+                       <br>
+                       <span style="font-weight: bold;">' ${keyWord} '</span> 에 대해 검색된 상품이 없습니다.
+                       <br>
+                       <small style="font-size: 12pt;">다른 검색어를 입력하시거나 철자와 띄어쓰기를 확인해 보세요.</small><br> 
+                       <small style="font-size: 12pt;"><a href="/ItemShop/ItemShopList" style="font-style: italic;color: #663399;text-decoration-line: underline;">아이템샵 바로가기</a></small> 
+                    </div>  
+                   
+                </c:if>          
             <c:forEach var="items" items="${items}" varStatus="status">
                 <div class="col-md-6 col-lg-3" style="    padding-top: 15px;   padding-bottom: 15px;">
                     <table style="  border: 1px solid #cecece;">
@@ -72,7 +80,7 @@
                 </select>
                      <input type="text" size="40" name="keyWord" id="keyWord" value="${keyWord}">                     
                      <button class="btn" id="btn" onclick="check();" 
-                        style="background-color: #2c3e50;color:white;  border: 1px solid #2c3e50;padding: 3px; padding-left: 0; width:6%; font-family: 'Lato';    margin-bottom: 4px;" >
+                        style="background-color: #2c3e50;color:white;width: 70px;border: 1px solid #2c3e50;padding: 3px; padding-left: 0; font-family: 'Lato';    margin-bottom: 4px;" >
                      <img class="btn-img" src="/img/search.png" style=" width: 25%;font-weight:bold;margin-bottom: 4px;">&nbsp;검 색</button>
                      <input type="hidden" name="page" value="0">
         

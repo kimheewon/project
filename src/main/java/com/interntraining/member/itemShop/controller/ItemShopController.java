@@ -68,6 +68,7 @@ public class ItemShopController {
 			
 			List<ProductInfo> items = itemShopService.selectAllItemSearch(pagination);	//검색시 아이템 전체 목록 개수
 					
+			mav.addObject("keyField", keyField);
 			mav.addObject("keyWord", KeyWord);
 			mav.addObject("listCnt", listCnt);
 			mav.addObject("items", items);

@@ -116,14 +116,14 @@
     font-size: 12px;
     content: attr(data-tooltip-text);
 
-  margin-bottom: 10px;
+    margin-bottom: 10px;
     top: 130%;
     left: 0;    
     padding: 7px 12px;
     position: absolute;
     width: auto;
-  /*  min-width: 100px;*/
-    max-width: 300px;
+    min-width: 100px;
+    max-width: 600px;
     word-wrap: break-word;
 
     z-index: 9999;
@@ -134,7 +134,7 @@
     
 <jsp:include page="../../login/navigation.jsp" flush="true"/>
 
-<div class="container_t">
+<div class="container_t" style="min-height: 800px;">
     <h3 style="color:#2c3e50;margin-left: 6%;">캐시 내역</h3><br><br><br>
     <form action="/Cash/CashList">
         <!-- search -->
@@ -224,12 +224,12 @@
         <table style="margin-bottom: 1rem;width:100%;margin: auto;">
             <colgroup>
                 <col width = "5%"/>
-                <col width = "20%"/>
-                <col width = "*"/>
-                <col width = "15%"/>
+                <col width = "18%"/>
+                <col width = "13%"/>
+                <col width = "13%"/>
                 <col width = "15%"/> 
                 <col width = "15%"/>
-                <col width = "15%"/>                           
+                <col width = "*"/>                           
             </colgroup>
             <thead style="text-align: center;font-size: 20px;background-color: #f2f2e8;color: #2c3e50;font-family: TmonTium;">
                 <tr>                        
@@ -244,23 +244,35 @@
                 </tr>
             </thead>
             <tbody style="text-align: center;font-size: 17px;font-family: Bareun;">
+                <c:if test="${empty cashList}">
+	               <tr>
+	                   <td colspan="7" style="color: #5a5a5a;font-size: 14pt;text-align: center;font-style: italic;">캐시 내역이 없습니다.</td>
+	               </tr>
+	            </c:if>
+                
                 <c:forEach var="cash" items="${cashList}" varStatus="status">   
 		            <tr>   
 		                <td style="padding-top: 1%;padding-bottom: 1%;">${cash.intNum}</td>
-		                <td style="padding-top: 1%;padding-bottom: 1%;">${cash.intCashNo}</td>
-		                
+		                <td style="padding-top: 1%;padding-bottom: 1%;">${cash.intCashNo}</td>		                
 		                <td style="padding-top: 1%;padding-bottom: 1%;">
 		                  <c:if test="${cash.amount ne 0}"><fmt:formatNumber value="${cash.amount}" pattern="#,###" />&nbsp;원</c:if>
 		                </td>
 		                <td style="padding-top: 1%;padding-bottom: 1%;"><fmt:formatNumber value="${cash.intCashAmt}" pattern="#,###" />&nbsp;코인</td>
 		                <td style="padding-top: 1%;padding-bottom: 1%;">${cash.strPurchasekind}</td>	
-		                <td style="padding-top: 1%;padding-bottom: 1%;">
+		                <td style="padding-top: 1%;padding-bottom: 1%;font-weight: bold;color:#3a3ac5;">
                             <c:choose>
                                 <c:when test="${cash.strReason ne '0'}">                                        
-                                    <span id="cursor" data-tooltip-text="${cash.strReason}">${cash.strPurchaseState}</span> 
+                                    <span id="cursor" data-tooltip-text="${cash.strReason}" style="color: #503b3b;">${cash.strPurchaseState}</span> 
                                 </c:when>
                                 <c:otherwise>
-                                    ${cash.strPurchaseState}
+                                    <c:choose>
+	                                    <c:when test="${cash.strPurchaseState eq '결제 취소'}">
+	                                        <span style="color: black;font-weight: normal;">${cash.strPurchaseState}</span>
+	                                    </c:when>
+	                                    <c:otherwise>
+	                                        ${cash.strPurchaseState}
+	                                    </c:otherwise>
+                                    </c:choose> 
                                 </c:otherwise>
                             </c:choose> 
                         </td>

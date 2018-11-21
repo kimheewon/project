@@ -180,6 +180,7 @@ public class BoardController {
 		        }
 		    }
 			
+	        mav.addObject("keyField", keyField);
 	        mav.addObject("keyWord", KeyWord);
 			mav.addObject("intBoardCateNo", intBoardCateNo);
 			mav.addObject("boardlist", list);

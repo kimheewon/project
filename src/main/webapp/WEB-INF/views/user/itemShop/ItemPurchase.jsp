@@ -47,11 +47,11 @@ input[type="number"]::-webkit-inner-spin-button {
     transform: translateY(4px);
 }
 input[type="text"]:enabled {
-    background: white !important;;
+    background: white !important;
 }
 
 input[type="text"]:disabled {
-    background: #dddddd !important;;
+    background: #dddddd !important;
 }
 </style>
 <body>

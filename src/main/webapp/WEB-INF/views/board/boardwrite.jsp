@@ -72,8 +72,8 @@
 			</tr>
 		</table>
 		<div class="container_b" style="text-align: right;  margin-left: 79.2%;">	
-			<button class="button" type="reset">다시작성</button>
-			<button class="button" name="writebtn" id="writebtn" style="width: 34%;"><img class="btn-img" src="/img/check.png" style=" width: 34%;">&nbsp;저장</button>			
+			<button class="button" type="reset" style="width: 80px; height: 35px;">다시작성</button>
+			<button class="button" name="writebtn" id="writebtn" style="width: 80px; height: 35px;"><img class="btn-img" src="/img/check.png" style=" width: 34%;">&nbsp;저장</button>			
 		</div>
 		</form>
 	</div>

@@ -76,7 +76,121 @@
 		
 	}
 
+#address2:enabled {
+    background: white !important;
+    border: 1px solid gray!important;
+}
 
+#address2:disabled {
+    background-color:#efefef !important;
+}
+
+/* Custom labels: the container */
+.checkcontainer {
+    position: relative !important;
+    padding-left: 35px !important;
+    margin-bottom: 12px !important;
+    cursor: pointer !important;
+    font-size: 17px !important;
+    -webkit-user-select: none !important; /* Chrome, Opera, Safari */
+    -moz-user-select: none !important; /* Firefox 2+ */
+    -ms-user-select: none !important; /* IE 10+ */
+    user-select: none !important; /* Standard syntax */
+}
+
+/* Hide the browser's default checkbox */
+.checkcontainer input {
+    position: absolute !important;
+      opacity: 0 !important;
+cursor: pointer !important;}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    height: 25px !important;
+    width: 25px !important;
+    background-color: #eee !important;
+}
+
+/* On mouse-over, add a grey background color */
+.checkcontainer:hover input ~ .checkmark {
+    background-color: #ccc !important;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkcontainer input:checked ~ .checkmark {
+    background-color: #2196F3 !important;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "" !important;
+    position: absolute !important;
+    display: none !important;
+}
+
+/* Show the checkmark when checked */
+.checkcontainer input:checked ~ .checkmark:after {
+    display: block !important;
+}
+
+/* Style the checkmark/indicator */
+.checkcontainer .checkmark:after {
+    left: 10px !important;
+    top: 6px !important;
+    width: 7px !important;
+    height: 12px !important;
+    border: solid white !important;
+    border-width: 0 3px 3px 0 !important;
+    -webkit-transform: rotate(45deg) !important;
+    -ms-transform: rotate(45deg) !important;
+    transform: rotate(45deg) !important;
+}
+
+/* Create a custom radio button */
+.radiobtn{
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  height: 25px !important;
+  width: 25px !important;
+  background-color: #eee !important;
+  border-radius: 50% !important;
+}
+
+/* On mouse-over, add a grey background color */
+.checkcontainer:hover input ~ .radiobtn{
+  background-color: #ccc !important;
+}
+
+/* When the radio button is checked, add a blue background */
+.checkcontainer input:checked ~ .radiobtn{
+  background-color: #2196F3 !important;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.radiobtn:after {
+  content: "" !important;
+  position: absolute !important;
+  display: none !important;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.checkcontainer input:checked ~ .radiobtn:after {
+  display: block !important;
+}
+
+/* Style the indicator (dot/circle) */
+.checkcontainer .radiobtn:after {
+  top: 9px !important;
+  left: 9px !important;
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+  background: white !important;
+}
 </style>
 <script type="text/javascript" >
 
@@ -240,7 +354,7 @@
 
 
 </head>
-
+<link type="text/css" rel="stylesheet" href="/css/itemPurchaseStyle.css" />
 <body id="page-top">
 
 	<!-- Navigation -->
@@ -325,12 +439,19 @@
 						</div>
 						<div class="control-group">
 							<div class="form-group">
-								<div class="form-group floating-label-form-group controls mb-0 pb-2">
+								<div class="" style="border-bottom: 1px solid #e9ecef;">
 									<a class="fontsize">* 성별</a>   
 									<p class="help-block text-danger"></p>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<input class="radio" id="sex" type="radio" name="sex"  value="남성" checked="checked" > &nbsp;남성 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<input class="radio" type="radio" id="sex2" name="sex" value="여성" /> &nbsp;여성								
+									<label class="checkcontainer" style="margin-bottom: 0px;opacity: inherit;margin-right:3%">남성
+									   <input class="radio" id="sex" type="radio" name="sex"  value="남성" checked="checked" >
+									   <span class="radiobtn"></span>
+									</label>
+									<label class="checkcontainer" style="margin-bottom: 0px;opacity: inherit;">여성
+                                       <input class="radio" type="radio" id="sex2" name="sex" value="여성" />
+                                       <span class="radiobtn"></span>
+                                    </label>
+									
 										
 									<p class="help-block text-danger"></p>
 							     </div>
@@ -341,11 +462,11 @@
                                 class="form-group floating-label-form-group controls mb-0 pb-2">
                                 <a class="font_required">* 우편번호</a>
                                 <p class="help-block text-danger"><p class="help-block text-danger">
-                                &nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="postcode" name="postcode" placeholder="우편번호" type="text" style="display:inline; border-radius: 8px;width:15%;background-color:white;border: 1px solid gray;" readonly> 
+                                &nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="postcode" name="postcode" placeholder="우편번호" type="text" style="height: 35px;margin-bottom: 3px;display:inline; border-radius: 8px;width:15%;background-color:white;border: 1px solid gray;" readonly> 
                               
-                                <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" style="background-color:#2c3e50; color:white;padding: 0.5rem;border-radius: 8px;"> <br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" type="text" id="address" name="address" placeholder="주소" style="display:inline; border-radius: 8px;width:80%;background-color:white;border: 1px solid gray;" readonly> <br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" type="text" id="address2" name="address2" placeholder="상세주소" style="display:inline; border-radius: 8px;width:80%;background-color:#efefef ">                            
+                                <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" style="background-color: #2c3e50;color: white;border-radius: 8px;height: 35px;width: 130px;padding-left: 0;margin-bottom: 3px;"> <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" type="text" id="address" name="address" placeholder="주소" style="margin-bottom: 3px;height: 35px;display:inline; border-radius: 8px;width:80%;background-color:white;border: 1px solid gray;" readonly> <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" disabled="disabled" type="text" id="address2" name="address2" placeholder="상세주소" style="display:inline;border: 1px solid lightgray;height: 35px; border-radius: 8px;width:80%;background-color:#efefef ">                            
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -412,7 +533,8 @@
 	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
 	                document.getElementById('postcode').value = data.zonecode; //5자리 새우편번호 사용
 	                document.getElementById('address').value = fullAddr;
-	
+	                $('#address2').attr('disabled', false);
+	                
 	                // 커서를 상세주소 필드로 이동한다.
 	                document.getElementById('address2').focus();
 	            }

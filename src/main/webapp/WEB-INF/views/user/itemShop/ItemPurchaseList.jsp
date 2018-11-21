@@ -52,7 +52,7 @@
     padding: 7px 12px;
     position: absolute;
     width: auto;
-  /*  min-width: 100px;*/
+    min-width: 100px;
     max-width: 300px;
     word-wrap: break-word;
 
@@ -200,7 +200,7 @@
     
 <jsp:include page="../../login/navigation.jsp" flush="true"/>
 
-<div class="container_t">
+<div class="container_t" style="min-height: 800px;">
     <h3 style="color:#2c3e50;margin-left: 6%;">아이템 구매 내역</h3><br><br><br>
      <form action="/ItemShop/ItemPurchaseList">
         <!-- search -->
@@ -307,6 +307,11 @@
                 </tr>
             </thead>
             <tbody style="text-align: center;font-size: 17px;font-family: Bareun;">
+                <c:if test="${empty item}">
+                   <tr>
+                       <td colspan="6" style="color: #5a5a5a;font-size: 14pt;text-align: center;font-style: italic;">아이템 구매 내역이 없습니다.</td>
+                   </tr>
+                </c:if>                
                 <c:forEach var="item" items="${item}" varStatus="status">   
 		            <tr>   
 		                <td style="padding-top: 1%;padding-bottom: 1%;">${item.intNum}</td>
@@ -459,8 +464,8 @@ $(document).ready(function() {
             
 
     //종료일.
-    /*$('#searchEndDate').datepicker("option","onClose", function( selectedDate ) {    
-	    / 종료일 datepicker가 닫힐때
+ /*   $('#searchEndDate').datepicker("option","onClose", function( selectedDate ) {    
+	    // 종료일 datepicker가 닫힐때
 	    // 시작일의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
 	    $("#searchStartDate").datepicker( "option", "maxDate", selectedDate );
 	    $(".searchDate").find(".chkbox2").removeClass("on");
