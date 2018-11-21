@@ -98,7 +98,7 @@
 		<br>
 
 	
-		<form method="POST" action="/board/boardchange?intBoardNo=${board.intBoardNo}">
+		<form method="POST" action="/board/boardchange?intBoardNo=${board.intBoardNo}" autocomplete="off">
 		<div style="border:1px solid #c1c1c1; padding : 1.5%">
 			<input type="hidden" id="bno" value="${board.intBoardNo}">
 			<table class="" style="text-align: center;  ">

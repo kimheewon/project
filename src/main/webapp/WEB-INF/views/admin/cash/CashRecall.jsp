@@ -90,7 +90,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3 style="font-family: Bareun;color: #605183;font-weight: bold;">${id}&nbsp;&nbsp;회원님의,</h3>
+                <h3 style="font-family: Bareun;color: #605183;font-weight: bold;font-size: 15pt;">${id}&nbsp;&nbsp;회원님의</h3>
               </div>
 
               <div class="title_right">
@@ -118,7 +118,7 @@
                   <div class="x_content" style="font-size:18px;margin-top: 6%; margin-bottom: 6%;"> 
                     <p style="text-align: center;"><img style="width: 13%;" src="/img/trash1.png"></p>                   
                     <br><br><br>
-                    <form action="/AdminCash/AdminCashRecall" method="POST" name="info">
+                    <form autocomplete="off" action="/AdminCash/AdminCashRecall" method="POST" name="info">
                         <input type="hidden" value="${userNo}" id="intUserNo" name="intUserNo">
                         <input type="hidden" value="${id}" id="strUserId" name="strUserId">                         
                         <table id="datatable" class="table table-bordered" id="AdminList" style="font-family: Bareun; width: 55%;margin-left: auto;margin-right: auto;">

@@ -61,7 +61,7 @@
 		<br>
 		<span style="float:right; margin-right:2%; font-weight:bold"><a href='/board/boardlist?intBoardCateNo=${intBoardCateNo}' >목록</a></span>
 		<br><br>
-		<form method="POST" action="/board/boardsave?intBoardCateNo=${intBoardCateNo}" name="info">
+		<form method="POST" action="/board/boardsave?intBoardCateNo=${intBoardCateNo}" name="info" autocomplete="off">
 		<table class="table">
 			<tr>
 				<td style="width: 10%; text-align: center; padding-top: 1.5%;font-weight: bold;">제&nbsp;&nbsp;&nbsp;&nbsp;목</td>

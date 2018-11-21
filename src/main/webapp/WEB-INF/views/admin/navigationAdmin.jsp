@@ -128,10 +128,10 @@
                   
                   <c:forEach var="item" items="${items}">
                     <c:if test="${5 eq item.intAuthItemNo}">
-                      <li><a style=" font-size: 14px;"><i class="fa fa-tasks"></i> 상품 관리<span class="fa fa-chevron-down"></span></a>
+                      <li><a style=" font-size: 14px;"><i class="fa fa-tasks"></i> 아이템 관리<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                          <li><a href="/Product/ProductList">상품 목록</a></li>
-                          <li><a href="/Product/ProductEnrollForm">상품 등록</a></li>  
+                          <li><a href="/Product/ProductList">아이템 목록</a></li>
+                          <li><a href="/Product/ProductEnrollForm">아이템 등록</a></li>  
                         </ul>
                       </li>
                       </c:if>
@@ -147,6 +147,7 @@
                       </li>
                       </c:if>
                   </c:forEach>  
+                  
                   
                 </ul>
               </div>
@@ -171,13 +172,11 @@
 
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="font-weight:bold">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="width: 180px;font-weight:bold">
                     <img src="/img/profile.png" alt=""><%= session.getAttribute("AdminId") %> 관리자님
                     <span class=" fa fa-angle-down"></span>
                   </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    
-                   
+                  <ul class="dropdown-menu dropdown-usermenu pull-right" style="width: 180px;">
                     <li><a href="/loginAdmin/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>

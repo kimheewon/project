@@ -376,7 +376,7 @@ cursor: pointer !important;}
 					<div style="text-align:right; color:#18BC9C;">
 					*는 필수 입력값입니다.
 					</div>
-					<form name="joinInfo" action="/user/joinSave" method="POST">
+					<form name="joinInfo" action="/user/joinSave" method="POST" autocomplete="off">
 						<div class="control-group">
 							<div class="form-group floating-label-form-group controls mb-0 pb-2" >
 								<a class="font_required">* 아이디</a>
@@ -431,7 +431,7 @@ cursor: pointer !important;}
 						</div>
 						<div class="control-group">
 							<div class="form-group floating-label-form-group controls mb-0 pb-2">
-								<a class="font_required">이메일</a>
+								<a class="font_required" style="color: #2c3e50;">이메일</a>
 								<p class="help-block text-danger"></p>
 								&nbsp;&nbsp; &nbsp;&nbsp;<input class="form-control" id="email" name="email" type="email" data-validation-required-message="Please enter your email address." style="display:inline; border-radius: 8px;width:80%;background-color:#efefef ">
 								<p class="help-block text-danger"></p>
@@ -460,7 +460,7 @@ cursor: pointer !important;}
                         <div class="control-group">
                             <div
                                 class="form-group floating-label-form-group controls mb-0 pb-2">
-                                <a class="font_required">* 우편번호</a>
+                                <a class="font_required" style="color: #2c3e50;">우편번호</a>
                                 <p class="help-block text-danger"><p class="help-block text-danger">
                                 &nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="postcode" name="postcode" placeholder="우편번호" type="text" style="height: 35px;margin-bottom: 3px;display:inline; border-radius: 8px;width:15%;background-color:white;border: 1px solid gray;" readonly> 
                               

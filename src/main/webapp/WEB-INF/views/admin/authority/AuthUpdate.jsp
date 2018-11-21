@@ -59,8 +59,7 @@
 						</div>
 
 						<div class="title_right">
-							<div
-								class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+							<div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
 								<div class="input-group"></div>
 							</div>
 						</div>
@@ -76,7 +75,7 @@
 				                </div>
 								<div class="x_content">
 									<br />
-									<form id="AuthEnrollInfo" name="AuthEnrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Auth/AuthUpdate" method="POST">
+									<form id="AuthEnrollInfo" autocomplete="off" name="AuthEnrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Auth/AuthUpdate" method="POST">
 										<input type="hidden" name="no" id="no" value="${authNo}">	
 										<div class="form-group">
 											<label class="control-label col-md-3 col-sm-3 col-xs-12" for="authName" style="font-size: 15px; color: #00003f;">권한명 <span class="required">*</span>

@@ -189,7 +189,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>회원정보 등록</h3>
+                <h3></h3>
               </div>
 
               <div class="title_right">
@@ -211,7 +211,7 @@
                    </div>
                    <div class="x_content">
                     <br />
-                    <form id="enrollInfo" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Membership/MembershipEnroll" method="POST">
+                    <form autocomplete="off" id="enrollInfo" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Membership/MembershipEnroll" method="POST">
 
                      
                       

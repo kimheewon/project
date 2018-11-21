@@ -15,7 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>상세보기 - 결제 내역</title>
+    <title>상세보기 - 충전 내역</title>
 
      <!-- Bootstrap -->
     <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -48,7 +48,9 @@
     padding-top: 0.5%;
     padding-bottom: 1.5%;
 }
-    
+#cancelBtn{
+font-family: Bareun;margin-bottom: 0px;background-color: white;color:#2c3e50;padding-top: 0.7%;padding-bottom: 0.7%;
+}
 </style>
 </head>
 
@@ -62,7 +64,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3 style="font-family: Bareun;color: #605183;font-weight: bold;">${id}&nbsp;&nbsp;회원님의,</h3>
+                <h3 style="font-family: Bareun;color: #605183;font-weight: bold;font-size: 15pt;">${id}&nbsp;&nbsp;회원님의,</h3>
               </div>
 
               <div class="title_right">
@@ -80,7 +82,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2 style="font-family: Bareun;font-weight: bold;">결제 내역 상세보기</h2>
+                    <h2 style="font-family: Bareun;font-weight: bold;">충전 내역 상세보기</h2>
                     <button class="btn btn-app" type="button" onclick="location.href='/Membership/MembershipRead?intUserNo=${userNo}'"
                                                                 id="editBtn" data-placement="top" data-toggle="tooltip" data-original-title="상세보기" style="margin-right: 0.5%;">                                                       
                         <i class="fa fa-newspaper-o" style="color: #a55663;"></i>
@@ -92,23 +94,23 @@
                     <table id="datatable" class="table table-striped table-bordered" id="AdminList" style="font-family: Bareun;">
                     <colgroup>
                         <col width = "6%"/>
-                        <col width = "15%"/>
                         <col width = "*"/>
-                        <col width = "10%"/>
-                        <col width = "14%"/>
-                        <col width = "12%"/>
-                        <col width = "12%"/>
+                        <col width = "13%"/>
+                        <col width = "13%"/>
+                        <col width = "13%"/> 
+                        <col width = "15%"/>
+                        <col width = "15%"/>
                         <col width = "12%"/>
                     </colgroup>
                       <thead>
                         <tr>
                           <th style="text-align: center; padding-left: 1.5%; color:#00003f" class="sorting_desc">#</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">일&nbsp;&nbsp;시</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">번&nbsp;&nbsp;호</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">상&nbsp;&nbsp;태</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">번&nbsp;&nbsp;호</th>                          
                           <th style="text-align: center; padding-left: 2%; color:#00003f">금&nbsp;&nbsp;액</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">캐&nbsp;&nbsp;시</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">결제&nbsp;수단</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">결제&nbsp;수단</th>   
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">상&nbsp;&nbsp;태</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">일&nbsp;&nbsp;시</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">결제&nbsp;취소</th>
                         </tr>
                       </thead>
@@ -117,28 +119,27 @@
                         <c:forEach var="cash" items="${cash}" varStatus="status">
 
                             <tr>
-                                <td style="text-align: center; color:#3b5976;" class="sorting">${status.count}</td>         
-                                <td style="text-align: center; color:#3b5976;">${cash.transaction_date}</td>
+                                <td style="text-align: center; color:#3b5976;" class="sorting">${status.count}</td>   
                                 <td style="text-align: center; color:#3b5976;">${cash.intCashNo}</td>
-                                <td style="text-align: center; color:#3b5976;">
-	                                <c:choose>
-	                                   <c:when test="${cash.strReason ne '0'}">	                                       
-	                                      <span style="line-height: 22px;" data-toggle="tooltip" data-placement="bottom" data-original-title="${cash.strReason}">${cash.strPurchaseState}(${cash.strAdminId})</span>  
-	                                   </c:when>
-		                                <c:otherwise>
-		                                   ${cash.strPurchaseState}
-		                                </c:otherwise>
-	                                </c:choose>	                               
-                                </td>
-                                <td style="text-align: center; color:#3b5976;">
+                                <td style="text-align: right;color: #3b5976;padding-right: 2%;">
                                     <c:if test="${cash.amount ne 0}"><fmt:formatNumber value="${cash.amount}" pattern="#,###" />&nbsp;원</c:if></td>
-                                <td style="text-align: center; color:#3b5976;"><fmt:formatNumber value="${cash.intCashAmt}" pattern="#,###" />&nbsp;코인</td>
+                                <td style="text-align: right;color: #3b5976;padding-right: 2%;"><fmt:formatNumber value="${cash.intCashAmt}" pattern="#,###" />&nbsp;코인</td>
                                 <td style="text-align: center; color:#3b5976;">${cash.strPurchasekind}</td>
+                                 <td style="text-align: center; color:#3b5976;">
+                                    <c:choose>
+                                       <c:when test="${cash.strReason ne '0'}">                                        
+                                          <span style="line-height: 22px;" data-toggle="tooltip" data-placement="bottom" data-original-title="${cash.strReason}">${cash.strPurchaseState}(${cash.strAdminId})</span>  
+                                       </c:when>
+                                        <c:otherwise>
+                                           ${cash.strPurchaseState}
+                                        </c:otherwise>
+                                    </c:choose>                                
+                                </td>
+                                <td style="text-align: center; color:#3b5976;">${cash.transaction_date}</td>
                                 <td style="text-align: center; color:#3b5976;padding-top: 0.5%;padding-bottom: 0.5%;">
                                     <c:if test="${cash.strPurchaseState eq '결제 완료'}">
                                         <c:if test="${cash.intCashAmt eq cash.intRemainCashAmt}">
-                                             <button class="btn btn-primary" style="font-family: Bareun;margin-bottom: 0px;background-color: white;color:#2c3e50;padding-top: 0.7%;padding-bottom: 0.7%;" type="button"
-                                    onclick="location.href='/AdminCash/CashCancel?cashNo=${cash.intCashNo}'">취소</button>
+                                             <button id="cancelBtn" class="btn btn-primary" type="button" value="${cash.intCashNo}">취소</button>
                                         </c:if>
                                     </c:if>
                                 </td>   
@@ -192,6 +193,16 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', 'UA-23581568-13', 'auto');
 ga('send', 'pageview');
 
+$("#cancelBtn").click(function() {
+    var no =  $(this).val();
+    if((confirm("결제 취소 하시겠습니까?") == true)){
+        location.href="/AdminCash/CashCancel?cashNo="+no;
+    }                
+    else{
+        return;
+    }
+    
+});
 
  
 </script>

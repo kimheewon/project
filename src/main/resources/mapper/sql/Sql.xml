@@ -31,7 +31,7 @@
 	
 	<!-- 아이디 중복체크 -->	
 	<select id="selectId"  resultType="Member">
-		SELECT   UserId AS StrUserid	
+		SELECT UserId AS StrUserid	
 		FROM TUser
 		WHERE UserId = #{id} 
 	</select>
@@ -242,10 +242,21 @@
 	<select id="getUserGrade" resultType="String">
 		SELECT    UserGrade
 		FROM      TUser			
-		WHERE     UserId = #{id} 
-	
+		WHERE     UserId = #{id} 	
 	</select>
 	
+	<!-- 아이디로 회원번호 가져오기 -->
+    <select id="selectUserNo" resultType="int">
+        SELECT    UserNo 
+        FROM      TUser         
+        WHERE     UserId = #{strUserId}     
+    </select>
+    
+    <!-- 계좌만들기 -->
+    <insert id="insertUserCashAmt">
+        INSERT INTO TUserCashMst(UserNo)
+                          VALUES(#{userNo});
+    </insert>
 	<!--db에서 게시판 카테고리 항목 불러오기 -->
 	<select id="boardCategoryList" resultType="BoardCategoryInfo">
 	   SELECT  BoardCateNo      AS intBoardCateNo    

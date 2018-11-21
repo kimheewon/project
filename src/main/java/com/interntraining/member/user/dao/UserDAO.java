@@ -31,6 +31,16 @@ public class UserDAO {
 		sqlSession.insert("sql.insertmember",member);
 		
 	}
+
+	//회원번호 찾기
+	public int selectUserNo(String strUserId) {
+		return sqlSession.selectOne("sql.selectUserNo",strUserId);
+	}
+
+	//계좌만들기
+	public void insertUserCashAmt(int userNo) {
+		sqlSession.insert("sql.insertUserCashAmt",userNo);
+	}
 		
 	
 }

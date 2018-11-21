@@ -110,7 +110,7 @@
 								<td style="text-align: center; color:#3b5976;">${userList.strUserPhone}</td>
 								<td style="text-align: center; color:#3b5976;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${userList.dateUserDate}"/></td>
 								<td style="text-align: center; color:#3b5976;">${userList.strUserGrade} 회원</td>
-								<td style="text-align: center; color:#3b5976;"><fmt:formatNumber value="${userList.intTotalCashAmt}" pattern="#,###" />&nbsp;코인</td>
+								<td style="text-align: right;color: #3b5976;padding-right: 2%;"><fmt:formatNumber value="${userList.intTotalCashAmt}" pattern="#,###" />&nbsp;코인</td>
 								<td style="text-align: center; color:#3b5976; "><a href="/Membership/MembershipRead?intUserNo=${userList.intUserNo}" style="color:#3b5976;">상세보기</a>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<a href="/Membership/MembershipUpdateForm?intUserNo=${userList.intUserNo}" style="color:#3b5976;">수정하기</a></td>

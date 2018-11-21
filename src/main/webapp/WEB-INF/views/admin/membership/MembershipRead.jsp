@@ -91,7 +91,7 @@
                   <div class="x_title">
                   <h2 style="font-family: Bareun;font-weight: bold;">회원정보 상세보기</h2>           
                     <div style="float:right">
-	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href='/AdminCash/AdminCashList?userNo=${intUserNo}'">결제 내역</button>
+	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href='/AdminCash/AdminCashList?userNo=${intUserNo}'">충전 내역</button>
 	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href=''">캐시 사용 내역</button>
 	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href='/AdminCash/AdminCashPaymentForm?userNo=${intUserNo}'">캐시 지급</button>
 	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href='/AdminCash/AdminCashRecallForm?userNo=${intUserNo}'">캐시 회수</button>     
@@ -110,13 +110,7 @@
                            </span>
                        </div>
                       </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password" style="font-size: 13px; color: #00003f;">비밀번호
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                         <input type="text" class="form-control" style="background-color: white;border: none; box-shadow: none;" readonly>
-                        </div>
-                      </div>                      
+                                        
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name" style="font-size: 13px; color: #00003f;">이름 
                         </label>

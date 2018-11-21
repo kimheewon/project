@@ -49,7 +49,7 @@
 			<h2 class="card-title text-center" style="color: #113366;">Payletter</h2>
 		</div>
 		<div class="card-body">
-			<form class="form-signin" method="POST" action="/login/loginCheck">				
+			<form class="form-signin" method="POST" action="/login/loginCheck" autocomplete="off">				
 				<label for="inputEmail" class="sr-only">Your ID</label>
 				<input value="lion1234" type="text" name="id" class="form-control" placeholder="Your ID"	required autofocus><BR>
 				<label for="inputPassword" class="sr-only">Password</label>

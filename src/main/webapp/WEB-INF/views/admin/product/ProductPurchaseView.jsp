@@ -137,13 +137,13 @@ input[type="number"]::-webkit-inner-spin-button {
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                      <h2 style="font-family: Bareun;font-weight: bold;">상품 구매 내역 상세보기</h2>
+                      <h2 style="font-family: Bareun;font-weight: bold;">아이템 구매 내역 상세보기</h2>
                     
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content" style="font-size:15px">
                     <br>
-                   <p style="width:90%; margin-bottom: 0px;font-size: 20px;font-weight: bold;margin: auto;">구매 상품 정보</p>
+                   <p style="width:90%; margin-bottom: 0px;font-size: 20px;font-weight: bold;margin: auto;">구매 아이템 정보</p>
                     <hr style="width:90%">
                    <table id="itemTable" >
                     <colgroup>

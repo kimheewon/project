@@ -74,16 +74,16 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2 style="width: 100%;font-weight: bold;font-family: Bareun;">캐시 충전 내역
-                                    <small style="color: #2c3e50;font-weight: bold;float: right;">*은 필수항목입니다.</small></h2>                   
+                                    <h2 style="width: 100%;font-weight: bold;font-family: Bareun;">아이템 등록</h2>                   
                                     <div class="clearfix"></div>
                                 </div>
-                                <div class="x_content"><br/>
-                                    <form id="enrollInfo" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data"
+                                <div class="x_content">
+                                <h2 style="margin-top: 0px;margin-right: 35px;">
+                                        <small style="color: #2c3e50;  font-weight: bold;float: right;font-size: 10pt;">*은 필수항목입니다.</small></h2> <br/>
+                                    <form autocomplete="off" id="enrollInfo" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data"
                                         action="/Product/ProductEnroll" method="POST" >
-                                        
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 13px; color: #00003f;">상품명 <span class="required">*</span>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 13px; color: #00003f;">아이템명 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <input type="text" id="strItemName" name="strItemName" required="required" class="form-control col-md-7 col-xs-12">
@@ -178,117 +178,23 @@ ga('send', 'pageview');
             filesArr.forEach(function(f) {
                 if(!f.type.match("image.*")) {
                     alert("확장자는 이미지 확장자만 가능합니다.");
-                    return;
+                    document.getElementById("file").value="";
+                    return false;
                 }
- 
-                sel_file = f;
- 
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                	$img = $("#img").attr("src", e.target.result);                            //파일을 선택했을 경우 정보를 $img 객체에 저장  
-                    
+                else{
+	                sel_file = f;
+	 
+	                var reader = new FileReader();
+	                reader.onload = function(e) {
+	                	$img = $("#img").attr("src", e.target.result);                            //파일을 선택했을 경우 정보를 $img 객체에 저장  
+	                    
+	                }
+	                reader.readAsDataURL(f);
                 }
-                reader.readAsDataURL(f);
             });
         }
        
-        $("#adminIdCheck").on("click",function(){
-            
-            if(document.getElementById("admin_Id").value==""){
-                alert("아이디를 입력하세요.");
-                document.getElementById("admin_Id").value="";   
-            }
-            else{
-             $.ajax({   
-                type:"POST",
-                url:"/Administrator/AdministratorIdCheck",   
-                dataType:"html",// JSON/html
-                async: false,
-                data:{ 
-                    "id": $("#admin_Id").val()
-                },
-            
-                success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-                    
-                    if(data==0){                    
-                        alert("사용해도 되는 아이디입니다.");
-                        val = 0; //중복체크함
-                        
-                    }
-                    else{
-                        alert("중복된 아이디입니다.");
-                        document.getElementById("admin_Id").value="";   
-                    }
-                }
-            }); //--ajax
-            }
-            
-        });
-        
-        
-        //빈값 확인
-        $("#adminEnroll").on("click",function(){
-            var str = document.enrollInfo;
-            var pw1 = str.admin_Pw.value;
-            var pw2 = str.admin_Pw2.value;
-            var count=$("#admin_Auth").val(); //<-- option값
-             
-            
-            if(str.admin_Id.value == ""){
-                alert("아이디를 입력하지 않았습니다. 입력해주세요");
-                str.admin_Id.focus();
-                return false;
-            }
-            else{
-                var idReg = /^[a-zA-Z](?=.{0,28}[0-9])[0-9a-zA-Z]{6,15}$/   //영문 대문자 또는 소문자로 시작하는 아이디, 길이는 6~15자, 끝날때 제한 없음
-                if(!idReg.test(str.admin_Id.value)) {
-                    alert("6~15자 영문대소문자,숫자를 사용하세요.");
-                    str.admin_Id.focus();
-                    return false;
-                }
-            }
-                
-            if(val == 1){
-                alert("중복체크를 해주세요");
-                return false;
-            }
-            if(str.admin_Pw.value == ""){
-                alert("비밀번호를 입력하지 않았습니다. 입력해주세요");
-                str.admin_Pw.focus();
-                return false;
-            }
-            else{   //비밀번호 유효성 검사
-                var pw = str.admin_Pw.value;
-                var reg_pw ="^(?=.*\\d)(?=.*[~`!@#$%\\^&*()-])(?=.*[a-z])(?=.*[A-Z]).{8,20}$";
-    
-                if(!pw.match(reg_pw)) {
-                    alert("8~20자 영문 대 소문자, 숫자, 특수문자를 사용하세요."); 
-                    document.enrollInfo.admin_Pw.value="";
-                    document.enrollInfo.admin_Pw2.value="";
-                    return false; 
-                }
-            }
-            if(str.admin_Pw2.value == ""){
-                alert("비밀번호 확인을 입력하지 않았습니다. 입력해주세요");
-                str.admin_Pw2.focus();
-                return false;
-            }
-            if(pw1 != pw2){         
-                alert("비밀번호가 일치하지 않습니다");
-                document.getElementById("admin_Pw2").value="";
-                return false;
-            }   
-            if(str.admin_Name.value == ""){
-                alert("이름을 입력하지 않았습니다. 입력해주세요");
-                document.getElementById("admin_Name").focus();
-                return false;
-            }
-          
-            if(count == '0'){
-                alert("권한 항목을 선택하지 않습니다.");
-                return false;
-            }   
-        });     
+      
     });
 
     function inputNumberFormat(obj) {

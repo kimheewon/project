@@ -48,7 +48,9 @@
     padding-top: 0.5%;
     padding-bottom: 1.5%;
 }
-    
+#cancelBtn{
+font-family: Bareun;margin-bottom: 0px;background-color: white;color:#2c3e50;padding-top: 0.7%;padding-bottom: 0.7%;
+} 
 </style>
 </head>
 
@@ -88,25 +90,25 @@
                     <table id="datatable" class="table table-striped table-bordered" id="AdminList" style="font-family: Bareun;">
                     <colgroup>
                         <col width = "6%"/>
+                        <col width = "*"/>  
                         <col width = "12%"/>
-                        <col width = "17%"/>                        
-                        <col width = "*"/>
-                        <col width = "15%"/>
                         <col width = "10%"/>
                         <col width = "10%"/>
                         <col width = "9%"/>
+                        <col width = "15%"/>
+                        <col width = "17%"/>  
                         <col width = "8%"/>
                     </colgroup>
                       <thead>
                         <tr>
-                          <th style="text-align: center; padding-left: 1.5%; color:#00003f" class="sorting_desc">#</th>                         
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">아&nbsp;이&nbsp;디</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">일&nbsp;&nbsp;시</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">번&nbsp;&nbsp;호</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">상&nbsp;&nbsp;태</th>
+                          <th style="text-align: center; padding-left: 1.5%; color:#00003f" class="sorting_desc">#</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">번&nbsp;&nbsp;호</th>  
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">아&nbsp;이&nbsp;디</th>                         
                           <th style="text-align: center; padding-left: 2%; color:#00003f">금&nbsp;&nbsp;액</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">캐&nbsp;&nbsp;시</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">캐&nbsp;&nbsp;시</th> 
                           <th style="text-align: center; padding-left: 2%; color:#00003f">결제&nbsp;수단</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">상&nbsp;&nbsp;태</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">일&nbsp;&nbsp;시</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">결제&nbsp;취소</th>
                         </tr>
                       </thead>
@@ -116,28 +118,27 @@
 
                             <tr>
                                 <td style="text-align: center; color:#3b5976;" class="sorting">${status.count}</td> 
-                                <td style="text-align: center; color:#3b5976;">${cash.user_id}</td>        
-                                <td style="text-align: center; color:#3b5976;">${cash.transaction_date}</td>
                                 <td style="text-align: center; color:#3b5976;">${cash.intCashNo}</td>
-                                <td style="text-align: center; color:#3b5976;">
-	                                <c:choose>
-	                                   <c:when test="${cash.strReason ne '0'}">	                                       
-	                                      <span style="line-height: 22px;" data-toggle="tooltip" data-placement="bottom" data-original-title="${cash.strReason}">${cash.strPurchaseState}(${cash.strAdminId})</span> 
-	                                   </c:when>
-		                                <c:otherwise>
-		                                   ${cash.strPurchaseState}
-		                                </c:otherwise>
-	                                </c:choose>	                               
-                                </td>
+                                <td style="text-align: center; color:#3b5976;">${cash.user_id}</td>   
                                 <td style="text-align: right;color: #3b5976;padding-right: 2.5%;">
                                     <c:if test="${cash.amount ne 0}"><fmt:formatNumber value="${cash.amount}" pattern="#,###" />&nbsp;원</c:if></td>
                                 <td style="text-align: right;color: #3b5976;padding-right: 2.5%;"><fmt:formatNumber value="${cash.intCashAmt}" pattern="#,###" />&nbsp;코인</td>
-                                <td style="text-align: center; color:#3b5976;">${cash.strPurchasekind}</td>
+                                <td style="text-align: center; color:#3b5976;">${cash.strPurchasekind}</td>                                
+                                <td style="text-align: center; color:#3b5976;">
+                                    <c:choose>
+                                       <c:when test="${cash.strReason ne '0'}">                                        
+                                          <span style="line-height: 22px;" data-toggle="tooltip" data-placement="bottom" data-original-title="${cash.strReason}">${cash.strPurchaseState}(${cash.strAdminId})</span> 
+                                       </c:when>
+                                        <c:otherwise>
+                                           ${cash.strPurchaseState}
+                                        </c:otherwise>
+                                    </c:choose>                                
+                                </td>
+                                <td style="text-align: center; color:#3b5976;">${cash.transaction_date}</td>
                                 <td style="text-align: center; color:#3b5976;padding-top: 0.5%;padding-bottom: 0.5%;">
                                     <c:if test="${cash.strPurchaseState eq '결제 완료'}">
                                          <c:if test="${cash.intCashAmt eq cash.intRemainCashAmt}">
-                                             <button class="btn btn-primary" style="font-family: Bareun;margin-bottom: 0px;background-color: white;color:#2c3e50;padding-top: 0.7%;padding-bottom: 0.7%;" type="button"
-                                    onclick="location.href='/AdminCash/CashAllCancel?cashNo=${cash.intCashNo}'">취소</button>
+                                             <button id="cancelBtn" class="btn btn-primary" value="${cash.intCashNo}" type="button">취소</button>
                                         </c:if>
                                     </c:if>
                                 </td>   
@@ -190,6 +191,17 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
 ga('create', 'UA-23581568-13', 'auto');
 ga('send', 'pageview');
+
+$("#cancelBtn").click(function() {
+	var no =  $(this).val();
+	if((confirm("결제 취소 하시겠습니까?") == true)){
+		location.href="/AdminCash/CashAllCancel?cashNo="+no;
+    }                
+    else{
+        return;
+    }
+	
+});
 
 
  

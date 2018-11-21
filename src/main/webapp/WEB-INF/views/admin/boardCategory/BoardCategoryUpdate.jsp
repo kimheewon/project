@@ -61,15 +61,16 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2 style="width: 100%;font-weight: bold;font-family: Bareun;">게시판 카테고리 수정
-                                    <small style="color: #2c3e50;font-weight: bold;float: right;">*은 필수항목입니다.</small></h2>                   
+                                    <h2 style="width: 100%;font-weight: bold;font-family: Bareun;">게시판 카테고리 수정</h2>                   
                                     <div class="clearfix"></div>
                                 </div>
-			                    <div class="x_content"><br/>
-                                    <form id="enrollInfo" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/BoardCategory/BoardCategoryUpdate" method="POST">
+			                    <div class="x_content">
+			                        <h2 style="margin-top: 0px;margin-right: 35px;">
+                                        <small style="color: #2c3e50;  font-weight: bold;float: right;font-size: 10pt;">*은 필수항목입니다.</small></h2> <br/>
+                                    <form autocomplete="off" id="enrollInfo" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/BoardCategory/BoardCategoryUpdate" method="POST">
                                         <input type="hidden" name="no" id="no" value="${board.intBoardCateNo}">
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id" style="font-size: 13px; color: #00003f;">게시판명 <span class="required">*</span></label>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id" style="font-size: 13px; color: #00003f;">카테고리명 <span class="required">*</span></label>
 				                            <div class="input-group" style="width:49.5%; padding-left:0.9rem">
                                                 <span class="input-group-btn"><input type="text" class="form-control" id="boardName" name="boardName" required="required" value="${board.strBoardCateName}" >
 					                            <button type="button"  class="btn btn-primary"  id="boardNameCheck">중복확인</button></span>

@@ -123,7 +123,7 @@
     position: absolute;
     width: auto;
     min-width: 100px;
-    max-width: 600px;
+    max-width: 300px;
     word-wrap: break-word;
 
     z-index: 9999;
@@ -135,7 +135,7 @@
 <jsp:include page="../../login/navigation.jsp" flush="true"/>
 
 <div class="container_t" style="min-height: 800px;">
-    <h3 style="color:#2c3e50;margin-left: 6%;">캐시 내역</h3><br><br><br>
+    <h3 style="color:#2c3e50;margin-left: 6%;">캐시 충전 내역</h3><br><br><br>
     <form action="/Cash/CashList">
         <!-- search -->
         <table class="searchBox">
@@ -254,10 +254,10 @@
 		            <tr>   
 		                <td style="padding-top: 1%;padding-bottom: 1%;">${cash.intNum}</td>
 		                <td style="padding-top: 1%;padding-bottom: 1%;">${cash.intCashNo}</td>		                
-		                <td style="padding-top: 1%;padding-bottom: 1%;">
+		                <td style="padding-top: 1%;padding-bottom: 1%;text-align: right;padding-right: 2%;">
 		                  <c:if test="${cash.amount ne 0}"><fmt:formatNumber value="${cash.amount}" pattern="#,###" />&nbsp;원</c:if>
 		                </td>
-		                <td style="padding-top: 1%;padding-bottom: 1%;"><fmt:formatNumber value="${cash.intCashAmt}" pattern="#,###" />&nbsp;코인</td>
+		                <td style="padding-top: 1%;padding-bottom: 1%;text-align: right;padding-right: 2%;"><fmt:formatNumber value="${cash.intCashAmt}" pattern="#,###" />&nbsp;코인</td>
 		                <td style="padding-top: 1%;padding-bottom: 1%;">${cash.strPurchasekind}</td>	
 		                <td style="padding-top: 1%;padding-bottom: 1%;font-weight: bold;color:#3a3ac5;">
                             <c:choose>
@@ -328,6 +328,21 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
     
 <script>                
+$("#searchBtn").click(function(){
+    
+    var start = document.getElementById("searchStartDate").value;
+    var end = document.getElementById("searchEndDate").value;
+    
+    if(start == ""){
+        alert("시작일을 입력하세요.");
+        return false;
+    }
+    if(end == ""){
+        alert("종료일을 입력하세요.");
+        return false;
+    }
+    
+});
 
 $(document).ready(function() {
     

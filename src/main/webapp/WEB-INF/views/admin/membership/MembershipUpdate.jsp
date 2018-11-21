@@ -48,39 +48,12 @@
 		//빈값 확인
 		$("#update").on("click",function(){
 			var str = document.updateInfo;
-			var pw1 = str.pw1.value;
-			var pw2 = str.pw2.value;
+			
 			var count=$("#select_grade").val(); //<-- option값
 		     
 	 		
 			
-	      	if(str.pw1.value == ""){
-	           	alert("비밀번호를 입력하지 않았습니다. 입력해주세요");
-	           	str.pw1.focus();
-	           	return false;
-	       	}
-	      	else{	//비밀번호 유효성 검사
-	      		var pw = str.pw1.value;
-				var reg_pw ="^(?=.*\\d)(?=.*[~`!@#$%\\^&*()-])(?=.*[a-z])(?=.*[A-Z]).{8,20}$";
-	
-				if(!pw.match(reg_pw)) {
-					alert("8~20자 영문 대 소문자, 숫자, 특수문자를 사용하세요."); 
-	      		    document.updateInfo.pw1.value="";
-	      			document.updateInfo.pw2.value="";
-	      			str.pw1.focus();
-	      		    return false; 
-	      		}
-	      	}
-	       	if(str.pw2.value == ""){
-	           	alert("비밀번호 확인을 입력하지 않았습니다. 입력해주세요");
-	           	str.pw2.focus();
-	           	return false;
-	       	}
-	       	if(pw1 != pw2){			
-				alert("비밀번호가 일치하지 않습니다");
-				document.getElementById("pw2").value="";
-				return false;
-			}	
+	      	
 	       	if(str.name.value == ""){
 				alert("이름을 입력하지 않았습니다. 입력해주세요");
 				document.getElementById("name").focus();
@@ -110,21 +83,7 @@
 	});
 		
 	
-	//비밀번호 확인
-	function go(val){
-		var pw1 = document.updateInfo.pw1.value;
-		var pw2 = document.updateInfo.pw2.value;
-		
-		if(pw1 != pw2){			
-			document.getElementById("welcome").textContent = '비밀번호가 일치하지않습니다.';
-		}
-		else{
-			document.getElementById("welcome").textContent= '비밀번호가 일치합니다.';
-		}
-		
-	   
-	 
-	}
+	
 	
 	
 	</script>
@@ -140,7 +99,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>회원정보 수정</h3>
+                <h3></h3>
               </div>
 
               <div class="title_right">
@@ -162,7 +121,7 @@
                    </div>
                    <div class="x_content">
                     <br />
-                    <form id="updateInfo" name="updateInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Membership/MembershipUpdate?intUserNo=${intUserNo}" method="POST">
+                    <form autocomplete="off" id="updateInfo" name="updateInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Membership/MembershipUpdate?intUserNo=${intUserNo}" method="POST">
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id" style="font-size: 13px; color: #00003f;">아이디 <span class="required">*</span>
@@ -170,24 +129,7 @@
                         <div class="col-md-6 col-sm-6 col-xs-12" >
                             <span class="input-group-btn"><input type="text" class="form-control" id="id" name="id" style="background-color: #efefef;" value="${member.strUserId}" disabled>  </span>
                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password" style="font-size: 13px; color: #00003f;">비밀번호 <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                         <input type="password" name="pw1" id="pw1" class="form-control col-md-7 col-xs-12" style="background-color: white;" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password" style="font-size: 13px; color: #00003f;">비밀번호 확인 <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                         <input type="password"  name="pw2" id="pw2" class="form-control col-md-7 col-xs-12" style="background-color: white;" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자" onkeyup="go(this.value)">
-                        </div>
-                         <div>
-                        	<span id="welcome" style="color:#cc0000;font-size:10pt;width:50%;line-height: 35px;" ></span>
-                        </div>
-                      </div>                                
+                      </div>           
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name" style="font-size: 13px; color: #00003f;">이름 <span class="required">*</span>
                         </label>

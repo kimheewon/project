@@ -54,8 +54,7 @@
                                   <div class="progress vertical progress_wide bottom" style="width: 100%; height: 200px">
                                     <div class="progress-bar progress-bar-dark" role="progressbar" data-transitiongoal="${menP}">
                                     <div>${menP}%</div>
-                                    </div>
-                                  	 
+                                    </div>                                  	 
                                   </div>
                                 </li>
                                 <li style="width:10%">

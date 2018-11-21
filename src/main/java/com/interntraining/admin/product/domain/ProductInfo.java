@@ -21,7 +21,15 @@ public class ProductInfo {
     private int 	intDeliveryPrice;
     private int 	intItemPrice;
 	private String 	strAdminId;
+	private String 	strdate;
 	
+	
+	public String getStrdate() {
+		return strdate;
+	}
+	public void setStrdate(String strdate) {
+		this.strdate = strdate;
+	}
 	private MultipartFile 	file;
 	
 	

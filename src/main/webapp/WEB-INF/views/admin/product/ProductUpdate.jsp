@@ -74,18 +74,19 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2 style="width: 100%;font-weight: bold;font-family: Bareun;">상품 수정
-                                    <small style="color: #2c3e50;font-weight: bold;float: right;">*은 필수항목입니다.</small></h2>                   
+                                    <h2 style="width: 100%;font-weight: bold;font-family: Bareun;">아이템 수정</h2>                   
                                     <div class="clearfix"></div>
                                 </div>
-                                <div class="x_content"><br/>
-                                    <form id="enrollInfo" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data"
+                                <div class="x_content">
+                                    <h2 style="margin-top: 0px;margin-right: 35px;">
+                                        <small style="color: #2c3e50;  font-weight: bold;float: right;font-size: 10pt;">*은 필수항목입니다.</small></h2> <br/>
+                                    <form autocomplete="off" id="enrollInfo" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data"
                                         action="/Product/ProductUpdate" method="POST" >
                                         <input type="hidden" value="${product.strfileUrl}" id="url" name="strfileUrl">
                                         <input type="hidden" value="${product.strfileOriName}" name="strfileOriName">
                                         <input type="hidden" value="${product.intItemNo}" name="intItemNo">
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 13px; color: #00003f;">상품명 <span class="required">*</span>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 13px; color: #00003f;">아이템명 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <input type="text" id="strItemName" name="strItemName" required="required" class="form-control col-md-7 col-xs-12" value="${product.strItemName}">

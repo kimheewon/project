@@ -38,6 +38,18 @@ public class UserServiceImpl implements UserService {
 		userDAO.insertmember(member);
 		
 	}
+
+	//회원번호 찾기
+	@Override
+	public int selectUserNo(String strUserId) {
+		return userDAO.selectUserNo(strUserId);
+	}
+
+	//계좌만들기
+	@Override
+	public void insertUserCashAmt(int userNo) {
+		userDAO.insertUserCashAmt(userNo);
+	}
     
     
    

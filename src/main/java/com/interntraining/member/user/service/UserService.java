@@ -9,6 +9,12 @@ public interface UserService {
 
 	//회원 가입
 	public void insertMember(Member member);
+
+	//회원번호 찾기
+	public int selectUserNo(String strUserId);
+
+	//계좌만들기
+	public void insertUserCashAmt(int userNo);
 		
 
 	

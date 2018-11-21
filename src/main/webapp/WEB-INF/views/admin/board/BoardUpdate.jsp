@@ -113,9 +113,8 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content" id="contentStyle">
-                                    <form action="/AdminBoard/AdminBoardEnroll?boardCateNo=${boardCateNo}" method="post" name="info">
-                                        
-		                                <div class="form-group">
+                                    <form autocomplete="off" action="/AdminBoard/AdminBoardEnroll?boardCateNo=${boardCateNo}" method="post" name="info">
+                                        <div class="form-group">
 		                                    <label id="titleSytle" class="control-label col-md-3 col-sm-3 col-xs-12" for="id">제   목
 		                                    </label>
 					                        <div class="input-group" style="width:91.5%; padding-left:0.9rem">

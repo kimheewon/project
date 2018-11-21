@@ -42,11 +42,10 @@ public class LoginController {
 	//홈화면으로 이동
 	@RequestMapping("/home")
 	public ModelAndView home(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
-		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
-		
-
-		mv.setViewName("/login/home");		
-		return mv;		
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+				
+		mav.setViewName("/login/home");		
+		return mav;		
 	}
 	
 	//관리자 로그인 화면으로 이동
@@ -191,7 +190,7 @@ public class LoginController {
 	}
 	
 	//비밀번호 확인
-	@RequestMapping(value="/passwordCheck",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	@RequestMapping(value="/passwordCheck", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public int passwordCheck(String password, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 		
@@ -204,7 +203,7 @@ public class LoginController {
 		user.setStrUserPw(password);
 		
 		check = loginService.passwordCheck(user);
-		
+
 		return check;
 		
 	}

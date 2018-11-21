@@ -338,8 +338,7 @@ public class MembershipController {
 		
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		
-		//수정한 정보들 받아오기
-		String pw = request.getParameter("pw1");
+		//수정한 정보들 받아오기		
 		String name = request.getParameter("name");
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
@@ -351,7 +350,6 @@ public class MembershipController {
 		
 		//객체에 넣기
 		member.setIntUserNo(intUserNo);
-		member.setStrUserPw(pw);
 		member.setStrUserName(name);
 		member.setStrUserPhone(phone);
 		member.setStrUserEmail(email);

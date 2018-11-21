@@ -100,7 +100,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2 style="font-family: Bareun;font-weight: bold;">캐시 충전 내역</h2>
+                    <h2 style="font-family: Bareun;font-weight: bold;">아이템 구매 내역</h2>
                     
                     <div class="clearfix"></div>
                   </div>
@@ -123,7 +123,7 @@
                           <th style="text-align: center; padding-left: 2%; color:#00003f">구매&nbsp;번호</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">아 이 디</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">이&nbsp;&nbsp;&nbsp;름</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">상&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;품</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">아 이 템</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">캐&nbsp;&nbsp;&nbsp;시</th>
                           
                           <th style="text-align: center; padding-left: 2%; color:#00003f">거래&nbsp;일시</th>

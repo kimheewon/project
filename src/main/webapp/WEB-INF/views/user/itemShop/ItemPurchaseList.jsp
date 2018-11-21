@@ -268,13 +268,13 @@
                         <div class="clearfix">
                             <!-- 시작일 -->
                             <span class="dset">
-                                <input type="text" class="datepicker inpType" name="searchStartDate" id="searchStartDate" required="required" value="${searchStartDate}">
+                                <input type="text" readonly="readonly" class="datepicker inpType" name="searchStartDate" id="searchStartDate" value="${searchStartDate}">
                                 <img src="/img/small-calendar.png" class="btncalendar dateclick">
                             </span>
                             <span class="demi">~</span>
                             <!-- 종료일 -->
                             <span class="dset">
-                                <input type="text" class="datepicker inpType" name="searchEndDate" id="searchEndDate" required="required" value="${searchEndDate}" >
+                                <input type="text" readonly="readonly" class="datepicker inpType" name="searchEndDate" id="searchEndDate" value="${searchEndDate}" >
                                 <img src="/img/small-calendar.png" class="btncalendar dateclick" style="margin-right: 3%;">
                             </span>
                              <button id="searchBtn" type="submit">조회하기</button>
@@ -325,18 +325,18 @@
 		                          <c:choose>
 		                              <c:when test="${item.intFlag ne 0}">
 		                                  <a href="/ItemShop/ItemPurchaseResult?PurchaseNo=${item.intNumber}" style="color: #b13862;;font-weight: bold;">
-                                            <span style="color:#5a5a5a;font-weight: normal;">${item.intItemNo}&nbsp;&nbsp;</span>${item.strItemName}</a>
+                                            ${item.strItemName}</a>
 		                              </c:when>
 		                              <c:otherwise>
 		                                  <span style="font-weight: normal;font-style: italic;text-decoration: line-through;">
-		                                  <span style="color:#5a5a5a;font-weight: normal;">${item.intItemNo}</span>&nbsp;&nbsp;${item.strItemName}</span>
+		                                  ${item.strItemName}</span>
 		                              </c:otherwise>
 		                          </c:choose>
 		                      </c:otherwise>
 		                  </c:choose>
 		                 
 		                </td>
-		                <td style="padding-top: 1%;padding-bottom: 1%;"><fmt:formatNumber value="${item.intItemTotalPrice}" pattern="#,###" />&nbsp;코인</td>
+		                <td style="padding-top: 1%;padding-bottom: 1%;text-align: right;padding-right: 3%;"><fmt:formatNumber value="${item.intItemTotalPrice}" pattern="#,###" />&nbsp;코인</td>
                         <td style="padding-top: 1%;padding-bottom: 1%;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${item.datePurchaseDate}" /></td>
 		                <td style="padding-top: 1%;padding-bottom: 1%;font-weight: bold;">
 		                  <c:if test="${item.strItemName ne '캐시 회수'}">
@@ -418,15 +418,30 @@ function deliver(purchaseNo){
         },
     
         success: function(invoice){//통신이 성공적으로 이루어 졌을때 받을 함수                   
-              window.open(invoice,"hiddenframe", "배송조회", "width=500, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" ); 
-              
+              window.open(invoice,"hiddenframe", "배송조회", "width=400, height=500, toolbar=no, menubar=no, scrollbars=no, resizable=yes" ); 
+        	// window.open(invoice,"hiddenframe", "배송조회", "width="+screen.availWidth-300+",height="+screen.availHeight-500+""); 
+             
         }
     }); //--ajax
     
     
 }
 
-
+$("#searchBtn").click(function(){
+	
+    var start = document.getElementById("searchStartDate").value;
+    var end = document.getElementById("searchEndDate").value;
+	
+    if(start == ""){
+    	alert("시작일을 입력하세요.");
+    	return false;
+    }
+    if(end == ""){
+    	alert("종료일을 입력하세요.");
+        return false;
+    }
+	
+});
 $(document).ready(function() {
 	//datepicker 한국어로 사용하기 위한 언어설정
     $.datepicker.setDefaults($.datepicker.regional['ko']);     

@@ -72,7 +72,7 @@
                    </div>
                    <div class="x_content">
                     <br />
-                    <form id="enrollInfo" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Administrator/Update" method="POST">
+                    <form id="enrollInfo" autocomplete="off" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Administrator/Update" method="POST">
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id" style="font-size: 13px; color: #00003f;">아이디 <span class="required">*</span>

@@ -45,7 +45,7 @@
         SELECT  ItemNo        AS  intItemNo
                ,ItemName      AS  strItemName
                ,ItemPrice     AS  intItemPrice
-               ,FileUrl       AS  strfileUrl
+               ,FileUrl       AS  strfileUrl               
         FROM    TItemInfoMgmt   
         WHERE   ItemNo NOT IN(0) AND UseFlag NOT IN(0) 
         ORDER BY ItemDate DESC
@@ -59,6 +59,7 @@
 															               ,ItemName      AS  strItemName
 															               ,ItemPrice     AS  intItemPrice
 															               ,FileUrl       AS  strfileUrl
+															               ,CONVERT(NVARCHAR(10),ItemDate,121) AS strdate
 		        FROM    TItemInfoMgmt   
 		        WHERE   ItemNo NOT IN(0) AND UseFlag NOT IN(0) ) AS resultTable
         WHERE rownumber > (#{curPage} - 1) * 10
@@ -82,6 +83,7 @@
                                                                            ,ItemName      AS  strItemName
                                                                            ,ItemPrice     AS  intItemPrice
                                                                            ,FileUrl       AS  strfileUrl
+                                                                           ,CONVERT(NVARCHAR(10),ItemDate,121) AS strdate
 		        FROM   (SELECT *  
 				        FROM TItemInfoMgmt
 				        WHERE ${keyField} LIKE '%${keyWord}%')  AS TSearch  

@@ -18,7 +18,58 @@
 <title>Item Shop List</title>
 <script src="/js/jquery-1.12.3.min.js"></script>
 <script src="/js/jquery-ui.min.js"></script>
+<style>
+.text-box {
+position: absolute;
+    height: 24px;
+    text-align: center;
+    width: 51px;
+    /* margin: auto; */
+    top: 25px;
+    bottom: 0;
+    right: 0;
+    left: 255px;
+    font-size: 13px;
+    color: white;
+    font-family: Bareun;
+    /* float: right; */
+    vertical-align: middle;
+    background-color: #1c6ab0;
+    /* padding-bottom: 0; */
+    padding: 0.5%;
+    border: 1px solid #12426e;
+    border-radius: 4pt;
+}
 
+.img-fluid {
+  display: block;
+  max-width: 100%;
+  height: 120px;
+  margin: auto;
+  padding: auto;
+}
+
+
+.blinking{
+    -webkit-animation:blink 0.5s ease-in-out infinite alternate;
+    -moz-animation:blink 0.5s ease-in-out infinite alternate;
+    animation:blink 0.5s ease-in-out infinite alternate;
+}
+@-webkit-keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+@-moz-keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+@keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+
+
+</style>
 </head>
 
 <body>
@@ -44,7 +95,11 @@
                     <table style="  border: 1px solid #cecece;">
 		                <tr style=" border: 1px solid #cecece">
 			                <td>
-			                     <img class="img-fluid" src="${items.strfileUrl}" style=" width: 300px; height: 200px;"></td>
+			                     <img class="img-fluid" src="${items.strfileUrl}" style=" width: 300px; height: 200px;">
+			                     <c:if test="${items.strdate eq today}">
+			                         <div class='text-box'><p class="blinking">신제품</p></div>     
+			                     </c:if>
+			                </td>
 			            </tr>
 			            <tr>
 		                    <td id="noStyle">${items.intItemNo}</td>

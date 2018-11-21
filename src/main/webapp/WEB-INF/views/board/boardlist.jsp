@@ -125,7 +125,7 @@
 	</span>
 	<br>
 		<div style='text-align: center; margin: 1px auto;margin-left: 20%;'>
-			 <form action="/board/boardlist?intBoardCateNo=${intBoardCateNo}" name="search" method="post">
+			 <form action="/board/boardlist?intBoardCateNo=${intBoardCateNo}" name="search" method="post" autocomplete="off">
 			
 			 <select name="keyField" id="keyField" size="1" style="width:110px;height: 30px;">
 	                <option value="UserId" <c:if test="${'UserId'==keyField }"> selected</c:if>> 아이디 </option>

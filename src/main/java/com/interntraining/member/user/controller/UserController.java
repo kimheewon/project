@@ -83,6 +83,8 @@ public class UserController {
 		
 		userService.insertMember(member);
 		
+		int userNo = userService.selectUserNo(member.getStrUserId());	//회원번호 찾기
+		userService.insertUserCashAmt(userNo);	//계좌만들기
 		
 		mav.setViewName("/login/loginForm");
 		

@@ -61,7 +61,7 @@ input[type="text"]:disabled {
 
 <div class="container_t">
     <h3 style="color:#2c3e50;margin-left: 6%;">아이템 구매</h3><br><br><br><br>
-        <form action="/ItemShop/ItemPurchase" method="post">
+        <form action="/ItemShop/ItemPurchase" method="post" autocomplete="off">
             <input type="hidden" value="${item.intItemNo}" id="itemNo" name="itemNo">
             <input type="hidden" value="${item.intItemPrice}" id="itemPrice" name="itemPrice">
             <input type="hidden" value="${item.intDeliveryPrice}" id="deliveryPrice" name="deliveryPrice">

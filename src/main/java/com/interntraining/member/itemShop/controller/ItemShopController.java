@@ -1,6 +1,7 @@
 package com.interntraining.member.itemShop.controller;
 
 import java.math.BigInteger;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -49,6 +50,12 @@ public class ItemShopController {
 			  /* List */
 	        List<ProductInfo> items = itemShopService.selectAllItem(pagination);	// 페이징 리스트
 	        
+	        //오늘날짜
+	        SimpleDateFormat  date = new SimpleDateFormat("yyyy-MM-dd");
+	        String today =  date.format(new Date());	           
+	        
+	        	        
+	        mav.addObject("today", today);
 	        mav.addObject("items", items);
 	        mav.addObject("listCnt", listCnt);
 			mav.addObject("pagination", pagination);
@@ -68,6 +75,11 @@ public class ItemShopController {
 			
 			List<ProductInfo> items = itemShopService.selectAllItemSearch(pagination);	//검색시 아이템 전체 목록 개수
 					
+			 //오늘날짜
+	        SimpleDateFormat  date = new SimpleDateFormat("yyyy-MM-dd");
+	        String today =  date.format(new Date());	           
+	        
+	        mav.addObject("today", today);
 			mav.addObject("keyField", keyField);
 			mav.addObject("keyWord", KeyWord);
 			mav.addObject("listCnt", listCnt);

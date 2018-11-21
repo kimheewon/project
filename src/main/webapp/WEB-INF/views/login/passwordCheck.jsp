@@ -28,17 +28,17 @@
 		height: 564pt;
     }
 #btn{ 
-    margin-top: 7%;
+       margin-top: 7%;
     display: block;
     margin: auto;
-    width: 14%;
+    width: 61px;
     border: 1px solid gray;
     border-radius: 4pt;
     font-weight: bold;
     font-family: Bareun;
     background-color: gray;
     color: white;
-    height: 37px;}
+    height: 31px;}
 
 </style>
 
@@ -53,16 +53,17 @@
 <jsp:include page="../login/navigation.jsp" flush="true"/>
 	<div class="container_t">
 	   <h3 style="color:#2c3e50;margin-left: 1%;margin-bottom: 10%;">비밀번호 확인</h3>
-	   <div style="background-color: #ededed; padding: 5%; width: 60%; margin: auto;">
-	       <form > 
-	           <table style="margin: auto;width: 70%;margin-bottom: 7%;">
-				    <tr>
-				        <td style="padding-right: 7%;font-size: 15pt;font-weight: bold;  text-align: right;">비밀번호 입력</td>
-				        <td><input type="password" id="password" style="width: 100%;" ></td>
+	   <div style="background-color: #ededed;padding: 5%;width: 1000px;margin: auto;">
+	       <form> 
+	           <table style="margin: auto;width: 900px;margin-bottom: 1%;">
+	               <tr>
+				        <td style="padding-right: 17px;font-size: 15pt;font-weight: bold;text-align: right;width: 100px;">비밀번호 입력</td>
+				        <td style="padding-right: 20px;width: 250px;"><input type="password" id="password" style="width: 100%;" ></td>
+				        <td style="width: 30px;"><button type="button" onclick="check()" id="btn" style="display: block;margin: auto;float: left;">확인</button></td>
 				    </tr>
 				</table> 
 	 
-	           <button type="button" onclick="check()" id="btn" style="display: block;margin: auto;">확인</button>
+	           
 	       </form>
 	   </div>
     <br>
@@ -90,13 +91,13 @@ function check(){
 	        },
 	    
 	        success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-	            
+
 	            if(data==1){                    
-	            	location.href = "/login/myPageForm";
+	            	location.href = '/login/myPageForm';
 	            }
 	            else{
 	               alert("비밀번호가 틀렸습니다.");
-	               document.getElementById("password").value = ""
+	               document.getElementById("password").value = "";
 	            }
 	        }
 	    }); //--ajax

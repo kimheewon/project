@@ -43,8 +43,7 @@
 	<!-- 회원 정보 업데이트 -->
 	<update id="updateMember">
 		UPDATE	 TUser
-		SET		 UserPw          = #{strUserPw}
-				,UserName	     = #{strUserName}
+		SET		 UserName	     = #{strUserName}
 				,UserPhone	     = #{strUserPhone}
 				,UserEmail	     = #{strUserEmail}
 				,UserSex	     = #{strUserSex}

@@ -32,7 +32,7 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content" style="margin-top: 26%;">
-            <form method="POST" action="/loginAdmin/login">
+            <form method="POST" action="/loginAdmin/login" autocomplete="off">
               <h1 style="color: #2c3e50; font-weight: bold;">관리자 로그인</h1>
               <br><br>
               <div>

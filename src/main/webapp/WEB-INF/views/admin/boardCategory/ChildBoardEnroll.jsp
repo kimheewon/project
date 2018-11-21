@@ -58,7 +58,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            
+                          <h3 style="font-family: Bareun;color: #605183;font-weight: bold;font-size: 15pt;">${boardCateName}&nbsp;<small style="font-size: 12pt;font-weight: normal;">의</small></h3>
                         </div>
                         <div class="title_right">
                            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -70,15 +70,16 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                            <div class="x_panel">
                                <div class="x_title">
-	                               <h2 style="color: #605183;font-weight: bold;">${boardCateName}</h2>
-	                                <button id="editBtn" class="btn btn-app" type="button" onclick="location.href='/BoardCategory/ChildBoardList?boardCateNo=${boardCateNo}'"
+	                               <h2 style="width: 50%;font-weight: bold;font-family: Bareun;">게시판 등록 </h2>  
+	                               <button id="editBtn" class="btn btn-app" type="button" onclick="location.href='/BoardCategory/ChildBoardList?boardCateNo=${boardCateNo}'"
 	                                      data-placement="top" data-toggle="tooltip" data-original-title="${boardCateName} 목록">                                        
-	                                    <i class="fa fa-list-ul" style="color: #7e498b;"></i> </button>                                      
+	                                    <i class="fa fa-list-ul" style="color: #7e498b;"></i> </button>                                   
                                    <div class="clearfix"></div>
                                </div>
                                <div class="x_content">
-                                   <h2><small style="color: #2c3e50;  font-weight: bold;float: right">*은 필수항목입니다.</small></h2> <br/>
-                                   <form id="enrollInfo" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/BoardCategory/ChildBoardCategoryEnroll" method="POST">
+                                   <h2 style="margin-top: 0px;margin-right: 35px;">
+                                    <small style="color: #2c3e50;  font-weight: bold;float: right;font-size: 10pt;">*은 필수항목입니다.</small></h2> <br/>
+                                   <form autocomplete="off" id="enrollInfo" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/BoardCategory/ChildBoardCategoryEnroll" method="POST">
                                        <input type="hidden" value="${boardCateNo}" name="intParentBoardCateNo">
                                        <div class="form-group">
                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id" style="font-size: 13px; color: #00003f;">게시판명 <span class="required">*</span></label>

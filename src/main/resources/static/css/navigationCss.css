@@ -126,6 +126,7 @@
 
 #mainNav ul ul li {
   position: relative;
+  width: 180px;
 }
 #mainNav>ul>li>a {
   line-height: 48px;

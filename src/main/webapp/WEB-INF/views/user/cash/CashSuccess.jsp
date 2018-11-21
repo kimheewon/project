@@ -44,7 +44,7 @@
     
 <jsp:include page="../../login/navigation.jsp" flush="true"/>
 
-<div class="container_t">
+<div class="container_t" style="min-height: 800px;">
     <h3 style="color:#2c3e50;margin-left: 6%;">캐시 구매(결제 완료)</h3><br>
         <p style="text-align: center;"><img style="width: 13%;" src="/img/piggy-bank3.png"></p>
         <br><p style="text-align: center;font-size: 30px; font-weight: bold; color: #2c3e50; font-family: TmonTium;"><span style="color:#d11d53">충전</span>이 <span style="color:#d11d53">완료 </span>되었습니다.</p>
