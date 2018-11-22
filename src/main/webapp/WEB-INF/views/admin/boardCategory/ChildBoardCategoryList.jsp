@@ -35,6 +35,8 @@
         min-width: 40px;
         margin: 0 0 0 0;
         padding-top: 0.6%;
+        border: none;
+        background-color: white;
     }
 
 </style>
@@ -61,12 +63,12 @@
                                 <div class="x_title">
                                     <h2 style="color: #605183;font-weight: bold;">${boardCateName}</h2>
                                     <button id="editBtn" class="btn btn-app" type="button" onclick="location.href='/BoardCategory/BoardCategoryList'" style="float: right;"
-                                          data-placement="top" data-toggle="tooltip" data-original-title="게시판 목록">                                        
+                                          data-placement="top" data-toggle="tooltip" data-original-title="게시판 카테고리 목록">                                        
                                         <i class="fa fa-list-ul" style="color: #7e498b;"></i> </button> 
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content" style="font-size:15px">
-                                    <table id="datatable" class="table table-striped table-bordered" id="AdminList">
+                                    <table id="datatable" class="table table-bordered" id="AdminList">
                                          <colgroup>
                                             <col width = "7%"/>
                                             <col width = "*"/>
@@ -76,15 +78,15 @@
                                             <col width = "14%"/>
                                             <col width = "8%"/>                   
                                         </colgroup>
-                                        <thead>
+                                        <thead style="background-color: #e6e6e8;">
                                             <tr>
-                                                <th style="text-align: center; padding-left: 1.5%; color:#00003f" class="sorting_desc">#</th>
-                                                <th style="text-align: center; padding-left: 2%; color:#00003f">게시판명</th>
-                                                <th style="text-align: center; padding-left: 2%; color:#00003f">생성 관리자 ID</th>
-                                                <th style="text-align: center; padding-left: 2%; color:#00003f">최근 수정 관리자 ID</th>
-                                                <th style="text-align: center; padding-left: 2%; color:#00003f">생성일시</th>
-                                                <th style="text-align: center; padding-left: 2%; color:#00003f">최근수정일시</th>
-                                                <th style="text-align: center; padding-left: 2%; color:#00003f">작&nbsp;&nbsp;&nbsp;&nbsp;업</th>
+                                                <th style="text-align: center; padding-left: 1.5%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;" class="sorting_desc">#</th>
+                                                <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">게시판명</th>
+                                                <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">생성 관리자 ID</th>
+                                                <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">최근 수정 관리자 ID</th>
+                                                <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">생성일시</th>
+                                                <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">최근수정일시</th>
+                                                <th style="text-align: center; padding-left: 2%; color:#00003f;border-bottom: 2px solid #a6a6a6;">작&nbsp;&nbsp;&nbsp;&nbsp;업</th>
                                             </tr>
                                         </thead>
                                         <tbody>

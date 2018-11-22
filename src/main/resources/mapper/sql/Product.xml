@@ -161,6 +161,19 @@
         ORDER BY a.PurchaseNo DESC
    </select>
    
+   <!-- 회원의 상품 구매 리스트 불러오기 -->
+   <select id="selectMemberProductList" resultType="ItemShopInfo">
+        SELECT   a.PurchaseNo       AS intNumber
+                ,a.ItemNo           AS intItemNo
+                ,b.ItemName         AS strItemName
+                ,a.TotalItemPrice   AS intItemTotalPrice
+                ,a.PurchaseDate     AS datePurchaseDate
+                ,a.Flag             AS intFlag
+        FROM TItemPurchaseMst a, TItemInfoMgmt b
+        WHERE a.ItemNo = b.ItemNo AND a.UserNo = #{userNo}
+        ORDER BY a.PurchaseNo DESC
+   </select>
+   
    <!-- 회수 사유 찾기 -->
    <select id="selectReason" resultType="String">
         SELECT Reason

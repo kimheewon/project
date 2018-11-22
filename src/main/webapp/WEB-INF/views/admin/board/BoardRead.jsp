@@ -171,9 +171,7 @@
 								            </table>
 	                                    </div>
 								        <br>
-								            <button class="btn btn-app" type="button" onclick="location.href='/AdminBoard/AdminBoardUpdateForm?BoardNo=${board.intBoardNo}'"  style="margin-right: 0%;"
-                                                    id="editBtn" data-placement="top" data-toggle="tooltip" data-original-title="수정">
-                                                <i class="fa fa-wrench" style="color: #005e69;"></i></button>
+								            
                                             <button class="btn btn-app" type="button" onclick="checkDelete(${board.intBoardNo},${board.intBoardCateNo})"
                                                     id="editBtn" data-placement="top" data-toggle="tooltip" data-original-title="삭제" style="margin-right: 0.5%;">
                                             

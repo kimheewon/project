@@ -34,6 +34,8 @@
         min-width: 40px;
         margin: 0 0 0 0;
         padding-top: 4%;
+        border: none;
+        background-color: white;
     }
 
 </style>
@@ -63,7 +65,7 @@
                                 </div>
                                 <div class="x_content" style="font-size:15px">
                     
-				                    <table id="datatable" class="table table-striped table-bordered" id="AdminList">
+				                    <table id="datatable" class="table table-bordered" id="AdminList">
 				                        <colgroup>
 					                        <col width = "7%"/>
 					                        <col width = "*"/>
@@ -73,15 +75,15 @@
 					                        <col width = "14%"/>
 					                        <col width = "12%"/>                    
                                         </colgroup>
-                                        <thead>
+                                        <thead style="background-color: #e6e6e8;">
 				                            <tr>
-                                                <th style="text-align: center; padding-left: 1.5%; color:#00003f" class="sorting_desc">#</th>
-                                                <th style="text-align: center; padding-left: 2%; color:#00003f">게시판명</th>
-                                                <th style="text-align: center; padding-left: 2%; color:#00003f">생성 관리자 ID</th>
-                                                <th style="text-align: center; padding-left: 2%; color:#00003f">최근 수정 관리자 ID</th>
-                                                <th style="text-align: center; padding-left: 2%; color:#00003f">생성일시</th>
-                                                <th style="text-align: center; padding-left: 2%; color:#00003f">최근수정일시</th>
-					                            <th style="text-align: center; padding-left: 2%; color:#00003f">작&nbsp;&nbsp;&nbsp;&nbsp;업</th>
+                                                <th style="text-align: center; padding-left: 1.5%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;" class="sorting_desc">#</th>
+                                                <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">게시판명</th>
+                                                <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">생성 관리자 ID</th>
+                                                <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">최근 수정 관리자 ID</th>
+                                                <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">생성일시</th>
+                                                <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">최근수정일시</th>
+					                            <th style="text-align: center; padding-left: 2%; color:#00003f;border-bottom: 2px solid #a6a6a6;">작&nbsp;&nbsp;&nbsp;&nbsp;업</th>
 				                            </tr>
 				                        </thead>
 				                        <tbody>
@@ -98,10 +100,10 @@
 					                                <td style="text-align: center; color:#3b5976; padding-top: 0.2%; padding-bottom: 0.2%;">
                                                         <button class="btn btn-app" type="button" onclick="location.href='/BoardCategory/ChildBoardCategoryEnrollForm?boardCateNo=${boardCategory.intBoardCateNo}'"  
 			                                                    id="editBtn" data-placement="top" data-toggle="tooltip" data-original-title="등록">
-			                                                <i class="fa fa-check-square-o" style="color: #005e69;"></i></button>
+			                                                <i class="fa fa-check-square-o" style="color: #005e69;"></i></button>&nbsp;|
 					                                   <button class="btn btn-app" type="button" onclick="location.href='/BoardCategory/BoardCategoryUpdateForm?intboardCategoryNo=${boardCategory.intBoardCateNo}'" 
                                                                 id="editBtn" data-placement="top" data-toggle="tooltip" data-original-title="수정">
-			                                                <i class="fa fa-wrench" style="color: #626200;"></i></button>
+			                                                <i class="fa fa-wrench" style="color: #626200;"></i></button>|
 			                                            <button class="btn btn-app" type="button" onclick="checkDelete(${boardCategory.intBoardCateNo})"
 			                                                    id="editBtn" data-placement="top" data-toggle="tooltip" data-original-title="삭제" style="margin-right: 0.5%;">			                                            
 			                                                <i class="fa fa-trash-o" style="color: #a55663;"></i>

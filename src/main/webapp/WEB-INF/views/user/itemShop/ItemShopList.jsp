@@ -74,10 +74,41 @@ position: absolute;
 
 <body>
     <jsp:include page="../../login/navigation.jsp" flush="true"/>
+
+    <c:if test="${!empty sessionScope.url}">
+    <div style="position: relative;float: left;;margin-left: 50px;margin-top: 200px;">  
+        <div id="right_section" style="position:absolute;top:0px;left:0px;background-color: #ececec;">  
+           <div style="width: 200px;height: 285px;text-align: center;padding-top: 10px;">               
+                <span style="font-family: Bareun;">최근 본 상품</span>
+                <table style="margin: auto;background-color: white;margin-top: 7px;border: 1px solid #cecece;">
+                    <tr>
+                        <td style="border-bottom: 1px solid #cecece;"><img src="<%=session.getAttribute("url")%>" style="width: 166px;height: 124px;"></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;padding-left: 12px;font-size: 8pt;padding-top: 4pt;font-family: candy;color: #696969;"><%=session.getAttribute("itemNumber")%></td>
+                    </tr>
+                    <tr>
+                        <td style="font-family: Bareun;color: #2c3e50;font-size: 11pt;"><%=session.getAttribute("itemName")%></td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #cecece;">
+                        <td style="color: #731d48;font-weight: bold;font-size: 12pt;text-align: right;padding-right: 10px;font-family: candy;"><fmt:formatNumber value='<%=session.getAttribute("price")%>' pattern="#,###" /> 코인</td>
+                    </tr>
+                    <tr>
+                        <td><p id="pbtn"><button type="button" id="purchaseBtn" onclick="location.href='/ItemShop/ItemPurchaseForm?itemNo=<%=session.getAttribute("itemNumber")%>'">구매하기</button></p></td>
+                    </tr>
+                </table>
+                
+                
+                         
+           </div>  
+        </div>  
+    </div>  
+    </c:if>
     <div class="container_t" style="min-height: 592px;">
     <h3 style="color:#2c3e50;margin-left: 1%;">아이템샵</h3>    
     <br><br>
-        
+    
+    
     <div class="row">            
     <c:if test="${empty items}">
                <div style="text-align: center;margin: auto;font-size: 16pt;font-family: Bareun;word-spacing: 2px;letter-spacing: 1px;color: #4d4b51;">
@@ -205,6 +236,17 @@ position: absolute;
              f.submit();   
     	}
     }
+    
+    $("document").ready(function() {  
+    	  
+        var currentPosition = parseInt($("#right_section").css("top"));  
+      
+        $(window).scroll(function() {  
+                var position = $(window).scrollTop(); // 현재 스크롤바의 위치값을 반환합니다.  
+                $("#right_section").stop().animate({"top":position+currentPosition+"px"},500);  
+        });  
+          
+    });  
 
 
 </script>

@@ -57,4 +57,9 @@ public class AdminBoardDAO {
 		return sqlSession.selectOne("boardSql.selectBoard", boardNo);
 	}
 
+	//부모게시판 명 불러오기
+	public AdminBoardInfo selectCategoryParentName(int boardCateNo) {
+		return sqlSession.selectOne("boardCategorySql.selectCategoryParentName", boardCateNo);
+	}
+
 }

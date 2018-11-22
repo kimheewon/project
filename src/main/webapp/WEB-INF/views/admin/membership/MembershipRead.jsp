@@ -46,18 +46,73 @@
     background-color: white;
     color: #2c3e50;
     font-family: Bareun;
-    border: 1px solid #2c3e50;
+    border: 1px solid #415b76;
 }
 
 #btnTop:hover{
     background-color: #2c3e50;
     color: white;
     box-shadow: 0 2px #999;
+    border: 1px solid #415b76;
 }
 #btnTop:active {
     background-color: #2c3e50;
     color: white;
     box-shadow: 0 2px #666;
+    transform: translateY(4px);
+    
+}
+#accountBtn{
+    padding: 0px;
+    margin: 0;
+    padding-bottom: 25px;
+    border: none;
+    background-color: white;
+    min-width: 32px;
+    height: 22px;
+    vertical-align: middle;
+    font-size: 17px;
+}
+#purchaseTop{
+    background-color: white;
+    color: #772642;
+    font-family: Bareun;
+    border: 1px solid #d11d53;
+}
+#purchaseTop:hover{
+ background: #772642;
+    color: white;
+    box-shadow: 0 2px #999;
+
+    font-weight: bold;
+}
+#purchaseTop:active {
+ background: #772642;
+    color: white;
+    box-shadow: 0 2px #999;
+
+    font-weight: bold;
+    transform: translateY(4px);
+}
+#recallTop{
+    background-color: white;
+    color: #003b00;
+    font-family: Bareun;
+    border: 1px solid #007600;
+}
+#recallTop:hover{
+    background: #003b00;
+    color: white;
+    box-shadow: 0 2px #999;
+    
+    font-weight: bold;
+}
+#recallTop:active {
+    background: #003b00;
+    color: white;
+    box-shadow: 0 2px #999;
+
+    font-weight: bold;
     transform: translateY(4px);
 }
 </style>
@@ -91,17 +146,16 @@
                   <div class="x_title">
                   <h2 style="font-family: Bareun;font-weight: bold;">회원정보 상세보기</h2>           
                     <div style="float:right">
-	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href='/AdminCash/AdminCashList?userNo=${intUserNo}'">충전 내역</button>
-	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href=''">캐시 사용 내역</button>
-	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href='/AdminCash/AdminCashPaymentForm?userNo=${intUserNo}'">캐시 지급</button>
-	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href='/AdminCash/AdminCashRecallForm?userNo=${intUserNo}'">캐시 회수</button>     
+	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href='/AdminCash/AdminCashList?userNo=${intUserNo}'">캐시 충전 내역</button>
+	                    <button class="btn btn-primary" type="button" id="btnTop" onclick="location.href='/Product/MemberPurchaseList?userNo=${intUserNo}'">아이템 구매 내역</button>
+	                    <button class="btn btn-primary" type="button" id="purchaseTop" onclick="location.href='/AdminCash/AdminCashPaymentForm?userNo=${intUserNo}'">캐시 지급</button>
+	                    <button class="btn btn-primary" type="button" id="recallTop" onclick="location.href='/AdminCash/AdminCashRecallForm?userNo=${intUserNo}'">캐시 회수</button>     
                     </div>
                     <div class="clearfix"></div>
                   </div>
                    <div class="x_content">
-                    <br />
-                    <form id="enrollInfo" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Membership/MembershipUpdateForm?intUserNo=${intUserNo}" method="POST">
-
+                    <br/>
+                    <form id="enrollInfo" name="enrollInfo" style="width: 80%;margin: auto;" data-parsley-validate class="form-horizontal form-label-left" action="/Membership/MembershipUpdateForm?intUserNo=${intUserNo}" method="POST">
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id" style="font-size: 13px; color: #00003f;">아이디
                         </label>
@@ -109,8 +163,7 @@
                             <span class="input-group-btn"><input type="text" class="form-control" id="id" name="id" style="background-color: white;border: none; box-shadow: none;" value="${member.strUserId}" readonly>
                            </span>
                        </div>
-                      </div>
-                                        
+                      </div>                                        
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name" style="font-size: 13px; color: #00003f;">이름 
                         </label>
@@ -168,18 +221,44 @@
                       </div>
                        <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 13px; color: #d11d53;">보유 캐시</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12" style="padding-top: 8px;padding-left: 20px;color: #d11d53;font-weight: bold;">                                               
-                        <fmt:formatNumber value="${member.intTotalCashAmt}" pattern="#,###" />&nbsp;코인                        
+                        <div class="col-md-6 col-sm-6 col-xs-12" style="padding-top: 6px;padding-left: 20px;color: #d11d53;font-weight: bold;">                                               
+                            <fmt:formatNumber value="${member.intTotalCashAmt}" pattern="#,###" />&nbsp;코인
+                            <button class="" id="accountBtn" type="button" data-placement="top" data-toggle="tooltip" data-original-title="계좌 정보 보기" >                                                       
+                                <i id="accountI" class="fa fa-sort-desc" style="color: #a55663;"></i>
+                            </button>                       
                         </div>
                       </div>
+                      <div class="form-group" id="accountDiv" hidden="">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 13px;"></label>  
+                        <div class="col-md-6 col-sm-6 col-xs-12" style="padding-top: 8px;padding-left: 20px;font-weight: bold;">                                               
+                        
+                                       
+                      <table style="width: 500px; height: 55px; border: 1px solid;text-align: center;">
+                            <colgroup>
+				                <col width = "33%"/>
+				                <col width = "33%"/>
+				                <col width = "*"/>                        
+				            </colgroup>                            
+                                <tr style="border-bottom: 2px solid;">
+                                    <td style="border-right: 1px solid;">총 적립 캐시</td>
+                                    <td style="border-right: 1px solid;">총 사용 캐시</td>
+                                    <td style="border-right: 1px solid;">보유 캐시</td>
+                                </tr>                            
+                                <tr>
+                                    <td style="text-align: right;border-right: 1px solid;padding-right: 13px;"><fmt:formatNumber value="${account.intTotalInCashAmt}" pattern="#,###" />&nbsp;코인</td>
+                                    <td style="text-align: right;border-right: 1px solid;padding-right: 13px;"><fmt:formatNumber value="${account.intTotalOutCashAmt}" pattern="#,###" />&nbsp;코인</td>
+                                    <td style="text-align: right;border-right: 1px solid;padding-right: 13px;"><fmt:formatNumber value="${account.intTotalCashAmt}" pattern="#,###" />&nbsp;코인</td>
+                                </tr>
+                        </table>
+                        </div>
+                        </div>
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3" style="margin-left: 43%;">
                           <button class="btn btn-primary" style="font-family: Bareun;" type="button" onclick="location.href='/Membership/MembershipList'">목록</button>
                           <button type="submit" style="font-family: Bareun;" class="btn btn-success" id="adminEnroll">수정</button>
                         </div>
-                      </div>
-
+                      </div>                        
                     </form>
                   </div>
                 </div>
@@ -196,33 +275,33 @@
     </div>
 <jsp:include page="../bottomAdmin.jsp" flush="true"/>
     
-    <!-- bootstrap-progressbar -->
-    <script src="/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-    <!-- iCheck -->
-    <script src="/vendors/iCheck/icheck.min.js"></script>
-    <!-- bootstrap-daterangepicker -->
-    <script src="/vendors/moment/min/moment.min.js"></script>
-    <script src="/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <!-- bootstrap-wysiwyg -->
-    <script src="/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
-    <script src="/vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
-    <script src="/vendors/google-code-prettify/src/prettify.js"></script>
-    <!-- jQuery Tags Input -->
-    <script src="/vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
-    <!-- Switchery -->
-    <script src="/vendors/switchery/dist/switchery.min.js"></script>
-    <!-- Select2 -->
-    <script src="/vendors/select2/dist/js/select2.full.min.js"></script>
-    <!-- Parsley -->
-    <script src="/vendors/parsleyjs/dist/parsley.min.js"></script>
-    <!-- Autosize -->
-    <script src="/vendors/autosize/dist/autosize.min.js"></script>
-    <!-- jQuery autocomplete -->
-    <script src="/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
-    <!-- starrr -->
-    <script src="/vendors/starrr/dist/starrr.js"></script>
-    <!-- Custom Theme Scripts -->
-    <script src="/build/js/custom.min.js"></script>
+<!-- bootstrap-progressbar -->
+<script src="/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+<!-- iCheck -->
+<script src="/vendors/iCheck/icheck.min.js"></script>
+<!-- bootstrap-daterangepicker -->
+<script src="/vendors/moment/min/moment.min.js"></script>
+<script src="/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap-wysiwyg -->
+<script src="/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
+<script src="/vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
+<script src="/vendors/google-code-prettify/src/prettify.js"></script>
+<!-- jQuery Tags Input -->
+<script src="/vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
+<!-- Switchery -->
+<script src="/vendors/switchery/dist/switchery.min.js"></script>
+<!-- Select2 -->
+<script src="/vendors/select2/dist/js/select2.full.min.js"></script>
+<!-- Parsley -->
+<script src="/vendors/parsleyjs/dist/parsley.min.js"></script>
+<!-- Autosize -->
+<script src="/vendors/autosize/dist/autosize.min.js"></script>
+<!-- jQuery autocomplete -->
+<script src="/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+<!-- starrr -->
+<script src="/vendors/starrr/dist/starrr.js"></script>
+<!-- Custom Theme Scripts -->
+<script src="/build/js/custom.min.js"></script>
 <!-- Google Analytics -->
 <script type="text/javascript" >
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -233,8 +312,20 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', 'UA-23581568-13', 'auto');
 ga('send', 'pageview');
 
+$("#accountBtn").click(function() {
 	
-
+	var check = $("#accountI").attr("class");
+		
+	if(check == "fa fa-sort-asc"){
+		$("#accountDiv").fadeOut();
+	    $("#accountI").prop("class","fa fa-sort-desc");		
+	}
+	else{
+		$("#accountDiv").fadeIn();
+	    $("#accountI").prop("class","fa fa-sort-asc");
+	}
+	
+});
 
 </script>
 	

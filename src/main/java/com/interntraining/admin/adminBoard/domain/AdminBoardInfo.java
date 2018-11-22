@@ -20,7 +20,15 @@ public class AdminBoardInfo {
 	private int intAdmincheck;		//관리자 작성 여부
 	private int intAdminNo;			//관리자 번호
 	private String strAdminId;		//관리자 ID
+	private String strBoardCateName;
 	
+	
+	public String getStrBoardCateName() {
+		return strBoardCateName;
+	}
+	public void setStrBoardCateName(String strBoardCateName) {
+		this.strBoardCateName = strBoardCateName;
+	}
 	public int getIntBoardNo() {
 		return intBoardNo;
 	}

@@ -87,7 +87,7 @@ font-family: Bareun;margin-bottom: 0px;background-color: white;color:#2c3e50;pad
                   </div>
                   <div class="x_content" style="font-size:15px">
                     
-                    <table id="datatable" class="table table-striped table-bordered" id="AdminList" style="font-family: Bareun;">
+                    <table id="datatable" class="table table-bordered" id="AdminList" style="font-family: Bareun;">
                     <colgroup>
                         <col width = "6%"/>
                         <col width = "*"/>  
@@ -99,17 +99,17 @@ font-family: Bareun;margin-bottom: 0px;background-color: white;color:#2c3e50;pad
                         <col width = "17%"/>  
                         <col width = "8%"/>
                     </colgroup>
-                      <thead>
+                      <thead style="background-color: #e6e6e8;">
                         <tr>
-                          <th style="text-align: center; padding-left: 1.5%; color:#00003f" class="sorting_desc">#</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">번&nbsp;&nbsp;호</th>  
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">아&nbsp;이&nbsp;디</th>                         
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">금&nbsp;&nbsp;액</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">캐&nbsp;&nbsp;시</th> 
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">결제&nbsp;수단</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">상&nbsp;&nbsp;태</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">일&nbsp;&nbsp;시</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">결제&nbsp;취소</th>
+                          <th style="text-align: center; padding-left: 1.5%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;" class="sorting_desc">#</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">번&nbsp;&nbsp;호</th>  
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">아&nbsp;이&nbsp;디</th>                         
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">금&nbsp;&nbsp;액</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">캐&nbsp;&nbsp;시</th> 
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">결제&nbsp;수단</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">상&nbsp;&nbsp;태</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">일&nbsp;&nbsp;시</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-bottom: 2px solid #a6a6a6;">결제&nbsp;취소</th>
                         </tr>
                       </thead>
                       <tbody>

@@ -40,4 +40,6 @@ public interface BoardCategoryService {
 	//부모 카테고리 번호 찾기
 	public int searchParentBoardCateNo(int boardCateNo);
 
+	
+
 }

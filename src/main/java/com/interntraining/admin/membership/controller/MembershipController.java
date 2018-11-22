@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.interntraining.admin.authority.domain.AuthMapp;
 import com.interntraining.admin.membership.domain.MembershipInfo;
 import com.interntraining.admin.membership.service.MembershipService;
+import com.interntraining.member.login.domain.User;
 
 /*
  * 회원 관리
@@ -150,9 +151,11 @@ public class MembershipController {
 	            String Bhp = matcher.group(3);            
 	            phone =  Fhp + "-" + Mhp + "-" + Bhp; 
 	        }
-			
 			member.setStrUserPhone(phone);
 			
+			User account = membershipService.selectMemberCashAmt(intUserNo);	//회원의 계좌정보 가져오기
+			
+			mav.addObject("account", account);
 			mav.addObject("intUserNo", intUserNo);
 			mav.addObject("member",member);
 			mav.setViewName("/admin/membership/MembershipRead");

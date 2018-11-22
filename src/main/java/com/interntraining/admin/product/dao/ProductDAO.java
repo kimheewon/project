@@ -107,4 +107,14 @@ public class ProductDAO {
 	public ItemShopInfo selectInvoice(BigInteger purchaseNo) {
 		return sqlSession.selectOne("productSql.selectInvoice", purchaseNo);
 	}
+
+	//회원의 상품 구매 리스트 불러오기
+	public List<ItemShopInfo> selectMemberProductList(int userNo) {
+		return sqlSession.selectList("productSql.selectMemberProductList", userNo);
+	}
+
+	//아이디 찾기
+	public String selectUserId(int userNo) {
+		return sqlSession.selectOne("cashSql.selectUserId", userNo);
+	}
 }

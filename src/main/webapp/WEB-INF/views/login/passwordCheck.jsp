@@ -54,17 +54,15 @@
 	<div class="container_t">
 	   <h3 style="color:#2c3e50;margin-left: 1%;margin-bottom: 10%;">비밀번호 확인</h3>
 	   <div style="background-color: #ededed;padding: 5%;width: 1000px;margin: auto;">
-	       <form> 
+	       
 	           <table style="margin: auto;width: 900px;margin-bottom: 1%;">
 	               <tr>
 				        <td style="padding-right: 17px;font-size: 15pt;font-weight: bold;text-align: right;width: 100px;">비밀번호 입력</td>
 				        <td style="padding-right: 20px;width: 250px;"><input type="password" id="password" style="width: 100%;" ></td>
-				        <td style="width: 30px;"><button type="button" onclick="check()" id="btn" style="display: block;margin: auto;float: left;">확인</button></td>
+				        <td style="width: 30px;"><button type="button" id="btn" style="display: block;margin: auto;float: left;">확인</button></td>
 				    </tr>
 				</table> 
-	 
-	           
-	       </form>
+	      
 	   </div>
     <br>
 	
@@ -75,34 +73,37 @@
 
 <script type="text/javascript">
 
-function check(){
+$("#btn").click(function() {
 	var pw = document.getElementById("password").value;
-	if(pw == ''){
-		alert("비밀번호를 입력해주세요.")
-	}
-	else{
-		$.ajax({   
-	        type:"POST",
-	        url:"/login/passwordCheck",   
-	        dataType:"html",// JSON/html
-	        async: false,
-	        data:{ 
-	            "password": document.getElementById("password").value
-	        },
-	    
-	        success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+    if(pw == ''){
+        alert("비밀번호를 입력해주세요.")
+    }
+    else{
+        $.ajax({   
+            type:"POST",
+            url:"/login/passwordCheck",   
+            dataType:"html",// JSON/html
+            async: false,
+            data:{ 
+                "password": document.getElementById("password").value
+            },
+        
+            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 
-	            if(data==1){                    
-	            	location.href = '/login/myPageForm';
-	            }
-	            else{
-	               alert("비밀번호가 틀렸습니다.");
-	               document.getElementById("password").value = "";
-	            }
-	        }
-	    }); //--ajax
-	}
-}
+                if(data==1){                    
+                	return location.href = '/login/myPageForm';
+                  
+                }
+                else{
+                   alert("비밀번호가 틀렸습니다.");
+                   document.getElementById("password").value = "";
+                   document.getElementById("password").focus();
+                   return false;
+                }
+            }
+        }); //--ajax
+    }
+});
 
 
 </script>

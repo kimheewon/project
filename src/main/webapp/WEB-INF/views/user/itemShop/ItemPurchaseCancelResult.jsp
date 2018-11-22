@@ -52,8 +52,8 @@ input[type="number"]::-webkit-inner-spin-button {
     
 <jsp:include page="../../login/navigation.jsp" flush="true"/>
 
-<div class="container_t">
-    <h3 style="color:#2c3e50;margin-left: 6%;"></h3><br><br><br>
+<div class="container_t" style="min-height: 800px;">
+    <h3 style="color:#2c3e50;margin-left: 6%;"></h3><br>
         <form action="/ItemShop/ItemPurchaseList" method="post">
             <p style="text-align: center;font-size: 30pt;font-weight: bold;font-family: Bareun;color: #2c3e50;margin-bottom: 7%;">아이템 <span style="color: #d11d53;">구매가 취소</span> 되었습니다.</p>
             <p style="text-align: center;"><img src="/img/crying2.png" style="width: 20%;"><p>
@@ -64,7 +64,7 @@ input[type="number"]::-webkit-inner-spin-button {
             <br><br><br>
                  
         </form>
-        <br><br><br><br>
+        <br><br>
 </div>        
 </body>
 <jsp:include page="../../bottom.jsp" flush="true"/>

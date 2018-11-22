@@ -66,4 +66,13 @@
 	           VALUES(#{strUserId}, #{strUserPw}, #{strUserName}, #{strUserPhone}, #{strUserEmail},
 	                  #{strUserSex}, #{strUserGrade})	
 	</insert>
+	
+	<!-- 회원의 계좌정보 가져오기 -->
+	<select id="selectMemberCashAmt" resultType="User">
+	   SELECT  TotalInCashAmt   AS intTotalInCashAmt
+              ,TotalOutCashAmt  AS intTotalOutCashAmt
+              ,TotalCashAmt     AS intTotalCashAmt
+        FROM TUserCashMst
+        WHERE UserNo = #{intUserNo}
+	</select>
 </mapper>

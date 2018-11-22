@@ -31,6 +31,9 @@ public interface AdminBoardService {
 	//글번호로 게시글 내용 가져오기
 	public AdminBoardInfo selectBoard(int boardNo);
 
+	//부모게시판 명 불러오기
+	public AdminBoardInfo selectCategoryParentName(int boardCateNo);
+
 	
 
 }

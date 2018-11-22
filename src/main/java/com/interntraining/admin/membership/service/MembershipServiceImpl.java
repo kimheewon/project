@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.interntraining.admin.membership.dao.MembershipDAO;
 import com.interntraining.admin.membership.domain.MembershipInfo;
+import com.interntraining.member.login.domain.User;
 
 @Service 
 public class MembershipServiceImpl implements MembershipService{
@@ -51,6 +52,12 @@ public class MembershipServiceImpl implements MembershipService{
 	@Override
 	public String checkId(String id) {
 		return membershipDAO.checkId(id);
+	}
+
+	//회원의 계좌정보 가져오기
+	@Override
+	public User selectMemberCashAmt(int intUserNo) {
+		return membershipDAO.selectMemberCashAmt(intUserNo);
 	}
 	
 	

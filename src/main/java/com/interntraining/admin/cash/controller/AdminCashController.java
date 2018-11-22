@@ -112,6 +112,7 @@ public class AdminCashController {
 		
 		int totalCash = admincashService.selectTotalCash(memo.getIntUserNo());	//현재 보유 캐시 정보 가져오기
 		
+		mav.addObject("userNo", memo.getIntUserNo());
 		mav.addObject("id", memo.getStrUserId());
 		mav.addObject("totalCash", totalCash);
 		mav.addObject("memo", memo);
@@ -200,6 +201,7 @@ public class AdminCashController {
 		
 		int totalCash = admincashService.selectTotalCash(memo.getIntUserNo());	//현재 보유 캐시 정보 가져오기
 		
+		mav.addObject("userNo", memo.getIntUserNo());
 		mav.addObject("id", memo.getStrUserId());
 		mav.addObject("totalCash", totalCash);
 		mav.addObject("memo", memo);

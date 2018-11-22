@@ -66,12 +66,12 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                     <h2 style="width: 100%;font-weight: bold;font-family: Bareun;">관리자 정보 수정
-                     <small style="color: #2c3e50;font-weight: bold;float: right;">*은 필수항목입니다.</small></h2>                   
+                     <h2 style="width: 100%;font-weight: bold;font-family: Bareun;">관리자 정보 수정</h2>                   
                      <div class="clearfix"></div>
                    </div>
                    <div class="x_content">
-                    <br />
+                    <h2 style="margin-top: 0px;margin-right: 35px;">
+                            <small style="color: #2c3e50;  font-weight: bold;float: right;font-size: 10pt;">*은 필수항목입니다.</small></h2> <br/>
                     <form id="enrollInfo" autocomplete="off" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Administrator/Update" method="POST">
 
                       <div class="form-group">
@@ -114,8 +114,16 @@
                           <select  id="admin_Auth" name="admin_Auth" class="form-control">                        
                           <option value="0" selected>===========================&nbsp;&nbsp;&nbsp;Select&nbsp;&nbsp;&nbsp;===========================</option>
                           <c:forEach var="authList" items="${authList}">                           
-                            <c:if test="${authList.intAuthNo ge itemNo}">                                    
-	                            <option value="${authList.intAuthNo}" id="auth" >${authList.strAuthName}</option>
+                            <c:if test="${authList.intAuthNo ge itemNo}"> 
+                                <c:choose>
+                                    <c:when test="${authList.intAuthNo eq adminInfo.intAdminAuth}">     
+                                        <option value="${authList.intAuthNo}" id="auth" selected>${authList.strAuthName}</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${authList.intAuthNo}" id="auth" >${authList.strAuthName}</option>
+                                    </c:otherwise>
+                                </c:choose>
+	                            
 	                          </c:if>                           
                             </c:forEach>
                           </select>

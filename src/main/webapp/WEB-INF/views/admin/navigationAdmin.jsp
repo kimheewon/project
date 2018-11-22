@@ -108,8 +108,7 @@
                   <li><a style=" font-size: 14px;"><i class="fa fa-sitemap"></i> 회  원 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="/Membership/MembershipList">회원 목록</a></li>
-                      <li><a href="/Membership/MembershipEnrollForm">회원 등록</a></li>
-                      <li><a href="/AdminCash/AdminCashMember">캐시 지급/회수</a></li>                     
+                      <li><a href="/Membership/MembershipEnrollForm">회원 등록</a></li>                 
                     </ul>
                   </li>
                   </c:if>
@@ -172,11 +171,11 @@
 
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="width: 180px;font-weight:bold">
-                    <img src="/img/profile.png" alt=""><%= session.getAttribute("AdminId") %> 관리자님
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="width: 240px;text-align:center; font-weight:bold">
+                    <img src="/img/profile.png" alt=""><%= session.getAttribute("AdminId") %> 관리자님 &nbsp;&nbsp;&nbsp;
                     <span class=" fa fa-angle-down"></span>
                   </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right" style="width: 180px;">
+                  <ul class="dropdown-menu dropdown-usermenu pull-right" style="width: 240px;">
                     <li><a href="/loginAdmin/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>

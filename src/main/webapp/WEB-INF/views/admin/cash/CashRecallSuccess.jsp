@@ -109,10 +109,6 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2 style="font-family: Bareun;font-weight: bold;">캐시 회수 완료</h2>
-                    <button class="btn btn-app" type="button" onclick="location.href='/Membership/MembershipRead?intUserNo=${userNo}'"
-                                                                id="editBtn" data-placement="top" data-toggle="tooltip" data-original-title="상세보기" style="margin-right: 0.5%;">                                                       
-                        <i class="fa fa-newspaper-o" style="color: #a55663;"></i>
-                    </button>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content" style="font-size:18px;margin-top: 6%; margin-bottom: 6%;"> 
@@ -128,11 +124,13 @@
                         <tbody>
                             <tr>
                                 <td style="text-align: center; color:#3b5976;" class="sorting">회수한 캐시</td>         
-                                <td style="padding-left: 3%;font-size: 15pt;font-weight:bold;color:#d11d53;vertical-align: middle;">${memo.intAmount}&nbsp;코인</td>
+                                <td style="padding-left: 3%;font-size: 15pt;font-weight:bold;color:#d11d53;vertical-align: middle;">
+                                    <fmt:formatNumber value="${memo.intAmount}" pattern="#,###" />&nbsp;코인</td>
                             </tr>
                             <tr>
                                 <td style="text-align: center; color:#3b5976;" class="sorting">보유&nbsp;&nbsp;&nbsp;&nbsp;캐시</td>         
-                                <td style="padding-left: 3%;font-size: 15pt;color:#3b5976;vertical-align: middle;">${totalCash}&nbsp;코인</td>
+                                <td style="padding-left: 3%;font-size: 15pt;color:#3b5976;vertical-align: middle;">
+                                    <fmt:formatNumber value="${totalCash}" pattern="#,###" />&nbsp;코인</td>
                             </tr>
                             <tr>
                                 <td style="text-align: center; color:#3b5976;" class="sorting">사&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;유</td>         
@@ -142,7 +140,7 @@
                     </table>
                     <br><br><br>
                     <p style="text-align: center">
-                        <button class="btn btn-primary" style="font-family: Bareun;" type="button" id="btnStyle" onclick="location.href='/AdminCash/AdminCashMember'">목록으로</button>
+                        <button class="btn btn-primary" style="font-family: Bareun;" type="button" id="btnStyle" onclick="location.href='/Membership/MembershipRead?intUserNo=${userNo}'">회원 정보 상세보기로 이동</button>
                     </p>
                   </div>
                 </div>

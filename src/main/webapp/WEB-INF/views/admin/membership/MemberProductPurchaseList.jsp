@@ -15,7 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>상품 목록 리스트</title>
+    <title>회원의 상품 구매 리스트</title>
 
      <!-- Bootstrap -->
     <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -41,9 +41,33 @@
         min-width: 40px;
         margin: 0 0 0 0;
         padding-top: 0.6%;
-        border: none;
-        background-color: white;
     }
+#shopBtn{
+    background-color: white;
+    width: 65%;
+    height: 21pt;
+    font-size: 11pt;
+    border-radius: 3pt;
+    border: none;
+    color: #3d1322;
+    font-family: Bareun;
+    border: 2px solid #772642;
+}
+#shopBtn:hover{
+    background: #772642;
+    color: white;
+    box-shadow: 0 2px #999;
+    border: 2px solid #772642;
+    font-weight: bold;
+}
+#shopBtn:active {
+    background: #772642;
+    color: white;
+    box-shadow: 0 2px #999;
+    border: 2px solid #772642;
+    font-weight: bold;
+    transform: translateY(4px);
+}
 
 </style>
   </head>
@@ -58,7 +82,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3></h3>
+                <h3 style="font-family: Bareun;color: #605183;font-weight: bold;font-size: 15pt;">${id}&nbsp;&nbsp;회원님의,</h3>
               </div>
 
               <div class="title_right">
@@ -76,63 +100,75 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2 style="font-family: Bareun;font-weight: bold;">아이템 목록</h2>
-                    
+                    <h2 style="font-family: Bareun;font-weight: bold;">아이템 구매 내역</h2>
+                    <button class="btn btn-app" type="button" onclick="location.href='/Membership/MembershipRead?intUserNo=${userNo}'"
+                         id="editBtn" data-placement="top" data-toggle="tooltip" data-original-title="상세보기" style="float: right;padding-top: 8px;">                                                       
+                        <i class="fa fa-newspaper-o" style="color: #a55663;"></i>
+                    </button>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content" style="font-size:15px">
                     
-                    <table id="datatable" class="table table-bordered" id="AdminList">
+                    <table id="datatable" class="table table-striped table-bordered" id="AdminList">
                     <colgroup>
                         <col width = "6%"/>
-                        <col width = "8%"/>
-                        <col width = "12%"/>
-                        <col width = "*"/>
-                        <col width = "12%"/>
-                        <col width = "12%"/>
-                        <col width = "15%"/>
-                        <col width = "15%"/>
-                        <col width = "7%"/>                        
+                        <col width = "13%"/>	                
+		                <col width = "*"/>
+		                <col width = "14%"/>		                
+		                <col width = "15%"/> 
+		                <col width = "10%"/>                        
                     </colgroup>
-                      <thead style="background-color: #e6e6e8;">
+                      <thead>
                         <tr>
-                          <th style="text-align: center; padding-left: 1.5%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;" class="sorting_desc">#</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">번 호</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">아이템</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">아이템 명</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">캐&nbsp;&nbsp;&nbsp;시</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">최근 등록자</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">등록 일시</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">수정 일시</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-bottom: 2px solid #a6a6a6;">작   업</th>
+                          <th style="text-align: center; padding-left: 1.5%; color:#00003f" class="sorting_desc">#</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">구매&nbsp;번호</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">아 이 템</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">캐&nbsp;&nbsp;&nbsp;시</th>
+                          
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">거래&nbsp;일시</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f"></th>
                         </tr>
                       </thead>
                       <tbody>
                         <c:forEach var="list" items="${product}" varStatus="status">
+
                             <tr>
                                 <td style="text-align: center; color:#3b5976;vertical-align: middle;">${status.count}</td>
-                                <td style="text-align: center; color:#3b5976;vertical-align: middle;">${list.intItemNo}</td>
-                                <td style="text-align: center; color:#3b5976;vertical-align: middle;padding: 0;">
-                                     <c:if test="${list.intItemNo ne 0}">       
-                                        <img id="preview" src="${list.strfileUrl}" style="width: 216px;height: 102px;">
-                                     </c:if>
+                                <td style="text-align: center; color:#3b5976;vertical-align: middle;">${list.intNumber}</td>
+                                <td style="text-align: left;padding-left: 2%; color:#3b5976;vertical-align: middle;">
+	                                <c:choose>
+			                              <c:when test="${list.strItemName eq '캐시 회수'}">
+			                                 <span data-toggle="tooltip" data-placement="bottom" data-original-title="${list.strReason}">${list.strItemName}</span>
+			                              </c:when>
+			                              <c:otherwise>
+			                                  <c:choose>
+			                                      <c:when test="${list.intFlag ne 0}">
+			                                          <a href="/Product/MemberPurchaseView?PurchaseNo=${list.intNumber}" style="color: #b13862;;font-weight: bold;">
+			                                            ${list.strItemName}</a>
+			                                      </c:when>
+			                                      <c:otherwise>
+			                                          <span style="font-weight: normal;font-style: italic;text-decoration: line-through;">${list.strItemName}</span>
+			                                      </c:otherwise>
+			                                  </c:choose>
+			                              </c:otherwise>
+			                          </c:choose>
                                 </td>
-                                <td style="text-align: center; color:#3b5976;vertical-align: middle;">${list.strItemName}</td>
-                                <td style="text-align: right; padding-right: 3%;color:#3b5976;vertical-align: middle;"><fmt:formatNumber value="${list.intItemPrice}" pattern="#,###" />&nbsp;코인</td>
-                                <td style="text-align: center; color:#3b5976;vertical-align: middle;">${list.strAdminId}</td>
-                                <td style="text-align: center; color:#3b5976;vertical-align: middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.dateItemDate}"/></td>
-                                <td style="text-align: center; color:#3b5976;vertical-align: middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.dateUpdateItemDate}"/></td>
-                                <td style="text-align: center; color:#3b5976;padding-top: 0.2%; padding-bottom: 0.2%;vertical-align: middle;">
-                                    <c:if test="${list.intItemNo ne 0}">                                    
-	                                    <button class="btn btn-app" type="button" onclick="location.href='/Product/ProductUpdateForm?itemNo=${list.intItemNo}'" 
-	                                        style="padding-top: 5%;" id="editBtn" data-placement="top" data-toggle="tooltip" data-original-title="수정">
-	                                        <i class="fa fa-wrench" style="color: #626200;"></i></button>|
-	                                    <button class="btn btn-app" type="button" onclick="checkDelete(${list.intItemNo})"
-	                                        style="padding-top: 5%;" id="editBtn" data-placement="top" data-toggle="tooltip" data-original-title="삭제" style="margin-right: 0.5%;">                                                        
-	                                        <i class="fa fa-trash-o" style="color: #a55663;"></i></button>                                    
-                                    </c:if>
-                                    
+                                <td style="text-align: right; padding-right:4%; color:#3b5976;vertical-align: middle;"><fmt:formatNumber value="${list.intItemTotalPrice}" pattern="#,###" />&nbsp;코인</td>
+                                <td style="text-align: center; color:#3b5976;vertical-align: middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.datePurchaseDate}"/></td>
+                                <td style="text-align: center; color:#3b5976;vertical-align: middle;">
+	                                <c:if test="${list.strItemName ne '캐시 회수'}">
+		                              <c:choose>
+		                                  <c:when test="${list.intFlag eq 1}">
+		                                      <span style="font-family: Bareun;color: rebeccapurple;font-weight: bold;">상품 준비중</span>
+		                                  </c:when>
+		                                  <c:when test="${list.intFlag eq 2}">
+                                              <button id="shopBtn" type="button" onclick="deliver(${list.intNumber})" style="margin-right: 0;">배송 추적</button>
+                                          </c:when>
+		                                  <c:otherwise>구매 취소</c:otherwise>
+		                              </c:choose>
+	                               </c:if>
                                 </td>
+                                
                             </tr>   
                         </c:forEach>
                       </tbody>
@@ -182,6 +218,29 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
 ga('create', 'UA-23581568-13', 'auto');
 ga('send', 'pageview');
+
+//배송추적
+function deliver(purchaseNo){
+    //var invoice = document.getElementById("invoiceNumber").value;
+    //var code = document.getElementById("companyCode").value;
+    
+    $.ajax({   
+        type:"POST",
+        url:"/Product/listDeliveryTrack",   
+        dataType:"html",// JSON/html
+        async: false,
+        data:{ 
+            "purchaseNo": purchaseNo
+        },
+    
+        success: function(invoice){//통신이 성공적으로 이루어 졌을때 받을 함수                   
+              window.open(invoice,"hiddenframe", "배송조회", "width=500, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" ); 
+              
+        }
+    }); //--ajax
+    
+    
+}
 
     function checkFunction(no){
          $.ajax({   

@@ -155,5 +155,17 @@ public class ProductServiceImpl implements ProductService{
 	public ItemShopInfo selectInvoice(BigInteger purchaseNo) {
 		return productDAO.selectInvoice(purchaseNo);
 	}
+
+	//회원의 상품 구매 리스트 불러오기
+	@Override
+	public List<ItemShopInfo> selectMemberProductList(int userNo) {
+		return productDAO.selectMemberProductList(userNo);
+	}
+
+	//아이디 찾기
+	@Override
+	public String selectUserId(int userNo) {
+		return productDAO.selectUserId(userNo);
+	}
 	
 }

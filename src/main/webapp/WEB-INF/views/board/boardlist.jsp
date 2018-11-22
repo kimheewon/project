@@ -40,7 +40,7 @@
 	
 <jsp:include page="../login/navigation.jsp" flush="true"/>
 
-    <div class="container_t" style="height: 750px;">
+    <div class="container_t" style="min-height: 574px;margin-bottom: 4%;">
     
   		<h3 style="color:#2c3e50;margin-left: 1%;">${strBoardCateName}</h3>
   		
@@ -115,16 +115,17 @@
 			</c:forEach>
 		</table>
 		<hr/>
+		<span style="float:right; font-weight:bold; width:5.5%;margin-right:2%;">
+            <button class="btn" id="btn" onclick="location.href='/board/boardwrite?intBoardCateNo=${intBoardCateNo}'" style="background-color: white;color:#2c3e50; 
+                border: 1px solid #2c3e50;padding: 3px; padding-left: 0;width: 100px;" >
+                <img class="btn-img" src="/img/pen.png" style=" width: 30%;">&nbsp;글쓰기</button>      
+        </span>
 	</div>
 
 	
-	<span style="float:right; font-weight:bold; width:5.5%;margin-right: 18%;">
-	<button class="btn" id="btn" onclick="location.href='/board/boardwrite?intBoardCateNo=${intBoardCateNo}'" style="background-color: white;color:#2c3e50; 
-		border: 1px solid #2c3e50;padding: 3px; padding-left: 0;width: 100px;" >
-	<img class="btn-img" src="/img/pen.png" style=" width: 30%;">&nbsp;글쓰기</button> 		
-	</span>
+	
 	<br>
-		<div style='text-align: center; margin: 1px auto;margin-left: 20%;'>
+		<div style='text-align: center; margin: 1px auto;'>
 			 <form action="/board/boardlist?intBoardCateNo=${intBoardCateNo}" name="search" method="post" autocomplete="off">
 			
 			 <select name="keyField" id="keyField" size="1" style="width:110px;height: 30px;">

@@ -11,6 +11,16 @@
         FROM    TBoardCategory
         WHERE   BoardCateNo = #{boardCateNo}
     </select>
+    
+     <!--부모 게시판 이름 찾기  -->
+    <select id="selectCategoryParentName" resultType="AdminBoardInfo">
+        SELECT  a.BoardParentCateNo AS intBoardNo
+               ,b.BoardCateName     AS strBoardCateName
+        FROM    TBoardCategory a LEFT JOIN TBoardCategory b
+        ON      a.BoardParentCateNo = b.BoardCateNo
+        WHERE   a.BoardCateNo = #{boardCateNo}
+    </select>
+    
     <!-- 게시판 카테고리 모두 가져오기 -->
     <select id="selectAllBoardCategory" resultType="BoardCategoryInfo"> 
         SELECT   A.BoardCateNo      AS intBoardCateNo

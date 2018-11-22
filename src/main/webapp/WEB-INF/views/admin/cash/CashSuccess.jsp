@@ -109,10 +109,7 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2 style="font-family: Bareun;font-weight: bold;">캐시 지급 완료</h2>
-                    <button class="btn btn-app" type="button" onclick="location.href='/Membership/MembershipRead?intUserNo=${userNo}'"
-                                                                id="editBtn" data-placement="top" data-toggle="tooltip" data-original-title="상세보기" style="margin-right: 0.5%;">                                                       
-                        <i class="fa fa-newspaper-o" style="color: #a55663;"></i>
-                    </button>
+                  
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content" style="font-size:18px;margin-top: 6%; margin-bottom: 6%;"> 
@@ -144,7 +141,7 @@
                     </table>
                     <br><br><br>
                     <p style="text-align: center">
-                        <button class="btn btn-primary" style="font-family: Bareun;" type="button" id="btnStyle" onclick="location.href='/AdminCash/AdminCashMember'">목록으로</button>
+                        <button class="btn btn-primary" style="font-family: Bareun;" type="button" id="btnStyle" onclick="location.href='/Membership/MembershipRead?intUserNo=${userNo}'">회원 정보 상세보기로 이동</button>
                     </p>
                   </div>
                 </div>

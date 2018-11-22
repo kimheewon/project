@@ -36,6 +36,8 @@
         margin: 0 0 0 0;
         padding-top: 0.6%;
         float: right;
+        border: none;
+        background-color: white;
     }
 
 </style>
@@ -61,8 +63,8 @@
                             <div class="x_panel" >
                                 <div class="x_title">
                                     <h2 style="color: #605183;font-weight: bold;">${boardName}</h2>
-                                        <button id="editBtn" class="btn btn-app" type="button" onclick="location.href='/BoardCategory/ChildBoardList'"
-                                                    data-placement="top" data-toggle="tooltip" data-original-title="${boardName} 목록">                                        
+                                        <button id="editBtn" class="btn btn-app" type="button" onclick="location.href='/BoardCategory/ChildBoardList?boardCateNo=${Parent.intBoardNo}'"
+                                                    data-placement="top" data-toggle="tooltip" data-original-title="${Parent.strBoardCateName} 목록">                                        
                                          <i class="fa fa-list-ul" style="color: #7e498b;"></i> </button>                                           
                                                                      
                                     <div class="clearfix"></div>
@@ -131,10 +133,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <button  id="editBtn" class="btn btn-app" type="button" onclick="location.href='/AdminBoard/AdminBoardEnrollForm?boardCateNo=${boardCateNo}'"
-                                                    data-placement="top" data-toggle="tooltip" data-original-title="글쓰기">
-                                            <i class="fa fa-edit" style="color: #7e498b;"></i>  </button>                                          
-                                
+                               
                             </div>                            
                         </div>
                     </div>

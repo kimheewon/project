@@ -35,13 +35,20 @@
     <!-- Custom Theme Style -->
     <link href="/build/css/custom.min.css" rel="stylesheet">
 
-	<style>
+<style>
 	th {
     text-align: center;
     }
-	
-	</style>
-  </head>
+    #editBtn{
+        height: 35px;
+        min-width: 40px;
+        margin: 0 0 0 0;
+        padding-top: 0.6%;
+        border: none;
+        background-color: white;
+    }	
+</style>
+</head>
 
   <body class="nav-md">
      <div class="container body">
@@ -76,27 +83,27 @@
                   </div>
                   <div class="x_content" style="font-size:15px">
                     
-                    <table id="datatable" class="table table-striped table-bordered" id="AdminList">
+                    <table id="datatable" class="table table-bordered" id="AdminList">
                     <colgroup>
 			    		<col width = "6%"/>
 			    		<col width = "*"/>
-			    		<col width = "9%"/>
+			    		<col width = "12%"/>
 			    		<col width = "15%"/>
 			    		<col width = "15%"/>
-			    		<col width = "10%"/>
-			    		<col width = "10%"/>
-			    		<col width = "20%"/>
+			    		<col width = "12%"/>
+			    		<col width = "13%"/>
+			    		<col width = "8%"/>
 			    	</colgroup>
-                      <thead>
+                      <thead style="background-color: #e6e6e8;">
                         <tr>
-                          <th style="text-align: center; padding-left: 1.5%; color:#00003f" class="sorting_desc">#</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">아이디</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">이   름</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">전화번호</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">가입 일시</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">등   급</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">보유캐시</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">작   업</th>
+                          <th style="text-align: center; padding-left: 1.5%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;" class="sorting_desc">#</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">아이디</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">이   름</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">전화번호</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">가입 일시</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">등   급</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">보유캐시</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-bottom: 2px solid #a6a6a6;">작   업</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -105,15 +112,18 @@
 
 							<tr>
 								<td style="text-align: center; color:#3b5976;" class="sorting">${status.count}</td>			
-								<td style="padding-left: 2%; color:#3b5976;">${userList.strUserId}</td>
+								<td style="padding-left: 3%; font-weight: bold; color: #772642;">
+								    <a href="/Membership/MembershipRead?intUserNo=${userList.intUserNo}" style="color:#772642;">${userList.strUserId}</a></td>
 								<td style="text-align: center; color:#3b5976;">${userList.strUserName}</td>
 								<td style="text-align: center; color:#3b5976;">${userList.strUserPhone}</td>
 								<td style="text-align: center; color:#3b5976;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${userList.dateUserDate}"/></td>
 								<td style="text-align: center; color:#3b5976;">${userList.strUserGrade} 회원</td>
-								<td style="text-align: right;color: #3b5976;padding-right: 2%;"><fmt:formatNumber value="${userList.intTotalCashAmt}" pattern="#,###" />&nbsp;코인</td>
-								<td style="text-align: center; color:#3b5976; "><a href="/Membership/MembershipRead?intUserNo=${userList.intUserNo}" style="color:#3b5976;">상세보기</a>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<a href="/Membership/MembershipUpdateForm?intUserNo=${userList.intUserNo}" style="color:#3b5976;">수정하기</a></td>
+								<td style="text-align: right;color: #3b5976;padding-right: 3%;"><fmt:formatNumber value="${userList.intTotalCashAmt}" pattern="#,###" />&nbsp;코인</td>
+								<td style="text-align: center; color:#3b5976; padding-top: 3px; padding-bottom: 3px;">
+									<button class="btn btn-app" type="button" onclick="location.href='/Membership/MembershipUpdateForm?intUserNo=${userList.intUserNo}'" 
+                                        style="padding-top: 5%;" id="editBtn" data-placement="top" data-toggle="tooltip" data-original-title="수정">
+                                        <i class="fa fa-wrench" style="color: #626200;"></i></button>
+							    </td>
 							</tr>	
 						</c:forEach>
                       </tbody>

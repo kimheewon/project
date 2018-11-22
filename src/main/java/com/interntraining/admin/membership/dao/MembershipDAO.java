@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.interntraining.admin.membership.domain.MembershipInfo;
+import com.interntraining.member.login.domain.User;
 
 @Repository("membershipDAO")
 public class MembershipDAO {
@@ -41,5 +42,10 @@ public class MembershipDAO {
 	//DB에서 Id 체크
 	public String checkId(String id) {
 		return sqlSession.selectOne("membershipSql.checkId", id);
+	}
+
+	//회원의 계좌정보 가져오기
+	public User selectMemberCashAmt(int intUserNo) {
+		return sqlSession.selectOne("membershipSql.selectMemberCashAmt", intUserNo);
 	}
 }

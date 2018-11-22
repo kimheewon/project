@@ -72,6 +72,12 @@ public class AdminBoardServiceImpl implements AdminBoardService{
 		return adminBoardDAO.selectBoard(boardNo);
 	}
 
+	//부모게시판 명 불러오기
+	@Override
+	public AdminBoardInfo selectCategoryParentName(int boardCateNo) {
+		return adminBoardDAO.selectCategoryParentName(boardCateNo);
+	}
+
 	
 
 }

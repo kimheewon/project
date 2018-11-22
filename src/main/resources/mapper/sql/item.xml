@@ -67,6 +67,7 @@
 		        ,ItemCount        AS itemCount
 		        ,TotalItemPrice   AS intItemTotalPrice
 		        ,DeliveryPrice    AS intDeliveryPrice
+		        ,UserNo           AS intUserNo
 		FROM  TItemPurchaseMst
 		WHERE PurchaseNo = #{purchaseNo}
     </select>

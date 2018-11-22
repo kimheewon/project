@@ -87,8 +87,8 @@ public class BoardCategoryServiceImpl implements BoardCategoryService{
 	//부모 카테고리 번호 찾기
 	@Override
 	public int searchParentBoardCateNo(int boardCateNo) {
-		// TODO Auto-generated method stub
 		return boardCategoryDAO.searchParentBoardCateNo(boardCateNo);
 	}
+
 	
 }

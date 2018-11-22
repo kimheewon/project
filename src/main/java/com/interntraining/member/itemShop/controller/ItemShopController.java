@@ -98,6 +98,17 @@ public class ItemShopController {
 		
 		ItemShopInfo item = itemShopService.selectItemInfo(itemNo);		//아이템 번호로 아이템 정보 가져오기
 		//회원목록에서 배송지 정보 가져오기
+		
+		String url = item.getStrfileUrl();
+		int itemNumber = item.getIntItemNo();
+		String itemName = item.getStrItemName();
+		int price = item.getIntItemPrice();
+		
+		session.setAttribute("url", url);
+		session.setAttribute("itemNumber", itemNumber);
+		session.setAttribute("itemName", itemName);
+		session.setAttribute("price", price);
+		
 		mav.addObject("item", item);
 		mav.setViewName("/user/itemShop/ItemPurchase");
 		return mav;

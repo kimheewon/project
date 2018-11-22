@@ -162,6 +162,22 @@ public class ProductController {
 		return mav;
 	}
 	
+	//회원의 상품 구매 리스트
+	@RequestMapping(value="MemberPurchaseList")
+	public ModelAndView memberPurchaseList(int userNo) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		
+		List<ItemShopInfo> product = productService.selectMemberProductList(userNo);			//회원의 상품 구매 리스트 불러오기
+		String id = productService.selectUserId(userNo);	//아이디 찾기
+		
+		mav.addObject("userNo", userNo);
+		mav.addObject("product", product);
+		mav.addObject("id",id);
+		mav.setViewName("/admin/membership/MemberProductPurchaseList");
+		return mav;
+	}
+	
+	
 	//상품 구매내역 상세보기
 	@RequestMapping(value="PurchaseView")
 	public ModelAndView purchaseView(BigInteger PurchaseNo) {
@@ -181,6 +197,29 @@ public class ProductController {
 		mav.setViewName("/admin/product/ProductPurchaseView");
 		return mav;
 	}
+	
+	//회원의 상품 구매내역 상세보기
+	@RequestMapping(value="MemberPurchaseView")
+	public ModelAndView memberPurchaseView(BigInteger PurchaseNo) {
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		
+		ItemShopInfo item = productService.selectPurchaseItem(PurchaseNo);		//구매한 아이템 정보 가져오기
+		ItemShopInfo itemInfo = productService.selectItemInfo(item.getIntItemNo());
+		ItemShopInfo deliver = productService.selectDeliveryInfo(PurchaseNo);		//배송정보 가져오기
+		List<ItemShopInfo> company = productService.selectCompany();		//택배회사 정보 가져오기
+		String id = productService.selectUserId(item.getIntUserNo());
+		
+		mav.addObject("id",id);
+		mav.addObject("PurchaseNo", PurchaseNo);
+		mav.addObject("item", item);
+		mav.addObject("itemInfo", itemInfo);
+		mav.addObject("deliver", deliver);
+		mav.addObject("company", company);
+
+		mav.setViewName("/admin/membership/MemberProductPurchaseView");
+		return mav;
+	}
+		
 	
 	//송장번호 입력
 	@RequestMapping(value="deliveryCompany")

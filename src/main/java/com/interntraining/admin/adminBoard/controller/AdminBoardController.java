@@ -62,6 +62,7 @@ public class AdminBoardController {
 		if(authCheck == 1) {	//권한 가지고 있으면
 			List<AdminBoardInfo> Board = adminBoardService.selectAllBoard(boardCateNo);	//게시판 글 모두 가져오기
 			String BoardName = adminBoardService.selectBoardName(boardCateNo);			//게시판 명 불러오기
+			AdminBoardInfo Parent = adminBoardService.selectCategoryParentName(boardCateNo);			//부모게시판 명 불러오기
 			
 			//날짜 변환
 	        Date dateB = new Date();
@@ -91,6 +92,7 @@ public class AdminBoardController {
 		    }
 			mav.addObject("board", Board);
 			mav.addObject("boardName", BoardName);
+			mav.addObject("Parent", Parent);
 			mav.addObject("boardCateNo", boardCateNo);
 			mav.setViewName("/admin/board/BoardList");
 			

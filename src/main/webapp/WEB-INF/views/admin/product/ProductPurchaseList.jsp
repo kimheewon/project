@@ -41,6 +41,7 @@
         min-width: 40px;
         margin: 0 0 0 0;
         padding-top: 0.6%;
+        
     }
 #shopBtn{
     background-color: white;
@@ -49,22 +50,22 @@
     font-size: 11pt;
     border-radius: 3pt;
     border: none;
-    color: #2c3e50;
+    color: #3d1322;
     font-family: Bareun;
-    border: 1px solid #2c3e50;
+    border: 2px solid #772642;
 }
 #shopBtn:hover{
-    background: #f1f4f7;
-    color: black;
+    background: #772642;
+    color: white;
     box-shadow: 0 2px #999;
-    border: 2px solid #3a3e42;
+    border: 2px solid #772642;
     font-weight: bold;
 }
 #shopBtn:active {
-    background: #f1f4f7;
-    color: black;
-    box-shadow: 0 2px #666;
-    border: 2px solid #3a3e42;
+    background: #772642;
+    color: white;
+    box-shadow: 0 2px #999;
+    border: 2px solid #772642;
     font-weight: bold;
     transform: translateY(4px);
 }
@@ -106,7 +107,7 @@
                   </div>
                   <div class="x_content" style="font-size:15px">
                     
-                    <table id="datatable" class="table table-striped table-bordered" id="AdminList">
+                    <table id="datatable" class="table table-bordered" id="AdminList">
                     <colgroup>
                         <col width = "6%"/>
                         <col width = "12%"/>
@@ -117,17 +118,16 @@
 		                <col width = "15%"/> 
 		                <col width = "10%"/>                        
                     </colgroup>
-                      <thead>
+                      <thead style="background-color: #e6e6e8;">
                         <tr>
-                          <th style="text-align: center; padding-left: 1.5%; color:#00003f" class="sorting_desc">#</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">구매&nbsp;번호</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">아 이 디</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">이&nbsp;&nbsp;&nbsp;름</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">아 이 템</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">캐&nbsp;&nbsp;&nbsp;시</th>
-                          
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">거래&nbsp;일시</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f"></th>
+                          <th style="text-align: center; padding-left: 1.5%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;" class="sorting_desc">#</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">구매&nbsp;번호</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">아 이 디</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">이&nbsp;&nbsp;&nbsp;름</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">아 이 템</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">캐&nbsp;&nbsp;&nbsp;시</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">거래&nbsp;일시</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-bottom: 2px solid #a6a6a6;"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -147,10 +147,10 @@
 			                                  <c:choose>
 			                                      <c:when test="${list.intFlag ne 0}">
 			                                          <a href="/Product/PurchaseView?PurchaseNo=${list.intNumber}" style="color: #b13862;;font-weight: bold;">
-			                                            <span style="color:#5a5a5a;font-weight: normal;">${list.intItemNo}&nbsp;&nbsp;</span>${list.strItemName}</a>
+			                                            ${list.strItemName}</a>
 			                                      </c:when>
 			                                      <c:otherwise>
-			                                          <span style="font-weight: normal;font-style: italic;text-decoration: line-through;"><span style="color:#5a5a5a;font-weight: normal;">${list.intItemNo}</span>&nbsp;&nbsp;${item.strItemName}</span>
+			                                          <span style="font-weight: normal;font-style: italic;text-decoration: line-through;">${list.strItemName}</span>
 			                                      </c:otherwise>
 			                                  </c:choose>
 			                              </c:otherwise>
@@ -166,7 +166,7 @@
 		                                      <span style="font-family: Bareun;color: rebeccapurple;font-weight: bold;">상품 준비중</span>
 		                                  </c:when>
 		                                  <c:when test="${list.intFlag eq 2}">
-                                              <button id="shopBtn" type="button" onclick="deliver(${list.intNumber})">배송 추적</button>
+                                              <button id="shopBtn" type="button" onclick="deliver(${list.intNumber})" style="margin-right: 0;">배송 추적</button>
                                           </c:when>
 		                                  <c:otherwise>구매 취소</c:otherwise>
 		                              </c:choose>

@@ -3,6 +3,7 @@ package com.interntraining.admin.membership.service;
 import java.util.List;
 
 import com.interntraining.admin.membership.domain.MembershipInfo;
+import com.interntraining.member.login.domain.User;
 
 public interface MembershipService {
 
@@ -20,5 +21,8 @@ public interface MembershipService {
 
 	//DB에서 Id 체크
 	public String checkId(String id);
+
+	//회원의 계좌정보 가져오기
+	public User selectMemberCashAmt(int intUserNo);
 
 }

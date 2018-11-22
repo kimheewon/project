@@ -35,7 +35,16 @@
     <!-- Custom Theme Style -->
     <link href="/build/css/custom.min.css" rel="stylesheet">
 
-	
+<style type="text/css">
+    #editBtn{
+           height: 23px;
+        min-width: 40px;
+        margin: 0 0 0 0;
+        padding-top: 0.6%;
+        border: none;
+        background-color: white;
+    }
+</style>
   </head>
 
   <body class="nav-md">
@@ -72,23 +81,23 @@
                   </div>
                   <div class="x_content" style="font-size:15px">
                     
-                    <table id="datatable" class="table table-striped table-bordered" id="AdminList">
+                    <table id="datatable" class="table table-bordered" id="AdminList">
                     <colgroup>
-			    		<col width = "6%"/>
-			    		<col width = "10%"/>
+			    		<col width = "7%"/>
+			    		<col width = "12%"/>
 			    		<col width = "*"/>
-			    		<col width = "10%"/>
-			    		<col width = "15%"/>
+			    		<col width = "12%"/>
+			    		<col width = "16%"/>
 			    		<col width = "12%"/>			    		
 			    	</colgroup>
-                      <thead>
+                      <thead style="background-color: #e6e6e8;">
                         <tr>
-                          <th style="text-align: center; padding-left: 1.5%; color:#00003f" class="sorting_desc">#</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">아이디</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">권한 유형</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">이   름</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">가입 일시</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">작   업</th>
+                          <th style="text-align: center; padding-left: 1.5%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;" class="sorting_desc">#</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">아이디</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">권한 유형</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">이   름</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">가입 일시</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-bottom: 2px solid #a6a6a6;">작   업</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -100,7 +109,11 @@
 								<td style="text-align: center; color:#3b5976;">${list.strAdminGrade}</td>
 								<td style="text-align: center; color:#3b5976;">${list.strAdminName}</td>
 								<td style="text-align: center; color:#3b5976;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.dateAdminDate}"/></td>
-								<td style="text-align: center; color:#3b5976;"><a href="javascript:checkFunction(${list.intAdminNo});" style="color:#3b5976;">수정하기</a></td>
+								<td style="text-align: center; color:#3b5976;">
+								    <button class="btn btn-app" type="button" onclick="location.href='javascript:checkFunction(${list.intAdminNo});'" 
+                                          id="editBtn" data-placement="top" data-toggle="tooltip" data-original-title="수정">
+                                            <i class="fa fa-wrench" style="color: #626200;"></i></button>
+								    </td>
 							</tr>	
 						</c:forEach>
                       </tbody>

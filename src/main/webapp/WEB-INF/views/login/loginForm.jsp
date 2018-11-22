@@ -51,9 +51,9 @@
 		<div class="card-body">
 			<form class="form-signin" method="POST" action="/login/loginCheck" autocomplete="off">				
 				<label for="inputEmail" class="sr-only">Your ID</label>
-				<input value="lion1234" type="text" name="id" class="form-control" placeholder="Your ID"	required autofocus><BR>
+				<input  type="text" name="id" class="form-control" placeholder="Your ID"	required autofocus><BR>
 				<label for="inputPassword" class="sr-only">Password</label>
-				<input value="qqqQQQ1!" type="password" name="pw" class="form-control" placeholder="Password" required><br>
+				<input type="password" name="pw" class="form-control" placeholder="Password" required><br>
 				<br>
 				<button id="btn-Yes" class="btn btn-lg btn-primary btn-block" style="font-weight: bold;" type="submit">로 그 인</button>
 				<button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="button" style="font-weight: bold;" onclick="location.href='/user/joinForm'">회원가입</button>	

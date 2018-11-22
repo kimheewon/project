@@ -115,12 +115,13 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                    <div class="x_title">
-                     <h2 style="width: 100%;font-weight: bold;font-family: Bareun;">회원 정보 수정
-                     <small style="color: #2c3e50;font-weight: bold;float: right;">*은 필수항목입니다.</small></h2>                   
+                     <h2 style="width: 100%;font-weight: bold;font-family: Bareun;">회원 정보 수정</h2>                   
                      <div class="clearfix"></div>
                    </div>
                    <div class="x_content">
-                    <br />
+                        <h2 style="margin-top: 0px;margin-right: 35px;">
+                            <small style="color: #2c3e50;  font-weight: bold;float: right;font-size: 10pt;">*은 필수항목입니다.</small></h2> <br/>
+                                    
                     <form autocomplete="off" id="updateInfo" name="updateInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Membership/MembershipUpdate?intUserNo=${intUserNo}" method="POST">
 
                       <div class="form-group">
@@ -200,7 +201,7 @@
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3" style="margin-left: 43%;">
                           <button class="btn btn-primary" type="button" onclick="location.href='/Membership/MembershipRead?intUserNo=${intUserNo}'">취소</button>
-                          <button type="submit" class="btn btn-success" id="update">완료</button>
+                          <button type="submit" class="btn btn-success" id="update">저장</button>
                         </div>
                       </div>
 
