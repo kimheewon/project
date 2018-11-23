@@ -152,7 +152,7 @@
 					<div style="text-align:right; color:#18BC9C;">
 					*는 필수 입력값입니다.
 					</div>
-					<form name="joinInfo" action="/login/myPageUpdate" method="POST">
+					<form name="joinInfo" action="/login/myPageUpdate" method="POST" autocomplete="off">
 						<div class="control-group">
 							<div class="form-group floating-label-form-group controls mb-0 pb-2" >
 								<a class="font_required">아이디</a>

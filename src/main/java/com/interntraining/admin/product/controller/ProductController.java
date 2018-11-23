@@ -57,6 +57,16 @@ public class ProductController {
 		return mav;
 	}
 	
+	//상품번호 중복체크
+	@RequestMapping(value="/CheckItemNo", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public int checkItemNo(int itemNo) {
+		
+		int check = productService.selectCheckItemNo(itemNo);	//아이템 번호 중복체크
+	
+		return check;
+	}
+	
 	//상품등록 페이지로 이동
 	@RequestMapping(value="/ProductEnrollForm")
 	public ModelAndView productEnrollForm(HttpServletRequest request, HttpServletResponse response, HttpSession session) {

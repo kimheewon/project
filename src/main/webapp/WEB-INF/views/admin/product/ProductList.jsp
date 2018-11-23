@@ -91,8 +91,7 @@
                         <col width = "12%"/>
                         <col width = "12%"/>
                         <col width = "15%"/>
-                        <col width = "15%"/>
-                        <col width = "7%"/>                        
+                        <col width = "12%"/>                        
                     </colgroup>
                       <thead style="background-color: #e6e6e8;">
                         <tr>
@@ -101,9 +100,8 @@
                           <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">아이템</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">아이템 명</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">캐&nbsp;&nbsp;&nbsp;시</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">최근 등록자</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">등록 일시</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">수정 일시</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">등록자</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">일&nbsp;&nbsp;&nbsp;시</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f;border-bottom: 2px solid #a6a6a6;">작   업</th>
                         </tr>
                       </thead>
@@ -118,9 +116,8 @@
                                      </c:if>
                                 </td>
                                 <td style="text-align: center; color:#3b5976;vertical-align: middle;">${list.strItemName}</td>
-                                <td style="text-align: right; padding-right: 3%;color:#3b5976;vertical-align: middle;"><fmt:formatNumber value="${list.intItemPrice}" pattern="#,###" />&nbsp;코인</td>
+                                <td style="text-align: right; padding-right: 2%;color:#3b5976;vertical-align: middle;"><fmt:formatNumber value="${list.intItemPrice}" pattern="#,###" />&nbsp;코인</td>
                                 <td style="text-align: center; color:#3b5976;vertical-align: middle;">${list.strAdminId}</td>
-                                <td style="text-align: center; color:#3b5976;vertical-align: middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.dateItemDate}"/></td>
                                 <td style="text-align: center; color:#3b5976;vertical-align: middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.dateUpdateItemDate}"/></td>
                                 <td style="text-align: center; color:#3b5976;padding-top: 0.2%; padding-bottom: 0.2%;vertical-align: middle;">
                                     <c:if test="${list.intItemNo ne 0}">                                    

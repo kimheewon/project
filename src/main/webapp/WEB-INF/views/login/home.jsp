@@ -80,7 +80,7 @@ function carousel() {
     if (myIndex > x.length) {myIndex = 1}    
     x[myIndex-1].style.display = "block";  
     dots[myIndex-1].className += " w3-white";
-    setTimeout(carousel, 1400); // Change image every 2 seconds
+    setTimeout(carousel, 1700); // Change image every 2 seconds
 }
 function plusDivs(n) {
   showDivs(slideIndex += n);

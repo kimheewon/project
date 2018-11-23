@@ -28,7 +28,7 @@ position: absolute;
     top: 25px;
     bottom: 0;
     right: 0;
-    left: 255px;
+    left: 191px;
     font-size: 13px;
     color: white;
     font-family: Bareun;
@@ -76,7 +76,7 @@ position: absolute;
     <jsp:include page="../../login/navigation.jsp" flush="true"/>
 
     <c:if test="${!empty sessionScope.url}">
-    <div style="position: relative;float: left;;margin-left: 50px;margin-top: 200px;">  
+    <div style="position: relative;float: left;;margin-left: 22px;margin-top: 200px;">  
         <div id="right_section" style="position:absolute;top:0px;left:0px;background-color: #ececec;">  
            <div style="width: 200px;height: 285px;text-align: center;padding-top: 10px;">               
                 <span style="font-family: Bareun;">최근 본 상품</span>

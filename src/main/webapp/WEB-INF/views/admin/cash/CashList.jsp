@@ -106,10 +106,10 @@ font-family: Bareun;margin-bottom: 0px;background-color: white;color:#2c3e50;pad
                           <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">아&nbsp;이&nbsp;디</th>                         
                           <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">금&nbsp;&nbsp;액</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">캐&nbsp;&nbsp;시</th> 
-                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">결제&nbsp;수단</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">수&nbsp;&nbsp;단</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">상&nbsp;&nbsp;태</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">일&nbsp;&nbsp;시</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-bottom: 2px solid #a6a6a6;">결제&nbsp;취소</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f;border-bottom: 2px solid #a6a6a6;">취&nbsp;소</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -127,7 +127,7 @@ font-family: Bareun;margin-bottom: 0px;background-color: white;color:#2c3e50;pad
                                 <td style="text-align: center; color:#3b5976;">
                                     <c:choose>
                                        <c:when test="${cash.strReason ne '0'}">                                        
-                                          <span style="line-height: 22px;" data-toggle="tooltip" data-placement="bottom" data-original-title="${cash.strReason}">${cash.strPurchaseState}(${cash.strAdminId})</span> 
+                                          <span style="line-height: 22px;cursor:pointer" data-toggle="tooltip" data-placement="bottom" data-original-title="${cash.strReason}" >${cash.strPurchaseState}(${cash.strAdminId})</span> 
                                        </c:when>
                                         <c:otherwise>
                                            ${cash.strPurchaseState}
@@ -195,7 +195,22 @@ ga('send', 'pageview');
 $("#cancelBtn").click(function() {
 	var no =  $(this).val();
 	if((confirm("결제 취소 하시겠습니까?") == true)){
-		location.href="/AdminCash/CashAllCancel?cashNo="+no;
+		//location.href="/AdminCash/CashAllCancel?cashNo="+no;
+		 $.ajax({   
+             type:"POST",
+             url:"/AdminCash/CashAllCancel",   
+             dataType:"html",// JSON/html
+             async: false,
+             data:{ 
+                 "cashNo": no
+             },
+         
+             success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수                   
+            	  alert("취소가 완료 되었습니다.");
+                  location.href="/AdminCash/AdminCashAllList"; 
+             }
+         }); //--ajax
+     
     }                
     else{
         return;

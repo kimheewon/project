@@ -47,6 +47,8 @@
     float: right;
     padding-top: 0.5%;
     padding-bottom: 1.5%;
+    background-color: white;
+    border: none;
 }
 #cancelBtn{
 font-family: Bareun;margin-bottom: 0px;background-color: white;color:#2c3e50;padding-top: 0.7%;padding-bottom: 0.7%;
@@ -90,7 +92,7 @@ font-family: Bareun;margin-bottom: 0px;background-color: white;color:#2c3e50;pad
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content" style="font-size:15px">
-                    
+                    <input type="hidden" value="${userNo}" id="userNoHidden">
                     <table id="datatable" class="table table-striped table-bordered" id="AdminList" style="font-family: Bareun;">
                     <colgroup>
                         <col width = "6%"/>
@@ -128,7 +130,7 @@ font-family: Bareun;margin-bottom: 0px;background-color: white;color:#2c3e50;pad
                                  <td style="text-align: center; color:#3b5976;">
                                     <c:choose>
                                        <c:when test="${cash.strReason ne '0'}">                                        
-                                          <span style="line-height: 22px;" data-toggle="tooltip" data-placement="bottom" data-original-title="${cash.strReason}">${cash.strPurchaseState}(${cash.strAdminId})</span>  
+                                          <span style="line-height: 22px;cursor: pointer;" data-toggle="tooltip" data-placement="bottom" data-original-title="${cash.strReason}" >${cash.strPurchaseState}(${cash.strAdminId})</span>  
                                        </c:when>
                                         <c:otherwise>
                                            ${cash.strPurchaseState}
@@ -195,13 +197,33 @@ ga('send', 'pageview');
 
 $("#cancelBtn").click(function() {
     var no =  $(this).val();
+    var userNoHidden = $("#userNoHidden").val();
     if((confirm("결제 취소 하시겠습니까?") == true)){
-        location.href="/AdminCash/CashCancel?cashNo="+no;
-    }                
-    else{
-        return;
-    }
+       //location.href="/AdminCash/CashCancel?cashNo="+no;
+       
+        $.ajax({   
+            type:"POST",
+            url:"/AdminCash/CashCancel",   
+            dataType:"html",// JSON/html
+            async: false,
+            data:{ 
+                "cashNo": no
+            },
+        
+            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수                   
+               
+            	   alert("취소가 완료 되었습니다.");
+            	   location.href="/AdminCash/AdminCashList?userNo="+userNoHidden; 
+                
+            }
+        }); //--ajax
     
+   }                
+   else{
+       return;
+   }
+   
+
 });
 
  

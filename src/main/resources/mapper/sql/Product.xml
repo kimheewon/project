@@ -7,10 +7,16 @@
 
     <!-- 상품등록-->   
     <insert id="insertProduct">
-        INSERT INTO TItemInfoMgmt(ItemName, ItemPrice, AdminNo, FileName, FileUrl  ,FileOriName)
-                           VALUES( #{strItemName}, #{intItemPrice}, #{intAdminNo}, #{strfileName}, #{strfileUrl}, #{strfileOriName})
+        INSERT INTO TItemInfoMgmt(ItemNo, ItemName, ItemPrice, AdminNo, FileName, FileUrl  ,FileOriName)
+                           VALUES(#{intItemNo}, #{strItemName}, #{intItemPrice}, #{intAdminNo}, #{strfileName}, #{strfileUrl}, #{strfileOriName})
     </insert>
-
+    
+    <!-- 상품번호 중복체크 -->
+    <select id="selectCheckItemNo" resultType="String">
+        SELECT ItemName
+        FROM TItemInfoMgmt
+        WHERE ItemNo = #{itemNo}
+    </select>
     <!-- DB에서 모든 상품 리스트 가져오기 -->
     <select id="seletAllList" resultType="ProductInfo">
         SELECT  ItemNo        AS  intItemNo

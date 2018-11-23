@@ -117,4 +117,9 @@ public class ProductDAO {
 	public String selectUserId(int userNo) {
 		return sqlSession.selectOne("cashSql.selectUserId", userNo);
 	}
+
+	//상품번호 중복체크
+	public String selectCheckItemNo(int itemNo) {
+		return sqlSession.selectOne("productSql.selectCheckItemNo", itemNo);
+	}
 }

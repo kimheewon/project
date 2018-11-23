@@ -116,7 +116,7 @@
 		                <col width = "*"/>
 		                <col width = "12%"/>		                
 		                <col width = "15%"/> 
-		                <col width = "10%"/>                        
+		                <col width = "12%"/>                        
                     </colgroup>
                       <thead style="background-color: #e6e6e8;">
                         <tr>
@@ -141,7 +141,7 @@
                                 <td style="text-align: left;padding-left: 2%; color:#3b5976;vertical-align: middle;">
 	                                <c:choose>
 			                              <c:when test="${list.strItemName eq '캐시 회수'}">
-			                                 <span data-toggle="tooltip" data-placement="bottom" data-original-title="${list.strReason}">${list.strItemName}</span>
+			                                 <span data-toggle="tooltip" data-placement="bottom" data-original-title="${list.strReason}" style="cursor: pointer;">${list.strItemName}</span>
 			                              </c:when>
 			                              <c:otherwise>
 			                                  <c:choose>

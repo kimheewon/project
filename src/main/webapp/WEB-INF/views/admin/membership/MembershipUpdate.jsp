@@ -122,38 +122,38 @@
                         <h2 style="margin-top: 0px;margin-right: 35px;">
                             <small style="color: #2c3e50;  font-weight: bold;float: right;font-size: 10pt;">*은 필수항목입니다.</small></h2> <br/>
                                     
-                    <form autocomplete="off" id="updateInfo" name="updateInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Membership/MembershipUpdate?intUserNo=${intUserNo}" method="POST">
+                    <form autocomplete="off" style="font-size: 15px;" id="updateInfo" name="updateInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Membership/MembershipUpdate?intUserNo=${intUserNo}" method="POST">
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id" style="font-size: 13px; color: #00003f;">아이디 <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id" style="font-size: 15px; color: #00003f;">아이디 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12" >
                             <span class="input-group-btn"><input type="text" class="form-control" id="id" name="id" style="background-color: #efefef;" value="${member.strUserId}" disabled>  </span>
                        </div>
                       </div>           
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name" style="font-size: 13px; color: #00003f;">이름 <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name" style="font-size: 15px; color: #00003f;">이름 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input id="name" class="form-control col-md-7 col-xs-12" style="background-color: white;" type="text" name="name" value="${member.strUserName}">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phone" style="font-size: 13px; color: #00003f;">전화번호 <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phone" style="font-size: 15px; color: #00003f;">전화번호 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input id="phone" class="form-control col-md-7 col-xs-12" style="background-color: white;" type="tel" name="phone" value="${member.strUserPhone}">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email" style="font-size: 13px; color: #00003f;">이메일 
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email" style="font-size: 15px; color: #00003f;">이메일 
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input id="email" class="form-control col-md-7 col-xs-12" style="background-color: white;" type="email" name="email" value="${member.strUserEmail}">
                         </div>
                       </div>                      
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sex" style="font-size: 13px; color: #00003f;">성별 <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sex" style="font-size: 15px; color: #00003f;">성별 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
 	                       <div class="form-control col-md-7 col-xs-12" style="border: 0px white; box-shadow: 0px 0px 0px white;">
@@ -172,14 +172,14 @@
                         </div>
                       </div>                     
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="date" style="font-size: 13px; color: #00003f;">가입일시
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="date" style="font-size: 15px; color: #00003f;">가입일시
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                         <a class="form-control col-md-7 col-xs-12" style="background-color: #efefef;" ><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${member.dateUserDate}"/></a>
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 13px; color: #00003f;">등급 <span class="required">*</span></label> 
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 15px; color: #00003f;">등급 <span class="required">*</span></label> 
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <select  id="select_grade" name="select_grade" class="form-control">                        
                           <option value="0" selected>===========================&nbsp;&nbsp;&nbsp;Select&nbsp;&nbsp;&nbsp;===========================</option>           

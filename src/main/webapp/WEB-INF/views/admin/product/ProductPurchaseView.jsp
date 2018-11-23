@@ -298,6 +298,44 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', 'UA-23581568-13', 'auto');
 ga('send', 'pageview');
 
+$(document).ready(function(){
+    var tel = $('#strTel').val();
+    tel = hypen(tel);
+    $('#strTel').val(tel);
+
+});
+
+
+
+function hypen(str){
+    str = str.replace(/[^0-9]/g, '');
+      var tmp = '';
+      if( str.length < 4){
+        return str;
+        
+      }else if(str.length < 7){
+        tmp = tmp + str.substr(0, 3);
+        tmp  = tmp + ' - ';
+        tmp = tmp + str.substr(3);
+        return tmp;
+      }else if(str.length < 11){
+        tmp += str.substr(0, 3);
+        tmp += ' - ';
+        tmp += str.substr(3, 3);
+        tmp += ' - ';
+        tmp += str.substr(6);
+         return tmp;
+      }else{        
+        tmp += str.substr(0, 3);
+        tmp += ' - ';
+        tmp += str.substr(3, 4);
+        tmp += ' - ';
+        tmp += str.substr(7);
+          return tmp;
+      }
+        return str;
+};
+
 //배송추적
 function deliver(){
 	var invoice = document.getElementById("invoiceNumber").value;

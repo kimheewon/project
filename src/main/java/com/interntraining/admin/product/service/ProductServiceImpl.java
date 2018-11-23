@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
+import org.springframework.util.SystemPropertyUtils;
 
 import com.interntraining.admin.product.dao.ProductDAO;
 import com.interntraining.admin.product.domain.ProductInfo;
@@ -158,14 +159,41 @@ public class ProductServiceImpl implements ProductService{
 
 	//회원의 상품 구매 리스트 불러오기
 	@Override
-	public List<ItemShopInfo> selectMemberProductList(int userNo) {
-		return productDAO.selectMemberProductList(userNo);
+	public List<ItemShopInfo> selectMemberProductList(int userNo) {		
+		List<ItemShopInfo> item = productDAO.selectMemberProductList(userNo);
+		for(int i=0; i<item.size();i++) {
+			BigInteger no = item.get(i).getIntNumber();
+			String reason = productDAO.selectReason(no);	//회수 사유 찾기
+			item.get(i).setStrReason(reason);
+			/*
+			int userNo = item.get(i).getIntUserNo();		//회원 이름 찾기
+			String name = productDAO.selectUserName(userNo);
+			item.get(i).setStrUserName(name);*/
+		}
+		return item;
+		
+		
 	}
 
 	//아이디 찾기
 	@Override
 	public String selectUserId(int userNo) {
 		return productDAO.selectUserId(userNo);
+	}
+
+	//상품번호 중복체크
+	@Override
+	public int selectCheckItemNo(int itemNo) {
+		String name = productDAO.selectCheckItemNo(itemNo);
+		
+		int check;
+		if(name != null) {
+			check = 1; //중복
+		}
+		else {
+			check = 0;
+		}
+		return check;
 	}
 	
 }

@@ -58,4 +58,7 @@ public interface ProductService {
 	//아이디 찾기
 	public String selectUserId(int userNo);
 
+	//상품번호 중복체크
+	public int selectCheckItemNo(int itemNo);
+
 }

@@ -71,25 +71,25 @@
                                         <small style="color: #2c3e50;  font-weight: bold;float: right;font-size: 10pt;">*은 필수항목입니다.</small></h2> <br/>
                                     <form id="enrollInfo" autocomplete="off" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/Administrator/Enroll" method="POST">
 		                                <div class="form-group">
-		                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id" style="font-size: 13px; color: #00003f;">아이디 <span class="required">*</span>
+		                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id" style="font-size: 15px; color: #00003f;">아이디 <span class="required">*</span>
 				                            </label>
 					                        <div class="input-group" style="width:49.5%; padding-left:0.9rem">
-					                            <span class="input-group-btn"><input type="text" class="form-control" id="admin_Id" name="admin_Id" required="required" placeholder="첫글자는 영문대소자. 영문대소문자,숫자 모두 포함 최소 6자~최대 15자" >
+					                            <span class="input-group-btn"><input type="text" class="form-control" style="font-size: 15px; "id="admin_Id" name="admin_Id" required="required" placeholder="첫글자는 영문대소자. 영문대소문자,숫자 모두 포함 최소 6자~최대 15자" >
 					                            <button type="button"  class="btn btn-primary"  id="adminIdCheck">중복확인</button></span>
 					                       </div>
 		                                </div>
 		                                <div class="form-group">
-		                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password" style="font-size: 13px; color: #00003f;">비밀번호 <span class="required">*</span>
+		                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password" style="font-size: 15px; color: #00003f;">비밀번호 <span class="required">*</span>
 					                        </label>
 					                        <div class="col-md-6 col-sm-6 col-xs-12">
-					                            <input type="password" id="admin_Pw" name="admin_Pw" required="required" class="form-control col-md-7 col-xs-12" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자">
+					                            <input type="password" id="admin_Pw" name="admin_Pw" required="required" style="font-size: 15px;" class="form-control col-md-7 col-xs-12" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자">
 					                        </div>
 		                                </div>
 					                    <div class="form-group">
-					                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password2" style="font-size: 13px; color: #00003f;">비밀번호 확인 <span class="required">*</span>
+					                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password2" style="font-size: 15px; color: #00003f;">비밀번호 확인 <span class="required">*</span>
 					                        </label>
 					                        <div class="col-md-6 col-sm-6 col-xs-12">
-					                            <input id="admin_Pw2" class="form-control col-md-7 col-xs-12" required="required" type="password" name="admin_Pw2" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자" 
+					                            <input id="admin_Pw2" class="form-control col-md-7 col-xs-12" style="font-size: 15px;" required="required" type="password" name="admin_Pw2" placeholder="영문대소문자,숫자,특수문자 모두 포함 최소 8자~최대 20자" 
 					                          onkeyup="go(this.value)" >
 					                        </div>
 					                        <div>
@@ -97,16 +97,16 @@
 					                        </div>
 		                                </div>
 				                        <div class="form-group">
-				                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name" style="font-size: 13px; color: #00003f;">이름 <span class="required">*</span>
+				                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name" style="font-size: 15px; color: #00003f;">이름 <span class="required">*</span>
 				                            </label>
 					                        <div class="col-md-6 col-sm-6 col-xs-12">
-					                            <input id="admin_Name" class="form-control col-md-7 col-xs-12" type="text" name="admin_Name" required="required">
+					                            <input id="admin_Name" class="form-control col-md-7 col-xs-12" style="font-size: 15px;" type="text" name="admin_Name" required="required">
 					                        </div>
 		                                </div>
 			                            <div class="form-group">
-					                        <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 13px; color: #00003f;">관리자 권한 유형 <span class="required">*</span></label>
+					                        <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 15px; color: #00003f;">관리자 권한 유형 <span class="required">*</span></label>
 					                        <div class="col-md-6 col-sm-6 col-xs-12">
-					                            <select  id="admin_Auth" name="admin_Auth" class="form-control">                        
+					                            <select  id="admin_Auth" name="admin_Auth" class="form-control" style="font-size: 15px;">                        
 					                                <option value="0" selected>===========================&nbsp;&nbsp;&nbsp;Select&nbsp;&nbsp;&nbsp;===========================</option>
 							                        <c:forEach var="authList" items="${authList}">                           
 							                            <c:if test="${authList.intAuthNo ge itemNo}">                                    

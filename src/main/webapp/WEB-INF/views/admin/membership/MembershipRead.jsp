@@ -155,9 +155,9 @@
                   </div>
                    <div class="x_content">
                     <br/>
-                    <form id="enrollInfo" name="enrollInfo" style="width: 80%;margin: auto;" data-parsley-validate class="form-horizontal form-label-left" action="/Membership/MembershipUpdateForm?intUserNo=${intUserNo}" method="POST">
+                    <form id="enrollInfo" style="font-size: 15px;"name="enrollInfo" style="width: 80%;margin: auto;" data-parsley-validate class="form-horizontal form-label-left" action="/Membership/MembershipUpdateForm?intUserNo=${intUserNo}" method="POST">
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id" style="font-size: 13px; color: #00003f;">아이디
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id" style="font-size: 15px; color: #00003f;">아이디
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12" >
                             <span class="input-group-btn"><input type="text" class="form-control" id="id" name="id" style="background-color: white;border: none; box-shadow: none;" value="${member.strUserId}" readonly>
@@ -165,63 +165,63 @@
                        </div>
                       </div>                                        
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name" style="font-size: 13px; color: #00003f;">이름 
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name" style="font-size: 15px; color: #00003f;">이름 
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="name" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;border: none; box-shadow: none;" type="text" name="name"value="${member.strUserName}">
+                          <input id="name" readonly class="form-control col-md-7 col-xs-12" style="font-size: 15px;background-color: white;border: none; box-shadow: none;" type="text" name="name"value="${member.strUserName}">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phone" style="font-size: 13px; color: #00003f;">전화번호 
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phone" style="font-size: 15px; color: #00003f;">전화번호 
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="phone" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;border: none; box-shadow: none;" type="tel" name="phone"value="${member.strUserPhone}">
+                          <input id="phone" readonly class="form-control col-md-7 col-xs-12" style="font-size: 15px;background-color: white;border: none; box-shadow: none;" type="tel" name="phone"value="${member.strUserPhone}">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email" style="font-size: 13px; color: #00003f;">이메일 
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email" style="font-size: 15px; color: #00003f;">이메일 
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="email" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;border: none; box-shadow: none;" type="email" name="email"value="${member.strUserEmail}">
+                          <input id="email" readonly class="form-control col-md-7 col-xs-12" style="font-size: 15px;background-color: white;border: none; box-shadow: none;" type="email" name="email"value="${member.strUserEmail}">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sex" style="font-size: 13px; color: #00003f;">성별
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sex" style="font-size: 15px; color: #00003f;">성별
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="sex" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;border: none; box-shadow: none;" type="text" name="sex" value="${member.strUserSex}">
+                          <input id="sex" readonly class="form-control col-md-7 col-xs-12" style="font-size: 15px;background-color: white;border: none; box-shadow: none;" type="text" name="sex" value="${member.strUserSex}">
                         </div>
                       </div>                     
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="date" style="font-size: 13px; color: #00003f;">가입일시
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="date" style="font-size: 15px; color: #00003f;">가입일시
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                        <a class="form-control col-md-7 col-xs-12" style="background-color: white;border: none; box-shadow: none;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${member.dateUserDate}"/></a>
+                        <a class="form-control col-md-7 col-xs-12" style="font-size: 15px;background-color: white;border: none; box-shadow: none;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${member.dateUserDate}"/></a>
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 13px; color: #00003f;">등급 </label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 15px; color: #00003f;">등급 </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                                                
-                        <input id="grade" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;border: none; box-shadow: none;" type="text" name="grade" value="${member.strUserGrade} 회원">
+                        <input id="grade" readonly class="form-control col-md-7 col-xs-12" style="font-size: 15px;background-color: white;border: none; box-shadow: none;" type="text" name="grade" value="${member.strUserGrade} 회원">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 13px; color: #00003f;">주소</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 15px; color: #00003f;">주소</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">                                               
                         <c:choose>
                             <c:when test ="${! empty member.strPostCode}">
-                                <input id="adress" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;border: none; box-shadow: none;" type="text" name="adress" value="(${member.strPostCode}) ${member.strAdress} ${member.strAdress2}">
+                                <input id="adress" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;border: none; box-shadow: none;font-size: 15px;" type="text" name="adress" value="(${member.strPostCode}) ${member.strAdress} ${member.strAdress2}">
                             </c:when>
                             <c:otherwise>
-                                <input id="adress" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;border: none; box-shadow: none;" type="text" name="adress" value="">                                
+                                <input id="adress" readonly class="form-control col-md-7 col-xs-12" style="background-color: white;border: none; box-shadow: none;font-size: 15px;" type="text" name="adress" value="">                                
                             </c:otherwise>
                         </c:choose>                        
                         </div>
                       </div>
                        <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 13px; color: #d11d53;">보유 캐시</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12" style="padding-top: 6px;padding-left: 20px;color: #d11d53;font-weight: bold;">                                               
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 15px; color: #d11d53;">보유 캐시</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12" style="padding-top: 6px;padding-left: 20px;color: #d11d53;font-weight: bold;font-size: 15px;">                                               
                             <fmt:formatNumber value="${member.intTotalCashAmt}" pattern="#,###" />&nbsp;코인
                             <button class="" id="accountBtn" type="button" data-placement="top" data-toggle="tooltip" data-original-title="계좌 정보 보기" >                                                       
                                 <i id="accountI" class="fa fa-sort-desc" style="color: #a55663;"></i>

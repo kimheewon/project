@@ -82,7 +82,7 @@
                                     <form autocomplete="off" id="enrollInfo" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" action="/BoardCategory/ChildBoardCategoryUpdate?parentBoardCateNo=${board.intParentBoardCateNo}" method="POST">
                                         <input type="hidden" name="no" id="no" value="${board.intBoardCateNo}">
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id" style="font-size: 13px; color: #00003f;">게시판명 <span class="required">*</span></label>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id" style="font-size: 15px; color: #00003f;">게시판명 <span class="required">*</span></label>
 				                            <div class="input-group" style="width:49.5%; padding-left:0.9rem">
                                                 <span class="input-group-btn"><input type="text" class="form-control" id="boardName" name="boardName" required="required" value="${board.strBoardCateName}" >
 					                            <button type="button"  class="btn btn-primary"  id="boardNameCheck">중복확인</button></span>

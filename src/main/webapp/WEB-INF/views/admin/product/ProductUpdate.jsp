@@ -80,27 +80,27 @@
                                 <div class="x_content">
                                     <h2 style="margin-top: 0px;margin-right: 35px;">
                                         <small style="color: #2c3e50;  font-weight: bold;float: right;font-size: 10pt;">*은 필수항목입니다.</small></h2> <br/>
-                                    <form autocomplete="off" id="enrollInfo" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data"
+                                    <form autocomplete="off" style="font-size: 15px;" id="enrollInfo" name="enrollInfo" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data"
                                         action="/Product/ProductUpdate" method="POST" >
                                         <input type="hidden" value="${product.strfileUrl}" id="url" name="strfileUrl">
                                         <input type="hidden" value="${product.strfileOriName}" name="strfileOriName">
                                         <input type="hidden" value="${product.intItemNo}" name="intItemNo">
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 13px; color: #00003f;">아이템명 <span class="required">*</span>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" style="color: #00003f;">아이템명 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <input type="text" id="strItemName" name="strItemName" required="required" class="form-control col-md-7 col-xs-12" value="${product.strItemName}">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 13px; color: #00003f;">캐시금액 <span class="required">*</span></label>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" style=" color: #00003f;">캐시금액 <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <input type="text" id="strPrice" name="strPrice" value="${product.intItemPrice}" class="form-control col-md-7 col-xs-12" required="required" onkeyup="inputNumberFormat(this)">
                                              
                                             </div>                                           
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 13px; color: #00003f;">이미지 업로드 <span class="required">*</span></label>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" style=" color: #00003f;">이미지 업로드 <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <input type="file" id="file" name="file" class="form-control col-md-7 col-xs-12" style="background-color: white;border: none;box-shadow: none;" >
                                                 <div class="img_wrap">

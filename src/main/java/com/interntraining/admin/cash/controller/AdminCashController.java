@@ -66,17 +66,15 @@ public class AdminCashController {
 		if(cancel.getTid()!= null) {	//결제 취소 성공
 			admincashService.updateCancel(cancel);	//DB에 결제 취소 내역 update
 			admincashService.updateUserCashMst(cancel);	//사용자 캐시AMT update
+				
 		}
 		
-		
-		mav.addObject("userNo", userNo);
-		mav.setViewName("redirect:/AdminCash/AdminCashList");
 		return mav;
 	}
 	
 	//캐시 지급 페이지로 이동
 	@RequestMapping(value="AdminCashPaymentForm")
-	public ModelAndView cashCancel(int userNo) {
+	public ModelAndView adminCashPaymentForm(int userNo) {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 	
 		int cash = admincashService.selectUserCashAmt(userNo);		//캐시 내역 가져오기
@@ -151,7 +149,7 @@ public class AdminCashController {
 		}		
 			
 		mav.addObject("userNo", userNo);
-		mav.setViewName("redirect:/AdminCash/AdminCashAllList");
+		//mav.setViewName("redirect:/AdminCash/AdminCashAllList");
 		return mav;
 	}
 	

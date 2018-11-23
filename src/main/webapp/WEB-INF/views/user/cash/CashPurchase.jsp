@@ -29,7 +29,7 @@
         padding-left: 15px;
         margin-right: auto;
         margin-left: auto;
-        width: 70%;
+        width: 85%;
         margin: 0 auto;     /* 가로로 중앙에 배치 */
         padding-top: 3%;   /* 테두리와 내용 사이의 패딩 여백 */
     }
@@ -118,8 +118,8 @@
 	               <th colspan="3" style="border-bottom: 1px solid #8f959c;font-size: 20px;padding-bottom: 1%;">충전금액 선택</th>
 	           </tr>
 	           <tr>
-	               <td id="cashChoosStyle"><input type="radio" value="1000" name="cashChoose">&nbsp;&nbsp;1,000 원</td>
-	               <td id="cashChoosStyle"><input type="radio" value="5000" name="cashChoose">&nbsp;&nbsp;5,000 원</td>
+	               <td id="cashChoosStyle"><input type="radio" value="1,000" name="cashChoose">&nbsp;&nbsp;1,000 원</td>
+	               <td id="cashChoosStyle"><input type="radio" value="5,000" name="cashChoose">&nbsp;&nbsp;5,000 원</td>
 	               <td id="cashChoosStyle"><input type="radio" value="10,000" name="cashChoose">&nbsp;&nbsp;1,0000 원</td>
 	           </tr>
 	           <tr>

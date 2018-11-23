@@ -107,7 +107,7 @@ input[type="text"]:disabled {
                             <p style="margin-bottom: 0;font-size: 11pt;color: gray;">(* 5만원 이상 구매시 배송료 무료)</p>
                         </td>
                         <td colspan="2" style="border-bottom:1px solid #aeaea7;">
-                            <input type="text" id="deliverPrice" pattern="#,###" value="${item.intDeliveryPrice}" style="border: none;width: 15%;text-align: right;" readonly>&nbsp;코인</td>
+                            <input type="text" id="deliverPrice" pattern="#,###" style="border: none;width: 15%;text-align: right;" readonly>&nbsp;코인</td>
                     </tr>
                     <tr style="height: 80px;">
                         <td colspan="3" style="border-right:1px solid #aeaea7;border-bottom:1px solid #aeaea7;font-weight: bold">총합계</td>
@@ -313,7 +313,12 @@ function hypen(str){
           document.getElementById("totalPrice").value = comma(total);
          // $('#price').val(price);
         //  $('#totalPrice').val(total);
-         
+         if($('#deliveryPrice').val() == "3000"){
+        	 document.getElementById("deliverPrice").value = "3,000";
+         }
+         else{
+        	 document.getElementById("deliverPrice").value = "0";
+         }
         $('select[name=itemCount]').change(function() {
         	var price = $('#itemPrice').val() * $(this).val();  
         	if(price >= 50000 ){
@@ -321,7 +326,8 @@ function hypen(str){
         		$('#deliverPrice').val(0);
         	}else{
         		var total = Number(price) + Number($('#deliveryPrice').val());
-        		$('#deliverPrice').val(3000);
+        		document.getElementById("deliverPrice").value = "3,000";
+        		//$('#deliverPrice').val(3,000);
         	}
         	//var total = Number(price) + Number($('#deliveryPrice').val());
         	document.getElementById("price").value = comma(price);

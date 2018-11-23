@@ -47,6 +47,8 @@
     float: right;
     padding-top: 0.5%;
     padding-bottom: 1.5%;
+        background-color: white;
+    border: none;
 }
     
 .sorting{
