@@ -262,7 +262,7 @@
 		                <td style="padding-top: 1%;padding-bottom: 1%;font-weight: bold;color:#3a3ac5;">
                             <c:choose>
                                 <c:when test="${cash.strReason ne '0'}">                                        
-                                    <span id="cursor" data-tooltip-text="${cash.strReason}" style="color: #503b3b;">${cash.strPurchaseState}</span> 
+                                    <span id="cursor" data-tooltip-text="${cash.strReason}" style="color: brown;">${cash.strPurchaseState}</span> 
                                 </c:when>
                                 <c:otherwise>
                                     <c:choose>

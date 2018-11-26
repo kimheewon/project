@@ -43,6 +43,8 @@
         margin: 0 0 0 0;
         padding-top: 0.6%;
         float: right;
+        border: none;
+        background-color: white;
     }
 
 </style>
@@ -91,7 +93,7 @@
                                        <div class="ln_solid"></div>
                                        <div class="form-group">
                                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3" style="margin-left: 43%;">
-                                               <button class="btn btn-primary" type="button" onclick="location.href='/BoardCategory/BoardCategoryList'">취소</button>
+                                               <button class="btn btn-primary" type="button" onclick="location.href='/BoardCategory/ChildBoardList?boardCateNo=${boardCateNo}'">취소</button>
                                                <button type="submit" class="btn btn-success" id="enroll">등록</button>
                                            </div>
                                        </div>

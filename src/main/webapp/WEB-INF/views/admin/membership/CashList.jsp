@@ -130,11 +130,18 @@ font-family: Bareun;margin-bottom: 0px;background-color: white;color:#2c3e50;pad
                                  <td style="text-align: center; color:#3b5976;">
                                     <c:choose>
                                        <c:when test="${cash.strReason ne '0'}">                                        
-                                          <span style="line-height: 22px;cursor: pointer;" data-toggle="tooltip" data-placement="bottom" data-original-title="${cash.strReason}" >${cash.strPurchaseState}(${cash.strAdminId})</span>  
+                                          <span style="line-height: 22px;cursor: pointer;color: brown;" data-toggle="tooltip" data-placement="bottom" data-original-title="${cash.strReason}" >${cash.strPurchaseState}(${cash.strAdminId})</span>  
                                        </c:when>
-                                        <c:otherwise>
-                                           ${cash.strPurchaseState}
-                                        </c:otherwise>
+                                       <c:otherwise>
+                                            <c:choose>
+                                                <c:when test="${cash.strPurchaseState eq '결제 완료'}">
+                                                    <span style="color: #0000ff;">${cash.strPurchaseState}</span>
+                                                </c:when>
+	                                            <c:otherwise>
+	                                                <span style="font-style: italic;">${cash.strPurchaseState}</span>
+	                                            </c:otherwise>
+	                                        </c:choose>
+                                       </c:otherwise>
                                     </c:choose>                                
                                 </td>
                                 <td style="text-align: center; color:#3b5976;">${cash.transaction_date}</td>

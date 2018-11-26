@@ -53,6 +53,8 @@
         padding-top: 0.6%;
         float: right;
         margin-right: 5%;
+        border: none;
+        background-color: white;
     }
 
     #contentStyle{

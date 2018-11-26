@@ -141,7 +141,7 @@
 }
 #shopBtn{
     background-color: #b13862;
-    width: 34%;
+    width: 40%;
     height: 21pt;
     font-size: 11pt;
     border-radius: 3pt;

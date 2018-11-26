@@ -93,7 +93,7 @@
 <jsp:include page="../../login/navigation.jsp" flush="true"/>
 
 <div class="container_t">
-    <h3 style="color:#2c3e50;margin-left: 6%;">캐시 구매</h3><br><br>
+    <h3 style="color:#2c3e50;margin-left: 6%;">캐시 충전</h3><br><br>
         <form action="/Cash/Purchase" method="post">
             <table style="margin-bottom: 1rem;width: 80%;margin: auto;border: 1px solid #3a5269">
                 <colgroup>

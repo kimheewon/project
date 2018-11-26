@@ -41,6 +41,8 @@
         min-width: 40px;
         margin: 0 0 0 0;
         padding-top: 0.6%;
+        background-color: white;
+        border: none;
     }
 #shopBtn{
     background-color: white;

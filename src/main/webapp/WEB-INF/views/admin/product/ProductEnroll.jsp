@@ -198,7 +198,7 @@ $(document).ready(function () {
              },
          
              success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-                 alert(data);
+                 
                  if(data==0){                    
                      alert("사용해도 되는 아이템번호입니다.");
                      check = 0; //중복체크함

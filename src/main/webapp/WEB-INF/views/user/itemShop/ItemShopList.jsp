@@ -25,10 +25,10 @@ position: absolute;
     text-align: center;
     width: 51px;
     /* margin: auto; */
-    top: 25px;
+    top: 30px;
     bottom: 0;
     right: 0;
-    left: 191px;
+    left: 73%;
     font-size: 13px;
     color: white;
     font-family: Bareun;
@@ -79,7 +79,7 @@ position: absolute;
     <div style="position: relative;float: left;;margin-left: 22px;margin-top: 200px;">  
         <div id="right_section" style="position:absolute;top:0px;left:0px;background-color: #ececec;">  
            <div style="width: 200px;height: 285px;text-align: center;padding-top: 10px;">               
-                <span style="font-family: Bareun;">최근 본 상품</span>
+                <span style="font-family: Bareun;">최근 본 아이템</span>
                 <table style="margin: auto;background-color: white;margin-top: 7px;border: 1px solid #cecece;">
                     <tr>
                         <td style="border-bottom: 1px solid #cecece;"><img src="<%=session.getAttribute("url")%>" style="width: 166px;height: 124px;"></td>

@@ -76,8 +76,8 @@
                                         <thead style="background-color: #e6e6e8;">
 				                            <tr>
                                                 <th style="text-align: center; padding-left: 1.5%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;" class="sorting_desc">#</th>
-                                                <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">게시판명</th>
-                                                <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">등록자</th>
+                                                <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">게시판 카테고리 명</th>
+                                                <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">등 록 자</th>
                                                 <th style="text-align: center; padding-left: 2%; color:#00003f;border-right: 1px solid #a6a6a6;border-bottom: 2px solid #a6a6a6;">일&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;시</th>
 					                            <th style="text-align: center; padding-left: 2%; color:#00003f;border-bottom: 2px solid #a6a6a6;">작&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;업</th>
 				                            </tr>
