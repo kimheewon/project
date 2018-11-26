@@ -103,7 +103,7 @@
 		        <tr>
 		           <td style="font-size: 23px;text-align: center;background-color: #3a5269; color: white;height: 65px;">충전 금액</td>
 		           <td style="font-size: 21px;color: #3a5269;font-weight: bold; padding-left: 3%;">
-		              <input type="text" id="money" name="money" pattern="#,###" readonly style="border: 0px;background-color: #f0efef;text-align: center;">&nbsp;원
+		              <input type="text" id="money" name="money" pattern="#,###" value="1,000" readonly style="border: 0px;background-color: #f0efef;text-align: center;">&nbsp;원
 		              <small style="padding-left: 3%;font-weight: bold;color: #5e646b;">(&nbsp;보유캐시&nbsp;:&nbsp;&nbsp;&nbsp;<fmt:formatNumber value='<%= session.getAttribute("cash") %>' pattern="#,###" />&nbsp;코인&nbsp;)</small></td>                
 		           </tr>        
             </table>
@@ -118,7 +118,7 @@
 	               <th colspan="3" style="border-bottom: 1px solid #8f959c;font-size: 20px;padding-bottom: 1%;">충전금액 선택</th>
 	           </tr>
 	           <tr>
-	               <td id="cashChoosStyle"><input type="radio" value="1,000" name="cashChoose">&nbsp;&nbsp;1,000 원</td>
+	               <td id="cashChoosStyle"><input type="radio" value="1,000" name="cashChoose" checked="checked">&nbsp;&nbsp;1,000 원</td>
 	               <td id="cashChoosStyle"><input type="radio" value="5,000" name="cashChoose">&nbsp;&nbsp;5,000 원</td>
 	               <td id="cashChoosStyle"><input type="radio" value="10,000" name="cashChoose">&nbsp;&nbsp;1,0000 원</td>
 	           </tr>
@@ -181,7 +181,7 @@ $(document).ready(function() { // 해당 페이지 Loading 후,
 	    
 	   $("input[name=purchase]").on("click",function(){
 		   if($("#money").val() == ""){
-			   alert("충전할 금액을 선택하세요.");
+			   alert("충전할 금액을 입력해주세요.");
 			   return;
 		   }
 		   else{
