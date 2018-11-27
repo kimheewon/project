@@ -139,7 +139,7 @@ public class CashController {
 	@ResponseBody
 	public ModelAndView purchaseSave(@RequestBody PGInfo pgInfo, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ClientProtocolException, IOException {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
-		System.out.println("실패");
+		
 		int check = cashService.checkResult(pgInfo);	//요청값과 결과값 비교
 		
 		if(check == 0) {	//결과 성공
