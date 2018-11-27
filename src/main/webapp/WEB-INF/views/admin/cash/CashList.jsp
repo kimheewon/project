@@ -145,7 +145,7 @@ font-family: Bareun;margin-bottom: 0px;background-color: white;color:#2c3e50;pad
                                 <td style="text-align: center; color:#3b5976;padding-top: 0.5%;padding-bottom: 0.5%;">
                                     <c:if test="${cash.strPurchaseState eq '결제 완료'}">
                                          <c:if test="${cash.intCashAmt eq cash.intRemainCashAmt}">
-                                             <button id="cancelBtn" class="btn btn-primary" value="${cash.intCashNo}" type="button">취소</button>
+                                             <button id="cancelBtn"  onclick="cancelBtn(${cash.intCashNo})" class="btn btn-primary" value="${cash.intCashNo}" type="button">취소</button>
                                         </c:if>
                                     </c:if>
                                 </td>   
@@ -199,34 +199,57 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', 'UA-23581568-13', 'auto');
 ga('send', 'pageview');
 
-$("#cancelBtn").click(function() {
-	var no =  $(this).val();
-	if((confirm("결제 취소 하시겠습니까?") == true)){
-		//location.href="/AdminCash/CashAllCancel?cashNo="+no;
-		 $.ajax({   
-             type:"POST",
-             url:"/AdminCash/CashAllCancel",   
-             dataType:"html",// JSON/html
-             async: false,
-             data:{ 
-                 "cashNo": no
-             },
+
+	/*$("#cancelBtn").click(function() {
+		var no =  $(this).val();
+		if((confirm("결제 취소 하시겠습니까?") == true)){
+			//location.href="/AdminCash/CashAllCancel?cashNo="+no;
+			 $.ajax({   
+	             type:"POST",
+	             url:"/AdminCash/CashAllCancel",   
+	             dataType:"html",// JSON/html
+	             async: false,
+	             data:{ 
+	                 "cashNo": no
+	             },
+	         
+	             success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수                   
+	            	  alert("취소가 완료 되었습니다.");
+	                  location.href="/AdminCash/AdminCashAllList"; 
+	             }
+	         }); //--ajax
+	     
+	    }                
+	    else{
+	        return;
+	    }
+		
+	});*/
+
+	function cancelBtn(no){
+		if((confirm("결제 취소 하시겠습니까?") == true)){
+            //location.href="/AdminCash/CashAllCancel?cashNo="+no;
+             $.ajax({   
+                 type:"POST",
+                 url:"/AdminCash/CashAllCancel",   
+                 dataType:"html",// JSON/html
+                 async: false,
+                 data:{ 
+                     "cashNo": no
+                 },
+             
+                 success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수                   
+                      alert("취소가 완료 되었습니다.");
+                      location.href="/AdminCash/AdminCashAllList"; 
+                 }
+             }); //--ajax
          
-             success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수                   
-            	  alert("취소가 완료 되었습니다.");
-                  location.href="/AdminCash/AdminCashAllList"; 
-             }
-         }); //--ajax
-     
-    }                
-    else{
-        return;
-    }
-	
-});
-
-
- 
+        }                
+        else{
+            return;
+        }	
+		
+	}
 </script>
   </body>
 </html>
