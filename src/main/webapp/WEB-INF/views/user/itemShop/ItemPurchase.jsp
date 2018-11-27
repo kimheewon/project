@@ -59,7 +59,7 @@ input[type="text"]:disabled {
     
 <jsp:include page="../../login/navigation.jsp" flush="true"/>
 
-<div class="container_t">
+<div class="container_t" >
     <h3 style="color:#2c3e50;margin-left: 6%;">아이템 구매</h3><br><br><br><br>
         <form action="/ItemShop/ItemPurchase" method="post" autocomplete="off">
             <input type="hidden" value="${item.intItemNo}" id="itemNo" name="itemNo">
@@ -107,22 +107,22 @@ input[type="text"]:disabled {
                             <p style="margin-bottom: 0;font-size: 11pt;color: gray;">(* 5만원 이상 구매시 배송료 무료)</p>
                         </td>
                         <td colspan="2" style="border-bottom:1px solid #aeaea7;">
-                            <input type="text" id="deliverPrice" pattern="#,###" style="border: none;width: 15%;text-align: right;" readonly>&nbsp;코인</td>
+                            <input type="text" id="deliverPrice" name="deliverPrice" pattern="#,###" style="border: none;width: 15%;text-align: right;" readonly>&nbsp;코인</td>
                     </tr>
                     <tr style="height: 80px;">
                         <td colspan="3" style="border-right:1px solid #aeaea7;border-bottom:1px solid #aeaea7;font-weight: bold">총합계</td>
                         <td colspan="2" style="border-bottom: 1px solid #aeaea7;color: #b13862;font-weight: bold;">
-                            <input type="text" id="totalPrice" pattern="#,###" readonly>&nbsp;코인</td>
+                            <input type="text" id="totalPrice" name="totalPrice" pattern="#,###" readonly>&nbsp;코인</td>
                     </tr>
                 </tbody>
                     
             </table>
             <br><br><br><br>
             <p style="width:90%; margin-bottom: 0px;font-size: 20px;font-weight: bold;margin: auto;">배송지 정보</p>
-            <hr style="width:90%">
+            <hr style="width:90%; border: 1px solid lightgray;">
             <table id="deliverTable">
                 <colgroup>
-                   <col width = "15%"/>
+                   <col width = "18%"/>
                    <col width = "*"/>            
                 </colgroup>
                
@@ -147,14 +147,14 @@ input[type="text"]:disabled {
                 <tr>
                     <td style="padding-left: 2%;border-right: 1px solid #aeaea7;border-bottom: 1px solid #aeaea7;font-size: 12pt;height: 50px;">전화번호</td>
                     <td style="padding-left: 1%;border-bottom: 1px solid #aeaea7;">
-                        <input id="strTel" name="strTel" type="text" style="padding-left: 2%;width: 23%;border-radius: 8px;background-color: white;border: 1px solid gray;height: 31px;font-size: 14pt;" maxlength="17" onkeyup="autoHypenPhone(this)"></td>
+                        <input id="strTel" name="strTel" type="text" style="padding-left: 2%;width: 40%;border-radius: 8px;background-color: white;border: 1px solid gray;height: 31px;font-size: 14pt;" maxlength="17" onkeyup="autoHypenPhone(this)"></td>
                 </tr>
                 <tr>
                    <td rowspan="3" style="padding-left: 2%;height: 124px;border-right: 1px solid #aeaea7;border-bottom: 1px solid #aeaea7;font-size: 12pt;height: 50px;">주소</td>
                    <td style="padding-left: 1%;height: 40px;padding-top: 10px;">
                     <input type="text" value="우편번호" readonly="readonly" style="width: 13%;border: none;color: #5d5d5d;font-size: 12pt; ">
                     <input id="strPostcode" name="strPostcode" type="text" style="padding-left: 2%;font-size: 14pt;letter-spacing: 1pt;border-radius: 8px;width: 15%;background-color: white;border: 1px solid gray;height: 31px;" readonly="readonly">
-                    <input type="button" style="border-radius: 8px;width: 11%;background-color: #2c3e50;border: 1px solid #2c3e50;color:white;height: 31px;" value="주소 검색" onclick="execDaumPostcode()"></td>
+                    <input type="button" style="border-radius: 8px;width: 14%;background-color: #2c3e50;border: 1px solid #2c3e50;color:white;height: 31px;" value="주소 검색" onclick="execDaumPostcode()"></td>
                </tr>
                <tr>
                    <td style="padding-left: 1%;height: 40px;">
@@ -371,6 +371,7 @@ function hypen(str){
             $('#strPostcode').val("");
             $('#strAddress').val("");
             $('#strAddress2').val("");
+            $('#strAddress2').attr("disabled", 'disabled');
             
         });
         

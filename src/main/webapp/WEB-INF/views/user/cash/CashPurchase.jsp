@@ -92,12 +92,12 @@
     
 <jsp:include page="../../login/navigation.jsp" flush="true"/>
 
-<div class="container_t">
+<div class="container_t" style="min-height: 889px;">
     <h3 style="color:#2c3e50;margin-left: 6%;">캐시 충전</h3><br><br>
         <form action="/Cash/Purchase" method="post">
             <table style="margin-bottom: 1rem;width: 80%;margin: auto;border: 1px solid #3a5269">
                 <colgroup>
-	               <col width = "40%"/>
+	               <col width = "30%"/>
 	               <col width = "*"/>             
 	            </colgroup>
 		        <tr>
@@ -140,7 +140,7 @@
                    <input type="button" id="mobile" name="purchase" value="mobile" alt="휴대폰"></td>
                </tr>
             </table>
-            <br><br><br>
+            <br><br><br><br>
             <div class="container_t" style="border: 1px solid #2c3e50; padding-top: 1%; font-family: Bareun;width: 80%;">
 		        <ul>
 		            <li> 캐시는 구매 후 <span style="color: #d11d53;">현금으로 환불이 되지 않습니다.</span></li>

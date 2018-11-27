@@ -131,12 +131,12 @@ input[type="number"]::-webkit-inner-spin-button {
             </table>
             <br><br><br><br>
             <p style="width:90%; margin-bottom: 0px;font-size: 20px;font-weight: bold;margin: auto;">배송지 정보</p>
-            <hr style="width:90%">
+            <hr style="width:90%;    border: 1px solid lightgray;">
             <input type="hidden" value="${deliver.intCompanyCode}" id="companyCode">
             <input type="hidden" value="${deliver.intInvoiceNumber}" id="invoiceNumber">
             <table id="deliverTable">
                 <colgroup>
-                   <col width = "15%"/>
+                   <col width = "18%"/>
                    <col width = "*"/>            
                 </colgroup>               
                 <tr>
@@ -148,7 +148,7 @@ input[type="number"]::-webkit-inner-spin-button {
                    <td style="padding-left: 2%;border-bottom: 1px solid #aeaea7;">
                          <c:choose>
                             <c:when test="${empty deliver.intInvoiceNumber}">
-                                <span style="color: gray;font-style: italic;">상품 준비중...</span>
+                                <span style="color: gray;font-style: italic;">아이템 준비중...</span>
                             </c:when>
                             <c:otherwise>
                                 ( ${deliver.strCompanyName} )  ${deliver.intInvoiceNumber}

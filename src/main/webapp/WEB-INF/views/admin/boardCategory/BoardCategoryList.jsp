@@ -70,7 +70,7 @@
 					                        <col width = "7%"/>
 					                        <col width = "*"/>
 					                        <col width = "14%"/>
-					                        <col width = "14%"/>
+					                        <col width = "18%"/>
 					                        <col width = "20%"/>                    
                                         </colgroup>
                                         <thead style="background-color: #e6e6e8;">

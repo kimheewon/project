@@ -107,7 +107,7 @@ input[type="number"]::-webkit-inner-spin-button {
             <hr style="width:90%">
             <table id="deliverTable">
                 <colgroup>
-                   <col width = "15%"/>
+                   <col width = "18%"/>
                    <col width = "*"/>            
                 </colgroup>
                

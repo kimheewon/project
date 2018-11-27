@@ -15,7 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>회원의 상품 구매 상세보기 </title>
+    <title>회원의 아이템 구매 상세보기 </title>
 
      <!-- Bootstrap -->
     <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -197,7 +197,7 @@ input[type="number"]::-webkit-inner-spin-button {
             <input type="hidden" value="${deliver.intInvoiceNumber}" id="invoiceNumber">
             <table id="deliverTable">
                 <colgroup>
-                   <col width = "15%"/>
+                   <col width = "17%"/>
                    <col width = "*"/>            
                 </colgroup>
                
@@ -216,7 +216,7 @@ input[type="number"]::-webkit-inner-spin-button {
                                          <option value="${company.intCompanyCode}">${company.strCompanyName}</option>
                                     </c:forEach>
                                </select> 
-                                <input type="number" id="invoice" placeholder="송장번호를 입력하세요" style="width: 600px;height: 30px;padding-left: 2%;margin-right: 1%;border-radius: 4pt;border: 1px solid;">
+                                <input type="number" id="invoice" placeholder="송장번호를 입력하세요" style="width: 421px;height: 30px;padding-left: 2%;margin-right: 1%;border-radius: 4pt;border: 1px solid;">
                                 <button onclick="inputInvoice()" data-placement="bottom" data-toggle="tooltip" data-original-title="입력" style="width: 53px;height: 31px;margin-bottom: 0;border: 2px solid #8e688e;padding-bottom: 0;border-radius: 4pt;background-color: #fff6ff;">
                                     <img class="btn-img" src="/img/delivery-truck.png" style="width: 40px;height: 25px;"></button>
                             </c:when>

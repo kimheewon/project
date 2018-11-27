@@ -118,7 +118,7 @@
 								<td style="text-align: center; color:#3b5976;">${userList.strUserPhone}</td>
 								<td style="text-align: center; color:#3b5976;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${userList.dateUserDate}"/></td>
 								<td style="text-align: center; color:#3b5976;">${userList.strUserGrade} 회원</td>
-								<td style="text-align: right;color: #3b5976;padding-right: 3%;"><fmt:formatNumber value="${userList.intTotalCashAmt}" pattern="#,###" />&nbsp;코인</td>
+								<td style="text-align: right;color: #3b5976;padding-right: 1%;"><fmt:formatNumber value="${userList.intTotalCashAmt}" pattern="#,###" />&nbsp;코인</td>
 								<td style="text-align: center; color:#3b5976; padding-top: 3px; padding-bottom: 3px;">
 									<button class="btn btn-app" type="button" onclick="location.href='/Membership/MembershipUpdateForm?intUserNo=${userList.intUserNo}'" 
                                         style="padding-top: 5%;" id="editBtn" data-placement="top" data-toggle="tooltip" data-original-title="수정">

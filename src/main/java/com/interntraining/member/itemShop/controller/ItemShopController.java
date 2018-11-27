@@ -138,6 +138,16 @@ public class ItemShopController {
 		item = itemShopService.replace(item); 	//가격들 int로 변환
 		int nowTotalCash = itemShopService.selectTotalCash(item.getIntUserNo());	//현재 보유 캐시 정보 가져오기
 		
+		String commDeliverPriceResult = (String) request.getParameter("deliverPrice");		
+		String deliverPriceResult = commDeliverPriceResult.replace(",", "");	
+		int price = Integer.parseInt(deliverPriceResult);		
+		item.setIntDeliveryPrice(price);
+		
+		String commtotalResult = (String) request.getParameter("totalPrice");
+		String totalPriceResult = commtotalResult.replace(",", "");		
+		int total = Integer.parseInt(totalPriceResult);		
+		item.setIntItemTotalPrice(total);
+				
 		if(item.getIntItemTotalPrice() <= nowTotalCash) {
 			
 			BigInteger number = itemShopService.selectOrderNo();		//아이템 구매 번호 생성

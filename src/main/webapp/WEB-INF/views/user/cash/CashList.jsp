@@ -70,7 +70,7 @@
         padding-left: 15px;
         margin-right: auto;
         margin-left: auto;
-        width: 70%;
+        width: 80%;
         margin: 0 auto;     /* 가로로 중앙에 배치 */
         padding-top: 3%;   /* 테두리와 내용 사이의 패딩 여백 */
     }
@@ -225,8 +225,8 @@
             <colgroup>
                 <col width = "5%"/>
                 <col width = "18%"/>
-                <col width = "13%"/>
-                <col width = "13%"/>
+                <col width = "14%"/>
+                <col width = "14%"/>
                 <col width = "15%"/> 
                 <col width = "15%"/>
                 <col width = "*"/>                           
@@ -254,10 +254,10 @@
 		            <tr>   
 		                <td style="padding-top: 1%;padding-bottom: 1%;">${cash.intNum}</td>
 		                <td style="padding-top: 1%;padding-bottom: 1%;">${cash.intCashNo}</td>		                
-		                <td style="padding-top: 1%;padding-bottom: 1%;text-align: right;padding-right: 2%;">
+		                <td style="padding-top: 1%;padding-bottom: 1%;text-align: right;padding-right: 1%;">
 		                  <c:if test="${cash.amount ne 0}"><fmt:formatNumber value="${cash.amount}" pattern="#,###" />&nbsp;원</c:if>
 		                </td>
-		                <td style="padding-top: 1%;padding-bottom: 1%;text-align: right;padding-right: 2%;"><fmt:formatNumber value="${cash.intCashAmt}" pattern="#,###" />&nbsp;코인</td>
+		                <td style="padding-top: 1%;padding-bottom: 1%;text-align: right;padding-right: 1%;"><fmt:formatNumber value="${cash.intCashAmt}" pattern="#,###" />&nbsp;코인</td>
 		                <td style="padding-top: 1%;padding-bottom: 1%;">${cash.strPurchasekind}</td>	
 		                <td style="padding-top: 1%;padding-bottom: 1%;font-weight: bold;color:#3a3ac5;">
                             <c:choose>

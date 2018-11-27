@@ -15,7 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>상품 구매 리스트</title>
+    <title>아이템 구매 리스트</title>
 
      <!-- Bootstrap -->
     <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -45,7 +45,7 @@
     }
 #shopBtn{
     background-color: white;
-    width: 65%;
+    width: 83%;
     height: 21pt;
     font-size: 11pt;
     border-radius: 3pt;
@@ -111,12 +111,12 @@
                     <colgroup>
                         <col width = "6%"/>
                         <col width = "12%"/>
-                        <col width = "10%"/>
+                        <col width = "11%"/>
                         <col width = "10%"/>		                
 		                <col width = "*"/>
 		                <col width = "12%"/>		                
 		                <col width = "15%"/> 
-		                <col width = "12%"/>                        
+		                <col width = "10%"/>                        
                     </colgroup>
                       <thead style="background-color: #e6e6e8;">
                         <tr>
@@ -141,7 +141,7 @@
                                 <td style="text-align: left;padding-left: 2%; color:#3b5976;vertical-align: middle;">
 	                                <c:choose>
 			                              <c:when test="${list.strItemName eq '캐시 회수'}">
-			                                 <span data-toggle="tooltip" data-placement="bottom" data-original-title="${list.strReason}" style="cursor: pointer;">${list.strItemName}</span>
+			                                 <span data-toggle="tooltip" data-placement="bottom" data-original-title="${list.strReason}" style="cursor: pointer;color: blue;">${list.strItemName}</span>
 			                              </c:when>
 			                              <c:otherwise>
 			                                  <c:choose>
@@ -156,14 +156,14 @@
 			                              </c:otherwise>
 			                          </c:choose>
                                 </td>
-                                <td style="text-align: right; padding-right:3%; color:#3b5976;vertical-align: middle;"><fmt:formatNumber value="${list.intItemTotalPrice}" pattern="#,###" />&nbsp;코인</td>
+                                <td style="text-align: right; padding-right:1%; color:#3b5976;vertical-align: middle;"><fmt:formatNumber value="${list.intItemTotalPrice}" pattern="#,###" />&nbsp;코인</td>
                                 
                                 <td style="text-align: center; color:#3b5976;vertical-align: middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.datePurchaseDate}"/></td>
                                 <td style="text-align: center; color:#3b5976;vertical-align: middle;">
 	                                <c:if test="${list.strItemName ne '캐시 회수'}">
 		                              <c:choose>
 		                                  <c:when test="${list.intFlag eq 1}">
-		                                      <span style="font-family: Bareun;color: rebeccapurple;font-weight: bold;">상품 준비중</span>
+		                                      <span style="font-family: Bareun;color: rebeccapurple;font-weight: bold;">준비중</span>
 		                                  </c:when>
 		                                  <c:when test="${list.intFlag eq 2}">
                                               <button id="shopBtn" type="button" onclick="deliver(${list.intNumber})" style="margin-right: 0;">배송 추적</button>

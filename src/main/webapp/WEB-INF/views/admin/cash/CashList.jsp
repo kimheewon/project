@@ -89,12 +89,12 @@ font-family: Bareun;margin-bottom: 0px;background-color: white;color:#2c3e50;pad
                     
                     <table id="datatable" class="table table-bordered" id="AdminList" style="font-family: Bareun;">
                     <colgroup>
-                        <col width = "6%"/>
+                        <col width = "5%"/>
                         <col width = "*"/>  
+                        <col width = "11%"/>
                         <col width = "12%"/>
-                        <col width = "10%"/>
-                        <col width = "10%"/>
-                        <col width = "9%"/>
+                        <col width = "12%"/>
+                        <col width = "8%"/>
                         <col width = "15%"/>
                         <col width = "17%"/>  
                         <col width = "8%"/>
@@ -120,9 +120,9 @@ font-family: Bareun;margin-bottom: 0px;background-color: white;color:#2c3e50;pad
                                 <td style="text-align: center; color:#3b5976;" class="sorting">${status.count}</td> 
                                 <td style="text-align: center; color:#3b5976;">${cash.intCashNo}</td>
                                 <td style="text-align: center; color:#3b5976;">${cash.user_id}</td>   
-                                <td style="text-align: right;color: #3b5976;padding-right: 2.5%;">
+                                <td style="text-align: right;color: #3b5976;padding-right: 1%;">
                                     <c:if test="${cash.amount ne 0}"><fmt:formatNumber value="${cash.amount}" pattern="#,###" />&nbsp;원</c:if></td>
-                                <td style="text-align: right;color: #3b5976;padding-right: 2.5%;"><fmt:formatNumber value="${cash.intCashAmt}" pattern="#,###" />&nbsp;코인</td>
+                                <td style="text-align: right;color: #3b5976;padding-right: 1%;"><fmt:formatNumber value="${cash.intCashAmt}" pattern="#,###" />&nbsp;코인</td>
                                 <td style="text-align: center; color:#3b5976;">${cash.strPurchasekind}</td>                                
                                 <td style="text-align: center; color:#3b5976;">
                                     <c:choose>
@@ -145,7 +145,7 @@ font-family: Bareun;margin-bottom: 0px;background-color: white;color:#2c3e50;pad
                                 <td style="text-align: center; color:#3b5976;padding-top: 0.5%;padding-bottom: 0.5%;">
                                     <c:if test="${cash.strPurchaseState eq '결제 완료'}">
                                          <c:if test="${cash.intCashAmt eq cash.intRemainCashAmt}">
-                                             <button id="cancelBtn"  onclick="cancelBtn(${cash.intCashNo})" class="btn btn-primary" value="${cash.intCashNo}" type="button">취소</button>
+                                             <button id="cancelBtn" style="margin: auto;margin-top: 6%;" onclick="cancelBtn(${cash.intCashNo})" class="btn btn-primary" value="${cash.intCashNo}" type="button">취소</button>
                                         </c:if>
                                     </c:if>
                                 </td>   

@@ -86,10 +86,10 @@
                     <colgroup>
                         <col width = "6%"/>
                         <col width = "8%"/>
-                        <col width = "12%"/>
+                        <col width = "11%"/>
                         <col width = "*"/>
-                        <col width = "12%"/>
-                        <col width = "12%"/>
+                        <col width = "13%"/>
+                        <col width = "11%"/>
                         <col width = "15%"/>
                         <col width = "12%"/>                        
                     </colgroup>
@@ -116,7 +116,7 @@
                                      </c:if>
                                 </td>
                                 <td style="text-align: center; color:#3b5976;vertical-align: middle;">${list.strItemName}</td>
-                                <td style="text-align: right; padding-right: 2%;color:#3b5976;vertical-align: middle;"><fmt:formatNumber value="${list.intItemPrice}" pattern="#,###" />&nbsp;코인</td>
+                                <td style="text-align: right; padding-right: 1%;color:#3b5976;vertical-align: middle;"><fmt:formatNumber value="${list.intItemPrice}" pattern="#,###" />&nbsp;코인</td>
                                 <td style="text-align: center; color:#3b5976;vertical-align: middle;">${list.strAdminId}</td>
                                 <td style="text-align: center; color:#3b5976;vertical-align: middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${list.dateUpdateItemDate}"/></td>
                                 <td style="text-align: center; color:#3b5976;padding-top: 0.2%; padding-bottom: 0.2%;vertical-align: middle;">

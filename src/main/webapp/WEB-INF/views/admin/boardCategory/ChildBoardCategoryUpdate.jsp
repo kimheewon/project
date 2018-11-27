@@ -43,6 +43,8 @@
         margin: 0 0 0 0;
         padding-top: 0.6%;
         float: right;
+        border: none;
+        background-color: white;
     }
 
 </style>

@@ -63,6 +63,7 @@ public class AdminCashController {
 		int userNo = admincashService.selectCancelUserNo(cashNo);		//사용자 번호 가져오기
 		cancel.setIntUserNo(userNo);
 		
+		
 		if(cancel.getTid()!= null) {	//결제 취소 성공
 			admincashService.updateCancel(cancel);	//DB에 결제 취소 내역 update
 			admincashService.updateUserCashMst(cancel);	//사용자 캐시AMT update

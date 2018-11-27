@@ -76,13 +76,13 @@ position: absolute;
     <jsp:include page="../../login/navigation.jsp" flush="true"/>
 
     <c:if test="${!empty sessionScope.url}">
-    <div style="position: relative;float: left;;margin-left: 22px;margin-top: 200px;">  
-        <div id="right_section" style="position:absolute;top:0px;left:0px;background-color: #ececec;">  
-           <div style="width: 200px;height: 285px;text-align: center;padding-top: 10px;">               
+    <div style="position: relative;float: left;margin-left: 1%;margin-top: 200px;width:13%;margin-right:1%;">  
+        <div id="right_section" style="position:absolute;top:0px;left:5%;right:5%; height:275px; background-color: #ececec;">  
+           <div style="width: 80%;text-align: center;padding-top: 5%;padding-bottom: 5%;margin:auto;">               
                 <span style="font-family: Bareun;">최근 본 아이템</span>
                 <table style="margin: auto;background-color: white;margin-top: 7px;border: 1px solid #cecece;">
                     <tr>
-                        <td style="border-bottom: 1px solid #cecece;"><img src="<%=session.getAttribute("url")%>" style="width: 166px;height: 124px;"></td>
+                        <td style="border-bottom: 1px solid #cecece;"><img src="<%=session.getAttribute("url")%>" style="width: 74%;height: 26%;"></td>
                     </tr>
                     <tr>
                         <td style="text-align: left;padding-left: 12px;font-size: 8pt;padding-top: 4pt;font-family: candy;color: #696969;"><%=session.getAttribute("itemNumber")%></td>
@@ -114,7 +114,7 @@ position: absolute;
                <div style="text-align: center;margin: auto;font-size: 16pt;font-family: Bareun;word-spacing: 2px;letter-spacing: 1px;color: #4d4b51;">
                        <img src="/img/search2.png" style="margin-bottom: 9%;width: 200px;">
                        <br>
-                       <span style="font-weight: bold;">' ${keyWord} '</span> 에 대해 검색된 상품이 없습니다.
+                       <span style="font-weight: bold;">' ${keyWord} '</span> 에 대해 검색된 아이템이 없습니다.
                        <br>
                        <small style="font-size: 12pt;">다른 검색어를 입력하시거나 철자와 띄어쓰기를 확인해 보세요.</small><br> 
                        <small style="font-size: 12pt;"><a href="/ItemShop/ItemShopList" style="font-style: italic;color: #663399;text-decoration-line: underline;">아이템샵 바로가기</a></small> 
@@ -122,7 +122,7 @@ position: absolute;
                    
                 </c:if>          
             <c:forEach var="items" items="${items}" varStatus="status">
-                <div class="col-md-6 col-lg-3" style="    padding-top: 15px;   padding-bottom: 15px;">
+                <div class="col-md-6 col-lg-3" style="padding-top: 10px;padding-bottom: 10px;padding-right: 10px;padding-left: 10px;">
                     <table style="  border: 1px solid #cecece;">
 		                <tr style=" border: 1px solid #cecece">
 			                <td>
@@ -161,8 +161,8 @@ position: absolute;
              <form action="/ItemShop/ItemShopList" name="search" method="post">
             
              <select name="keyField" id="keyField" size="1" style="width:110px;height: 30px;">
-                    <option value="ItemNo" <c:if test="${'ItemNo'==keyField }"> selected</c:if>> 상품번호 </option>
-                    <option value="ItemName" <c:if test="${'ItemName'==keyField }"> selected</c:if>> 상품명 </option>
+                    <option value="ItemNo" <c:if test="${'ItemNo'==keyField }"> selected</c:if>> 아이템번호 </option>
+                    <option value="ItemName" <c:if test="${'ItemName'==keyField }"> selected</c:if>> 아이템명 </option>
                 </select>
                      <input type="text" size="40" name="keyWord" id="keyWord" value="${keyWord}">                     
                      <button class="btn" id="btn" onclick="check();" 

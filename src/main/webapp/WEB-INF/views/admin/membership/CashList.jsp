@@ -97,12 +97,12 @@ font-family: Bareun;margin-bottom: 0px;background-color: white;color:#2c3e50;pad
                     <colgroup>
                         <col width = "6%"/>
                         <col width = "*"/>
-                        <col width = "13%"/>
-                        <col width = "13%"/>
-                        <col width = "13%"/> 
-                        <col width = "15%"/>
-                        <col width = "15%"/>
                         <col width = "12%"/>
+                        <col width = "12%"/>
+                        <col width = "13%"/> 
+                        <col width = "17%"/>
+                        <col width = "18%"/>
+                        <col width = "9%"/>
                     </colgroup>
                       <thead>
                         <tr>
@@ -113,7 +113,7 @@ font-family: Bareun;margin-bottom: 0px;background-color: white;color:#2c3e50;pad
                           <th style="text-align: center; padding-left: 2%; color:#00003f">결제&nbsp;수단</th>   
                           <th style="text-align: center; padding-left: 2%; color:#00003f">상&nbsp;&nbsp;태</th>
                           <th style="text-align: center; padding-left: 2%; color:#00003f">일&nbsp;&nbsp;시</th>
-                          <th style="text-align: center; padding-left: 2%; color:#00003f">결제&nbsp;취소</th>
+                          <th style="text-align: center; padding-left: 2%; color:#00003f">취&nbsp;&nbsp;소</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -123,9 +123,9 @@ font-family: Bareun;margin-bottom: 0px;background-color: white;color:#2c3e50;pad
                             <tr>
                                 <td style="text-align: center; color:#3b5976;" class="sorting">${status.count}</td>   
                                 <td style="text-align: center; color:#3b5976;">${cash.intCashNo}</td>
-                                <td style="text-align: right;color: #3b5976;padding-right: 2%;">
+                                <td style="text-align: right;color: #3b5976;padding-right: 1%;">
                                     <c:if test="${cash.amount ne 0}"><fmt:formatNumber value="${cash.amount}" pattern="#,###" />&nbsp;원</c:if></td>
-                                <td style="text-align: right;color: #3b5976;padding-right: 2%;"><fmt:formatNumber value="${cash.intCashAmt}" pattern="#,###" />&nbsp;코인</td>
+                                <td style="text-align: right;color: #3b5976;padding-right: 1%;"><fmt:formatNumber value="${cash.intCashAmt}" pattern="#,###" />&nbsp;코인</td>
                                 <td style="text-align: center; color:#3b5976;">${cash.strPurchasekind}</td>
                                  <td style="text-align: center; color:#3b5976;">
                                     <c:choose>

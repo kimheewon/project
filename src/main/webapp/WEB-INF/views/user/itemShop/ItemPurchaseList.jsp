@@ -104,7 +104,7 @@
         padding-left: 15px;
         margin-right: auto;
         margin-left: auto;
-        width: 70%;
+        width: 80%;
         margin: 0 auto;     /* 가로로 중앙에 배치 */
         padding-top: 3%;   /* 테두리와 내용 사이의 패딩 여백 */
     }
@@ -291,10 +291,10 @@
             <colgroup>
                 <col width = "7%"/>
                 <col width = "15%"/>
-                <col width = "*"/>
+                <col width = "20*"/>
                 <col width = "15%"/>
                 <col width = "18%"/> 
-                <col width = "20%"/>                         
+                <col width = "*"/>                         
             </colgroup>
             <thead style="text-align: center;font-size: 20px;background-color: #f2f2e8;color: #2c3e50;font-family: TmonTium;">
                 <tr>                        
@@ -342,7 +342,7 @@
 		                  <c:if test="${item.strItemName ne '캐시 회수'}">
 		                      <c:choose>
 			                      <c:when test="${item.intFlag eq 1}">
-			                          <span style="font-family: Bareun;color: rebeccapurple;font-weight: bold;">상품 준비중  (  			                          
+			                          <span style="font-family: Bareun;color: rebeccapurple;font-weight: bold;">아이템 준비중  (  			                          
 			                             <button id="cancelBtn" type="button" onclick="location.href='/ItemShop/ItemPurchaseCancelForm?PurchaseNo=${item.intNumber}'">구매 취소 </button> )
 			                          </span>
 			                      </c:when>
