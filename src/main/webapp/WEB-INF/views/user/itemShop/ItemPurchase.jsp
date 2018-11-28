@@ -104,7 +104,7 @@ input[type="text"]:disabled {
                     <tr style="height: 80px;">
                         <td colspan="3" style="border-right:1px solid #aeaea7;border-bottom:1px solid #aeaea7;">
                             <p style="margin-bottom: 0;font-weight: bold;">배송료</p>
-                            <p style="margin-bottom: 0;font-size: 11pt;color: gray;">(* 5만원 이상 구매시 배송료 무료)</p>
+                            <p style="margin-bottom: 0;font-size: 11pt;color: gray;">(* 5만 코인 이상 구매시 배송료 무료)</p>
                         </td>
                         <td colspan="2" style="border-bottom:1px solid #aeaea7;">
                             <input type="text" id="deliverPrice" name="deliverPrice" pattern="#,###" style="border: none;width: 15%;text-align: right;" readonly>&nbsp;코인</td>

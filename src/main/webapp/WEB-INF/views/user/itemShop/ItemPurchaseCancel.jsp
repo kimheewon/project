@@ -90,7 +90,7 @@ input[type="number"]::-webkit-inner-spin-button {
                     <tr style="height: 80px;">
                         <td colspan="3" style="border-right:1px solid #aeaea7;border-bottom:1px solid #aeaea7;">
                             <p style="margin-bottom: 0;font-weight: bold;">배송료</p>
-                            <p style="margin-bottom: 0;font-size: 11pt;color: gray;">(* 5만원 이상 구매시 배송료 무료)</p>
+                            <p style="margin-bottom: 0;font-size: 11pt;color: gray;">(* 5만 코인 이상 구매시 배송료 무료)</p>
                         </td>
                         <td colspan="2" style="border-bottom:1px solid #aeaea7;"><fmt:formatNumber value="${item.intDeliveryPrice}" pattern="#,###" />&nbsp;코인</td>
                     </tr>
